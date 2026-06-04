@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WAR ROOM v3 — 4 Junio 2026 · Rotación Sectorial · AVGO Shock · Irán Ceasefire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04060a; --panel:#0b1016; --panel-2:#0f1620; --grid:#1a232e; --grid-soft:#121a24;
+  --ink:#e8eef2; --white:#fff; --ink-dim:#7d8a93; --ink-faint:#48555d;
+  --signal:#00ff9c; --alert:#ffb000; --risk:#ff2e4d; --info:#2ea8ff; --rumor:#c084fc;
+  --g-signal:0 0 6px rgba(0,255,156,.9),0 0 16px rgba(0,255,156,.45);
+  --g-alert:0 0 6px rgba(255,176,0,.9),0 0 16px rgba(255,176,0,.4);
+  --g-risk:0 0 6px rgba(255,46,77,.9),0 0 16px rgba(255,46,77,.4);
+  --g-info:0 0 6px rgba(46,168,255,.9),0 0 16px rgba(46,168,255,.4);
+  --g-rumor:0 0 6px rgba(192,132,252,.9),0 0 16px rgba(192,132,252,.4);
+  --mono:'JetBrains Mono',monospace; --display:'Archivo','Archivo Black',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--mono);-webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 12% 0%,rgba(0,255,156,.06),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 92% 22%,rgba(46,168,255,.05),transparent 55%),
+    radial-gradient(ellipse 60% 40% at 50% 100%,rgba(255,176,0,.04),transparent 60%),
+    linear-gradient(var(--grid-soft) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-soft) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,100% 100%,52px 52px,52px 52px;
+  background-attachment:fixed;position:relative;overflow-x:hidden;
+}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.15) 0,rgba(0,0,0,.15) 1px,transparent 1px,transparent 3px);
+  opacity:.5;mix-blend-mode:multiply}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+/* glows */
+.s{color:var(--signal);text-shadow:var(--g-signal)} .a{color:var(--alert);text-shadow:var(--g-alert)}
+.r{color:var(--risk);text-shadow:var(--g-risk)} .i{color:var(--info);text-shadow:var(--g-info)}
+.ru{color:var(--rumor);text-shadow:var(--g-rumor)}
+@keyframes blink-r{0%,100%{opacity:1}50%{opacity:.4}}
+.live-r{animation:blink-r 1.1s steps(1,end) infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ===== TICKER ===== */
+.ticker{border-bottom:1px solid var(--grid);background:rgba(6,9,13,.92);backdrop-filter:blur(8px);
+  overflow:hidden;white-space:nowrap;font-size:12px;letter-spacing:.4px;position:sticky;top:0;z-index:60}
+.tk-track{display:inline-block;padding:9px 0;animation:scroll 38s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk{display:inline-block;padding:0 20px;color:var(--ink-dim);border-right:1px solid var(--grid-soft)}
+.tk b{color:var(--ink);font-weight:700}
+
+/* ===== REGIMEN BAR ===== */
+.regime{border-bottom:1px solid var(--grid);background:rgba(8,11,15,.6);padding:11px 0}
+.regime .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.regime-left{display:flex;align-items:center;gap:14px}
+.rg-dot{width:9px;height:9px;border-radius:50%;background:var(--risk);box-shadow:var(--g-risk);animation:pulse 1.6s infinite}
+.rg-label{font-size:10px;letter-spacing:3px;color:var(--ink-faint);text-transform:uppercase}
+.rg-val{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:.5px}
+.defbars{display:flex;gap:4px}
+.defbar{width:26px;height:6px;background:var(--grid);border-radius:1px}
+.defbar.on{background:var(--risk);box-shadow:var(--g-risk)}
+.regime-date{font-size:11px;color:var(--ink-dim);letter-spacing:1px}
+
+/* ===== HERO (01) ===== */
+.hero{padding:64px 0 52px;border-bottom:1px solid var(--grid)}
+.hero .wrap{display:grid;grid-template-columns:1.55fr 1fr;gap:48px;align-items:start}
+.kick{font-size:11px;letter-spacing:4px;color:var(--alert);text-transform:uppercase;text-shadow:var(--g-alert);
+  display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.kick::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:var(--g-signal);animation:pulse 1.6s infinite}
+h1.headline{font-family:var(--display);font-weight:900;font-size:clamp(38px,5.4vw,68px);line-height:.95;
+  letter-spacing:-1.5px;text-transform:uppercase}
+h1.headline .em{color:var(--bg);-webkit-text-stroke:1.4px var(--risk);
+  filter:drop-shadow(0 0 7px rgba(255,46,77,.65)) drop-shadow(0 0 18px rgba(255,46,77,.35))}
+.lede{margin-top:24px;color:var(--ink-dim);font-size:14.5px;line-height:1.75;max-width:600px}
+.lede b{color:var(--ink)}
+.verdict-badge{display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:9px 16px;
+  border:1px solid var(--risk);border-radius:3px;background:rgba(255,46,77,.07);
+  font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--risk);text-shadow:var(--g-risk)}
+.verdict-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--risk);box-shadow:var(--g-risk)}
+/* live panel */
+.livebox{border:1px solid var(--grid);background:rgba(11,16,22,.7);border-radius:4px;overflow:hidden}
+.lb-head{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid var(--grid);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+.lb-live{color:var(--signal);text-shadow:var(--g-signal);display:flex;align-items:center;gap:6px}
+.lb-live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:var(--g-signal);animation:pulse 1.4s infinite}
+.lb-row{display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--grid-soft);font-size:12.5px}
+.lb-row:last-child{border-bottom:none}
+.lb-tick{font-weight:700;color:var(--ink)}
+.lb-name{color:var(--ink-faint);font-size:10.5px;letter-spacing:.5px}
+.lb-val{text-align:right;font-weight:700}
+.lb-delta{font-size:10px}
+.up{color:var(--signal)} .dn{color:var(--risk)} .nt{color:var(--ink-dim)}
+
+/* ===== SECTION SHELL ===== */
+section{padding:62px 0;border-bottom:1px solid var(--grid)}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px}
+.sec-num{font-family:var(--display);font-weight:900;font-size:13px;color:var(--alert);text-shadow:var(--g-alert);white-space:nowrap}
+.sec-title{font-family:var(--display);font-weight:800;font-size:clamp(20px,3vw,30px);letter-spacing:-.5px;text-transform:uppercase}
+.sec-title em{font-style:normal;color:var(--signal);text-shadow:var(--g-signal)}
+.sec-line{flex:1;height:1px;background:var(--grid)}
+.sec-sub{font-size:10.5px;color:var(--ink-faint);letter-spacing:1px;white-space:nowrap}
+
+/* ===== 4-DAY MEMORY STRIP ===== */
+.memory{background:rgba(11,16,22,.5)}
+.mem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--grid)}
+.mem-cell{background:var(--bg);padding:16px 16px 14px}
+.mem-tick{font-size:10px;letter-spacing:1.5px;color:var(--ink-faint);text-transform:uppercase}
+.mem-now{font-family:var(--display);font-weight:800;font-size:21px;margin-top:6px;display:flex;align-items:baseline;gap:7px}
+.mem-d{font-size:10px;font-weight:700}
+.mem-spark{margin-top:9px;height:30px;width:100%}
+.mem-4d{font-size:9.5px;color:var(--ink-faint);margin-top:7px;letter-spacing:.5px;display:flex;justify-content:space-between}
+
+/* ===== TESIS 3 FUERZAS (02) ===== */
+.thesis-q{font-family:var(--display);font-weight:800;font-size:clamp(18px,2.4vw,26px);line-height:1.3;
+  letter-spacing:-.3px;max-width:780px;margin-bottom:34px}
+.thesis-q em{font-style:normal;color:var(--risk);text-shadow:var(--g-risk)}
+.forces{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.force{border:1px solid var(--grid);background:var(--panel);border-radius:4px;padding:22px;position:relative;overflow:hidden}
+.force::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--alert);box-shadow:var(--g-alert)}
+.force-n{font-family:var(--display);font-weight:900;font-size:30px;color:var(--grid);line-height:1}
+.force-t{font-weight:700;font-size:13.5px;margin-top:12px;color:var(--ink)}
+.force-x{font-size:12px;line-height:1.65;color:var(--ink-dim);margin-top:9px}
+.force-x b{color:var(--ink)}
+
+/* ===== CRONOLOGIA (03) ===== */
+.tl{display:flex;flex-direction:column;gap:1px;background:var(--grid)}
+.tl-ev{background:var(--bg);padding:16px 20px;display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:start;transition:background .2s}
+.tl-ev:hover{background:var(--panel)}
+.tl-ev.crit{border-left:3px solid var(--risk)}
+.tl-meta{font-size:10px;letter-spacing:1px}
+.tl-time{color:var(--alert);font-weight:700}.tl-src{color:var(--ink-faint);display:block;margin-top:3px}
+.tl-t{font-weight:700;font-size:13.5px;color:var(--ink)}
+.tl-b{font-size:12px;color:var(--ink-dim);line-height:1.6;margin-top:5px}
+.tl-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.tl-tag{font-size:9px;letter-spacing:1px;padding:3px 7px;border:1px solid var(--grid);border-radius:2px;color:var(--ink-faint)}
+.tl-tag.hot{border-color:var(--alert);color:var(--alert)}
+.tl-tag.crit{border-color:var(--risk);color:var(--risk)}
+
+/* ===== RUMOR CHANNEL (04) — NUEVO ===== */
+.rumor-note{font-size:11px;color:var(--ink-faint);margin-bottom:20px;letter-spacing:.5px;padding:10px 14px;
+  border:1px dashed var(--rumor);border-radius:3px;background:rgba(192,132,252,.04)}
+.rumor-note b{color:var(--rumor);text-shadow:var(--g-rumor)}
+.rumors{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.rumor{border:1px solid var(--grid);border-top:2px solid var(--rumor);background:var(--panel);border-radius:4px;padding:18px}
+.rumor-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.rumor-conf{font-size:9px;letter-spacing:1.5px;padding:3px 8px;border-radius:2px;text-transform:uppercase;font-weight:700}
+.conf-low{background:rgba(255,46,77,.12);color:var(--risk)}
+.conf-mid{background:rgba(255,176,0,.12);color:var(--alert)}
+.conf-hi{background:rgba(0,255,156,.12);color:var(--signal)}
+.rumor-src{font-size:10px;color:var(--rumor);text-shadow:var(--g-rumor);letter-spacing:1px}
+.rumor-t{font-weight:700;font-size:13px;color:var(--ink);line-height:1.45}
+.rumor-impact{font-size:11px;color:var(--ink-dim);line-height:1.6;margin-top:9px;padding-top:9px;border-top:1px solid var(--grid-soft)}
+.rumor-impact b{color:var(--ink)}
+
+/* ===== DATA VIVA (05) ===== */
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.chart-card{border:1px solid var(--grid);background:var(--panel);border-radius:4px;overflow:hidden}
+.chart-card.wide{grid-column:1/-1}
+.ch-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--grid)}
+.ch-sym{font-weight:700;font-size:13px}
+.ch-meta{font-size:10px;color:var(--ink-faint);letter-spacing:.5px}
+.ch-tag{font-size:9px;letter-spacing:1px;padding:3px 8px;border-radius:2px;text-transform:uppercase}
+.ch-body{padding:16px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:10.5px;color:var(--ink-dim);margin-top:10px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+
+
+/* ===== DATA VIVA · responsive chart labels fix ===== */
+.chart-card{min-width:0}
+.ch-head>div{min-width:0}
+.chart-plot{position:relative;width:100%;height:200px;min-width:0;overflow:visible}
+.chart-plot.small{height:160px}
+.chart-plot svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.chart-label{position:absolute;z-index:2;font-family:var(--mono);font-size:11px;line-height:1;white-space:nowrap;pointer-events:none;color:var(--ink-dim);letter-spacing:-.15px;text-shadow:none}
+.chart-label.date{font-size:10px;color:var(--ink-faint)}
+.chart-label.alert{color:var(--alert);text-shadow:var(--g-alert)}
+.chart-label.risk{color:var(--risk);text-shadow:var(--g-risk)}
+.chart-label.anchor-r{transform:translateX(-100%)}
+.chart-label.anchor-c{transform:translateX(-50%)}
+
+/* ===== SEÑAL VS RUIDO (06) ===== */
+.sr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sr-col{border:1px solid var(--grid);border-radius:4px;padding:22px;background:var(--panel)}
+.sr-col.sig{border-top:2px solid var(--signal)}
+.sr-col.noise{border-top:2px solid var(--ink-faint)}
+.sr-h{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.sr-h.sig{color:var(--signal);text-shadow:var(--g-signal)}
+.sr-h.noise{color:var(--ink-dim)}
+.sr-item{display:grid;grid-template-columns:24px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid var(--grid-soft);font-size:12.5px;line-height:1.55}
+.sr-item:last-child{border-bottom:none}
+.sr-n{font-family:var(--display);font-weight:900;color:var(--grid)}
+.sr-item b{color:var(--ink)}.sr-item span{color:var(--ink-dim)}
+
+/* ===== SEMAFORO (07) ===== */
+.sem-tools{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.sem-btn{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;background:var(--panel);
+  border:1px solid var(--grid);color:var(--ink-dim);padding:8px 14px;border-radius:3px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:.2s}
+.sem-btn:hover{border-color:var(--ink-faint)}
+.sem-btn.active{border-color:var(--ink);color:var(--ink)}
+.sem-btn .dot{width:7px;height:7px;border-radius:50%}
+.sem-btn[data-sev="critical"] .dot{background:var(--risk);box-shadow:var(--g-risk)}
+.sem-btn[data-sev="alert"] .dot{background:var(--alert);box-shadow:var(--g-alert)}
+.sem-btn[data-sev="watch"] .dot{background:var(--info);box-shadow:var(--g-info)}
+.sem-btn[data-sev="all"] .dot{background:var(--ink-dim)}
+.sem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px}
+.sem-card{border:1px solid var(--grid);background:var(--panel);border-radius:4px;padding:16px;border-left:3px solid var(--ink-faint)}
+.sem-card[data-sev="critical"]{border-left-color:var(--risk)}
+.sem-card[data-sev="alert"]{border-left-color:var(--alert)}
+.sem-card[data-sev="watch"]{border-left-color:var(--info)}
+.sem-tag{font-size:9px;letter-spacing:1.5px;color:var(--ink-faint)}
+.sem-name{font-weight:700;font-size:13.5px;margin:6px 0 8px}
+.sem-desc{font-size:11.5px;color:var(--ink-dim);line-height:1.55}
+
+/* ===== OPERATIVA (08) ===== */
+.op-tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.op-tab{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--panel);border:1px solid var(--grid);color:var(--ink-dim);padding:11px 18px;border-radius:3px;cursor:pointer;transition:.2s}
+.op-tab.active{border-color:var(--signal);color:var(--signal);text-shadow:var(--g-signal);background:rgba(0,255,156,.05)}
+.op-panel{display:none}.op-panel.active{display:block}
+.op-setups{display:flex;flex-direction:column;gap:1px;background:var(--grid)}
+.op-setup{background:var(--bg);display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 18px}
+.op-n{font-family:var(--display);font-weight:900;font-size:18px;color:var(--grid)}
+.op-name{font-weight:700;font-size:13.5px}
+.op-detail{font-size:11.5px;color:var(--ink-dim);line-height:1.5;margin-top:4px}
+.op-detail em{font-style:normal;color:var(--alert);text-shadow:var(--g-alert)}
+.op-alloc{text-align:right}
+.op-cap{font-size:9px;letter-spacing:1px;color:var(--ink-faint)}
+.op-pct{font-family:var(--display);font-weight:900;font-size:22px;color:var(--signal);text-shadow:var(--g-signal)}
+
+/* exposure */
+.exp{margin-top:36px;border:1px solid var(--grid);border-radius:4px;background:var(--panel);padding:24px;display:grid;grid-template-columns:1fr 1.3fr;gap:30px}
+.exp-label{font-size:10px;letter-spacing:2px;color:var(--ink-faint);text-transform:uppercase;margin-bottom:10px}
+.exp-amount{display:flex;align-items:baseline;gap:8px;font-family:var(--display);font-weight:900;font-size:32px}
+.exp-cur{font-size:13px;color:var(--ink-faint)}
+.exp-field{background:transparent;border:none;border-bottom:1px solid var(--grid);color:var(--ink);font-family:var(--display);font-weight:900;font-size:32px;width:220px;outline:none}
+.exp-presets{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.cp{font-family:var(--mono);font-size:10px;background:var(--bg);border:1px solid var(--grid);color:var(--ink-dim);padding:6px 11px;border-radius:2px;cursor:pointer}
+.cp.active{border-color:var(--signal);color:var(--signal)}
+.exp-note{font-size:11px;color:var(--ink-dim);line-height:1.6;margin-top:16px}
+.exp-note b{color:var(--ink)}
+.exp-bar{display:flex;height:14px;border-radius:3px;overflow:hidden;margin-bottom:16px}
+.exp-seg[data-cat="cash"]{background:var(--info)}.exp-seg[data-cat="energy"]{background:var(--alert)}
+.exp-seg[data-cat="defense"]{background:var(--signal)}.exp-seg[data-cat="metals"]{background:#d4af37}
+.exp-seg[data-cat="hedge"]{background:var(--risk)}
+.exp-row{display:grid;grid-template-columns:14px 1fr auto auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--grid-soft);font-size:12px}
+.exp-sw{width:11px;height:11px;border-radius:2px}
+.exp-sw[data-cat="cash"]{background:var(--info)}.exp-sw[data-cat="energy"]{background:var(--alert)}
+.exp-sw[data-cat="defense"]{background:var(--signal)}.exp-sw[data-cat="metals"]{background:#d4af37}
+.exp-sw[data-cat="hedge"]{background:var(--risk)}
+.exp-cat .d{font-size:10px;color:var(--ink-faint);display:block;margin-top:2px}
+.exp-pct{color:var(--ink-dim)}.exp-usd{font-weight:700;text-align:right;min-width:78px}
+
+/* footer */
+.footer{padding:40px 0;text-align:center}
+.footer .brand{font-family:var(--display);font-weight:900;font-size:16px;letter-spacing:1px}
+.footer .sub{display:block;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:8px}
+.disc{font-size:9px;color:var(--ink-faint);max-width:600px;margin:18px auto 0;line-height:1.6}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;gap:32px}
+  .forces{grid-template-columns:1fr}
+  .charts,.sr,.exp{grid-template-columns:1fr}
+  .tl-ev{grid-template-columns:1fr;gap:8px}
+  .tl-tags{justify-content:flex-start}
+  .op-setup{grid-template-columns:32px 1fr;gap:12px}
+  .op-alloc{grid-column:2;text-align:left;margin-top:6px}
+}
+
+@media(max-width:560px){
+  .wrap{padding:0 14px}
+  section{padding:46px 0}
+  .hero{padding:46px 0 42px}
+  .regime .wrap{gap:10px}.regime-left{gap:10px;flex-wrap:wrap}.rg-label{letter-spacing:2px}.rg-val{font-size:13px}
+  h1.headline{font-size:clamp(34px,12vw,48px);letter-spacing:-1px}
+  .lede{font-size:13.5px;line-height:1.65}
+  .sec-head{flex-wrap:wrap;align-items:flex-start;gap:10px;margin-bottom:26px}
+  .sec-line{flex-basis:100%;order:5}
+  .sec-sub{white-space:normal;line-height:1.4}
+  .ch-head{flex-direction:column;align-items:flex-start;gap:9px;padding:12px 12px}
+  .ch-sym,.ch-meta{display:block;line-height:1.35}.ch-meta{margin-top:4px}
+  .ch-body{padding:12px}
+  .chart-plot{height:178px}.chart-plot.small{height:142px}
+  .chart-label{font-size:10px}.chart-label.date{font-size:9px}
+  .legend{font-size:10px;line-height:1.55;gap:10px}
+  .lb-row{grid-template-columns:44px 1fr;align-items:start}
+  .lb-val{grid-column:2;text-align:left}
+  .mem-grid{grid-template-columns:repeat(auto-fit,minmax(136px,1fr))}
+  .mem-cell{padding:14px 12px}
+  .tl-ev{padding:14px}
+  .op-tab{width:100%;justify-content:center}
+  .exp{padding:18px;gap:22px}
+  .exp-field{width:150px;font-size:28px}.exp-amount{font-size:28px}
+  .exp-row{grid-template-columns:14px 1fr auto;gap:10px}
+  .exp-usd{grid-column:2/4;text-align:left;min-width:0;color:var(--ink)}
+}
+@media(max-width:420px){
+  .chart-label.wti-v1{left:1.5%!important;top:24%!important}
+  .chart-label.wti-v2{left:34%!important;top:41%!important}
+  .chart-label.wti-v3{left:48%!important;top:51%!important}
+  .chart-label.wti-v4{right:1.5%!important;top:70%!important}
+  .chart-label.wti-d4{right:1.5%!important}
+  .chart-label.skew-v2{right:2%!important}
+  .chart-label.skew-d2{right:2%!important}
+}
+
+.fade{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.fade.vis{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ===== 00 · TICKER + RÉGIMEN ===== -->
+<div class="ticker"><div class="tk-track" id="tkTrack">
+  <span class="tk"><b>SPX</b> 7,584.31 <span class="up">▲0.41%</span></span>
+  <span class="tk"><b>NASDAQ</b> 26,830.96 <span class="dn">▼0.09%</span></span>
+  <span class="tk"><b>DOW</b> +500 pts <span class="up">▲1.0%</span></span>
+  <span class="tk"><b>RTY</b> <span class="up">▲1.46%</span></span>
+  <span class="tk"><b>XLV</b> <span class="up">▲3.07%</span></span>
+  <span class="tk"><b>XLF</b> <span class="up">▲2.59%</span></span>
+  <span class="tk"><b>XLK</b> <span class="dn">▼1.56%</span></span>
+  <span class="tk"><b>AVGO</b> <span class="r">▼13-15% · AI derisk</span></span>
+  <span class="tk"><b>WTI</b> $92.18 <span class="dn">▼4.0% · ceasefire</span></span>
+  <span class="tk"><b>BRENT</b> $94.65 <span class="dn">▼3.2%</span></span>
+  <span class="tk"><b>OVX</b> 60.52 <span class="r">EXTREME</span></span>
+  <span class="tk"><b>SKEW</b> 136.86 <span class="r">TAIL BID</span></span>
+  <span class="tk"><b>US10Y</b> 4.477% <span class="nt">↓</span></span>
+  <span class="tk"><b>DXY</b> 99.44 <span class="dn">contracción</span></span>
+  <span class="tk"><b>BTC</b> $63-64K <span class="dn">RSI 17.95</span></span>
+</div></div>
+
+<div class="regime"><div class="wrap">
+  <div class="regime-left">
+    <span class="rg-dot"></span>
+    <span class="rg-label">Risk Posture</span>
+    <span class="rg-val a">DEFCON 3 · RIESGO SELECTIVO</span>
+  </div>
+  <div class="defbars"><span class="defbar"></span><span class="defbar"></span><span class="defbar on"></span><span class="defbar"></span><span class="defbar"></span></div>
+  <span class="regime-date">04 JUN 2026 · 21:00 UTC · AFTER CLOSE</span>
+</div></div>
+
+<!-- ===== 01 · VEREDICTO (HERO) ===== -->
+<section class="hero" style="border-top:none">
+  <div class="wrap">
+    <div>
+      <div class="kick">// 01 · Veredicto del día</div>
+      <h1 class="headline">Rotación<br>real.<br><span class="em">AI</span><br>paga excesos.</h1>
+      <p class="lede">El mercado no se rompió: se <b>rebalanceó</b>. El S&amp;P 500 cerró <b>+0,41%</b> en <b>7.584,31</b>, el Dow subió cerca de <b>500 puntos</b> y Russell <b>+1,46%</b>, pero Nasdaq quedó <b>−0,09%</b> y XLK cayó <b>−1,56%</b>. La señal fue interna: XLV <b>+3,07%</b>, XLF <b>+2,59%</b>, XLRE <b>+2,05%</b>. Broadcom castigó al AI trade con caída de <b>13-15%</b> tras revenue miss y no elevar el target de AI chips de <b>$100B</b>. WTI bajó a <b>$92,18</b> por señales diplomáticas, pero SKEW <b>136,86</b> y OVX <b>60,52</b> dicen que la cola del fin de semana sigue viva.</p>
+      <div class="verdict-badge">rotación selectiva · cubrir cola</div>
+    </div>
+    <aside class="livebox">
+      <div class="lb-head"><span>// Mercados · cierre 04J</span><span class="lb-live">LIVE</span></div>
+      <div class="lb-row"><span class="lb-tick">SPX</span><span class="lb-name">recovery con rotación</span><span class="lb-val up">7.584,31<span class="lb-delta"> +0,41%</span></span></div>
+      <div class="lb-row"><span class="lb-tick">XLV</span><span class="lb-name">líder defensivo</span><span class="lb-val up">+3,07%<span class="lb-delta"> RSI 62</span></span></div>
+      <div class="lb-row"><span class="lb-tick">XLK</span><span class="lb-name">tech bajo presión</span><span class="lb-val dn">−1,56%<span class="lb-delta"> AVGO drag</span></span></div>
+      <div class="lb-row"><span class="lb-tick">AVGO</span><span class="lb-name">priced for perfection</span><span class="lb-val r">−15%<span class="lb-delta"> capex doubt</span></span></div>
+      <div class="lb-row"><span class="lb-tick">WTI</span><span class="lb-name">ceasefire relief</span><span class="lb-val dn">$92,18<span class="lb-delta"> −4,0%</span></span></div>
+      <div class="lb-row"><span class="lb-tick">TAIL</span><span class="lb-name">VIX bajo, SKEW alto</span><span class="lb-val r">136,86<span class="lb-delta"> skew</span></span></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== MEMORIA 4 DÍAS ===== -->
+<section class="memory">
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// MEM</div><h2 class="sec-title">Lo que cambió en <em>4 días</em></h2><div class="sec-line"></div><div class="sec-sub">01J · 02J · 03J · 04J</div></div>
+    <div class="mem-grid" id="memGrid"></div>
+  </div>
+</section>
+
+<!-- ===== 02 · TESIS EN 3 FUERZAS ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 02</div><h2 class="sec-title">La tesis en <em>3 fuerzas</em></h2><div class="sec-line"></div><div class="sec-sub">por qué el mercado hace lo que hace</div></div>
+    <p class="thesis-q fade">¿Por qué el índice sube, tech cae, petróleo baja y aun así el mercado sigue pagando cobertura de cola?</p>
+    <div class="forces">
+      <div class="force fade"><div class="force-n">01</div><div class="force-t">La diplomacia bajó el petróleo, no eliminó el tail risk</div><div class="force-x">El ceasefire Israel-Líbano y las señales de conversaciones EE.UU.-Irán tiraron WTI a <b>$92,18</b> y Brent a <b>$94,65</b>. Pero OVX sigue en <b>60,52</b>: el mercado de opciones no compra el “all clear” antes del fin de semana.</div></div>
+      <div class="force fade"><div class="force-n">02</div><div class="force-t">La rotación institucional salió de AI semis hacia economía real</div><div class="force-x">XLV <b>+3,07%</b>, XLF <b>+2,59%</b>, XLRE <b>+2,05%</b> y XLI <b>+1,21%</b> contra XLK <b>−1,56%</b>. Esto no es risk-off clásico: es rebalanceo desde valuaciones extremas hacia sectores con cash flow, duración menor y beta más limpia.</div></div>
+      <div class="force fade"><div class="force-n">03</div><div class="force-t">El recovery estructural sigue, pero el frente táctico se enfría</div><div class="force-x">El mensual conserva <b>RECOVERY GENUINO</b> con score <b>18,7</b> y confianza <b>90,5%</b>. El semanal baja a score <b>11</b>, confianza <b>47,9%</b> y ETA de <b>4 semanas</b> hacia neutral si no recupera vector. No es salida de mercado; es sizing selectivo.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 03 · CRONOLOGÍA ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 03</div><h2 class="sec-title">Cronología <em>táctica</em></h2><div class="sec-line"></div><div class="sec-sub">el día evento por evento</div></div>
+    <div class="tl">
+      <div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">04J · Geopolítica</span><span class="tl-src">Israel-Líbano / Irán</span></div><div><div class="tl-t">Ceasefire firmado y diplomacia EE.UU.-Irán empujan el relief trade energético</div><div class="tl-b">Israel y Líbano firmaron cese al fuego. El mercado priceó conversaciones directas vía Witkoff/Kushner en Pakistán; petróleo cae, pero el escenario sigue binario.</div></div><div class="tl-tags"><span class="tl-tag crit">ORMUZ</span><span class="tl-tag hot">WEEKEND</span></div></div>
+      <div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">04J · Equity</span><span class="tl-src">US close</span></div><div><div class="tl-t">SPX +0,41% y Dow +500 pts: sube el índice, no sube la misma beta</div><div class="tl-b">El rebalanceo fue claro: 8 de 11 sectores en verde, Russell +1,46%, Nasdaq casi plano negativo. No hay pánico; hay cambio de liderazgo.</div></div><div class="tl-tags"><span class="tl-tag hot">ROTATION</span><span class="tl-tag">SPX</span></div></div>
+      <div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">04J · Earnings</span><span class="tl-src">AVGO</span></div><div><div class="tl-t">Broadcom cae 13-15%: el AI trade descubre que un beat no alcanza</div><div class="tl-b">Revenue Q2 <b>$22,187B</b> vs <b>$22,27B</b> estimado; EPS <b>$2,44</b> vs <b>$2,40</b>. El golpe vino por no elevar el target anual de AI chips de <b>$100B</b>.</div></div><div class="tl-tags"><span class="tl-tag crit">AVGO</span><span class="tl-tag crit">AI</span></div></div>
+      <div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">04J · Macro</span><span class="tl-src">Labor / Fed</span></div><div><div class="tl-t">Jobless Claims 225K vs 213K: el mercado laboral se enfría sin romper</div><div class="tl-b">Productividad Q1 final <b>0,3%</b> vs <b>0,5%</b> y Unit Labour Costs <b>1,8%</b> vs <b>2,5%</b>. Fed sigue en hold en junio, pero H2 gana opcionalidad de corte.</div></div><div class="tl-tags"><span class="tl-tag hot">FED</span><span class="tl-tag">CLAIMS</span></div></div>
+      <div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">04J · Volatilidad</span><span class="tl-src">VIX / SKEW / OVX</span></div><div><div class="tl-t">VIX cae, pero SKEW 136,86 y OVX 60,52 mantienen cobertura cara</div><div class="tl-b">VIX <b>15,39-16,06</b> no muestra crisis diaria. SKEW y OVX sí muestran miedo de cola: el mercado está tranquilo en spot y cubierto contra evento.</div></div><div class="tl-tags"><span class="tl-tag crit">TAIL</span><span class="tl-tag">HEDGE</span></div></div>
+      <div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">04J · Crédito</span><span class="tl-src">Dashboard</span></div><div><div class="tl-t">Credit Health cae de 92,8 a 73,8; Transmission sube a 10,4 crítico</div><div class="tl-b">Los spreads absolutos siguen bajos, pero la velocidad de deterioro importa. Si HY empieza a ampliar desde este nivel, el ajuste puede acelerarse rápido.</div></div><div class="tl-tags"><span class="tl-tag crit">CREDIT</span><span class="tl-tag">CANARY</span></div></div>
+      <div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">04J · Micro</span><span class="tl-src">CIEN / AGX / LULU</span></div><div><div class="tl-t">Data center no-chip y consumidor premium resisten</div><div class="tl-b">CIEN, AGX, GWRE, DOCU, RBRK y LULU entregaron beats. La lectura: AI infrastructure sigue viva, pero el mercado separa picks de infraestructura real de semis sobrecomprados.</div></div><div class="tl-tags"><span class="tl-tag hot">INFRA</span><span class="tl-tag">EARNINGS</span></div></div>
+      <div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">04J · Crypto</span><span class="tl-src">BTC / ETH</span></div><div><div class="tl-t">BTC $63-64K con RSI 17,95: sobreventa extrema sin catalizador de acumulación</div><div class="tl-b">El informe corrige tickers inconsistentes y trabaja con precio verificado. ETH RSI <b>18,33</b> y BVIV <b>50,53</b> confirman stress de volatilidad cripto.</div></div><div class="tl-tags"><span class="tl-tag crit">BTC</span><span class="tl-tag crit">VOL</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04 · CANAL RUMOR / NO CONFIRMADO ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 04</div><h2 class="sec-title">Canal <em style="color:var(--rumor);text-shadow:var(--g-rumor)">rumor</em> · no confirmado</h2><div class="sec-line"></div><div class="sec-sub">insider · flujos · chatter</div></div>
+    <div class="rumor-note fade">▸ Esta sección agrega <b>información no verificada</b>: rumores de mesa, posicionamiento institucional filtrado y chatter geopolítico. Cada ítem lleva nivel de <b>confianza</b> y fuente. <b>No es dato confirmado</b> — es ventaja informativa temprana, a operar con tamaño reducido.</div>
+    <div class="rumors">
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// Geopol desk · Islamabad</span><span class="rumor-conf conf-mid">media</span></div><div class="rumor-t">Chatter apunta a viaje Witkoff/Kushner para conversaciones directas con contrapartes iraníes durante el fin de semana.</div><div class="rumor-impact"><b>Si confirma:</b> Brent puede ir hacia <b>$80-85</b>; XLE/USO largos quedan vulnerables a gap bajista y el relief rally favorece industrials/financials.</div></div>
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// Options desk · petróleo</span><span class="rumor-conf conf-mid">media</span></div><div class="rumor-t">Mesa discute estructuras tipo straddle/strangle en USO por evento binario: MOU vs colapso del ceasefire.</div><div class="rumor-impact"><b>Si confirma:</b> conviene pagar dirección solo después del titular; antes del evento, estructura de volatilidad limitada en prima y tamaño chico.</div></div>
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// Flow desk · sector rotation</span><span class="rumor-conf conf-low">baja</span></div><div class="rumor-t">Chatter de rebalanceo institucional extendido: long XLV/XLF contra short XLK tras el shock AVGO.</div><div class="rumor-impact"><b>Si confirma:</b> la rotación puede durar <b>5-10 sesiones</b>; el pair XLV/XLK reduce beta de mercado y captura cambio de liderazgo.</div></div>
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// AI desk · semis</span><span class="rumor-conf conf-mid">media</span></div><div class="rumor-t">Fondos growth no estarían comprando agresivamente el dip de AVGO hasta ver estabilización de guidance y estimates.</div><div class="rumor-impact"><b>Si confirma:</b> el rebote de semis puede ser vendible; SOXX puts de vencimiento agosto mantienen convexidad contra repricing de valuaciones.</div></div>
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// FX Tokyo chatter</span><span class="rumor-conf conf-mid">media</span></div><div class="rumor-t">USDJPY 160 vuelve a concentrar rumores de intervención o advertencia verbal del MoF.</div><div class="rumor-impact"><b>Si confirma:</b> carry long USDJPY deja de ser gratis; short táctico requiere stop amplio por riesgo de squeeze previo.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 05 · DATA VIVA ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 05</div><h2 class="sec-title">Data <em>viva</em></h2><div class="sec-line"></div><div class="sec-sub">WTI · cola · rotación</div></div>
+    <div class="charts">
+      <div class="chart-card wide fade">
+        <div class="ch-head"><div><span class="ch-sym a">WTI · diplomacia vs squeeze 4 días</span> <span class="ch-meta">01J → 04J · relief por ceasefire, OVX aún extremo</span></div><span class="ch-tag" style="background:rgba(255,176,0,.12);color:var(--alert)">PRINCIPAL</span></div>
+        <div class="ch-body">
+          <div class="chart-plot wti-plot">
+          <svg viewBox="0 0 1080 220" preserveAspectRatio="none" aria-hidden="true">
+            <defs><filter id="gA"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <linearGradient id="wtiFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffb000" stop-opacity=".25"/><stop offset="100%" stop-color="#ffb000" stop-opacity="0"/></linearGradient></defs>
+            <g stroke="#1a232e" stroke-width="1"><line x1="0" y1="50" x2="1080" y2="50"/><line x1="0" y1="100" x2="1080" y2="100"/><line x1="0" y1="150" x2="1080" y2="150"/></g>
+            <path d="M40,94 L386,108 L540,38 L1040,96 L1040,210 L40,210 Z" fill="url(#wtiFill)"/>
+            <polyline fill="none" stroke="#ffb000" stroke-width="2.6" filter="url(#gA)" points="40,94 386,108 540,38 1040,96"/>
+            <circle cx="40" cy="94" r="4" fill="#ffb000"/><circle cx="386" cy="108" r="4" fill="#ffb000"/><circle cx="540" cy="38" r="4" fill="#ffb000"/><circle cx="1040" cy="96" r="5.5" fill="#ffb000" filter="url(#gA)"/>
+          </svg>
+            <span class="chart-label wti-v1" style="left:3.5%;top:43%">$92,19</span>
+            <span class="chart-label wti-v2" style="left:35.7%;top:49%">$91,64</span>
+            <span class="chart-label wti-v3 anchor-c alert" style="left:50%;top:16%">$96,02</span>
+            <span class="chart-label wti-v4 anchor-r" style="right:4%;top:44%">$92,18</span>
+            <span class="chart-label date" style="left:3%;top:93%">01J</span>
+            <span class="chart-label date" style="left:35%;top:93%">02J</span>
+            <span class="chart-label date alert" style="left:49%;top:93%">03J</span>
+            <span class="chart-label date wti-d4 anchor-r" style="right:4%;top:93%">04J</span>
+          </div>
+          <div class="legend"><span><i style="background:#ffb000"></i>WTI front month</span><span>La baja de <b>$96,02</b> a <b>$92,18</b> no elimina el riesgo: con OVX <b>60,52</b>, el mercado sigue priceando movimiento violento por titulares del fin de semana.</span></div>
+        </div>
+      </div>
+      <div class="chart-card fade">
+        <div class="ch-head"><div><span class="ch-sym r">SKEW · cola institucional</span> <span class="ch-meta">VIX calmo, protección aún cara</span></div><span class="ch-tag" style="background:rgba(255,46,77,.12);color:var(--risk)">RIESGO</span></div>
+        <div class="ch-body">
+          <div class="chart-plot small skew-plot">
+          <svg viewBox="0 0 520 180" preserveAspectRatio="none" aria-hidden="true">
+            <defs><filter id="gR"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+            <g stroke="#1a232e" stroke-width="1"><line x1="0" y1="45" x2="520" y2="45"/><line x1="0" y1="90" x2="520" y2="90"/><line x1="0" y1="135" x2="520" y2="135"/></g>
+            <polyline fill="none" stroke="#ff2e4d" stroke-width="2.6" filter="url(#gR)" points="30,42 195,58 360,50 490,112"/>
+            <circle cx="30" cy="42" r="4" fill="#ff2e4d"/><circle cx="195" cy="58" r="4" fill="#ff2e4d"/><circle cx="360" cy="50" r="4" fill="#ff2e4d"/><circle cx="490" cy="112" r="5" fill="#ff2e4d" filter="url(#gR)"/>
+          </svg>
+            <span class="chart-label risk" style="left:4.5%;top:24%">144,18</span>
+            <span class="chart-label risk skew-v2 anchor-r" style="right:7%;top:60%">136,86</span>
+            <span class="chart-label date" style="left:4.5%;top:89%">01J</span>
+            <span class="chart-label date risk skew-d2 anchor-r" style="right:7%;top:89%">04J</span>
+          </div>
+          <div class="legend"><span><i style="background:#ff2e4d"></i>SKEW</span><span>El SKEW baja, pero sigue elevado: VIX <b>15-16</b> describe calma spot; SKEW <b>136,86</b> describe miedo a gap.</span></div>
+        </div>
+      </div>
+      <div class="chart-card fade">
+        <div class="ch-head"><div><span class="ch-sym s">XLV vs XLK · rotación</span> <span class="ch-meta">salud lidera, tecnología financia</span></div><span class="ch-tag" style="background:rgba(46,168,255,.12);color:var(--info)">COMPARAR</span></div>
+        <div class="ch-body">
+          <div class="chart-plot small compare-plot">
+          <svg viewBox="0 0 520 180" preserveAspectRatio="none" aria-hidden="true">
+            <defs><filter id="gS"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+            <g stroke="#1a232e" stroke-width="1"><line x1="0" y1="45" x2="520" y2="45"/><line x1="0" y1="90" x2="520" y2="90"/><line x1="0" y1="135" x2="520" y2="135"/></g>
+            <polyline fill="none" stroke="#00ff9c" stroke-width="2.4" filter="url(#gS)" points="30,112 195,104 360,96 490,42"/>
+            <polyline fill="none" stroke="#ff2e4d" stroke-width="2.4" points="30,84 195,78 360,86 490,134"/>
+            <circle cx="490" cy="42" r="4.5" fill="#00ff9c" filter="url(#gS)"/><circle cx="490" cy="134" r="4.5" fill="#ff2e4d"/>
+          </svg>
+            <span class="chart-label date" style="left:4.5%;top:89%">01J</span>
+            <span class="chart-label date risk anchor-r" style="right:7%;top:89%">04J</span>
+          </div>
+          <div class="legend"><span><i style="background:#00ff9c"></i>XLV +3,07%</span><span><i style="background:#ff2e4d"></i>XLK −1,56%</span><span>La oportunidad del día no estuvo en perseguir índice: estuvo en detectar la transferencia de liderazgo.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 06 · SEÑAL VS RUIDO ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 06</div><h2 class="sec-title">Señal vs <em>ruido</em></h2><div class="sec-line"></div><div class="sec-sub">lo que mueve mercado vs lo que distrae</div></div>
+    <div class="sr">
+      <div class="sr-col sig fade">
+        <div class="sr-h sig">▲ Señal</div>
+        <div class="sr-item"><span class="sr-n">01</span><div><b>XLV +3,07% / XLF +2,59% / XLK −1,56%:</b> <span>la rotación sectorial es el dato central, no el +0,41% del SPX.</span></div></div>
+        <div class="sr-item"><span class="sr-n">02</span><div><b>AVGO −13-15%:</b> <span>el mercado ya no paga AI “bueno”; paga AI que acelera guidance sin fisuras.</span></div></div>
+        <div class="sr-item"><span class="sr-n">03</span><div><b>Claims 225K + ULC 1,8%:</b> <span>labor se suaviza y costos laborales ayudan; Fed no corta en junio, pero H2 gana opcionalidad.</span></div></div>
+        <div class="sr-item"><span class="sr-n">04</span><div><b>Credit Health 73,8:</b> <span>la caída de 19 puntos en una semana es el canario, aunque spreads absolutos sigan bajos.</span></div></div>
+        <div class="sr-item"><span class="sr-n">05</span><div><b>SKEW 136,86 + OVX 60,52:</b> <span>el mercado luce tranquilo en spot, pero compra protección contra evento.</span></div></div>
+      </div>
+      <div class="sr-col noise fade">
+        <div class="sr-h noise">○ Ruido</div>
+        <div class="sr-item"><span class="sr-n">01</span><div><b>"SPX verde = todo bien".</b> <span>la amplitud fue buena, pero el liderazgo cambió; no todo beta sirve.</span></div></div>
+        <div class="sr-item"><span class="sr-n">02</span><div><b>"WTI −4% = fin del riesgo Ormuz".</b> <span>OVX en 60,52 invalida esa lectura; el evento todavía no terminó.</span></div></div>
+        <div class="sr-item"><span class="sr-n">03</span><div><b>"BTC RSI 17,95 = compra automática".</b> <span>sobreventa extrema sin flujo comprador puede seguir cayendo o lateralizar semanas.</span></div></div>
+        <div class="sr-item"><span class="sr-n">04</span><div><b>"VIX 15 = cero riesgo".</b> <span>VIX mide calma diaria; SKEW mide gap y cola. Hoy manda el segundo.</span></div></div>
+        <div class="sr-item"><span class="sr-n">05</span><div><b>"AI murió por AVGO".</b> <span>CIEN y AGX muestran que data center sigue vivo; el problema es valuación de semis, no infraestructura.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 07 · SEMÁFORO ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 07</div><h2 class="sec-title">Semáforo de <em>activos</em></h2><div class="sec-line"></div><div class="sec-sub">dónde esperar y dónde atacar</div></div>
+    <div class="sem-tools">
+      <button class="sem-btn active" data-sev="all"><span class="dot"></span>Todos</button>
+      <button class="sem-btn" data-sev="critical"><span class="dot"></span>Crítico</button>
+      <button class="sem-btn" data-sev="alert"><span class="dot"></span>Alerta</button>
+      <button class="sem-btn" data-sev="watch"><span class="dot"></span>Monitoreo</button>
+    </div>
+    <div class="sem-grid" id="semGrid">
+      <div class="sem-card fade" data-sev="critical"><div class="sem-tag">// AI SEMIS</div><div class="sem-name">AVGO / SOXX / semis caros</div><div class="sem-desc">Broadcom −13-15%, sector venía priced for perfection y XLK −1,56%. No comprar dip sin estabilización de estimates.</div></div>
+      <div class="sem-card fade" data-sev="critical"><div class="sem-tag">// CRYPTO</div><div class="sem-name">BTC / ETH</div><div class="sem-desc">BTC $63-64K, RSI 17,95; ETH RSI 18,33. Sobreventa extrema, pero sin catalizador comprador estructural.</div></div>
+      <div class="sem-card fade" data-sev="critical"><div class="sem-tag">// CREDIT</div><div class="sem-name">HY / HYG / BDCs</div><div class="sem-desc">Credit Health 73,8 desde 92,8 y Transmission 10,4 crítico. Spreads bajos no compensan deterioro de velocidad.</div></div>
+      <div class="sem-card fade" data-sev="critical"><div class="sem-tag">// OIL NAKED</div><div class="sem-name">WTI / Brent direccional puro</div><div class="sem-desc">Crudo cae por diplomacia, pero OVX 60,52. Long o short desnudo antes del fin de semana es juego binario.</div></div>
+      <div class="sem-card fade" data-sev="critical"><div class="sem-tag">// EM</div><div class="sem-name">Emergentes sensibles a DXY</div><div class="sem-desc">DXY débil en corto plazo pero fuerte históricamente; EEM/DXY sigue bajo presión. Evitar EM con beta dólar alta.</div></div>
+
+      <div class="sem-card fade" data-sev="alert"><div class="sem-tag">// INDEX</div><div class="sem-name">SPY / QQQ beta amplia</div><div class="sem-desc">SPX +0,41%, pero el semanal macro frena y tech financia la rotación. Exposición broad con sizing reducido.</div></div>
+      <div class="sem-card fade" data-sev="alert"><div class="sem-tag">// TECHNOLOGY</div><div class="sem-name">XLK broad tech</div><div class="sem-desc">RSI 72,14 y presión de semis. Mejor esperar pullback limpio o operar pair contra sectores ganadores.</div></div>
+      <div class="sem-card fade" data-sev="alert"><div class="sem-tag">// ENERGY</div><div class="sem-name">XLE / USO / XOM / CVX</div><div class="sem-desc">XLE +0,07% pese al shock petrolero. Mantener solo con stops y sin perseguir antes de titulares de Irán.</div></div>
+      <div class="sem-card fade" data-sev="alert"><div class="sem-tag">// GOLD</div><div class="sem-name">Oro / GLD</div><div class="sem-desc">GC1! $3.228, RSI 43,75 y momentum negativo. Funciona como hedge si colapsa el ceasefire, no como momentum actual.</div></div>
+      <div class="sem-card fade" data-sev="alert"><div class="sem-tag">// FX</div><div class="sem-name">USDJPY / JPY</div><div class="sem-desc">USDJPY 160,02 con JP10Y 2,669%. Riesgo de intervención, pero timing difícil; operar chico y con stop amplio.</div></div>
+      <div class="sem-card fade" data-sev="alert"><div class="sem-tag">// CONSUMO</div><div class="sem-name">XLY / retail no premium</div><div class="sem-desc">LULU aguanta, Zumiez/Destination XL fallan. Consumidor bifurcado: premium sí, low-end bajo presión.</div></div>
+
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">// HEALTHCARE</div><div class="sem-name">XLV / healthcare</div><div class="sem-desc">Líder del día +3,07%, RSI 62,17. Defensivo con momentum; primer destino de rotación institucional.</div></div>
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">// FINANCIALS</div><div class="sem-name">XLF / bancos</div><div class="sem-desc">+2,59%, beneficia de curva positiva 2s10s 42,8 bps y eventual normalización de tasas en H2.</div></div>
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">// REAL ESTATE</div><div class="sem-name">XLRE</div><div class="sem-desc">+2,05%, sensible a expectativa de tasas más bajas. Mantener mientras yields no vuelvan a acelerar.</div></div>
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">// INDUSTRIALS</div><div class="sem-name">XLI / defensa</div><div class="sem-desc">+1,21%, gasto defensa e infraestructura sostienen. Mejor calidad que beta tech sobrecomprada.</div></div>
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">// DATA CENTER</div><div class="sem-name">CIEN / AGX</div><div class="sem-desc">Beats de infraestructura AI no-chip. La demanda de data center sigue viva aunque semis caros corrijan.</div></div>
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">// TREASURIES</div><div class="sem-name">2Y / 5Y / SHY</div><div class="sem-desc">2Y 4,04%, MOVE normal y claims subiendo. Buen ancla de cartera sin perseguir duración larga.</div></div>
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">// COPPER</div><div class="sem-name">HG1! / CPER</div><div class="sem-desc">Cobre $6,535, RSI 58,82 y momentum positivo. Proxy de crecimiento real con mejor lectura que oro.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 08 · OPERATIVA ===== -->
+<section style="border-bottom:none">
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 08</div><h2 class="sec-title">Qué <em>hago</em> con esto</h2><div class="sec-line"></div><div class="sec-sub">Plan A · B · C + exposición</div></div>
+    <div class="op-tabs">
+      <button class="op-tab active" data-plan="A">Plan A · Controlado</button>
+      <button class="op-tab" data-plan="B">Plan B · Asimétrico</button>
+      <button class="op-tab" data-plan="C">Plan C · Escalada</button>
+    </div>
+    <div class="op-panel active" id="planA"><div class="op-setups">
+      <div class="op-setup"><div class="op-n">01</div><div><div class="op-name">XLV / Health Care</div><div class="op-detail">Líder sectorial del día. Entrada escalonada, stop bajo zona <em>$148</em>; tesis: defensivo con momentum real.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">20%</div></div></div>
+      <div class="op-setup"><div class="op-n">02</div><div><div class="op-name">XLF / Financials</div><div class="op-detail">Curva 2s10s positiva <em>42,8 bps</em> y eventual easing H2. Stop bajo <em>$51</em>.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">15%</div></div></div>
+      <div class="op-setup"><div class="op-n">03</div><div><div class="op-name">Treasuries 2Y / SHY</div><div class="op-detail">Ancla de cartera con 2Y <em>4,04%</em>, MOVE normal y Fed aún en hold. Mantener sin perseguir duración larga.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">20%</div></div></div>
+      <div class="op-setup"><div class="op-n">04</div><div><div class="op-name">XLI / defensa industrial</div><div class="op-detail">Gasto defensa + infraestructura; participa del rally no-tech sin pagar múltiplos AI extremos.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">10%</div></div></div>
+      <div class="op-setup"><div class="op-n">05</div><div><div class="op-name">CIEN / AGX</div><div class="op-detail">Data center no-chip. Beats del día validan buildout de AI infrastructure sin depender del mismo trade AVGO.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">8%</div></div></div>
+      <div class="op-setup"><div class="op-n">06</div><div><div class="op-name">Cobre / CPER</div><div class="op-detail">HG1! <em>$6,535</em>, RSI 58,82 y momentum positivo. Stop -5% desde entrada.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">7%</div></div></div>
+      <div class="op-setup"><div class="op-n">07</div><div><div class="op-name">Cash / T-Bills</div><div class="op-detail">Liquidez para CPI, resultado diplomático de Irán y repricing post-AVGO. No gastar pólvora antes del evento.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">20%</div></div></div>
+    </div></div>
+    <div class="op-panel" id="planB"><div class="op-setups">
+      <div class="op-setup"><div class="op-n">01</div><div><div class="op-name">Pair trade XLV long / XLK short</div><div class="op-detail">Tesis de rotación sectorial: XLV captura flujo defensivo, XLK financia por presión AVGO. Exposición bruta <em>60%</em>, beta más neutral.</div></div><div class="op-alloc"><div class="op-cap">// Gross</div><div class="op-pct">60%</div></div></div>
+      <div class="op-setup"><div class="op-n">02</div><div><div class="op-name">USO opciones · evento binario</div><div class="op-detail">Straddle/strangle limitado en prima para MOU vs colapso. Con OVX <em>60,52</em>, no comprar dirección desnuda.</div></div><div class="op-alloc"><div class="op-cap">// Riesgo</div><div class="op-pct">10%</div></div></div>
+      <div class="op-setup"><div class="op-n">03</div><div><div class="op-name">LMT / RTX</div><div class="op-detail">Defensa estructural. No depende solo de Irán; depende del ciclo multianual de gasto europeo.</div></div><div class="op-alloc"><div class="op-cap">// Riesgo</div><div class="op-pct">20%</div></div></div>
+      <div class="op-setup"><div class="op-n">04</div><div><div class="op-name">SOXX puts agosto</div><div class="op-detail">Cobertura asimétrica contra repricing de semis. Strike -10% del nivel actual, prima acotada.</div></div><div class="op-alloc"><div class="op-cap">// Riesgo</div><div class="op-pct">5%</div></div></div>
+      <div class="op-setup"><div class="op-n">05</div><div><div class="op-name">Cash táctico</div><div class="op-detail">Reserva para comprar el activo correcto después del titular, no antes. Regla: si Credit Health &lt;65, reducir riesgo.</div></div><div class="op-alloc"><div class="op-cap">// Riesgo</div><div class="op-pct">5%</div></div></div>
+    </div></div>
+    <div class="op-panel" id="planC"><div class="op-setups">
+      <div class="op-setup"><div class="op-n">01</div><div><div class="op-name">Subir cash a 55%</div><div class="op-detail">Si el ceasefire colapsa, Credit Health cae bajo <em>65</em> o HY amplía +50 bps, cortar riesgo antes de discutir narrativa.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">55%</div></div></div>
+      <div class="op-setup"><div class="op-n">02</div><div><div class="op-name">SPY puts / VIX / long JPY</div><div class="op-detail">Si el spot empieza a reconocer la cola que SKEW ya está marcando, la protección se compra aunque no esté barata.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">15%</div></div></div>
+      <div class="op-setup"><div class="op-n">03</div><div><div class="op-name">Escalada Ormuz: long energía</div><div class="op-detail">Solo con titular confirmado: Brent &gt;$105, cierre operativo o ataque nuevo. Evitar perseguir rumor.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">10%</div></div></div>
+      <div class="op-setup"><div class="op-n">04</div><div><div class="op-name">MOU confirmado: vender petróleo, comprar rotación</div><div class="op-detail">Si hay acuerdo, tomar ganancias/cerrar long energía y sumar XLI/XLF/XLRE en relief macro.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">—</div></div></div>
+      <div class="op-setup"><div class="op-n">05</div><div><div class="op-name">Cortar semis caros y crypto</div><div class="op-detail">AVGO no estabiliza, SOXX pierde soporte o BTC rompe $63K con volumen: reducir sin negociar.</div></div><div class="op-alloc"><div class="op-cap">// Capital</div><div class="op-pct">—</div></div></div>
+    </div></div>
+
+    <div class="exp fade">
+      <div>
+        <div class="exp-label">// Capital total a desplegar</div>
+        <div class="exp-amount"><span class="exp-cur">USD</span><input type="text" class="exp-field" id="capInput" value="100,000" inputmode="numeric"></div>
+        <div class="exp-presets"><button class="cp" data-p="25000">25K</button><button class="cp" data-p="50000">50K</button><button class="cp active" data-p="100000">100K</button><button class="cp" data-p="250000">250K</button><button class="cp" data-p="500000">500K</button></div>
+        <div class="exp-note"><b>Régimen actual: DEFCON 3.</b> Recovery mensual firme, semanal frenando. La cartera participa de la rotación hacia salud/financieras/industriales, mantiene <b>20%</b> cash y evita semis AI caros, crypto y petróleo direccional antes del evento.</div>
+      </div>
+      <div>
+        <div class="exp-bar"><div class="exp-seg" data-cat="cash" style="flex:20"></div><div class="exp-seg" data-cat="defense" style="flex:35"></div><div class="exp-seg" data-cat="energy" style="flex:18"></div><div class="exp-seg" data-cat="info" style="flex:20;background:var(--info)"></div><div class="exp-seg" data-cat="metals" style="flex:7"></div></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="cash"></span><span class="exp-cat">Cash · T-Bills<span class="d">Liquidez para Irán, CPI y repricing post-AVGO</span></span><span class="exp-pct">20%</span><span class="exp-usd" data-sh="0.20">$20,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="defense"></span><span class="exp-cat">Salud + financieros<span class="d">XLV 20% + XLF 15%; rotación líder del día</span></span><span class="exp-pct">35%</span><span class="exp-usd" data-sh="0.35">$35,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="energy"></span><span class="exp-cat">Industriales + data center infra<span class="d">XLI, defensa, CIEN y AGX</span></span><span class="exp-pct">18%</span><span class="exp-usd" data-sh="0.18">$18,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="cash" style="background:var(--info)"></span><span class="exp-cat">Treasuries 2Y / SHY<span class="d">Ancla de cartera con 2Y en 4,04%</span></span><span class="exp-pct">20%</span><span class="exp-usd" data-sh="0.20">$20,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="metals"></span><span class="exp-cat">Cobre táctico<span class="d">HG1!/CPER, proxy de crecimiento real con momentum positivo</span></span><span class="exp-pct">7%</span><span class="exp-usd" data-sh="0.07">$7,000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="wrap">
+  <div class="brand">WAR ROOM <span class="a">· v3</span></div>
+  <span class="sub">Terminal de Señales · Senior Fellow, Brookings Institution · Global Economy &amp; Development</span>
+  <p class="disc">Análisis con datos de cierre del 4 jun 2026, 21:00 UTC, según el análisis macro cargado por el usuario. Se priorizaron los datos marcados como verificados y se señalaron discrepancias críticas de tickers en petróleo y Bitcoin dentro de la narrativa. Propósito informativo e investigación macroeconómica. No constituye asesoramiento de inversión personalizado.</p>
+</div></footer>
+
+<script>
+// ticker loop
+const tk=document.getElementById('tkTrack');tk.innerHTML+=tk.innerHTML;
+
+// ===== MEMORIA 4 DÍAS — ventana FIFO: salió 28M, entró 04J =====
+const MEM=[
+  {tick:'WTI',unit:'$',now:'92.18',d:'▼4.0%',cls:'dn',series:[92.19,91.64,96.02,92.18],color:'#ffb000'},
+  {tick:'SPX',unit:'',now:'7,584',d:'▲0.41%',cls:'up',series:[7599.96,7609.78,7553.68,7584.31],color:'#00ff9c'},
+  {tick:'VIX',unit:'',now:'15.39',d:'▼4.1%',cls:'dn',series:[16.06,15.76,16.05,15.39],color:'#2ea8ff'},
+  {tick:'SKEW',unit:'',now:'136.86',d:'▼4.45%',cls:'dn',series:[144.18,142.46,143.24,136.86],color:'#ff2e4d'},
+  {tick:'GOLD',unit:'$',now:'3,228',d:'verif.',cls:'nt',series:[3228,3228,3228,3228],color:'#d4af37'},
+  {tick:'BTC',unit:'$',now:'63.8K',d:'▼2.6%',cls:'dn',series:[71.6,67.5,65.5,63.8],color:'#ff2e4d'},
+  {tick:'DXY',unit:'',now:'99.44',d:'▼0.1%',cls:'dn',series:[99.19,99.22,99.53,99.44],color:'#7d8a93'}
+];
+function spark(s,color){
+  const w=150,h=30,mn=Math.min(...s),mx=Math.max(...s),pad=(mx-mn||1)*0.15,lo=mn-pad,hi=mx+pad;
+  const pts=s.map((v,i)=>[6+(w-12)*(i/(s.length-1)),h-2-((v-lo)/(hi-lo))*(h-4)]);
+  const last=pts[pts.length-1];
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="width:100%;height:30px">
+    <polyline fill="none" stroke="${color}" stroke-width="1.8" points="${pts.map(p=>p.join(',')).join(' ')}"/>
+    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="2.6" fill="${color}"/></svg>`;
+}
+document.getElementById('memGrid').innerHTML=MEM.map(m=>`
+  <div class="mem-cell">
+    <div class="mem-tick">${m.tick}</div>
+    <div class="mem-now">${m.unit}${m.now}<span class="mem-d ${m.cls}">${m.d}</span></div>
+    ${spark(m.series,m.color)}
+    <div class="mem-4d"><span>01J ${m.unit}${m.series[0]}</span><span>04J ${m.unit}${m.now}</span></div>
+  </div>`).join('');
+
+// ===== SEMÁFORO filter =====
+document.querySelectorAll('.sem-btn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.sem-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  const sev=b.dataset.sev;
+  document.querySelectorAll('.sem-card').forEach(c=>{c.style.display=(sev==='all'||c.dataset.sev===sev)?'':'none'});
+}));
+
+// ===== OPERATIVA tabs =====
+document.querySelectorAll('.op-tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.op-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
+  document.querySelectorAll('.op-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('plan'+t.dataset.plan).classList.add('active');
+}));
+
+// ===== EXPOSURE calc =====
+const capInput=document.getElementById('capInput');
+function recalc(){
+  const v=parseFloat(capInput.value.replace(/[^0-9.]/g,''))||0;
+  document.querySelectorAll('.exp-usd').forEach(el=>{
+    el.textContent='$'+Math.round(v*parseFloat(el.dataset.sh)).toLocaleString('en-US');
+  });
+}
+capInput.addEventListener('input',()=>{recalc();});
+document.querySelectorAll('.cp').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.cp').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  capInput.value=parseInt(b.dataset.p).toLocaleString('en-US');recalc();
+}));
+recalc();
+
+// ===== fade in =====
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+}else{document.querySelectorAll('.fade').forEach(el=>el.classList.add('vis'))}
+</script>
+</body>
+</html>
