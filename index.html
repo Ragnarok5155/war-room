@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WAR ROOM v3 — 22 Julio 2026 · Crudo rompe · Software cede · Capex castigado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Archivo:wght@400;600;800;900&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   SISTEMA — NO TOCAR
+   Template estable: estructura, componentes e interactivos base.
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#04060a; --panel:#0b1016; --panel-2:#0f1620; --grid:#1a232e; --grid-soft:#121a24;
+  --ink:#e8eef2; --white:#fff; --ink-dim:#7d8a93; --ink-faint:#48555d;
+  --signal:#00ff9c; --alert:#ffb000; --risk:#ff2e4d; --info:#2ea8ff; --rumor:#c084fc;
+  --g-signal:0 0 6px rgba(0,255,156,.9),0 0 16px rgba(0,255,156,.45);
+  --g-alert:0 0 6px rgba(255,176,0,.9),0 0 16px rgba(255,176,0,.4);
+  --g-risk:0 0 6px rgba(255,46,77,.9),0 0 16px rgba(255,46,77,.4);
+  --g-info:0 0 6px rgba(46,168,255,.9),0 0 16px rgba(46,168,255,.4);
+  --g-rumor:0 0 6px rgba(192,132,252,.9),0 0 16px rgba(192,132,252,.4);
+  --mono:'JetBrains Mono',monospace; --display:'Archivo','Archivo Black',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--mono);-webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 12% 0%,rgba(0,255,156,.06),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 92% 22%,rgba(46,168,255,.05),transparent 55%),
+    radial-gradient(ellipse 60% 40% at 50% 100%,rgba(255,176,0,.04),transparent 60%),
+    linear-gradient(var(--grid-soft) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-soft) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,100% 100%,52px 52px,52px 52px;
+  background-attachment:fixed;position:relative;overflow-x:hidden;
+}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.15) 0,rgba(0,0,0,.15) 1px,transparent 1px,transparent 3px);
+  opacity:.5;mix-blend-mode:multiply}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+/* glows */
+.s{color:var(--signal);text-shadow:var(--g-signal)} .a{color:var(--alert);text-shadow:var(--g-alert)}
+.r{color:var(--risk);text-shadow:var(--g-risk)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ===== TICKER ===== */
+.ticker{border-bottom:1px solid var(--grid);background:rgba(6,9,13,.92);backdrop-filter:blur(8px);
+  overflow:hidden;white-space:nowrap;font-size:12px;letter-spacing:.4px;position:sticky;top:0;z-index:60}
+.tk-track{display:inline-block;padding:9px 0;animation:scroll 38s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk{display:inline-block;padding:0 20px;color:var(--ink-dim);border-right:1px solid var(--grid-soft)}
+.tk b{color:var(--ink);font-weight:700}
+
+/* ===== REGIMEN BAR ===== */
+.regime{border-bottom:1px solid var(--grid);background:rgba(8,11,15,.6);padding:11px 0}
+.regime .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.regime-left{display:flex;align-items:center;gap:14px}
+.rg-dot{width:9px;height:9px;border-radius:50%;background:var(--risk);box-shadow:var(--g-risk);animation:pulse 1.6s infinite}
+.rg-label{font-size:10px;letter-spacing:3px;color:var(--ink-faint);text-transform:uppercase}
+.rg-val{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:.5px}
+.defbars{display:flex;gap:4px}
+.defbar{width:26px;height:6px;background:var(--grid);border-radius:1px}
+.defbar.on{background:var(--risk);box-shadow:var(--g-risk)}
+.regime-date{font-size:11px;color:var(--ink-dim);letter-spacing:1px}
+
+/* ===== HERO (01) ===== */
+.hero{padding:64px 0 52px;border-bottom:1px solid var(--grid)}
+.hero .wrap{display:grid;grid-template-columns:1.55fr 1fr;gap:48px;align-items:start}
+.kick{font-size:11px;letter-spacing:4px;color:var(--alert);text-transform:uppercase;text-shadow:var(--g-alert);
+  display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.kick::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:var(--g-signal);animation:pulse 1.6s infinite}
+h1.headline{font-family:var(--display);font-weight:900;font-size:clamp(38px,5.4vw,68px);line-height:.95;
+  letter-spacing:-1.5px;text-transform:uppercase}
+h1.headline .em{color:var(--bg);-webkit-text-stroke:1.4px var(--risk);
+  filter:drop-shadow(0 0 7px rgba(255,46,77,.65)) drop-shadow(0 0 18px rgba(255,46,77,.35))}
+.lede{margin-top:24px;color:var(--ink-dim);font-size:14.5px;line-height:1.75;max-width:600px}
+.lede b{color:var(--ink)}
+.verdict-badge{display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:9px 16px;
+  border:1px solid var(--risk);border-radius:3px;background:rgba(255,46,77,.07);
+  font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--risk);text-shadow:var(--g-risk)}
+.verdict-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--risk);box-shadow:var(--g-risk)}
+/* live panel */
+.livebox{border:1px solid var(--grid);background:rgba(11,16,22,.7);border-radius:4px;overflow:hidden}
+.lb-head{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid var(--grid);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+.lb-live{color:var(--signal);text-shadow:var(--g-signal);display:flex;align-items:center;gap:6px}
+.lb-live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:var(--g-signal);animation:pulse 1.4s infinite}
+.lb-row{display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--grid-soft);font-size:12.5px}
+.lb-row:last-child{border-bottom:none}
+.lb-tick{font-weight:700;color:var(--ink)}
+.lb-name{color:var(--ink-faint);font-size:10.5px;letter-spacing:.5px}
+.lb-val{text-align:right;font-weight:700}
+.lb-delta{font-size:10px}
+.up{color:var(--signal)} .dn{color:var(--risk)} .nt{color:var(--ink-dim)}
+
+/* ===== SECTION SHELL ===== */
+section{padding:62px 0;border-bottom:1px solid var(--grid)}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px}
+.sec-num{font-family:var(--display);font-weight:900;font-size:13px;color:var(--alert);text-shadow:var(--g-alert);white-space:nowrap}
+.sec-title{font-family:var(--display);font-weight:800;font-size:clamp(20px,3vw,30px);letter-spacing:-.5px;text-transform:uppercase}
+.sec-title em{font-style:normal;color:var(--signal);text-shadow:var(--g-signal)}
+.sec-line{flex:1;height:1px;background:var(--grid)}
+.sec-sub{font-size:10.5px;color:var(--ink-faint);letter-spacing:1px;white-space:nowrap}
+
+/* ===== 4-DAY MEMORY STRIP ===== */
+.memory{background:rgba(11,16,22,.5)}
+.mem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--grid)}
+.mem-cell{background:var(--bg);padding:16px 16px 14px}
+.mem-tick{font-size:10px;letter-spacing:1.5px;color:var(--ink-faint);text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.mem-stale{font-size:8px;letter-spacing:.35px;text-transform:none;color:var(--alert);white-space:nowrap}
+.mem-now{font-family:var(--display);font-weight:800;font-size:21px;margin-top:6px;display:flex;align-items:baseline;gap:7px}
+.mem-d{font-size:10px;font-weight:700}
+.tk .inv.dn,.mem-d.inv.dn{color:var(--signal)!important}
+.tk .inv.up,.mem-d.inv.up{color:var(--risk)!important}
+.mem-d.tone-risk{color:var(--risk)!important}
+.mem-footnote{font-size:10px;color:var(--ink-faint);margin-top:12px;letter-spacing:.5px;line-height:1.65}
+.mem-errata{border-left:2px solid var(--alert);padding-left:11px;color:var(--ink-dim)}
+.mem-errata b{color:var(--alert);text-shadow:var(--g-alert)}
+.mem-4d{font-size:9.5px;color:var(--ink-faint);margin-top:7px;letter-spacing:.5px;display:flex;justify-content:space-between}
+
+/* ===== TESIS 3 FUERZAS (02) ===== */
+.thesis-q{font-family:var(--display);font-weight:800;font-size:clamp(18px,2.4vw,26px);line-height:1.3;
+  letter-spacing:-.3px;max-width:780px;margin-bottom:34px}
+.thesis-q em{font-style:normal;color:var(--risk);text-shadow:var(--g-risk)}
+.forces{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.force{border:1px solid var(--grid);background:var(--panel);border-radius:4px;padding:22px;position:relative;overflow:hidden}
+.force::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--alert);box-shadow:var(--g-alert)}
+.force-n{font-family:var(--display);font-weight:900;font-size:30px;color:var(--grid);line-height:1}
+.force-t{font-weight:700;font-size:13.5px;margin-top:12px;color:var(--ink)}
+.force-x{font-size:12px;line-height:1.65;color:var(--ink-dim);margin-top:9px}
+.force-x b{color:var(--ink)}
+
+/* ===== CRONOLOGIA (03) ===== */
+.tl{display:flex;flex-direction:column;gap:1px;background:var(--grid)}
+.tl-ev{background:var(--bg);padding:16px 20px;display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:start;transition:background .2s}
+.tl-ev:hover{background:var(--panel)}
+.tl-ev.crit{border-left:3px solid var(--risk)}
+.tl-meta{font-size:10px;letter-spacing:1px}
+.tl-time{color:var(--alert);font-weight:700}.tl-src{color:var(--ink-faint);display:block;margin-top:3px}
+.tl-t{font-weight:700;font-size:13.5px;color:var(--ink)}
+.tl-b{font-size:12px;color:var(--ink-dim);line-height:1.6;margin-top:5px}
+.tl-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.tl-tag{font-size:9px;letter-spacing:1px;padding:3px 7px;border:1px solid var(--grid);border-radius:2px;color:var(--ink-faint)}
+.tl-tag.hot{border-color:var(--alert);color:var(--alert)}
+.tl-tag.crit{border-color:var(--risk);color:var(--risk)}
+
+/* ===== RUMOR CHANNEL (04) — NUEVO ===== */
+.rumor-note{font-size:11px;color:var(--ink-faint);margin-bottom:20px;letter-spacing:.5px;padding:10px 14px;
+  border:1px dashed var(--rumor);border-radius:3px;background:rgba(192,132,252,.04)}
+.rumor-note b{color:var(--rumor);text-shadow:var(--g-rumor)}
+.rumors{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.rumor{border:1px solid var(--grid);border-top:2px solid var(--rumor);background:var(--panel);border-radius:4px;padding:18px}
+.rumor-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.rumor-conf{font-size:9px;letter-spacing:1.5px;padding:3px 8px;border-radius:2px;text-transform:uppercase;font-weight:700}
+.conf-mid{background:rgba(255,176,0,.12);color:var(--alert)}
+.conf-hi{background:rgba(0,255,156,.12);color:var(--signal)}
+.rumor-src{font-size:10px;color:var(--rumor);text-shadow:var(--g-rumor);letter-spacing:1px}
+.rumor-t{font-weight:700;font-size:13px;color:var(--ink);line-height:1.45}
+.rumor-impact{font-size:11px;color:var(--ink-dim);line-height:1.6;margin-top:9px;padding-top:9px;border-top:1px solid var(--grid-soft)}
+.rumor-impact b{color:var(--ink)}
+
+/* ===== DATA VIVA (05) ===== */
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.chart-card{border:1px solid var(--grid);background:var(--panel);border-radius:4px;overflow:hidden}
+.chart-card.wide{grid-column:1/-1}
+.ch-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--grid)}
+.ch-sym{font-weight:700;font-size:13px}
+.ch-meta{font-size:10px;color:var(--ink-faint);letter-spacing:.5px}
+.ch-tag{font-size:9px;letter-spacing:1px;padding:3px 8px;border-radius:2px;text-transform:uppercase}
+.ch-body{padding:16px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:10.5px;color:var(--ink-dim);margin-top:10px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+
+
+/* ===== DATA VIVA · responsive chart labels fix ===== */
+.chart-card{min-width:0}
+.ch-head>div{min-width:0}
+.chart-plot{position:relative;width:100%;height:200px;min-width:0;overflow:visible}
+.chart-plot.small{height:160px}
+.chart-plot svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.chart-label{position:absolute;z-index:2;font-family:var(--mono);font-size:11px;line-height:1;white-space:nowrap;pointer-events:none;color:var(--ink-dim);letter-spacing:-.15px;text-shadow:none}
+.chart-label.date{font-size:10px;color:var(--ink-faint)}
+.chart-label.alert{color:var(--alert);text-shadow:var(--g-alert)}
+.chart-label.risk{color:var(--risk);text-shadow:var(--g-risk)}
+.chart-label.anchor-c{transform:translateX(-50%)}
+
+/* ===== SEÑAL VS RUIDO (06) ===== */
+.sr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sr-col{border:1px solid var(--grid);border-radius:4px;padding:22px;background:var(--panel)}
+.sr-col.sig{border-top:2px solid var(--signal)}
+.sr-col.noise{border-top:2px solid var(--ink-faint)}
+.sr-h{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.sr-h.sig{color:var(--signal);text-shadow:var(--g-signal)}
+.sr-h.noise{color:var(--ink-dim)}
+.sr-item{display:grid;grid-template-columns:24px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid var(--grid-soft);font-size:12.5px;line-height:1.55}
+.sr-item:last-child{border-bottom:none}
+.sr-n{font-family:var(--display);font-weight:900;color:var(--grid)}
+.sr-item b{color:var(--ink)}.sr-item span{color:var(--ink-dim)}
+
+/* ===== SEMAFORO (07) ===== */
+.sem-tools{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.sem-btn{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;background:var(--panel);
+  border:1px solid var(--grid);color:var(--ink-dim);padding:8px 14px;border-radius:3px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:.2s}
+.sem-btn:hover{border-color:var(--ink-faint)}
+.sem-btn.active{border-color:var(--ink);color:var(--ink)}
+.sem-btn .dot{width:7px;height:7px;border-radius:50%}
+.sem-btn[data-sev="critical"] .dot{background:var(--risk);box-shadow:var(--g-risk)}
+.sem-btn[data-sev="alert"] .dot{background:var(--alert);box-shadow:var(--g-alert)}
+.sem-btn[data-sev="watch"] .dot{background:var(--info);box-shadow:var(--g-info)}
+.sem-btn[data-sev="all"] .dot{background:var(--ink-dim)}
+.sem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px}
+.sem-card{border:1px solid var(--grid);background:var(--panel);border-radius:4px;padding:16px;border-left:3px solid var(--ink-faint)}
+.sem-card[data-sev="critical"]{border-left-color:var(--risk)}
+.sem-card[data-sev="alert"]{border-left-color:var(--alert)}
+.sem-card[data-sev="watch"]{border-left-color:var(--info)}
+.sem-tag{font-size:9px;letter-spacing:1.5px;color:var(--ink-faint)}
+.sem-name{font-weight:700;font-size:13.5px;margin:6px 0 8px}
+.sem-desc{font-size:11.5px;color:var(--ink-dim);line-height:1.55}
+
+/* ===== OPERATIVA (08) ===== */
+.op-tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.op-tab{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--panel);border:1px solid var(--grid);color:var(--ink-dim);padding:11px 18px;border-radius:3px;cursor:pointer;transition:.2s}
+.op-tab.active{border-color:var(--signal);color:var(--signal);text-shadow:var(--g-signal);background:rgba(0,255,156,.05)}
+.op-panel{display:none}.op-panel.active{display:block}
+.op-setups{display:flex;flex-direction:column;gap:1px;background:var(--grid)}
+.op-setup{background:var(--bg);display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 18px}
+.op-n{font-family:var(--display);font-weight:900;font-size:18px;color:var(--grid)}
+.op-name{font-weight:700;font-size:13.5px}
+.op-detail{font-size:11.5px;color:var(--ink-dim);line-height:1.5;margin-top:4px}
+.op-detail em{font-style:normal;color:var(--alert);text-shadow:var(--g-alert)}
+.op-alloc{text-align:right}
+.op-cap{font-size:9px;letter-spacing:1px;color:var(--ink-faint)}
+.op-pct{font-family:var(--display);font-weight:900;font-size:22px;color:var(--signal);text-shadow:var(--g-signal)}
+
+/* exposure */
+.exp{margin-top:36px;border:1px solid var(--grid);border-radius:4px;background:var(--panel);padding:24px;display:grid;grid-template-columns:1fr 1.3fr;gap:30px}
+.exp-label{font-size:10px;letter-spacing:2px;color:var(--ink-faint);text-transform:uppercase;margin-bottom:10px}
+.exp-amount{display:flex;align-items:baseline;gap:8px;font-family:var(--display);font-weight:900;font-size:32px}
+.exp-cur{font-size:13px;color:var(--ink-faint)}
+.exp-field{background:transparent;border:none;border-bottom:1px solid var(--grid);color:var(--ink);font-family:var(--display);font-weight:900;font-size:32px;width:220px;outline:none}
+.exp-presets{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.cp{font-family:var(--mono);font-size:10px;background:var(--bg);border:1px solid var(--grid);color:var(--ink-dim);padding:6px 11px;border-radius:2px;cursor:pointer}
+.cp.active{border-color:var(--signal);color:var(--signal)}
+.exp-note{font-size:11px;color:var(--ink-dim);line-height:1.6;margin-top:16px}
+.exp-note b{color:var(--ink)}
+.exp-bar{display:flex;height:14px;border-radius:3px;overflow:hidden;margin-bottom:16px}
+.exp-seg[data-cat="cash"]{background:var(--info)}.exp-seg[data-cat="energy"]{background:var(--alert)}
+.exp-seg[data-cat="defense"]{background:var(--signal)}.exp-seg[data-cat="metals"]{background:var(--alert)}
+.exp-seg[data-cat="hedge"]{background:var(--risk)}.exp-seg[data-cat="semi"]{background:var(--info)}
+.exp-seg[data-cat="fixed"]{background:repeating-linear-gradient(135deg,var(--info) 0 4px,rgba(46,168,255,.24) 4px 8px)}
+.exp-seg[data-cat="equity"]{background:repeating-linear-gradient(135deg,var(--signal) 0 4px,rgba(0,255,156,.22) 4px 8px)}
+.exp-seg[data-cat="alt"]{background:repeating-linear-gradient(135deg,var(--risk) 0 4px,rgba(255,46,77,.20) 4px 8px)}
+.exp-row{display:grid;grid-template-columns:14px 1fr auto auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--grid-soft);font-size:12px}
+.exp-sw{width:11px;height:11px;border-radius:2px}
+.exp-sw[data-cat="cash"]{background:var(--info)}.exp-sw[data-cat="energy"]{background:var(--alert)}
+.exp-sw[data-cat="defense"]{background:var(--signal)}.exp-sw[data-cat="metals"]{background:var(--alert)}
+.exp-sw[data-cat="hedge"]{background:var(--risk)}.exp-sw[data-cat="semi"]{background:var(--info)}
+.exp-sw[data-cat="fixed"]{background:repeating-linear-gradient(135deg,var(--info) 0 3px,rgba(46,168,255,.24) 3px 6px)}
+.exp-sw[data-cat="equity"]{background:repeating-linear-gradient(135deg,var(--signal) 0 3px,rgba(0,255,156,.22) 3px 6px)}
+.exp-sw[data-cat="alt"]{background:repeating-linear-gradient(135deg,var(--risk) 0 3px,rgba(255,46,77,.20) 3px 6px)}
+.exp-cat .d{font-size:10px;color:var(--ink-faint);display:block;margin-top:2px}
+.exp-pct{color:var(--ink-dim)}.exp-usd{font-weight:700;text-align:right;min-width:78px}
+
+/* footer */
+.footer{padding:40px 0;text-align:center}
+.footer .brand{font-family:var(--display);font-weight:900;font-size:16px;letter-spacing:1px}
+.footer .sub{display:block;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:8px}
+.disc{font-size:9px;color:var(--ink-faint);max-width:600px;margin:18px auto 0;line-height:1.6}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;gap:32px}
+  .forces{grid-template-columns:1fr}
+  .charts,.sr,.exp{grid-template-columns:1fr}
+  .tl-ev{grid-template-columns:1fr;gap:8px}
+  .tl-tags{justify-content:flex-start}
+  .op-setup{grid-template-columns:32px 1fr;gap:12px}
+  .op-alloc{grid-column:2;text-align:left;margin-top:6px}
+}
+
+@media(max-width:560px){
+  .wrap{padding:0 14px}
+  section{padding:46px 0}
+  .hero{padding:46px 0 42px}
+  .regime .wrap{gap:10px}.regime-left{gap:10px;flex-wrap:wrap}.rg-label{letter-spacing:2px}.rg-val{font-size:13px}
+  h1.headline{font-size:clamp(34px,12vw,48px);letter-spacing:-1px}
+  .lede{font-size:13.5px;line-height:1.65}
+  .sec-head{flex-wrap:wrap;align-items:flex-start;gap:10px;margin-bottom:26px}
+  .sec-line{flex-basis:100%;order:5}
+  .sec-sub{white-space:normal;line-height:1.4}
+  .ch-head{flex-direction:column;align-items:flex-start;gap:9px;padding:12px 12px}
+  .ch-sym,.ch-meta{display:block;line-height:1.35}.ch-meta{margin-top:4px}
+  .ch-body{padding:12px}
+  .chart-plot{height:178px}.chart-plot.small{height:142px}
+  .chart-label{font-size:10px}.chart-label.date{font-size:9px}
+  .legend{font-size:10px;line-height:1.55;gap:10px}
+  .lb-row{grid-template-columns:44px 1fr;align-items:start}
+  .lb-val{grid-column:2;text-align:left}
+  .mem-grid{grid-template-columns:repeat(auto-fit,minmax(136px,1fr))}
+  .mem-cell{padding:14px 12px}
+  .mem-cell:last-child:nth-child(odd){grid-column:1/-1}
+  .tl-ev{padding:14px}
+  .op-tab{width:100%;justify-content:center}
+  .exp{padding:18px;gap:22px}
+  .exp-field{width:150px;font-size:28px}.exp-amount{font-size:28px}
+  .exp-row{grid-template-columns:14px 1fr auto;gap:10px}
+  .exp-usd{grid-column:2/4;text-align:left;min-width:0;color:var(--ink)}
+}
+/* ===== MOTION / REVEAL ===== */
+.fade{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.fade.vis{opacity:1;transform:none}
+
+/* ===== AUDIT / DATA INTEGRITY ===== */
+.audit-note{font-size:11px;color:var(--ink-dim);margin:0 0 20px;letter-spacing:.35px;padding:11px 14px;
+  border:1px dashed var(--alert);border-radius:3px;background:rgba(255,176,0,.045);line-height:1.6}
+.audit-note b{color:var(--alert);text-shadow:var(--g-alert)}
+
+/* ═══════════════════════════════════════════════════════════════
+   CSS DE LA EDICIÓN — VACIAR Y REEMPLAZAR CADA DÍA
+   Régimen, componentes excepcionales y posiciones responsive.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ===== RÉGIMEN DEL DÍA · 22J ===== */
+body.pressure-stable h1.headline .em{
+  color:var(--bg);-webkit-text-stroke:1.4px var(--risk);
+  filter:drop-shadow(0 0 7px rgba(255,46,77,.78)) drop-shadow(0 0 18px rgba(255,46,77,.42))
+}
+body.pressure-stable .verdict-badge{
+  border-color:var(--alert);background:rgba(255,176,0,.07);
+  color:var(--alert);text-shadow:var(--g-alert)
+}
+body.pressure-stable .verdict-badge::before{background:var(--alert);box-shadow:var(--g-alert)}
+body.pressure-stable .rg-dot{background:var(--alert);box-shadow:var(--g-alert)}
+
+/* ===== COMPONENTE DE EDICIÓN · ROTACIÓN 22J ===== */
+.bar-chart{position:relative;height:200px;padding:6px 0 0}
+.bar-row{display:grid;grid-template-columns:90px 1fr 68px;gap:12px;align-items:center;height:30px;font-size:11px}
+.bar-name{color:var(--ink-dim)}
+.bar-track{height:8px;background:var(--grid-soft);position:relative;border-radius:1px;overflow:visible}
+.bar-zero{position:absolute;left:50%;top:-5px;bottom:-5px;width:1px;background:var(--grid)}
+.bar-fill{position:absolute;top:0;height:8px;border-radius:1px;box-shadow:0 0 10px currentColor}
+.bar-fill.pos{left:50%;background:var(--signal);color:var(--signal)}
+.bar-fill.neg{right:50%;background:var(--risk);color:var(--risk)}
+.bar-val{text-align:right;font-weight:700}
+
+@media(max-width:560px){
+  .bar-row{grid-template-columns:72px 1fr 58px;gap:8px;font-size:10px}
+}
+
+/* Único bloque responsive específico de la edición. */
+@media(max-width:420px){
+  .chart-label.crude-brent22{right:2%!important;top:8%!important}
+  .chart-label.crude-wti22{right:2%!important;top:22%!important}
+  .chart-label.crude-gold22{right:2%!important;top:38%!important}
+  .chart-label.crude-spx22{right:2%!important;top:69%!important}
+  .chart-label.tail-y1022{right:2%!important;top:12%!important}
+  .chart-label.tail-move22{right:2%!important;top:27%!important}
+  .chart-label.tail-vix22{right:2%!important;top:72%!important}
+}
+</style>
+</head>
+<body class="pressure-stable">
+
+<!-- ===== 00 · TICKER + RÉGIMEN ===== -->
+<div class="ticker"><div class="tk-track" id="tkTrack">
+  <span class="tk"><b>REGIME</b> Amarillo → <span class="a">18ª sesión · estable bajo presión</span></span>
+  <span class="tk"><b>SPX CASH</b> 7,498.96 <span class="dn">▼ -0.14%</span></span>
+  <span class="tk"><b>NASDAQ COMP</b> 25,690.90 <span class="dn">▼ -0.57%</span></span>
+  <span class="tk"><b>DOW</b> 52,218.58 <span class="nt">▼ -0.01% · plano</span></span>
+  <span class="tk"><b>IGV</b> -3.05% <span class="r">software lidera la caída</span></span>
+  <span class="tk"><b>SOXX/QQQ</b> +1.03% <span class="s">semis resisten</span></span>
+  <span class="tk"><b>VIX</b> 16.64 <span class="dn inv">▼ -2.40% · complacencia</span></span>
+  <span class="tk"><b>WTI</b> $86.83 <span class="r">▲ +3.0% · trigger cruzado</span></span>
+  <span class="tk"><b>BRENT</b> $94.07 <span class="r">▲ +3.4% · tocó &gt;$95</span></span>
+  <span class="tk"><b>GOLD</b> ~$4,137 <span class="s">▲ +1.5% · refugio valida</span></span>
+  <span class="tk"><b>10Y</b> 4.659% <span class="r">máximo de ciclo</span></span>
+  <span class="tk"><b>2Y</b> 4.304% <span class="r">máximo 1.5 años</span></span>
+  <span class="tk"><b>GOOGL AH</b> -5% <span class="a">capex $195–205B castigado</span></span>
+  <span class="tk"><b>BTC</b> ~$66K <span class="nt">▼ -0.8% · sin señal</span></span>
+  <span class="tk"><b>DXY</b> 101.12 <span class="nt">→ -0.06% · plano</span></span>
+  <span class="tk"><b>NEXT</b> digestión megacap <span class="a">Intel · yen · FOMC 28–29J</span></span>
+</div></div>
+
+<div class="regime"><div class="wrap">
+  <div class="regime-left">
+    <span class="rg-dot"></span>
+    <span class="rg-label">Risk Posture</span>
+    <span class="rg-val a">DEFCON 3 · AMARILLO → / ESTABLE BAJO PRESIÓN BAJISTA</span>
+  </div>
+  <div class="defbars"><span class="defbar"></span><span class="defbar"></span><span class="defbar on" style="background:var(--alert);box-shadow:var(--g-alert)"></span><span class="defbar"></span><span class="defbar"></span></div>
+  <span class="regime-date">22 JUL 2026 · 21:00 UTC · CRUDO / SOFTWARE / CAPEX IA</span>
+</div></div>
+
+<!-- ===== 01 · VEREDICTO (HERO) ===== -->
+<section class="hero" style="border-top:none">
+  <div class="wrap">
+    <div>
+      <div class="kick">// 01 · Veredicto del día</div>
+      <h1 class="headline">Crudo rompe;<br>software cede;<br><span class="em">amarillo</span><br>bajo presión.</h1>
+      <p class="lede">La superficie cerró ordenada: S&amp;P <b>7,498.96 (-0.14%)</b>, Dow casi plano y VIX en <b>16.64 (-2.40%)</b>. La estructura interna contó otra historia. WTI terminó en <b>$86.83</b>, Brent tocó <b>&gt;$95</b>, el oro ganó <b>~1.5%</b> como refugio y software perdió <b>3.05%</b> mientras semis resistieron. Después del cierre, Alphabet elevó capex FY26 a <b>$195–205B</b> y cayó <b>~5%</b>: el mercado ya castiga gasto sin retorno visible. Una sesión roja no cambia el vector; sí eleva la presión.</p>
+      <div class="verdict-badge">cautela estable · cash 30%</div>
+    </div>
+    <aside class="livebox">
+      <div class="lb-head"><span>// Mercados · cierre 22J</span><span class="lb-live">LIVE</span></div>
+      <div class="lb-row"><span class="lb-tick">WTI</span><span class="lb-name">trigger DEFCON</span><span class="lb-val r">$86.83<span class="lb-delta"> &gt;$85 cierre</span></span></div>
+      <div class="lb-row"><span class="lb-tick">BRENT</span><span class="lb-name">shock físico</span><span class="lb-val r">$94.07<span class="lb-delta"> tocó &gt;$95</span></span></div>
+      <div class="lb-row"><span class="lb-tick">IGV</span><span class="lb-name">software / capex</span><span class="lb-val dn">-3.05%<span class="lb-delta"> K-shaped</span></span></div>
+      <div class="lb-row"><span class="lb-tick">GOLD</span><span class="lb-name">refugio confirmado</span><span class="lb-val up">~$4,137<span class="lb-delta"> +1.5%</span></span></div>
+      <div class="lb-row"><span class="lb-tick">10Y</span><span class="lb-name">real yields</span><span class="lb-val r">4.659%<span class="lb-delta"> ciclo</span></span></div>
+      <div class="lb-row"><span class="lb-tick">CASH</span><span class="lb-name">liquidez táctica</span><span class="lb-val a">30%<span class="lb-delta"> oversold ~26</span></span></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== MEMORIA 4 DÍAS ===== -->
+<section class="memory">
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// MEM</div><h2 class="sec-title">Lo que cambió en <em>4 ediciones</em></h2><div class="sec-line"></div><div class="sec-sub">17J · 20J · 21J · 22J</div></div>
+    <div class="mem-grid" id="memGrid"></div>
+    <p class="mem-footnote">▸ Ventana FIFO actualizada: salió 16J y entró 22J. Convención activa: <b>el punto publicado no se modifica</b>. SKEW conserva el último dato confiable del 20J y queda fuera de gatillos frescos. El símbolo <b>*</b> indica que el delta diario utiliza el cierre oficial corregido y puede no coincidir con la distancia visual entre los dos últimos puntos publicados.</p>
+    <p class="mem-footnote mem-errata"><b>FE DE ERRATAS · SERIE HISTÓRICA:</b> WTI 20J publicado <b>$83.23</b>; cierre oficial <b>$82.48</b>. GOLD 21J publicado <b>$4,015</b>; cierre oficial <b>~$4,076</b>. BTC 21J publicado <b>$66.00K</b>; cierre oficial <b>$66.556K</b>. La serie conserva los valores publicados; los deltas 22J marcados con * usan la referencia oficial.</p>
+  </div>
+</section>
+
+<!-- ===== 02 · TESIS EN 3 FUERZAS ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 02</div><h2 class="sec-title">La tesis en <em>3 fuerzas</em></h2><div class="sec-line"></div><div class="sec-sub">por qué el mercado hace lo que hace</div></div>
+    <p class="thesis-q fade">¿Por qué el índice apenas cae mientras la estructura interna se vuelve <em>más defensiva</em>?</p>
+    <div class="forces">
+      <div class="force fade"><div class="force-n">01</div><div class="force-t">El shock de oferta cruza el gatillo</div><div class="force-x">WTI cerró en <b>$86.83 (+3%)</b> y Brent en <b>$94.07 (+3.4%)</b> tras superar <b>$95</b> intradía. Houthis declararon Bab el-Mandeb “cerrado” a petroleros saudíes. La prima dejó el terreno retórico: el canal físico está activo y el breakout habilita la pata de crudo.</div></div>
+      <div class="force fade"><div class="force-n">02</div><div class="force-t">La bifurcación IA se vuelve precio</div><div class="force-x">IGV cayó <b>3.05%</b> mientras SOXX/QQQ avanzó <b>1.03%</b>. Alphabet elevó capex a <b>$195–205B</b> y perdió <b>~5%</b> AH pese al beat. El capital separa memoria/semis con caja real de software e hyperscalers cuyo gasto todavía no demuestra retorno.</div></div>
+      <div class="force fade"><div class="force-n">03</div><div class="force-t">El VIX pierde la señal de la cola</div><div class="force-x">Oro subió <b>~1.5%</b>, 10Y llegó a <b>4.659%</b>, 2Y a <b>4.304%</b> y MOVE avanzó <b>2.19%</b>; VIX, en cambio, cayó a <b>16.64</b>. La cola se concentra en tasas, energía y apalancamiento mientras la volatilidad de equity permanece comprimida. Complacencia visible, estrés macro debajo.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 03 · CRONOLOGÍA ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 03</div><h2 class="sec-title">Cronología <em>táctica</em></h2><div class="sec-line"></div><div class="sec-sub">el día evento por evento</div></div>
+    <div class="tl">
+      <div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">22J · Asia</span><span class="tl-src">Bab el-Mandeb</span></div><div><div class="tl-t">Houthis declaran cerrado el paso a petroleros saudíes</div><div class="tl-b">Ataques a ENCELIA y LAYLA, desvíos de rutas y extensión de force majeure de QatarEnergy convierten el riesgo marítimo en canal físico operativo.</div></div><div class="tl-tags"><span class="tl-tag crit">PHYSICAL</span><span class="tl-tag hot">HOUTHI</span></div></div>
+      <div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">22J · apertura</span><span class="tl-src">crude tape</span></div><div><div class="tl-t">WTI cierra sobre $85; Brent toca el gatillo de $95</div><div class="tl-b">WTI termina en <b>$86.83</b> y Brent en <b>$94.07</b> después de superar <b>$95</b> intradía. El cierre confirma el breakout. La entrada táctica queda en el retest de $85.</div></div><div class="tl-tags"><span class="tl-tag crit">BREAKOUT</span><span class="tl-tag hot">$85 / $95</span></div></div>
+      <div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">22J · sesión</span><span class="tl-src">cash indices</span></div><div><div class="tl-t">El índice cede con orden</div><div class="tl-b">S&amp;P <b>-0.14%</b>, Nasdaq Composite <b>-0.57%</b>, Dow <b>-0.01%</b> y VIX <b>16.64 (-2.40%)</b>. La presión suma una jornada; falta otra sesión para activar el deterioro.</div></div><div class="tl-tags"><span class="tl-tag hot">ORDERLY</span><span class="tl-tag">NO WASHOUT</span></div></div>
+      <div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">22J · sectores</span><span class="tl-src">IGV / SOXX</span></div><div><div class="tl-t">Software se rompe; semis sostienen la K</div><div class="tl-b">IGV pierde <b>3.05%</b>, XLC <b>0.75%</b> y XLK <b>0.28%</b>; SOXX/QQQ sube <b>1.03%</b>. El daño se concentra en gasto sin ROI visible; los chips sostienen la resistencia relativa.</div></div><div class="tl-tags"><span class="tl-tag hot">K-SHAPED</span><span class="tl-tag">PAIR</span></div></div>
+      <div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">22J · refugios</span><span class="tl-src">gold / silver</span></div><div><div class="tl-t">El oro valida por fin su función de refugio</div><div class="tl-b">Oro cierra en <b>~$4,137 (+1.5%)</b> y plata gana aproximadamente <b>4%</b> mientras equity cae y crudo sube. Primera firma risk-off clara de la serie.</div></div><div class="tl-tags"><span class="tl-tag hot">SAFE HAVEN</span><span class="tl-tag">CONFIRMED</span></div></div>
+      <div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">22J · curva</span><span class="tl-src">Treasuries / MOVE</span></div><div><div class="tl-t">El estrés migra a tasas</div><div class="tl-b">10Y <b>4.659%</b>, 2Y <b>4.304%</b>, 30Y cerca de <b>5.15%</b> y MOVE <b>+2.19%</b>. Los spreads continúan contenidos mientras el precio del dinero sigue subiendo.</div></div><div class="tl-tags"><span class="tl-tag crit">WARSH</span><span class="tl-tag hot">MOVE</span></div></div>
+      <div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">22J · after-hours</span><span class="tl-src">Alphabet</span></div><div><div class="tl-t">El mercado castiga el capex pese al beat</div><div class="tl-b">Alphabet eleva capex FY26 a <b>$195–205B</b>, reporta Cloud backlog récord y cae <b>~5%</b> AH. El mercado exige retorno tangible sobre la infraestructura.</div></div><div class="tl-tags"><span class="tl-tag crit">CAPEX</span><span class="tl-tag hot">-5% AH</span></div></div>
+      <div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">22J · after-hours</span><span class="tl-src">Tesla / IBM</span></div><div><div class="tl-t">El resto del tape refuerza la selección por caja</div><div class="tl-b">Tesla falla EPS y margen; IBM recorta guía. El mercado llega al jueves con menor tolerancia a ejecución débil y mayor exigencia de retorno.</div></div><div class="tl-tags"><span class="tl-tag hot">EARNINGS</span><span class="tl-tag">QUALITY</span></div></div>
+      <div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">23–29J</span><span class="tl-src">próximos catalizadores</span></div><div><div class="tl-t">La próxima sesión decide el vector</div><div class="tl-b">La digestión de Alphabet/Tesla/IBM, Intel, posible intervención japonesa y FOMC <b>28–29J</b> determinan si aparece la segunda sesión de deterioro.</div></div><div class="tl-tags"><span class="tl-tag hot">NEXT</span><span class="tl-tag">RULE OF 2</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 04 · CANAL RUMOR / NO CONFIRMADO ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 04</div><h2 class="sec-title">Canal <em style="color:var(--rumor);text-shadow:var(--g-rumor)">rumor</em> · no confirmado</h2><div class="sec-line"></div><div class="sec-sub">prediction markets · policy · desk chatter</div></div>
+    <div class="rumor-note fade">▸ Esta sección agrega <b>información probabilística o todavía no confirmada</b>. Sirve para anticipar liquidez y catalizadores; no se opera como hecho.</div>
+    <div class="rumors">
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// Kalshi · 2026</span><span class="rumor-conf conf-hi">alta</span></div><div class="rumor-t">Cero recortes en 2026 cotiza cerca de 81%.</div><div class="rumor-impact"><b>Si confirma:</b> duración corta y dólar conservan carry; growth debe sostenerse sin Fed put.</div></div>
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// Polymarket · FOMC</span><span class="rumor-conf conf-hi">alta</span></div><div class="rumor-t">“Sin cambio” en julio ronda 76%.</div><div class="rumor-impact"><b>Si confirma:</b> el riesgo se concentra en el statement y en cualquier apertura explícita a una subida posterior.</div></div>
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// FedWatch · septiembre</span><span class="rumor-conf conf-mid">media</span></div><div class="rumor-t">La probabilidad de hike en septiembre supera aproximadamente 60%.</div><div class="rumor-impact"><b>Si confirma:</b> front-end y real yields mantienen presión sobre software, oro y múltiplos largos.</div></div>
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// Japón · policy chatter</span><span class="rumor-conf conf-mid">media</span></div><div class="rumor-t">Tokio podría intervenir si el yen extiende mínimos de 30 años.</div><div class="rumor-impact"><b>Si confirma:</b> el carry puede cortarse de golpe incluso sin que USD/JPY cierre sobre 164.</div></div>
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// Shipping desk</span><span class="rumor-conf conf-mid">media</span></div><div class="rumor-t">La declaración Houthi podría convertirse en cierre físico más amplio de Bab el-Mandeb.</div><div class="rumor-impact"><b>Si confirma:</b> Brent puede cerrar sobre $95 y obligar el cambio a DEFCON 2.</div></div>
+      <div class="rumor fade"><div class="rumor-head"><span class="rumor-src">// Earnings desk</span><span class="rumor-conf conf-mid">media</span></div><div class="rumor-t">Microsoft, Meta y Amazon podrían recibir el mismo castigo si elevan capex sin ROI visible.</div><div class="rumor-impact"><b>Si confirma:</b> la caída migra de software a concentración megacap y completa la segunda sesión de deterioro.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 05 · DATA VIVA ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 05</div><h2 class="sec-title">Data <em>viva</em></h2><div class="sec-line"></div><div class="sec-sub">shock de oferta · cola · rotación</div></div>
+    <div class="audit-note fade"><b>ALERTA DE SINCRONÍA:</b> el cierre fresco usa VIX <b>16.64</b>, WTI <b>$86.83</b>, Brent <b>$94.07</b>, 10Y <b>4.659%</b> y oro verificado en <b>~$4,137</b>. Los paneles internos con VIX 17–18 están parcialmente stale; SKEW, JGB y USD/JPY de archivo se muestran solo como vigilancia, nunca como gatillo ejecutable.</div>
+    <div class="charts">
+      <div class="chart-card wide fade">
+        <div class="ch-head"><div><span class="ch-sym r">Crudo y oro suben; equity pierde tracción</span> <span class="ch-meta">17J → 22J · trayectoria normalizada</span></div><span class="ch-tag" style="background:rgba(255,46,77,.12);color:var(--risk)">PRINCIPAL</span></div>
+        <div class="ch-body">
+          <div class="chart-plot" id="normalizedPlot">
+            <svg id="normalizedChart" viewBox="0 0 1080 220" preserveAspectRatio="none" aria-hidden="true">
+              <g id="normalizedGrid"><line x1="30" y1="165.65" x2="1050" y2="165.65" stroke="#1a232e" stroke-width="1.4"/><line x1="30" y1="128.94" x2="1050" y2="128.94" stroke="#121a24" stroke-width="1"/><line x1="30" y1="92.24" x2="1050" y2="92.24" stroke="#121a24" stroke-width="1"/><line x1="30" y1="55.53" x2="1050" y2="55.53" stroke="#121a24" stroke-width="1"/></g>
+              <g id="normalizedSeries"><polyline fill="none" stroke="#ff2e4d" stroke-width="3" points="55,165.65 310,142.32 565,105.23 820,41.28" vector-effect="non-scaling-stroke"/><circle cx="820" cy="41.28" r="4" fill="#ff2e4d"/><polyline fill="none" stroke="#ffb000" stroke-width="2.4" points="55,165.65 310,148.24 565,102.86 820,50.53" vector-effect="non-scaling-stroke"/><circle cx="820" cy="50.53" r="4" fill="#ffb000"/><polyline fill="none" stroke="#00ff9c" stroke-width="2.4" points="55,165.65 310,169.22 565,138.70 820,110.93" vector-effect="non-scaling-stroke"/><circle cx="820" cy="110.93" r="4" fill="#00ff9c"/><polyline fill="none" stroke="#2ea8ff" stroke-width="2.4" points="55,165.65 310,169.19 565,152.97 820,155.49" vector-effect="non-scaling-stroke"/><circle cx="820" cy="155.49" r="4" fill="#2ea8ff"/></g>
+              <g id="normalizedLeaders"><polyline fill="none" stroke="#ff2e4d" stroke-width="1.25" stroke-opacity=".55" stroke-dasharray="4 4" points="820,41.28 900,41.28 930,35 1040,35" vector-effect="non-scaling-stroke"/><polyline fill="none" stroke="#ffb000" stroke-width="1.25" stroke-opacity=".55" stroke-dasharray="4 4" points="820,50.53 900,50.53 930,64 1040,64" vector-effect="non-scaling-stroke"/><polyline fill="none" stroke="#00ff9c" stroke-width="1.25" stroke-opacity=".55" stroke-dasharray="4 4" points="820,110.93 900,110.93 930,95 1040,95" vector-effect="non-scaling-stroke"/><polyline fill="none" stroke="#2ea8ff" stroke-width="1.25" stroke-opacity=".55" stroke-dasharray="4 4" points="820,155.49 900,155.49 930,147 1040,147" vector-effect="non-scaling-stroke"/></g>
+            </svg>
+            <span class="chart-label risk crude-brent22" data-norm-label="BRENT" style="right:1%;top:16%">BRENT $94.07 · +3.4%</span>
+            <span class="chart-label alert crude-wti22" data-norm-label="WTI" style="right:1%;top:29%">WTI $86.83 · +3.0%</span>
+            <span class="chart-label crude-gold22" data-norm-label="GOLD" style="right:1%;top:43%;color:var(--signal);text-shadow:var(--g-signal)">GOLD ~$4,137 · +1.5%</span>
+            <span class="chart-label crude-spx22" data-norm-label="SPX" style="right:1%;top:67%;color:var(--info)">SPX 7,498.96 · -0.14%</span>
+            <span class="chart-label date" data-norm-date="0" style="bottom:1%">17J</span><span class="chart-label date anchor-c" data-norm-date="1" style="bottom:1%">20J</span><span class="chart-label date anchor-c" data-norm-date="2" style="bottom:1%">21J</span><span class="chart-label date anchor-c" data-norm-date="3" style="bottom:1%">22J</span>
+          </div>
+          <div class="legend"><span><i style="background:var(--risk)"></i>Brent</span><span><i style="background:var(--alert)"></i>WTI</span><span><i style="background:var(--signal)"></i>Oro</span><span><i style="background:var(--info)"></i>SPX</span><span>Base 17J=100 · escala Y compartida · cierres comparables verificados. La memoria conserva los puntos publicados. Lectura: el shock ya aparece en commodities y refugios antes que en la vol de equity.</span></div>
+        </div>
+      </div>
+
+      <div class="chart-card fade">
+        <div class="ch-head"><div><span class="ch-sym r">La cola está en tasas, no en VIX</span> <span class="ch-meta">riesgo cruzado</span></div><span class="ch-tag" style="background:rgba(255,46,77,.12);color:var(--risk)">RIESGO</span></div>
+        <div class="ch-body">
+          <div class="chart-plot small">
+            <svg viewBox="0 0 520 180" preserveAspectRatio="none" aria-hidden="true">
+              <line x1="24" y1="148" x2="498" y2="148" stroke="#1a232e"/><line x1="24" y1="86" x2="498" y2="86" stroke="#121a24"/>
+              <polyline fill="none" stroke="#ff2e4d" stroke-width="2.6" points="30,104 180,94 330,72 492,44"/>
+              <polyline fill="none" stroke="#ffb000" stroke-width="2.4" points="30,112 180,106 330,96 492,64"/>
+              <polyline fill="none" stroke="#2ea8ff" stroke-width="2.4" points="30,52 180,70 330,104 492,118"/>
+              <circle cx="492" cy="44" r="3.5" fill="#ff2e4d"/><circle cx="492" cy="64" r="3.5" fill="#ffb000"/><circle cx="492" cy="118" r="3.5" fill="#2ea8ff"/>
+            </svg>
+            <span class="chart-label risk tail-y1022" style="right:1%;top:18%">10Y 4.659%</span>
+            <span class="chart-label alert tail-move22" style="right:1%;top:34%">MOVE +2.19%</span>
+            <span class="chart-label tail-vix22" style="right:1%;top:69%;color:var(--info)">VIX 16.64</span>
+          </div>
+          <div class="legend"><span><i style="background:var(--risk)"></i>10Y</span><span><i style="background:var(--alert)"></i>MOVE</span><span><i style="background:var(--info)"></i>VIX</span><span>Lectura: seguro de equity barato, pero el mercado de bonos ya cobra el shock.</span></div>
+        </div>
+      </div>
+
+      <div class="chart-card fade">
+        <div class="ch-head"><div><span class="ch-sym a">Rotación de la sesión</span> <span class="ch-meta">22J · % diario</span></div><span class="ch-tag" style="background:rgba(255,176,0,.12);color:var(--alert)">DISPERSIÓN</span></div>
+        <div class="ch-body">
+          <div class="bar-chart" aria-label="Rotación sectorial 22 de julio">
+            <div class="bar-row"><span class="bar-name">XLU</span><div class="bar-track"><span class="bar-zero"></span><span class="bar-fill pos" style="width:35%"></span></div><span class="bar-val up">+2.25%</span></div>
+            <div class="bar-row"><span class="bar-name">XLB</span><div class="bar-track"><span class="bar-zero"></span><span class="bar-fill pos" style="width:23%"></span></div><span class="bar-val up">+1.44%</span></div>
+            <div class="bar-row"><span class="bar-name">XLE</span><div class="bar-track"><span class="bar-zero"></span><span class="bar-fill pos" style="width:19%"></span></div><span class="bar-val up">+1.20%</span></div>
+            <div class="bar-row"><span class="bar-name">SOXX/QQQ</span><div class="bar-track"><span class="bar-zero"></span><span class="bar-fill pos" style="width:16%"></span></div><span class="bar-val up">+1.03%</span></div>
+            <div class="bar-row"><span class="bar-name">SPX</span><div class="bar-track"><span class="bar-zero"></span><span class="bar-fill neg" style="width:2%"></span></div><span class="bar-val dn">-0.14%</span></div>
+            <div class="bar-row"><span class="bar-name">IGV</span><div class="bar-track"><span class="bar-zero"></span><span class="bar-fill neg" style="width:47%"></span></div><span class="bar-val dn">-3.05%</span></div>
+          </div>
+          <div class="legend"><span>Lectura: defensivos, materiales, energía y semis caja-real absorben flujo; software concentra el castigo.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 06 · SEÑAL VS RUIDO ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 06</div><h2 class="sec-title">Señal <em>vs ruido</em></h2><div class="sec-line"></div><div class="sec-sub">qué importa · qué distrae</div></div>
+    <div class="sr">
+      <div class="sr-col sig fade"><div class="sr-h sig">● Señal</div>
+        <div class="sr-item"><span class="sr-n">01</span><span><b>WTI cerró sobre $85.</b> El gatillo se cruzó. El próximo dato decisivo es el sostenimiento sobre $85.</span></div>
+        <div class="sr-item"><span class="sr-n">02</span><span><b>Brent tocó &gt;$95.</b> Bab el-Mandeb ya transmite prima física a energía y fletes.</span></div>
+        <div class="sr-item"><span class="sr-n">03</span><span><b>IGV -3.05% vs semis relativos +1%.</b> La K intra-tech se volvió operable como pair.</span></div>
+        <div class="sr-item"><span class="sr-n">04</span><span><b>Alphabet -5% AH con capex mayor.</b> El mercado exige ROI y castiga gasto especulativo.</span></div>
+        <div class="sr-item"><span class="sr-n">05</span><span><b>Oro +1.5% con equity abajo.</b> Primera validación clara del refugio en la serie.</span></div>
+      </div>
+      <div class="sr-col noise fade"><div class="sr-h noise">○ Ruido</div>
+        <div class="sr-item"><span class="sr-n">01</span><span><b>SPX -0.14% aislado.</b> Con una sola sesión, la regla de dos permanece inactiva.</span></div>
+        <div class="sr-item"><span class="sr-n">02</span><span><b>VIX 16.64.</b> La compresión abarata el seguro y convive con el shock macro.</span></div>
+        <div class="sr-item"><span class="sr-n">03</span><span><b>Precio de oro del archivo.</b> La lectura roja quedó invalidada por las fuentes verificadas.</span></div>
+        <div class="sr-item"><span class="sr-n">04</span><span><b>Reabrir China.</b> FXI/KWEB siguen sin catalizador estructural; la tesis permanece muerta.</span></div>
+        <div class="sr-item"><span class="sr-n">05</span><span><b>Short BTC por inercia.</b> ~$66K y volumen estable. El setup short aparece recién bajo $62K.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 07 · SEMÁFORO ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 07</div><h2 class="sec-title">Semáforo de <em>activos</em></h2><div class="sec-line"></div><div class="sec-sub">dónde espero · dónde ataco</div></div>
+    <div class="sem-tools fade">
+      <button class="sem-btn active" data-sev="all"><span class="dot"></span>Todos</button>
+      <button class="sem-btn" data-sev="critical"><span class="dot"></span>Crítico</button>
+      <button class="sem-btn" data-sev="alert"><span class="dot"></span>Alerta</button>
+      <button class="sem-btn" data-sev="watch"><span class="dot"></span>Monitoreo</button>
+    </div>
+    <div class="sem-grid">
+      <div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · ENERGÍA</div><div class="sem-name">WTI / Brent</div><div class="sem-desc">Segundo cierre sobre $85: confirmación del régimen energético. El retest de $85 define la entrada táctica.</div></div>
+      <div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · GEOPOLÍTICA</div><div class="sem-name">Bab el-Mandeb</div><div class="sem-desc">Un cierre físico total verificado eleva el régimen a DEFCON 2. La declaración Houthi y los ataques a buques mantienen el canal abierto.</div></div>
+      <div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · CAPEX</div><div class="sem-name">Alphabet / megacaps</div><div class="sem-desc">La apertura del 23J decide la regla de dos. GOOGL llega con -5% AH pese al beat y capex de $195–205B.</div></div>
+      <div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · YEN</div><div class="sem-name">USD/JPY / intervención</div><div class="sem-desc">Nivel operativo: 164 o intervención confirmada. El archivo marca 163.10 y Japón amenaza medidas audaces.</div></div>
+      <div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · SOFTWARE</div><div class="sem-name">IGV / hyperscalers</div><div class="sem-desc">Un rebote fallido hacia la MM20 activa el pair short IGV / long SMH; otra decepción de capex también sirve como gatillo.</div></div>
+      <div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · CURVA</div><div class="sem-name">10Y / 30Y / MOVE</div><div class="sem-desc">Gatillos: 10Y sobre 4.80% con desorden o 30Y sobre 5.25%. Hoy: 4.659%, ~5.15% y MOVE +2.19%.</div></div>
+      <div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · VOL</div><div class="sem-name">VIX / hedge</div><div class="sem-desc">Cobertura barata con VIX en 16.64 antes de megacaps y FOMC. La posición residual queda en 2/3.</div></div>
+      <div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · CRÉDITO</div><div class="sem-name">HY OAS / Credit Score</div><div class="sem-desc">HY OAS sobre 3.2% o score bajo 60 activa contagio. Los spreads siguen cómodos (~2.69%), aunque el score se deteriora.</div></div>
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · ORO</div><div class="sem-name">GLD / XAU</div><div class="sem-desc">La zona $4,050–4,080 concentra nuevas adiciones. El refugio quedó validado en ~$4,137 y los real yields limitan el tamaño.</div></div>
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · SEMIS</div><div class="sem-name">SMH / memoria</div><div class="sem-desc">El 3% caja-real se mantiene mientras semis conserven la ventaja frente a software. Las nuevas compras esperan retroceso.</div></div>
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · CRIPTO</div><div class="sem-name">BTC</div><div class="sem-desc">Bajo $62K con volumen aparece el short. Cerca de ~$66K, el activo permanece neutral y el macro hawkish limita el long.</div></div>
+      <div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · CHINA</div><div class="sem-name">FXI / KWEB</div><div class="sem-desc">La tesis sigue cerrada. Su reapertura exige estímulo estructural verificable y confirmación durante dos sesiones.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 08 · OPERATIVA ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head fade"><div class="sec-num">// 08</div><h2 class="sec-title">Qué hago <em>con esto</em></h2><div class="sec-line"></div><div class="sec-sub">plan · setups · exposición</div></div>
+    <div class="op-tabs fade">
+      <button class="op-tab active" data-plan="A">Plan A · controlado</button>
+      <button class="op-tab" data-plan="B">Plan B · asimétrico</button>
+      <button class="op-tab" data-plan="C">Plan C · escalada</button>
+    </div>
+
+    <div class="op-panel active" id="planA"><div class="op-setups">
+      <div class="op-setup"><div class="op-n">01</div><div><div class="op-name">Cash / T-Bills cortos</div><div class="op-detail">Cash en 30%. El oversold ronda 26% y el evento decisivo de after-hours todavía debe digerirse.</div></div><div class="op-alloc"><div class="op-cap">// Asignación</div><div class="op-pct">30%</div></div></div>
+      <div class="op-setup"><div class="op-n">02</div><div><div class="op-name">Energía · doble mecanismo activo</div><div class="op-detail">XLE + crudo. El retest de $85 como soporte define la próxima adición.</div></div><div class="op-alloc"><div class="op-cap">// Asignación</div><div class="op-pct">11%</div></div></div>
+      <div class="op-setup"><div class="op-n">03</div><div><div class="op-name">Oro · refugio validado</div><div class="op-detail">La base permanece. <em>$4,050–4,080</em> es zona de adición; cierre sostenido bajo $3,900 invalida.</div></div><div class="op-alloc"><div class="op-cap">// Asignación</div><div class="op-pct">8%</div></div></div>
+      <div class="op-setup"><div class="op-n">04</div><div><div class="op-name">Duración corta</div><div class="op-detail">Con 2Y en 4.30%, la espera cobra carry. El long-end queda fuera antes del FOMC.</div></div><div class="op-alloc"><div class="op-cap">// Asignación</div><div class="op-pct">9%</div></div></div>
+      <div class="op-setup"><div class="op-n">05</div><div><div class="op-name">Equity core ex-tech concentración</div><div class="op-detail">La exposición baja a 6%. Alphabet y Tesla pueden completar la segunda sesión durante la apertura.</div></div><div class="op-alloc"><div class="op-cap">// Asignación</div><div class="op-pct">6%</div></div></div>
+      <div class="op-setup"><div class="op-n">06</div><div><div class="op-name">Semis caja-real</div><div class="op-detail">La posición parcial captura la resistencia relativa. El short directo permanece desactivado.</div></div><div class="op-alloc"><div class="op-cap">// Asignación</div><div class="op-pct">3%</div></div></div>
+      <div class="op-setup"><div class="op-n">07</div><div><div class="op-name">Defensivos selectivos</div><div class="op-detail">XLU conserva ventaja sobre XLP. Los yields altos limitan el tamaño a 5%.</div></div><div class="op-alloc"><div class="op-cap">// Asignación</div><div class="op-pct">5%</div></div></div>
+    </div></div>
+
+    <div class="op-panel" id="planB"><div class="op-setups">
+      <div class="op-setup"><div class="op-n">01</div><div><div class="op-name">Hedge de cola · mantener 2/3</div><div class="op-detail">Hedge residual en 2/3 mediante puts OTM SPX / calls VIX. Entrada VIX 16.5; objetivo &gt;24; invalidación &lt;15 sostenido.</div></div><div class="op-alloc"><div class="op-cap">// Convicción</div><div class="op-pct">ALTA</div></div></div>
+      <div class="op-setup"><div class="op-n">02</div><div><div class="op-name">Long energía · activado</div><div class="op-detail">Breakout confirmado con XLE dentro. El retest de $85 habilita adición; objetivos WTI $92 y Brent $100.</div></div><div class="op-alloc"><div class="op-cap">// Convicción</div><div class="op-pct">ALTA</div></div></div>
+      <div class="op-setup"><div class="op-n">03</div><div><div class="op-name">Pair short software / long semis</div><div class="op-detail">Se activa con rebote fallido de IGV o decepción capex-ROI de MSFT/META. Estado actual: watch.</div></div><div class="op-alloc"><div class="op-cap">// Convicción</div><div class="op-pct">MEDIA</div></div></div>
+      <div class="op-setup"><div class="op-n">04</div><div><div class="op-name">Long oro · activo</div><div class="op-detail">Base vigente. Añadir entre $4,050–4,080; objetivo $4,300; invalidación &lt;$3,900.</div></div><div class="op-alloc"><div class="op-cap">// Convicción</div><div class="op-pct">MEDIA</div></div></div>
+      <div class="op-setup"><div class="op-n">05</div><div><div class="op-name">Short yen · vigilancia máxima</div><div class="op-detail">Gatillo 164 o intervención confirmada. El riesgo central es un reversal violento.</div></div><div class="op-alloc"><div class="op-cap">// Estado</div><div class="op-pct">MAX</div></div></div>
+      <div class="op-setup"><div class="op-n">06</div><div><div class="op-name">Short semis / cripto / China</div><div class="op-detail">Estados actuales: semis directo muerto, BTC neutral y China cerrada. El bloque permanece OFF.</div></div><div class="op-alloc"><div class="op-cap">// Estado</div><div class="op-pct">OFF</div></div></div>
+    </div></div>
+
+    <div class="op-panel" id="planC"><div class="op-setups">
+      <div class="op-setup"><div class="op-n">01</div><div><div class="op-name">WTI sostiene &gt;$85 / Brent cierra &gt;$95</div><div class="op-detail">Elevar a DEFCON 2, cash 35–38%, mantener energía y ampliar hedge.</div></div><div class="op-alloc"><div class="op-cap">// Trigger</div><div class="op-pct">OIL</div></div></div>
+      <div class="op-setup"><div class="op-n">02</div><div><div class="op-name">Segunda sesión de deterioro amplio</div><div class="op-detail">Si la digestión megacap arrastra índices y breadth, vector gira a ↓ y régimen pasa a rojo.</div></div><div class="op-alloc"><div class="op-cap">// Trigger</div><div class="op-pct">2D</div></div></div>
+      <div class="op-setup"><div class="op-n">03</div><div><div class="op-name">Cierre físico de Bab el-Mandeb</div><div class="op-detail">Tratar como shock materializado: revisar rutas, fletes, GNL y exposición cíclica.</div></div><div class="op-alloc"><div class="op-cap">// Trigger</div><div class="op-pct">PHYS</div></div></div>
+      <div class="op-setup"><div class="op-n">04</div><div><div class="op-name">Intervención japonesa / USDJPY &gt;164</div><div class="op-detail">Activar protocolo carry unwind y reducir beta global; solo con precio verificado.</div></div><div class="op-alloc"><div class="op-cap">// Trigger</div><div class="op-pct">JPY</div></div></div>
+      <div class="op-setup"><div class="op-n">05</div><div><div class="op-name">10Y &gt;4.80% / 30Y &gt;5.25%</div><div class="op-detail">Eliminar long duration, reforzar FRNs, cash y hedge de crecimiento.</div></div><div class="op-alloc"><div class="op-cap">// Trigger</div><div class="op-pct">RATES</div></div></div>
+      <div class="op-setup"><div class="op-n">06</div><div><div class="op-name">VIX &gt;24 o HY OAS &gt;3.2%</div><div class="op-detail">Confirmación de contagio: monetizar parte del hedge y elevar liquidez.</div></div><div class="op-alloc"><div class="op-cap">// Trigger</div><div class="op-pct">TAIL</div></div></div>
+      <div class="op-setup"><div class="op-n">07</div><div><div class="op-name">FOMC con sesgo explícito de hike</div><div class="op-detail">Mantener libro Warsh y declarar rojo aunque el equity aún resista.</div></div><div class="op-alloc"><div class="op-cap">// Trigger</div><div class="op-pct">FED</div></div></div>
+    </div></div>
+
+    <div class="exp fade">
+      <div>
+        <div class="exp-label">// Capital total a desplegar</div>
+        <div class="exp-amount"><span class="exp-cur">USD</span><input type="text" class="exp-field" id="capInput" value="100,000" inputmode="numeric"></div>
+        <div class="exp-presets"><button class="cp" data-p="25000">25K</button><button class="cp" data-p="50000">50K</button><button class="cp active" data-p="100000">100K</button><button class="cp" data-p="250000">250K</button><button class="cp" data-p="500000">500K</button></div>
+        <div class="exp-note"><b>Régimen actual: DEFCON 3.</b> Amarillo →, decimoctava sesión, bajo presión bajista. El libro sigue shock de oferta + Fed hawkish: cash <b>30%</b>, energía <b>11%</b>, oro <b>8%</b>, duración corta <b>9%</b> y hedge <b>8%</b>. El ajuste del día rota un punto desde equity core y otro desde defensivos hacia energía y oro. Cash permanece en 30%.</div>
+      </div>
+      <div>
+        <div class="exp-bar"><div class="exp-seg" data-cat="cash" style="flex:30"></div><div class="exp-seg" data-cat="energy" style="flex:11"></div><div class="exp-seg" data-cat="metals" style="flex:8"></div><div class="exp-seg" data-cat="fixed" style="flex:9"></div><div class="exp-seg" data-cat="equity" style="flex:6"></div><div class="exp-seg" data-cat="equity" style="flex:5"></div><div class="exp-seg" data-cat="semi" style="flex:3"></div><div class="exp-seg" data-cat="defense" style="flex:5"></div><div class="exp-seg" data-cat="energy" style="flex:3"></div><div class="exp-seg" data-cat="fixed" style="flex:6"></div><div class="exp-seg" data-cat="hedge" style="flex:8"></div><div class="exp-seg" data-cat="alt" style="flex:3"></div><div class="exp-seg" data-cat="hedge" style="flex:3"></div></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="cash"></span><span class="exp-cat">Cash + T-Bills cortos<span class="d">dry powder · liquidez táctica</span></span><span class="exp-pct">30%</span><span class="exp-usd" data-sh="0.30">$30,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="energy"></span><span class="exp-cat">Energía híbrida<span class="d">XLE + crude activado</span></span><span class="exp-pct">11%</span><span class="exp-usd" data-sh="0.11">$11,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="metals"></span><span class="exp-cat">Oro estructural<span class="d">refugio confirmado</span></span><span class="exp-pct">8%</span><span class="exp-usd" data-sh="0.08">$8,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="fixed"></span><span class="exp-cat">Duración corta<span class="d">T-Bills 1–3y</span></span><span class="exp-pct">9%</span><span class="exp-usd" data-sh="0.09">$9,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="equity"></span><span class="exp-cat">Equity core ex-tech<span class="d">reducido por digestión AH</span></span><span class="exp-pct">6%</span><span class="exp-usd" data-sh="0.06">$6,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="equity"></span><span class="exp-cat">Financieras<span class="d">earnings + curva</span></span><span class="exp-pct">5%</span><span class="exp-usd" data-sh="0.05">$5,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="semi"></span><span class="exp-cat">Semis caja-real<span class="d">memoria / HBM</span></span><span class="exp-pct">3%</span><span class="exp-usd" data-sh="0.03">$3,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="defense"></span><span class="exp-cat">Defensivos selectivos<span class="d">sesgo XLU</span></span><span class="exp-pct">5%</span><span class="exp-usd" data-sh="0.05">$5,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="energy"></span><span class="exp-cat">Materiales<span class="d">XLB / cobre</span></span><span class="exp-pct">3%</span><span class="exp-usd" data-sh="0.03">$3,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="fixed"></span><span class="exp-cat">TIPS / FRNs<span class="d">inflación de oferta</span></span><span class="exp-pct">6%</span><span class="exp-usd" data-sh="0.06">$6,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="hedge"></span><span class="exp-cat">Vol hedge residual<span class="d">2/3 de posición</span></span><span class="exp-pct">8%</span><span class="exp-usd" data-sh="0.08">$8,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="alt"></span><span class="exp-cat">BTC / ETH táctico<span class="d">sin leverage · neutral</span></span><span class="exp-pct">3%</span><span class="exp-usd" data-sh="0.03">$3,000</span></div>
+        <div class="exp-row"><span class="exp-sw" data-cat="hedge"></span><span class="exp-cat">USD / FX hedge<span class="d">Warsh + carry yen</span></span><span class="exp-pct">3%</span><span class="exp-usd" data-sh="0.03">$3,000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="brand">WAR ROOM v3 · TERMINAL DE SEÑALES</div>
+    <span class="sub">22 JUL 2026 · CRUDO ROMPE · SOFTWARE CEDE · CAPEX CASTIGADO · DEFCON 3 · AMARILLO →</span>
+    <p class="disc">Propósito informativo y educativo. No constituye asesoramiento de inversión personalizado, recomendación de compra/venta ni análisis registrado. Verificar precios, liquidez, spreads, calendario y riesgo propio antes de operar.</p>
+  </div>
+</footer>
+
+<script>
+// ticker loop
+const tk=document.getElementById('tkTrack');tk.innerHTML+=tk.innerHTML;
+
+
+// ===== DATA VIVA · chart principal normalizado (17J = 100) =====
+const NORMALIZED_CHART={
+  x:[55,310,565,820],
+  plot:{top:28,bottom:184,labelX:1040,leaderKnee:900},
+  series:[
+    {key:'BRENT',values:[88.10,89.22,91.00,94.07],color:'#ff2e4d',width:3,lane:35},
+    {key:'WTI',values:[81.705,82.48,84.50,86.83],color:'#ffb000',width:2.4,lane:64},
+    {key:'GOLD',values:[4017.32,4009.5,4076.3,4137.1],color:'#00ff9c',width:2.4,lane:95},
+    {key:'SPX',values:[7457.69,7443.28,7509.20,7498.96],color:'#2ea8ff',width:2.4,lane:147}
+  ]
+};
+
+function svgNode(tag,attrs={}){
+  const node=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.entries(attrs).forEach(([key,value])=>node.setAttribute(key,value));
+  return node;
+}
+
+function renderNormalizedChart(){
+  const svg=document.getElementById('normalizedChart');
+  if(!svg)return;
+  const grid=document.getElementById('normalizedGrid');
+  const seriesLayer=document.getElementById('normalizedSeries');
+  const leaders=document.getElementById('normalizedLeaders');
+  [grid,seriesLayer,leaders].forEach(layer=>layer.replaceChildren());
+
+  const normalized=NORMALIZED_CHART.series.map(s=>({
+    ...s,
+    norm:s.values.map(value=>(value/s.values[0])*100)
+  }));
+  const all=normalized.flatMap(s=>s.norm);
+  const rawMin=Math.min(...all),rawMax=Math.max(...all);
+  const pad=Math.max((rawMax-rawMin)*0.10,.25);
+  const min=Math.floor((rawMin-pad)*2)/2;
+  const max=Math.ceil((rawMax+pad)*2)/2;
+  const {top,bottom,labelX,leaderKnee}=NORMALIZED_CHART.plot;
+  const y=value=>bottom-((value-min)/(max-min))*(bottom-top);
+
+  // Shared scale grid; the 100 line is emphasized.
+  const gridValues=[];
+  const first=Math.ceil(min/2)*2;
+  for(let value=first;value<=max;value+=2)gridValues.push(value);
+  if(!gridValues.some(value=>Math.abs(value-100)<.01))gridValues.push(100);
+  gridValues.sort((a,b)=>a-b).forEach(value=>{
+    grid.appendChild(svgNode('line',{
+      x1:30,y1:y(value).toFixed(2),x2:1050,y2:y(value).toFixed(2),
+      stroke:Math.abs(value-100)<.01?'#1a232e':'#121a24',
+      'stroke-width':Math.abs(value-100)<.01?'1.4':'1'
+    }));
+  });
+
+  normalized.forEach(s=>{
+    const points=s.norm.map((value,index)=>[NORMALIZED_CHART.x[index],y(value)]);
+    seriesLayer.appendChild(svgNode('polyline',{
+      fill:'none',stroke:s.color,'stroke-width':s.width,
+      points:points.map(([px,py])=>`${px},${py.toFixed(2)}`).join(' '),
+      'vector-effect':'non-scaling-stroke'
+    }));
+    const [lastX,lastY]=points.at(-1);
+    seriesLayer.appendChild(svgNode('circle',{cx:lastX,cy:lastY.toFixed(2),r:4,fill:s.color}));
+    leaders.appendChild(svgNode('polyline',{
+      fill:'none',stroke:s.color,'stroke-width':'1.25','stroke-opacity':'.55','stroke-dasharray':'4 4',
+      points:`${lastX},${lastY.toFixed(2)} ${leaderKnee},${lastY.toFixed(2)} 930,${s.lane} ${labelX},${s.lane}`,
+      'vector-effect':'non-scaling-stroke'
+    }));
+    const label=document.querySelector(`[data-norm-label="${s.key}"]`);
+    if(label)label.style.top=`${(s.lane/220)*100}%`;
+  });
+
+  NORMALIZED_CHART.x.forEach((px,index)=>{
+    const label=document.querySelector(`[data-norm-date="${index}"]`);
+    if(label)label.style.left=`${(px/1080)*100}%`;
+  });
+}
+
+renderNormalizedChart();
+
+// ===== MEMORIA 4 EDICIONES — 17J · 20J · 21J · 22J =====
+// Convención: los puntos históricos conservan exactamente el valor publicado.
+// "officialPrev" solo valida el delta diario corregido; "deltaException" exige asterisco visible.
+const MEM=[
+  {tick:'WTI',unit:'$',now:'86.83',d:'▲3.0%*',cls:'up',tone:'tone-risk',series:[81.705,83.23,84.50,86.83],color:'#ff2e4d',start:'$81.71',deltaException:true},
+  {tick:'SPX',unit:'',now:'7,498.96',d:'▼0.14%',cls:'dn',series:[7457.69,7443.28,7509.20,7498.96],color:'#2ea8ff',start:'7,457.69'},
+  {tick:'VIX',unit:'',now:'16.64',d:'▼2.40%',cls:'dn',inv:true,series:[18.77,18.66,17.04,16.64],color:'#ff2e4d',start:'18.77'},
+  {tick:'SKEW',unit:'',now:'146.05',d:'→0.00%',cls:'nt',inv:true,stale:'últ. dato 20J',series:[145.72,146.05,146.05,146.05],color:'#ff2e4d',start:'145.72'},
+  {tick:'GOLD',unit:'$',now:'4,137',approx:true,d:'▲1.5%*',cls:'up',series:[4017.32,4009.5,4015,4137.1],officialPrev:4076.3,deltaException:true,color:'#00ff9c',start:'$4,017'},
+  {tick:'BTC',unit:'$',now:'66.02K',d:'▼0.80%*',cls:'dn',series:[64.122,64.30,66.00,66.023],officialPrev:66.556,deltaException:true,color:'#2ea8ff',start:'$64.12K'},
+  {tick:'DXY',unit:'',now:'101.12',d:'→ -0.06%',cls:'nt',series:[100.755,100.988,101.183,101.12],color:'#2ea8ff',start:'100.76'}
+];
+
+const MEM_DELTA_TOLERANCE=0.15; // puntos porcentuales
+const MEM_FLAT_THRESHOLD=0.10;  // |delta| menor a 0.10% se publica como plano
+
+function spark(s,color){
+  const w=150,h=30,mn=Math.min(...s),mx=Math.max(...s),pad=(mx-mn||1)*0.15,lo=mn-pad,hi=mx+pad;
+  const pts=s.map((v,i)=>[6+(w-12)*(i/(s.length-1)),h-2-((v-lo)/(hi-lo))*(h-4)]);
+  const last=pts[pts.length-1];
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="width:100%;height:30px">
+    <polyline fill="none" stroke="${color}" stroke-width="1.8" points="${pts.map(p=>p.join(',')).join(' ')}"/>
+    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="2.6" fill="${color}"/></svg>`;
+}
+
+function memDisplayValue(m){return `${m.approx?'~':''}${m.unit}${m.now}`}
+function memArrow(text){return text.includes('▲')?'▲':text.includes('▼')?'▼':'→'}
+function memDeclaredDelta(text){
+  const match=text.match(/([+-]?\d+(?:\.\d+)?)%/);
+  return match?parseFloat(match[1]):NaN;
+}
+function memExpectedArrow(delta){
+  if(Math.abs(delta)<MEM_FLAT_THRESHOLD)return '→';
+  return delta>0?'▲':'▼';
+}
+function memExpectedClass(arrow){return arrow==='▲'?'up':arrow==='▼'?'dn':'nt'}
+
+function auditMemory(){
+  MEM.forEach(m=>{
+    const previous=m.series[m.series.length-2];
+    const current=m.series[m.series.length-1];
+    const seriesDelta=((current-previous)/previous)*100;
+    const declared=memDeclaredDelta(m.d);
+    const arrow=memArrow(m.d);
+    const expectedClass=memExpectedClass(arrow);
+    const hasStar=m.d.includes('*');
+    const seriesMismatch=Number.isFinite(declared)&&Math.abs(Math.abs(seriesDelta)-Math.abs(declared))>MEM_DELTA_TOLERANCE;
+
+    if(m.cls!==expectedClass){
+      console.warn(`[MEM] ${m.tick}: clase ${m.cls} incompatible con ${arrow}. Esperada: ${expectedClass}.`);
+    }
+
+    if(seriesMismatch){
+      if(m.deltaException&&hasStar){
+        console.info(`[MEM · ERRATA] ${m.tick}: serie publicada ${seriesDelta.toFixed(2)}% vs delta oficial ${declared.toFixed(2)}%*.`);
+      }else{
+        console.warn(`[MEM] ${m.tick}: serie ${seriesDelta.toFixed(2)}% vs delta declarado ${declared.toFixed(2)}%.`);
+      }
+    }
+
+    if(m.deltaException&&!hasStar){
+      console.warn(`[MEM] ${m.tick}: excepción de fe de erratas sin asterisco visible.`);
+    }
+
+    if(!m.deltaException&&arrow!==memExpectedArrow(seriesDelta)){
+      console.warn(`[MEM] ${m.tick}: flecha ${arrow} contradice la dirección de la serie (${seriesDelta.toFixed(2)}%).`);
+    }
+
+    if(m.officialPrev){
+      const officialDelta=((current-m.officialPrev)/m.officialPrev)*100;
+      if(Math.abs(Math.abs(officialDelta)-Math.abs(declared))>MEM_DELTA_TOLERANCE||arrow!==memExpectedArrow(officialDelta)){
+        console.warn(`[MEM] ${m.tick}: delta oficial ${officialDelta.toFixed(2)}% no coincide con ${m.d}.`);
+      }
+    }
+  });
+}
+
+auditMemory();
+
+document.getElementById('memGrid').innerHTML=MEM.map(m=>`
+  <div class="mem-cell">
+    <div class="mem-tick"><span>${m.tick}</span>${m.stale?`<span class="mem-stale">${m.stale}</span>`:''}</div>
+    <div class="mem-now">${memDisplayValue(m)}<span class="mem-d ${m.cls}${m.inv?' inv':''}${m.tone?' '+m.tone:''}">${m.d}</span></div>
+    ${spark(m.series,m.color)}
+    <div class="mem-4d"><span>17J ${m.start||m.unit+m.series[0]}</span><span>22J ${memDisplayValue(m)}</span></div>
+  </div>`).join('');
+
+// ===== SEMÁFORO filter =====
+document.querySelectorAll('.sem-btn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.sem-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  const sev=b.dataset.sev;
+  document.querySelectorAll('.sem-card').forEach(c=>{c.style.display=(sev==='all'||c.dataset.sev===sev)?'':'none'});
+}));
+
+// ===== OPERATIVA tabs =====
+document.querySelectorAll('.op-tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.op-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
+  document.querySelectorAll('.op-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('plan'+t.dataset.plan).classList.add('active');
+}));
+
+// ===== EXPOSURE calc =====
+const capInput=document.getElementById('capInput');
+function recalc(){
+  const v=parseFloat(capInput.value.replace(/[^0-9.]/g,''))||0;
+  document.querySelectorAll('.exp-usd').forEach(el=>{
+    el.textContent='$'+Math.round(v*parseFloat(el.dataset.sh)).toLocaleString('en-US');
+  });
+}
+const exposureTotal=[...document.querySelectorAll('.exp-usd')].reduce((sum,el)=>sum+parseFloat(el.dataset.sh||0),0);
+if(Math.abs(exposureTotal-1)>.0001)console.warn(`[EXPOSURE] La asignación suma ${(exposureTotal*100).toFixed(2)}%, no 100%.`);
+capInput.addEventListener('input',()=>{recalc();});
+document.querySelectorAll('.cp').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.cp').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+  capInput.value=parseInt(b.dataset.p).toLocaleString('en-US');recalc();
+}));
+recalc();
+
+// ===== fade in =====
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+}else{document.querySelectorAll('.fade').forEach(el=>el.classList.add('vis'))}
+</script>
+
+</body>
+</html>
