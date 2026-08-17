@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WAR ROOM v3 — 17 Agosto 2026 · UST 30Y gatillo · MOVE · amplitud</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&amp;family=Archivo:wght@400;600;800;900&amp;family=Archivo+Black&amp;display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   SISTEMA — NO TOCAR
+   Template estable: estructura, componentes e interactivos base.
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#04060a; --panel:#0b1016; --panel-2:#0f1620; --grid:#1a232e; --grid-soft:#121a24;
+  --ink:#e8eef2; --white:#fff; --ink-dim:#7d8a93; --ink-faint:#48555d;
+  --signal:#00ff9c; --alert:#ffb000; --risk:#ff2e4d; --info:#2ea8ff; --rumor:#c084fc;
+  --g-signal:0 0 6px rgba(0,255,156,.9),0 0 16px rgba(0,255,156,.45);
+  --g-alert:0 0 6px rgba(255,176,0,.9),0 0 16px rgba(255,176,0,.4);
+  --g-risk:0 0 6px rgba(255,46,77,.9),0 0 16px rgba(255,46,77,.4);
+  --g-info:0 0 6px rgba(46,168,255,.9),0 0 16px rgba(46,168,255,.4);
+  --g-rumor:0 0 6px rgba(192,132,252,.9),0 0 16px rgba(192,132,252,.4);
+  --mono:'JetBrains Mono',monospace; --display:'Archivo','Archivo Black',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--mono);-webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 12% 0%,rgba(0,255,156,.06),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 92% 22%,rgba(46,168,255,.05),transparent 55%),
+    radial-gradient(ellipse 60% 40% at 50% 100%,rgba(255,176,0,.04),transparent 60%),
+    linear-gradient(var(--grid-soft) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-soft) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,100% 100%,52px 52px,52px 52px;
+  background-attachment:fixed;position:relative;overflow-x:hidden;
+}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.15) 0,rgba(0,0,0,.15) 1px,transparent 1px,transparent 3px);
+  opacity:.5;mix-blend-mode:multiply}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+/* glows */
+.s{color:var(--signal);text-shadow:var(--g-signal)} .a{color:var(--alert);text-shadow:var(--g-alert)}
+.r{color:var(--risk);text-shadow:var(--g-risk)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ===== TICKER ===== */
+.ticker{border-bottom:1px solid var(--grid);background:rgba(6,9,13,.92);backdrop-filter:blur(8px);
+  overflow:hidden;white-space:nowrap;font-size:12px;letter-spacing:.4px;position:sticky;top:0;z-index:60}
+.tk-track{display:inline-block;padding:9px 0;animation:scroll 38s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk{display:inline-block;padding:0 20px;color:var(--ink-dim);border-right:1px solid var(--grid-soft)}
+.tk b{color:var(--ink);font-weight:700}
+
+/* ===== REGIMEN BAR ===== */
+.regime{border-bottom:1px solid var(--grid);background:rgba(8,11,15,.6);padding:11px 0}
+.regime .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.regime-left{display:flex;align-items:center;gap:14px}
+.rg-dot{width:9px;height:9px;border-radius:50%;background:var(--risk);box-shadow:var(--g-risk);animation:pulse 1.6s infinite}
+.rg-label{font-size:10px;letter-spacing:3px;color:var(--ink-faint);text-transform:uppercase}
+.rg-val{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:.5px}
+.defbars{display:flex;gap:4px}
+.defbar{width:26px;height:6px;background:var(--grid);border-radius:1px}
+.defbar.on{background:var(--risk);box-shadow:var(--g-risk)}
+.regime-date{font-size:11px;color:var(--ink-dim);letter-spacing:1px}
+
+/* ===== HERO (01) ===== */
+.hero{padding:64px 0 52px;border-bottom:1px solid var(--grid)}
+.hero .wrap{display:grid;grid-template-columns:1.55fr 1fr;gap:48px;align-items:start}
+.kick{font-size:11px;letter-spacing:4px;color:var(--alert);text-transform:uppercase;text-shadow:var(--g-alert);
+  display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.kick::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:var(--g-signal);animation:pulse 1.6s infinite}
+h1.headline{font-family:var(--display);font-weight:900;font-size:clamp(38px,5.4vw,68px);line-height:.95;
+  letter-spacing:-1.5px;text-transform:uppercase}
+h1.headline .em{color:var(--bg);-webkit-text-stroke:1.4px var(--risk);
+  filter:drop-shadow(0 0 7px rgba(255,46,77,.65)) drop-shadow(0 0 18px rgba(255,46,77,.35))}
+.lede{margin-top:24px;color:var(--ink-dim);font-size:14.5px;line-height:1.75;max-width:600px}
+.lede b{color:var(--ink)}
+.verdict-badge{display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:9px 16px;
+  border:1px solid var(--risk);border-radius:3px;background:rgba(255,46,77,.07);
+  font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--risk);text-shadow:var(--g-risk)}
+.verdict-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--risk);box-shadow:var(--g-risk)}
+/* live panel */
+.livebox{border:1px solid var(--grid);background:rgba(11,16,22,.7);border-radius:4px;overflow:hidden}
+.lb-head{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid var(--grid);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+.lb-live{color:var(--signal);text-shadow:var(--g-signal);display:flex;align-items:center;gap:6px}
+.lb-live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:var(--g-signal);animation:pulse 1.4s infinite}
+.lb-row{display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--grid-soft);font-size:12.5px}
+.lb-row:last-child{border-bottom:none}
+.lb-tick{font-weight:700;color:var(--ink)}
+.lb-name{color:var(--ink-faint);font-size:10.5px;letter-spacing:.5px}
+.lb-val{text-align:right;font-weight:700}
+.lb-delta{font-size:10px}
+.up{color:var(--signal)} .dn{color:var(--risk)} .nt{color:var(--ink-dim)}
+
+/* ===== SECTION SHELL ===== */
+section{padding:62px 0;border-bottom:1px solid var(--grid)}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px}
+.sec-num{font-family:var(--display);font-weight:900;font-size:13px;color:var(--alert);text-shadow:var(--g-alert);white-space:nowrap}
+.sec-title{font-family:var(--display);font-weight:800;font-size:clamp(20px,3vw,30px);letter-spacing:-.5px;text-transform:uppercase}
+.sec-title em{font-style:normal;color:var(--signal);text-shadow:var(--g-signal)}
+.sec-line{flex:1;height:1px;background:var(--grid)}
+.sec-sub{font-size:10.5px;color:var(--ink-faint);letter-spacing:1px;white-space:nowrap}
+
+/* ===== 4-DAY MEMORY STRIP ===== */
+.memory{background:rgba(11,16,22,.5)}
+.mem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--grid)}
+.mem-cell{background:var(--bg);padding:16px 16px 14px}
+.mem-tick{font-size:10px;letter-spacing:1.5px;color:var(--ink-faint);text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.mem-stale{font-size:8px;letter-spacing:.35px;text-transform:none;color:var(--alert);white-space:nowrap}
+.mem-now{font-family:var(--display);font-weight:800;font-size:21px;margin-top:6px;display:flex;align-items:baseline;gap:7px}
+.mem-d{font-size:10px;font-weight:700}
+.tk .inv.dn,.mem-d.inv.dn{color:var(--signal)!important}
+.tk .inv.up,.mem-d.inv.up{color:var(--risk)!important}
+.mem-d.tone-risk{color:var(--risk)!important}
+.mem-footnote{font-size:10px;color:var(--ink-faint);margin-top:12px;letter-spacing:.5px;line-height:1.65}
+.mem-errata{border-left:2px solid var(--alert);padding-left:11px;color:var(--ink-dim)}
+.mem-errata b{color:var(--alert);text-shadow:var(--g-alert)}
+.mem-4d{font-size:9.5px;color:var(--ink-faint);margin-top:7px;letter-spacing:.5px;display:flex;justify-content:space-between}
+
+/* ===== TESIS 3 FUERZAS (02) ===== */
+.thesis-q{font-family:var(--display);font-weight:800;font-size:clamp(18px,2.4vw,26px);line-height:1.3;
+  letter-spacing:-.3px;max-width:780px;margin-bottom:34px}
+.thesis-q em{font-style:normal;color:var(--risk);text-shadow:var(--g-risk)}
+.forces{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.force{border:1px solid var(--grid);background:var(--panel);border-radius:4px;padding:22px;position:relative;overflow:hidden}
+.force::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--alert);box-shadow:var(--g-alert)}
+.force-n{font-family:var(--display);font-weight:900;font-size:30px;color:var(--grid);line-height:1}
+.force-t{font-weight:700;font-size:13.5px;margin-top:12px;color:var(--ink)}
+.force-x{font-size:12px;line-height:1.65;color:var(--ink-dim);margin-top:9px}
+.force-x b{color:var(--ink)}
+
+/* ===== CRONOLOGIA (03) ===== */
+.tl{display:flex;flex-direction:column;gap:1px;background:var(--grid)}
+.tl-ev{background:var(--bg);padding:16px 20px;display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:start;transition:background .2s}
+.tl-ev:hover{background:var(--panel)}
+.tl-ev.crit{border-left:3px solid var(--risk)}
+.tl-meta{font-size:10px;letter-spacing:1px}
+.tl-time{color:var(--alert);font-weight:700}.tl-src{color:var(--ink-faint);display:block;margin-top:3px}
+.tl-t{font-weight:700;font-size:13.5px;color:var(--ink)}
+.tl-b{font-size:12px;color:var(--ink-dim);line-height:1.6;margin-top:5px}
+.tl-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.tl-tag{font-size:9px;letter-spacing:1px;padding:3px 7px;border:1px solid var(--grid);border-radius:2px;color:var(--ink-faint)}
+.tl-tag.hot{border-color:var(--alert);color:var(--alert)}
+.tl-tag.crit{border-color:var(--risk);color:var(--risk)}
+
+/* ===== RUMOR CHANNEL (04) — NUEVO ===== */
+.rumor-note{font-size:11px;color:var(--ink-faint);margin-bottom:20px;letter-spacing:.5px;padding:10px 14px;
+  border:1px dashed var(--rumor);border-radius:3px;background:rgba(192,132,252,.04)}
+.rumor-note b{color:var(--rumor);text-shadow:var(--g-rumor)}
+.rumors{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.rumor{border:1px solid var(--grid);border-top:2px solid var(--rumor);background:var(--panel);border-radius:4px;padding:18px}
+.rumor-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.rumor-conf{font-size:9px;letter-spacing:1.5px;padding:3px 8px;border-radius:2px;text-transform:uppercase;font-weight:700}
+.conf-mid{background:rgba(255,176,0,.12);color:var(--alert)}
+.conf-hi{background:rgba(0,255,156,.12);color:var(--signal)}
+.rumor-src{font-size:10px;color:var(--rumor);text-shadow:var(--g-rumor);letter-spacing:1px}
+.rumor-t{font-weight:700;font-size:13px;color:var(--ink);line-height:1.45}
+.rumor-impact{font-size:11px;color:var(--ink-dim);line-height:1.6;margin-top:9px;padding-top:9px;border-top:1px solid var(--grid-soft)}
+.rumor-impact b{color:var(--ink)}
+
+/* ===== DATA VIVA (05) ===== */
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.chart-card{border:1px solid var(--grid);background:var(--panel);border-radius:4px;overflow:hidden}
+.chart-card.wide{grid-column:1/-1}
+.ch-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--grid)}
+.ch-sym{font-weight:700;font-size:13px}
+.ch-meta{font-size:10px;color:var(--ink-faint);letter-spacing:.5px}
+.ch-tag{font-size:9px;letter-spacing:1px;padding:3px 8px;border-radius:2px;text-transform:uppercase}
+.ch-body{padding:16px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:10.5px;color:var(--ink-dim);margin-top:10px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+
+
+/* ===== DATA VIVA · responsive chart labels fix ===== */
+.chart-card{min-width:0}
+.ch-head>div{min-width:0}
+.chart-plot{position:relative;width:100%;height:200px;min-width:0;overflow:visible}
+.chart-plot.small{height:160px}
+.chart-plot svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.chart-label{position:absolute;z-index:2;font-family:var(--mono);font-size:11px;line-height:1;white-space:nowrap;pointer-events:none;color:var(--ink-dim);letter-spacing:-.15px;text-shadow:none}
+.chart-label.date{font-size:10px;color:var(--ink-faint)}
+.chart-label.alert{color:var(--alert);text-shadow:var(--g-alert)}
+.chart-label.risk{color:var(--risk);text-shadow:var(--g-risk)}
+.chart-label.anchor-c{transform:translateX(-50%)}
+
+/* ===== SEÑAL VS RUIDO (06) ===== */
+.sr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sr-col{border:1px solid var(--grid);border-radius:4px;padding:22px;background:var(--panel)}
+.sr-col.sig{border-top:2px solid var(--signal)}
+.sr-col.noise{border-top:2px solid var(--ink-faint)}
+.sr-h{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.sr-h.sig{color:var(--signal);text-shadow:var(--g-signal)}
+.sr-h.noise{color:var(--ink-dim)}
+.sr-item{display:grid;grid-template-columns:24px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid var(--grid-soft);font-size:12.5px;line-height:1.55}
+.sr-item:last-child{border-bottom:none}
+.sr-n{font-family:var(--display);font-weight:900;color:var(--grid)}
+.sr-item b{color:var(--ink)}.sr-item span{color:var(--ink-dim)}
+
+/* ===== SEMAFORO (07) ===== */
+.sem-tools{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.sem-btn{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;background:var(--panel);
+  border:1px solid var(--grid);color:var(--ink-dim);padding:8px 14px;border-radius:3px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:.2s}
+.sem-btn:hover{border-color:var(--ink-faint)}
+.sem-btn.active{border-color:var(--ink);color:var(--ink)}
+.sem-btn .dot{width:7px;height:7px;border-radius:50%}
+.sem-btn[data-sev="critical"] .dot{background:var(--risk);box-shadow:var(--g-risk)}
+.sem-btn[data-sev="alert"] .dot{background:var(--alert);box-shadow:var(--g-alert)}
+.sem-btn[data-sev="watch"] .dot{background:var(--info);box-shadow:var(--g-info)}
+.sem-btn[data-sev="all"] .dot{background:var(--ink-dim)}
+.sem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px}
+.sem-card{border:1px solid var(--grid);background:var(--panel);border-radius:4px;padding:16px;border-left:3px solid var(--ink-faint)}
+.sem-card[data-sev="critical"]{border-left-color:var(--risk)}
+.sem-card[data-sev="alert"]{border-left-color:var(--alert)}
+.sem-card[data-sev="watch"]{border-left-color:var(--info)}
+.sem-tag{font-size:9px;letter-spacing:1.5px;color:var(--ink-faint)}
+.sem-name{font-weight:700;font-size:13.5px;margin:6px 0 8px}
+.sem-desc{font-size:11.5px;color:var(--ink-dim);line-height:1.55}
+
+/* ===== OPERATIVA (08) ===== */
+.op-tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.op-tab{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--panel);border:1px solid var(--grid);color:var(--ink-dim);padding:11px 18px;border-radius:3px;cursor:pointer;transition:.2s}
+.op-tab.active{border-color:var(--signal);color:var(--signal);text-shadow:var(--g-signal);background:rgba(0,255,156,.05)}
+.op-panel{display:none}.op-panel.active{display:block}
+.op-setups{display:flex;flex-direction:column;gap:1px;background:var(--grid)}
+.op-setup{background:var(--bg);display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 18px}
+.op-n{font-family:var(--display);font-weight:900;font-size:18px;color:var(--grid)}
+.op-name{font-weight:700;font-size:13.5px}
+.op-detail{font-size:11.5px;color:var(--ink-dim);line-height:1.5;margin-top:4px}
+.op-detail em{font-style:normal;color:var(--alert);text-shadow:var(--g-alert)}
+.op-alloc{text-align:right}
+.op-cap{font-size:9px;letter-spacing:1px;color:var(--ink-faint)}
+.op-pct{font-family:var(--display);font-weight:900;font-size:22px;color:var(--signal);text-shadow:var(--g-signal)}
+
+/* exposure */
+.exp{margin-top:36px;border:1px solid var(--grid);border-radius:4px;background:var(--panel);padding:24px;display:grid;grid-template-columns:1fr 1.3fr;gap:30px}
+.exp-label{font-size:10px;letter-spacing:2px;color:var(--ink-faint);text-transform:uppercase;margin-bottom:10px}
+.exp-amount{display:flex;align-items:baseline;gap:8px;font-family:var(--display);font-weight:900;font-size:32px}
+.exp-cur{font-size:13px;color:var(--ink-faint)}
+.exp-field{background:transparent;border:none;border-bottom:1px solid var(--grid);color:var(--ink);font-family:var(--display);font-weight:900;font-size:32px;width:220px;outline:none}
+.exp-presets{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.cp{font-family:var(--mono);font-size:10px;background:var(--bg);border:1px solid var(--grid);color:var(--ink-dim);padding:6px 11px;border-radius:2px;cursor:pointer}
+.cp.active{border-color:var(--signal);color:var(--signal)}
+.exp-note{font-size:11px;color:var(--ink-dim);line-height:1.6;margin-top:16px}
+.exp-note b{color:var(--ink)}
+.exp-bar{display:flex;height:14px;border-radius:3px;overflow:hidden;margin-bottom:16px}
+.exp-seg[data-cat="cash"]{background:var(--info)}.exp-seg[data-cat="energy"]{background:var(--alert)}
+.exp-seg[data-cat="defense"]{background:var(--signal)}.exp-seg[data-cat="metals"]{background:var(--alert)}
+.exp-seg[data-cat="hedge"]{background:var(--risk)}.exp-seg[data-cat="semi"]{background:var(--info)}
+.exp-seg[data-cat="fixed"]{background:repeating-linear-gradient(135deg,var(--info) 0 4px,rgba(46,168,255,.24) 4px 8px)}
+.exp-seg[data-cat="equity"]{background:repeating-linear-gradient(135deg,var(--signal) 0 4px,rgba(0,255,156,.22) 4px 8px)}
+.exp-seg[data-cat="alt"]{background:repeating-linear-gradient(135deg,var(--risk) 0 4px,rgba(255,46,77,.20) 4px 8px)}
+.exp-row{display:grid;grid-template-columns:14px 1fr auto auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--grid-soft);font-size:12px}
+.exp-sw{width:11px;height:11px;border-radius:2px}
+.exp-sw[data-cat="cash"]{background:var(--info)}.exp-sw[data-cat="energy"]{background:var(--alert)}
+.exp-sw[data-cat="defense"]{background:var(--signal)}.exp-sw[data-cat="metals"]{background:var(--alert)}
+.exp-sw[data-cat="hedge"]{background:var(--risk)}.exp-sw[data-cat="semi"]{background:var(--info)}
+.exp-sw[data-cat="fixed"]{background:repeating-linear-gradient(135deg,var(--info) 0 3px,rgba(46,168,255,.24) 3px 6px)}
+.exp-sw[data-cat="equity"]{background:repeating-linear-gradient(135deg,var(--signal) 0 3px,rgba(0,255,156,.22) 3px 6px)}
+.exp-sw[data-cat="alt"]{background:repeating-linear-gradient(135deg,var(--risk) 0 3px,rgba(255,46,77,.20) 3px 6px)}
+.exp-cat .d{font-size:10px;color:var(--ink-faint);display:block;margin-top:2px}
+.exp-pct{color:var(--ink-dim)}.exp-usd{font-weight:700;text-align:right;min-width:78px}
+
+/* footer */
+.footer{padding:40px 0;text-align:center}
+.footer .brand{font-family:var(--display);font-weight:900;font-size:16px;letter-spacing:1px}
+.footer .sub{display:block;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:8px}
+.disc{font-size:9px;color:var(--ink-faint);max-width:600px;margin:18px auto 0;line-height:1.6}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;gap:32px}
+  .forces{grid-template-columns:1fr}
+  .charts,.sr,.exp{grid-template-columns:1fr}
+  .tl-ev{grid-template-columns:1fr;gap:8px}
+  .tl-tags{justify-content:flex-start}
+  .op-setup{grid-template-columns:32px 1fr;gap:12px}
+  .op-alloc{grid-column:2;text-align:left;margin-top:6px}
+}
+
+@media(max-width:560px){
+  .wrap{padding:0 14px}
+  section{padding:46px 0}
+  .hero{padding:46px 0 42px}
+  .regime .wrap{gap:10px}.regime-left{gap:10px;flex-wrap:wrap}.rg-label{letter-spacing:2px}.rg-val{font-size:13px}
+  h1.headline{font-size:clamp(34px,12vw,48px);letter-spacing:-1px}
+  .lede{font-size:13.5px;line-height:1.65}
+  .sec-head{flex-wrap:wrap;align-items:flex-start;gap:10px;margin-bottom:26px}
+  .sec-line{flex-basis:100%;order:5}
+  .sec-sub{white-space:normal;line-height:1.4}
+  .ch-head{flex-direction:column;align-items:flex-start;gap:9px;padding:12px 12px}
+  .ch-sym,.ch-meta{display:block;line-height:1.35}.ch-meta{margin-top:4px}
+  .ch-body{padding:12px}
+  .chart-plot{height:178px}.chart-plot.small{height:142px}
+  .chart-label{font-size:10px}.chart-label.date{font-size:9px}
+  .legend{font-size:10px;line-height:1.55;gap:10px}
+  .lb-row{grid-template-columns:44px 1fr;align-items:start}
+  .lb-val{grid-column:2;text-align:left}
+  .mem-grid{grid-template-columns:repeat(auto-fit,minmax(136px,1fr))}
+  .mem-cell{padding:14px 12px}
+  .mem-cell:last-child:nth-child(odd){grid-column:1/-1}
+  .tl-ev{padding:14px}
+  .op-tab{width:100%;justify-content:center}
+  .exp{padding:18px;gap:22px}
+  .exp-field{width:150px;font-size:28px}.exp-amount{font-size:28px}
+  .exp-row{grid-template-columns:14px 1fr auto;gap:10px}
+  .exp-usd{grid-column:2/4;text-align:left;min-width:0;color:var(--ink)}
+}
+/* ===== MOTION / REVEAL ===== */
+.fade{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.fade.vis{opacity:1;transform:none}
+
+/* ===== AUDIT / DATA INTEGRITY ===== */
+.audit-note{font-size:11px;color:var(--ink-dim);margin:0 0 20px;letter-spacing:.35px;padding:11px 14px;
+  border:1px dashed var(--alert);border-radius:3px;background:rgba(255,176,0,.045);line-height:1.6}
+.audit-note b{color:var(--alert);text-shadow:var(--g-alert)}
+
+/* ═══════════════════════════════════════════════════════════════
+   CSS DE LA EDICIÓN — VACIAR Y REEMPLAZAR CADA DÍA
+   Régimen, componentes excepcionales y posiciones responsive.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ===== RÉGIMEN DEL DÍA · 17A ===== */
+body.red-rate-breakout h1.headline .em{
+  color:var(--bg);-webkit-text-stroke:1.5px var(--risk);
+  filter:drop-shadow(0 0 7px rgba(255,46,77,.88)) drop-shadow(0 0 24px rgba(255,46,77,.42))
+}
+body.red-rate-breakout .verdict-badge{
+  border-color:var(--risk);background:rgba(255,46,77,.075);
+  color:var(--risk);text-shadow:var(--g-risk)
+}
+body.red-rate-breakout .verdict-badge::before{background:var(--risk);box-shadow:var(--g-risk);animation:pulse 1.35s infinite}
+body.red-rate-breakout .rg-dot{background:var(--risk);box-shadow:var(--g-risk);animation:pulse 1.35s infinite}
+body.red-rate-breakout .defbar.on{background:var(--risk);box-shadow:var(--g-risk)}
+body.red-rate-breakout .regime{background:linear-gradient(90deg,rgba(255,46,77,.095),rgba(255,176,0,.025),transparent 74%)}
+.tk .tone-risk{color:var(--risk);text-shadow:var(--g-risk)}
+.mem-d.tone-risk{color:var(--risk)!important;text-shadow:var(--g-risk)}
+.audit-note strong{color:var(--ink)}
+.ch-sym{margin-right:10px}
+
+/* ===== COMPONENTE DE EDICIÓN · DISPERSIÓN 17A ===== */
+.bar-chart{position:relative;height:286px;padding:4px 0 0}
+.bar-row{display:grid;grid-template-columns:90px 1fr 74px;gap:12px;align-items:center;height:38px;font-size:11px}
+.bar-name{color:var(--ink-dim)}
+.bar-track{height:8px;background:var(--grid-soft);position:relative;border-radius:1px;overflow:visible}
+.bar-zero{position:absolute;left:50%;top:-5px;bottom:-5px;width:1px;background:var(--grid)}
+.bar-fill{position:absolute;top:0;height:8px;border-radius:1px;box-shadow:0 0 10px currentColor}
+.bar-fill.pos{left:50%;background:var(--signal);color:var(--signal)}
+.bar-fill.neg{right:50%;background:var(--risk);color:var(--risk)}
+.bar-val{text-align:right;font-weight:700}
+
+@media(max-width:420px){
+  .bar-row{grid-template-columns:62px 1fr 60px;gap:7px;font-size:9.5px}
+}
+</style>
+</head>
+<body class="red-rate-breakout">
+<!-- ===== 00 · TICKER + RÉGIMEN ===== -->
+<div class="ticker"><div class="tk-track" id="tkTrack">
+<span class="tk"><b>REGIME</b> <span class="r">ROJO ↓ · sesión 1 · caja 66%</span></span>
+<span class="tk"><b>SPX CASH</b> 7,745.06 <span class="dn">▼0.52%</span></span>
+<span class="tk"><b>NASDAQ COMP</b> 26,644.91 <span class="dn">▼0.32%</span></span>
+<span class="tk"><b>DOW</b> 53,459.78 <span class="dn">▼0.51%</span></span>
+<span class="tk"><b>RUSSELL 2000</b> 3,057.54 <span class="dn">▼0.35%</span></span>
+<span class="tk"><b>MOVE</b> 75.63 <span class="inv up">▲6.05 · ELEVATED</span></span>
+<span class="tk"><b>BONDS STRESS</b> 64.7 <span class="r">▲28.6 · HOTSPOT</span></span>
+<span class="tk"><b>VIX</b> 15.19 <span class="inv up">▲6.60%</span></span>
+<span class="tk"><b>HY OAS</b> 2.67% <span class="up">▼4pb · contador 1/2</span></span>
+<span class="tk"><b>UST 30Y</b> 5.311% <span class="r">+4.4pb · GATILLO DISPARADO</span></span>
+<span class="tk"><b>UST 10Y</b> 4.724% <span class="r">+3.4pb · 7.6pb de 🚨</span></span>
+<span class="tk"><b>UST 2Y</b> 4.182% <span class="nt">+1.1pb</span></span>
+<span class="tk"><b>JGB 30Y</b> 4.074% <span class="r">+7.4pb sobre umbral · sin JSDA</span></span>
+<span class="tk"><b>JGB 40Y</b> 4.136% <span class="r">+8.6pb sobre referencia</span></span>
+<span class="tk"><b>USD/JPY</b> 159.474 <span class="nt">+0.10% · yen no confirma</span></span>
+<span class="tk"><b>A/D NYSE</b> 0.51 <span class="r">proxy · 137 mín / 75 máx</span></span>
+<span class="tk"><b>TIC T-BONDS</b> $6.8B <span class="r">vs $56.6B previo</span></span>
+<span class="tk"><b>WTI</b> $84.82 <span class="tone-risk">▲2.94%</span></span>
+<span class="tk"><b>BRENT</b> $90.87 <span class="tone-risk">▲2.65%</span></span>
+<span class="tk"><b>GOLD SPOT</b> $4,415.42 <span class="up">▲0.88%</span></span>
+<span class="tk"><b>BTC</b> $64.347K <span class="up">▲2.38% · +$124 vs SMA200W</span></span>
+<span class="tk"><b>DXY</b> 99.586 <span class="nt">→−0.06%</span></span>
+<span class="tk"><b>SOX</b> +1.6% <span class="up">semis contra cinta</span></span>
+<span class="tk"><b>NEXT</b> <span class="a">JSDA JGB · UST 10Y/30Y · escalera 18A</span></span>
+</div></div>
+<div class="regime"><div class="wrap">
+<div class="regime-left"><span class="rg-dot"></span><span class="rg-label">Risk Posture</span><span class="rg-val r">DEFCON 2 · ROJO ↓ · SESIÓN 1 · CAJA 66%</span></div>
+<div class="defbars"><span class="defbar"></span><span class="defbar on"></span><span class="defbar"></span><span class="defbar"></span><span class="defbar"></span></div>
+<span class="regime-date">17 AGO 2026 · 21:00 UTC · UST 30Y / MOVE / AMPLITUD</span>
+</div></div>
+<!-- ===== 01 · VEREDICTO (HERO) ===== -->
+<section class="hero" style="border-top:none"><div class="wrap">
+<div>
+<div class="kick">// 01 · Veredicto del día</div>
+<h1 class="headline">El 30Y<br/>disparó.<br/>El amarillo<br/><span class="em">se rompió.</span></h1>
+<p class="lede">El UST 30Y cerró en <b>5.311% (+4.4pb)</b>, sobre el umbral pre-registrado de 5.300% y verificado contra dos fuentes externas. La Rama A se ejecutó completa: <b>caja 60% → 66%</b>, refino <b>3% → 0%</b> y XLV <b>6% → 3%</b>. En la misma sesión, MOVE saltó a <b>75.63</b>, el estrés de bonos a <b>64.7</b> y la amplitud NYSE cayó a <b>0.51</b> con <b>137 mínimos vs 75 máximos</b>. Japón sigue cruzado en <b>4.074%</b>, pero la ausencia de cierre oficial JSDA bloquea la escalada a 80%.</p>
+<div class="verdict-badge">rojo ↓ · caja 66%</div>
+</div>
+<aside class="livebox">
+<div class="lb-head"><span>// Mercados · cierre 17A</span><span class="lb-live">LIVE</span></div>
+<div class="lb-row"><span class="lb-tick">UST30</span><span class="lb-name">cierre verificado</span><span class="lb-val r">5.311%<span class="lb-delta"> gatillo disparado</span></span></div>
+<div class="lb-row"><span class="lb-tick">MOVE</span><span class="lb-name">panel rector</span><span class="lb-val r">75.63<span class="lb-delta"> +6.05 · ELEVATED</span></span></div>
+<div class="lb-row"><span class="lb-tick">BONDS</span><span class="lb-name">estrés 1D</span><span class="lb-val r">64.7<span class="lb-delta"> +28.6 · hotspot</span></span></div>
+<div class="lb-row"><span class="lb-tick">JGB30</span><span class="lb-name">JPC confirmado / sin JSDA</span><span class="lb-val r">4.074%<span class="lb-delta"> +7.4pb umbral</span></span></div>
+<div class="lb-row"><span class="lb-tick">A/D</span><span class="lb-name">proxy NYSE · no gatillo</span><span class="lb-val r">0.51<span class="lb-delta"> 137 mín / 75 máx</span></span></div>
+<div class="lb-row"><span class="lb-tick">CASH</span><span class="lb-name">Rama A ejecutada</span><span class="lb-val r">66%<span class="lb-delta"> +6 puntos</span></span></div>
+</aside>
+</div></section>
+<!-- ===== MEMORIA 4 DÍAS ===== -->
+<section class="memory"><div class="wrap">
+<div class="sec-head fade"><div class="sec-num">// MEM</div><h2 class="sec-title">Lo que cambió en <em>4 ediciones</em></h2><div class="sec-line"></div><div class="sec-sub">12A · 13A · 14A · 17A</div></div>
+<div class="mem-grid" id="memGrid"></div>
+<p class="mem-footnote">▸ Ventana FIFO actualizada: salió 11A y entró 17A. Los tres puntos heredados —12A, 13A y 14A— se conservan exactamente como fueron publicados. Cierres utilizables hoy: WTI <b>$84.82</b>, SPX <b>7,745.06</b>, VIX <b>15.19</b>, SKEW <b>138.36</b>, GOLD spot <b>$4,415.42</b>, BTC <b>~$64.347K</b> y DXY <b>99.586</b>. <span class="mem-errata"><b>FE DE ERRATAS · SERIE HISTÓRICA:</b> VIX 13A conserva <b>14.64</b> como valor publicado; el cierre oficial de referencia resuelto posteriormente fue <b>14.63</b>. Los puntos publicados no se reescriben.</span></p>
+</div></section>
+<!-- ===== 02 · TESIS EN 3 FUERZAS ===== -->
+<section><div class="wrap">
+<div class="sec-head fade"><div class="sec-num">// 02</div><h2 class="sec-title">La tesis en <em>3 fuerzas</em></h2><div class="sec-line"></div><div class="sec-sub">term premium · vol de bonos · Japón</div></div>
+<p class="thesis-q fade">El long-end dejó de avisar. <em>Ahora gobierna el libro.</em></p>
+<div class="forces">
+<div class="force fade"><div class="force-n">01</div><div class="force-t">El 30 años convierte la prima de plazo en una orden</div><div class="force-x">UST 30Y <b>5.311% (+4.4pb)</b> con el 2Y en <b>4.182% (+1.1pb)</b>: el empinamiento viene del extremo largo. El dato TIC publicado hoy refuerza el mecanismo: compras extranjeras de Treasuries de largo plazo <b>$6.8B vs $56.6B</b> el mes previo. La Rama A cruzó y movió seis puntos a caja.</div></div>
+<div class="force fade"><div class="force-n">02</div><div class="force-t">Los dos escalones que sostenían el amarillo se rompen juntos</div><div class="force-x">MOVE <b>69.58 → 75.63</b> y estrés de bonos <b>36.1 → 64.7</b>. El hotspot está concentrado en bonos y la alerta EQ-BD se activó. A la vez, la amplitud se invierte: A/D <b>0.51</b>, volumen comprador <b>32.96%</b> y <b>137 mínimos / 75 máximos</b>. El daño ya no está confinado a cuatro nombres.</div></div>
+<div class="force fade"><div class="force-n">03</div><div class="force-t">Japón confirma la presión de tasas; el yen corta la transmisión</div><div class="force-x">JPC vuelve con payload <b>17A confirmado</b>: JGB 30Y <b>4.074%</b>, 40Y <b>4.136%</b> y 10Y <b>2.923%</b>. Bloomberg corrobora el 30Y cerca de 4.07%, mientras USD/JPY queda en <b>159.474</b>. La cadena del panel sigue en activación solo tasas; sin JSDA, la caja permanece en <b>66%</b>.</div></div>
+</div>
+</div></section>
+<!-- ===== 03 · CRONOLOGÍA ===== -->
+<section><div class="wrap">
+<div class="sec-head fade"><div class="sec-num">// 03</div><h2 class="sec-title">Cronología <em>táctica</em></h2><div class="sec-line"></div><div class="sec-sub">Japón · TIC · long-end · amplitud · energía</div></div>
+<div class="tl">
+<div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">17A · Asia</span><span class="tl-src">JPC / Bloomberg</span></div><div><div class="tl-t">Japón abre con el 30Y otra vez del lado incorrecto</div><div class="tl-b">JPC se reactiva con cierre confirmado: 30Y <b>4.074%</b>, 40Y <b>4.136%</b>, 10Y <b>2.923%</b>. Bloomberg corrobora ~4.07%. La confirmación oficial JSDA sigue ausente.</div></div><div class="tl-tags"><span class="tl-tag crit">JGB</span><span class="tl-tag hot">JSDA</span></div></div>
+<div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">17A · 17:00 UTC</span><span class="tl-src">TIC · junio</span></div><div><div class="tl-t">La demanda extranjera del tramo largo se desploma</div><div class="tl-b">US Foreign Buying, T-bonds cae a <b>$6.8B</b> desde <b>$56.6B</b>; las transacciones netas de largo plazo bajan a <b>$172.7B</b> desde $231.2B. El agregado oficial reemplaza el desglose por China que no pudo verificarse.</div></div><div class="tl-tags"><span class="tl-tag crit">TIC</span><span class="tl-tag">DEMANDA</span></div></div>
+<div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">17A · sesión NY</span><span class="tl-src">Treasuries</span></div><div><div class="tl-t">El 30Y cierra en 5.311% y dispara la Rama A</div><div class="tl-b">El cierre queda sobre <b>5.300%</b> y es coherente con dos fuentes externas. El 10Y termina en <b>4.724%</b>; el 2Y apenas sube a <b>4.182%</b>. Se ejecuta caja <b>60% → 66%</b>.</div></div><div class="tl-tags"><span class="tl-tag crit">30Y</span><span class="tl-tag crit">EXEC</span></div></div>
+<div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">17A · cierre</span><span class="tl-src">NBD / NYSE proxies</span></div><div><div class="tl-t">La amplitud pasa a deterioro de corto plazo</div><div class="tl-b">A/D proxy <b>0.51</b>, comprador <b>32.96%</b>, McClellan <b>−16.49</b>, acumulada <b>−807.1</b> y <b>137 mínimos vs 75 máximos</b>. El Official Trigger sigue NO EVALUABLE sin carga manual.</div></div><div class="tl-tags"><span class="tl-tag crit">BREADTH</span><span class="tl-tag">PROXY</span></div></div>
+<div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">17A · cierre</span><span class="tl-src">sectorial / Ormuz</span></div><div><div class="tl-t">Energía queda sola en verde mientras el libro la cierra</div><div class="tl-b">XLE <b>+1.08%</b>, WTI <b>+2.94%</b> y Brent <b>+2.65%</b>; 9 de 11 sectores caen y XLC pierde <b>1.89%</b>. El refino se reduce 3% → 0% por pre-registro, pese a la fortaleza del sector.</div></div><div class="tl-tags"><span class="tl-tag hot">ENERGÍA</span><span class="tl-tag">SECTORES</span></div></div>
+</div>
+</div></section>
+<!-- ===== 04 · RUMOR ===== -->
+<section><div class="wrap">
+<div class="sec-head fade"><div class="sec-num">// 04</div><h2 class="sec-title">Canal <em style="color:var(--rumor);text-shadow:var(--g-rumor)">rumor</em></h2><div class="sec-line"></div><div class="sec-sub">posicionamiento · fragmentación · flujo IA</div></div>
+<p class="rumor-note fade"><b>CANAL NO CONFIRMADO:</b> pricing probabilístico e hipótesis tempranas. Ningún ítem modifica por sí solo el DEFCON ni sustituye una fuente oficial.</p>
+<div class="rumors">
+<div class="rumor fade"><div class="rumor-head"><span class="rumor-src">BARCHART / MACRO CHARTS</span><span class="rumor-conf conf-mid">confianza media</span></div><div class="rumor-t">El corto en futuros del Nasdaq sería el mayor del registro</div><div class="rumor-impact"><b>Si confirma:</b> el extremo sirve más como combustible de squeeze que como permiso para vender índice. Se usa para dimensionar el riesgo de un short, no como gatillo direccional.</div></div>
+<div class="rumor fade"><div class="rumor-head"><span class="rumor-src">EVERCORE / @NEGLIGIBLE_CAP</span><span class="rumor-conf conf-mid">confianza baja</span></div><div class="rumor-t">121 acciones del S&amp;P tendrían beta negativa, máximo desde 2000/01</div><div class="rumor-impact"><b>Si confirma:</b> reforzaría la lectura de fragmentación interna y ayudaría a explicar por qué el índice puede verse estable mientras sus componentes pierden sincronía.</div></div>
+<div class="rumor fade"><div class="rumor-head"><span class="rumor-src">SCMP / FLOW FEED</span><span class="rumor-conf conf-mid">confianza media</span></div><div class="rumor-t">Fondos chinos rotarían fuera de NVDA y hyperscalers estadounidenses</div><div class="rumor-impact"><b>Si confirma:</b> introduciría una capa de flujo estructural contra el rebote de semis. La sesión de hoy sigue dominada por demanda preliminar de Anthropic, por lo que esta hipótesis queda fuera del semáforo.</div></div>
+</div>
+</div></section>
+<!-- ===== 05 · DATA VIVA ===== -->
+<section><div class="wrap">
+<div class="sec-head fade"><div class="sec-num">// 05</div><h2 class="sec-title">Data <em>viva</em></h2><div class="sec-line"></div><div class="sec-sub">panel rector 17A · JPC reactivado · amplitud deteriora</div></div>
+<p class="audit-note fade"><b>AUDITORÍA DE FRESCURA:</b> Volatility Analyzer 1D, NBD y JPC están <strong>Data as of 2026-08-17</strong>; CORI usa cierre confirmado <strong>14-ago</strong>. MRI 1M está en <strong>CONFLICTO</strong>; Risk Learning <strong>STALE 1</strong> y su régimen no es operativo; Gold Macro y Dólar <strong>STALE 1</strong>; RRP <strong>STALE 2</strong> con descomposición deshabilitada; FCI <strong>STALE 3</strong>. NBD autoriza contexto, pero el Official Trigger sigue NO EVALUABLE. JPC autoriza niveles y régimen, aunque sus proxies no sustituyen JSDA.</p>
+<div class="charts">
+<div class="chart-card wide fade"><div class="ch-head"><div><span class="ch-sym">RUPTURA · LOS DOS ESCALONES DESAPARECEN</span><span class="ch-meta">13A = 100 · VIX / MOVE / estrés bonos</span></div><span class="ch-tag" style="color:var(--risk);border:1px solid var(--risk)">BREAK</span></div><div class="ch-body">
+<div class="chart-plot"><svg preserveaspectratio="none" viewbox="0 0 1080 220"><g id="normalizedGrid"></g><g id="normalizedSeries"></g><g id="normalizedLeaders"></g></svg>
+<span class="chart-label date anchor-c" data-norm-date="0" style="left:8%;bottom:0">13A</span><span class="chart-label date anchor-c" data-norm-date="1" style="left:42%;bottom:0">14A</span><span class="chart-label date anchor-c" data-norm-date="2" style="left:76%;bottom:0">17A</span>
+<span class="chart-label" data-norm-label="VIX" style="right:1%;top:38%">VIX 15.19</span><span class="chart-label alert" data-norm-label="MOVE" style="right:1%;top:53%">MOVE 75.63</span><span class="chart-label risk" data-norm-label="BONDS" style="right:1%;top:74%">BONDS 64.7</span></div>
+<div class="legend"><span><i style="background:var(--info)"></i>VIX</span><span><i style="background:var(--alert)"></i>MOVE</span><span><i style="background:var(--risk)"></i>Estrés bonos</span><span><b>Lectura:</b> MOVE y estrés de bonos dejan atrás los umbrales de 70 y 40 en la misma sesión. El VIX también sube, pero el incendio sigue concentrado en tasas: hotspot bonos 64.7 con aceleración +41.67.</span></div>
+</div></div>
+<div class="chart-card fade"><div class="ch-head"><div><span class="ch-sym">JAPÓN · PRESIÓN DE TASAS CONFIRMADA</span><span class="ch-meta">13A → 14A → 17A · JPC / proxies observables</span></div><span class="ch-tag" style="color:var(--risk);border:1px solid var(--risk)">+7.4PB</span></div><div class="ch-body">
+<div class="chart-plot small"><svg preserveaspectratio="none" viewbox="0 0 520 180"><g id="riskGrid"></g><g id="riskSeries"></g><g id="riskLeaders"></g></svg>
+<span class="chart-label date anchor-c" data-risk-date="0" style="left:12%;bottom:0">13A</span><span class="chart-label date anchor-c" data-risk-date="1" style="left:44%;bottom:0">14A</span><span class="chart-label date anchor-c" data-risk-date="2" style="left:74%;bottom:0">17A</span>
+<span class="chart-label" data-risk-label="JP10Y" style="right:1%;top:68%">10Y 2.923%</span><span class="chart-label risk" data-risk-label="JP30Y" style="right:1%;top:30%">30Y 4.074%</span><span class="chart-label alert" data-risk-label="JP40Y" style="right:1%;top:48%">40Y 4.136%</span></div>
+<div class="legend"><span><i style="background:var(--info)"></i>JGB 10Y</span><span><i style="background:var(--risk)"></i>JGB 30Y</span><span><i style="background:var(--alert)"></i>JGB 40Y</span><span><b>Lectura:</b> el bloque entero endurece y el 30Y permanece por encima de 4.000%. JPC ya confirma la sesión; la escalada de cartera sigue bloqueada hasta obtener el cierre oficial JSDA.</span></div>
+</div></div>
+<div class="chart-card fade"><div class="ch-head"><div><span class="ch-sym">DISPERSIÓN · YA NO HAY ROTACIÓN DEFENSIVA</span><span class="ch-meta">ETFs · variación 17A</span></div><span class="ch-tag" style="color:var(--risk);border:1px solid var(--risk)">9/11 ROJO</span></div><div class="ch-body">
+<div class="bar-chart">
+<div class="bar-row"><span class="bar-name">XLE</span><div class="bar-track"><i class="bar-zero"></i><i class="bar-fill pos" style="width:27%"></i></div><span class="bar-val up">+1.08%</span></div>
+<div class="bar-row"><span class="bar-name">XLK</span><div class="bar-track"><i class="bar-zero"></i><i class="bar-fill pos" style="width:4%"></i></div><span class="bar-val up">+0.16%</span></div>
+<div class="bar-row"><span class="bar-name">XLV</span><div class="bar-track"><i class="bar-zero"></i><i class="bar-fill neg" style="width:5%"></i></div><span class="bar-val dn">−0.19%</span></div>
+<div class="bar-row"><span class="bar-name">XLF</span><div class="bar-track"><i class="bar-zero"></i><i class="bar-fill neg" style="width:25%"></i></div><span class="bar-val dn">−1.00%</span></div>
+<div class="bar-row"><span class="bar-name">XLP</span><div class="bar-track"><i class="bar-zero"></i><i class="bar-fill neg" style="width:41%"></i></div><span class="bar-val dn">−1.64%</span></div>
+<div class="bar-row"><span class="bar-name">XLC</span><div class="bar-track"><i class="bar-zero"></i><i class="bar-fill neg" style="width:47%"></i></div><span class="bar-val dn">−1.89%</span></div>
+<div class="bar-row"><span class="bar-name">IGV</span><div class="bar-track"><i class="bar-zero"></i><i class="bar-fill neg" style="width:50%"></i></div><span class="bar-val dn">−2.01%</span></div>
+</div>
+<div class="legend"><span><i style="background:var(--signal)"></i>liderazgo</span><span><i style="background:var(--risk)"></i>venta</span><span><b>Lectura:</b> energía queda como única estructura limpia y XLK apenas positiva; consumo básico, financieras, comunicaciones y software caen juntos. La cinta pasa de rotación a reducción de exposición.</span></div>
+</div></div>
+</div>
+</div></section>
+<!-- ===== 06 · SEÑAL VS RUIDO ===== -->
+<section><div class="wrap">
+<div class="sec-head fade"><div class="sec-num">// 06</div><h2 class="sec-title">Señal vs <em>ruido</em></h2><div class="sec-line"></div><div class="sec-sub">lo que gobierna el rojo · lo que queda fuera</div></div>
+<div class="sr">
+<div class="sr-col sig fade"><div class="sr-h sig">● SEÑAL</div>
+
+
+
+
+
+<div class="sr-item"><div class="sr-n">01</div><div><b>UST 30Y 5.311%.</b> <span>El cierre verificó la Rama A y movió caja a 66%. Es el hecho de protocolo del día.</span></div></div><div class="sr-item"><div class="sr-n">02</div><div><b>MOVE 75.63 / bonos 64.7.</b> <span>Los dos escalones que habían producido el amarillo quedaron rotos en una sesión; EQ-BD se activó.</span></div></div><div class="sr-item"><div class="sr-n">03</div><div><b>Amplitud 0.51 · 137/75.</b> <span>Cuatro de cinco capas NBD deterioran y la lectura cambia a DETERIORO DE CORTO PLAZO. El daño se amplió.</span></div></div><div class="sr-item"><div class="sr-n">04</div><div><b>JGB 30Y 4.074% confirmado por JPC.</b> <span>Está 7.4pb sobre el contrato, con Bloomberg corroborando ~4.07%. Falta JSDA para la consecuencia de cartera.</span></div></div><div class="sr-item"><div class="sr-n">05</div><div><b>TIC T-bonds $6.8B vs $56.6B.</b> <span>La caída de 88% en compras extranjeras da un mecanismo observable al repricing del long-end. La fontanería, en cambio, sigue normal.</span></div></div></div>
+<div class="sr-col noise fade"><div class="sr-h noise">○ RUIDO</div>
+
+
+
+
+
+<div class="sr-item"><div class="sr-n">01</div><div><b>China Treasuries $633B del feed.</b> <span>No pudo verificarse contra una publicación oficial comparable y se descarta del argumento central.</span></div></div><div class="sr-item"><div class="sr-n">02</div><div><b>NBD 0.51 como trigger.</b> <span>Es contexto proxy. Sin A/D oficial manual, el Official Trigger sigue NO EVALUABLE por octava sesión.</span></div></div><div class="sr-item"><div class="sr-n">03</div><div><b>“Corto Nasdaq récord”.</b> <span>Es una hipótesis de posicionamiento de terceros. Sirve para respetar riesgo de squeeze, no para abrir un short.</span></div></div><div class="sr-item"><div class="sr-n">04</div><div><b>Semis +1.6% como cambio de régimen.</b> <span>El catalizador fue información preliminar y no auditada de una empresa privada. Demanda sí; extrapolación diaria, no.</span></div></div><div class="sr-item"><div class="sr-n">05</div><div><b>Descomposición RRP del 17A.</b> <span>El panel está STALE 2 y la atribución nominal/real/breakeven está deshabilitada. Solo se conserva la dirección del último cierre confirmado.</span></div></div></div>
+</div>
+</div></section>
+<!-- ===== 07 · SEMÁFORO ===== -->
+<section><div class="wrap">
+<div class="sec-head fade"><div class="sec-num">// 07</div><h2 class="sec-title">Semáforo de <em>activos</em></h2><div class="sec-line"></div><div class="sec-sub">rojo ↓ · sesión 1 · caja 66%</div></div>
+<div class="sem-tools fade"><button class="sem-btn active" data-sev="all"><span class="dot"></span>Todos</button><button class="sem-btn" data-sev="critical"><span class="dot"></span>Crítico</button><button class="sem-btn" data-sev="alert"><span class="dot"></span>Alerta</button><button class="sem-btn" data-sev="watch"><span class="dot"></span>Monitoreo</button></div>
+<div class="sem-grid">
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · LONG-END USA</div><div class="sem-name">Treasury 30Y / 10Y</div><div class="sem-desc">30Y <b>5.311%</b> disparó la Rama A; 10Y <b>4.724%</b>. Próximos umbrales 🚨: 30Y 5.40% y 10Y 4.80%, a 8.9pb y 7.6pb.</div></div>
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · JAPÓN / FX</div><div class="sem-name">JGB 30Y / 40Y / USDJPY</div><div class="sem-desc">30Y <b>4.074%</b>, 40Y <b>4.136%</b>, 10Y <b>2.923%</b>. JPC reactivado; yen 159.474 aún no confirma. JSDA sigue siendo la única puerta a caja 80% por Japón.</div></div>
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · AMPLITUD</div><div class="sem-name">NYSE breadth</div><div class="sem-desc">A/D proxy <b>0.51</b>, comprador 32.96%, McClellan −16.49, 137 mínimos / 75 máximos. NBD: DETERIORO DE CORTO PLAZO. Official Trigger bloqueado.</div></div>
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · SECTORES</div><div class="sem-name">Reducción general</div><div class="sem-desc">9 de 11 sectores en rojo. XLP −1.64%, XLC −1.89% e IGV −2.01%; defensivos y crecimiento caen a la vez.</div></div>
+<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · CRÉDITO</div><div class="sem-name">HY OAS / Risk Learning</div><div class="sem-desc">HY OAS <b>2.67%</b>, primera observación estrechando de dos. Credit Health cae a 70.8, pero Risk Learning está STALE 1 y su régimen no es operativo.</div></div>
+<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · SEMIS / IA</div><div class="sem-name">SOX / DRAM / Anthropic</div><div class="sem-desc">SOX +1.6% y DRAM +5.36% contra una cinta roja. Suben un peldaño por precio; el catalizador privado/preliminar impide tratarlo como cambio de régimen.</div></div>
+<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · ORO</div><div class="sem-name">XAU / Gold Macro</div><div class="sem-desc">Spot <b>$4,415.42 (+0.88%)</b>, cuarta subida. Gold Macro sigue 29/100 BAJISTA y STALE 1; se mantiene 3% sin ampliar.</div></div>
+<div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · ENERGÍA</div><div class="sem-name">XLE / WTI / Brent</div><div class="sem-desc">XLE +1.08%, WTI $84.82 y Brent $90.87; es la mejor estructura semanal. La posición de refino queda en 0% por ejecución de protocolo.</div></div>
+<div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · FINANCIACIÓN</div><div class="sem-name">SOFR / TED / Transmission</div><div class="sem-desc">SOFR−Fed Funds +0.003, TED 0.09% y Transmission 100. El repricing de duración todavía no contagia la fontanería.</div></div>
+<div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · CRIPTO</div><div class="sem-name">BTC / SMA 200W</div><div class="sem-desc">BTC <b>$64.347K</b>, apenas ~$124 sobre la SMA200W 64,222.39. La recuperación es marginal y no revive el setup muerto.</div></div>
+</div>
+</div></section>
+<!-- ===== 08 · OPERATIVA ===== -->
+<section><div class="wrap">
+<div class="sec-head fade"><div class="sec-num">// 08</div><h2 class="sec-title">Qué hago con <em>esto</em></h2><div class="sec-line"></div><div class="sec-sub">Rama A ejecutada · caja 66% · pre-registro 18/19A</div></div>
+<div class="op-tabs fade"><button class="op-tab active" data-plan="A">Plan A · controlado</button><button class="op-tab" data-plan="B">Plan B · asimétrico</button><button class="op-tab" data-plan="C">Protocolo · siguiente</button></div>
+<div class="op-panel active" id="planA">
+<div class="op-setups">
+<div class="op-setup"><div class="op-n">A</div><div><div class="op-name">Rama A · ejecutada completa</div><div class="op-detail">UST 30Y cerró en <em>5.311%</em> sobre 5.300% verificado. Caja 60% → 66%, refino 3% → 0% y XLV 6% → 3%.</div></div><div class="op-alloc"><div class="op-cap">// Caja</div><div class="op-pct">66%</div></div></div>
+<div class="op-setup"><div class="op-n">1</div><div><div class="op-name">Núcleo estratégico · intacto</div><div class="op-detail">VOO/SPY <em>9%</em>. Su invalidación es de régimen y solo se ejecuta en 🚨; el paso a rojo no lo toca.</div></div><div class="op-alloc"><div class="op-cap">// Peso</div><div class="op-pct">9%</div></div></div>
+<div class="op-setup"><div class="op-n">2</div><div><div class="op-name">Duración corta · mantener 17%</div><div class="op-detail">El 2Y queda en <em>4.182%</em> frente a Fed Funds 3.63%: prima derivada ~55.2pb. Es la posición que mejor absorbe el empinamiento por term premium.</div></div><div class="op-alloc"><div class="op-cap">// Peso</div><div class="op-pct">17%</div></div></div>
+<div class="op-setup"><div class="op-n">3</div><div><div class="op-name">XLV 3% + oro 3%</div><div class="op-detail">Salud se reduce por ejecución, no por tesis. Oro permanece congelado en 3% con Gold Macro <em>29/100 BAJISTA</em>.</div></div><div class="op-alloc"><div class="op-cap">// Peso</div><div class="op-pct">6%</div></div></div>
+<div class="op-setup"><div class="op-n">H</div><div><div class="op-name">Convexidad · 2%, sin tocar</div><div class="op-detail">Regla de simetría: ninguna cobertura se abre ni se cierra en sesión de cambio de color. VIX <em>15.19</em>, VVIX +7.36% y MOVE +8.70%.</div></div><div class="op-alloc"><div class="op-cap">// Peso</div><div class="op-pct">2%</div></div></div>
+</div></div>
+<div class="op-panel" id="planB">
+<div class="op-setups">
+<div class="op-setup"><div class="op-n">1</div><div><div class="op-name">Hedge de cola · LIVE, convicción ALTA</div><div class="op-detail">Puts OTM SPX / VIX calls siguen dentro. Invalidación: VIX cierra &gt;<em>22</em> o SKEW sube sobre decil 3. Hoy la cobertura gana por primera vez en cuatro sesiones.</div></div><div class="op-alloc"><div class="op-cap">// Estado</div><div class="op-pct">LIVE</div></div></div>
+<div class="op-setup"><div class="op-n">5</div><div><div class="op-name">Vol de tipos largos · reapertura 18A</div><div class="op-detail">Orden escrita: reabrir si el 30Y sigue ≥<em>5.300%</em> al cierre del 18A. Invalidación 5.10%, objetivo 5.50%, R/R ~3.5:1. Hoy se respeta la simetría.</div></div><div class="op-alloc"><div class="op-cap">// Estado</div><div class="op-pct">READY</div></div></div>
+<div class="op-setup"><div class="op-n">J</div><div><div class="op-name">JGB payer · condición de mercado lista, fuente pendiente</div><div class="op-detail">30Y JPC <em>4.074%</em> y Bloomberg ~4.07%. Solo se evalúa con cierre oficial JSDA ≥4.000%. Invalidación 3.90%; objetivo 4.20%.</div></div><div class="op-alloc"><div class="op-cap">// Estado</div><div class="op-pct">VERIFY</div></div></div>
+<div class="op-setup"><div class="op-n">Y</div><div><div class="op-name">Largo yen · entrada sin mover</div><div class="op-detail">Corto USD/JPY únicamente en rebote a <em>160.00</em>, objetivo 150 e invalidación 163. Spot 159.474; JPC todavía dice yen NO CONFIRMA.</div></div><div class="op-alloc"><div class="op-cap">// Estado</div><div class="op-pct">WAIT</div></div></div>
+<div class="op-setup"><div class="op-n">Ø</div><div><div class="op-name">Nuevo short de índice · rechazado</div><div class="op-detail">Ya existe 2% de convexidad y el Official Trigger de amplitud está bloqueado. Además, el posicionamiento Nasdaq extremo eleva el riesgo de squeeze.</div></div><div class="op-alloc"><div class="op-cap">// Estado</div><div class="op-pct">NO</div></div></div>
+</div></div>
+<div class="op-panel" id="planC">
+<div class="op-setups">
+<div class="op-setup"><div class="op-n">A</div><div><div class="op-name">🚨 Escalada estadounidense</div><div class="op-detail">30Y &gt;<em>5.400%</em> o 10Y &gt;<em>4.800%</em>, verificados externamente → caja <em>66% → 80%</em>. Salen núcleo 9% y oro 3%; XLV baja 3% → 1%.</div></div><div class="op-alloc"><div class="op-cap">// Caja</div><div class="op-pct">80%</div></div></div>
+<div class="op-setup"><div class="op-n">B</div><div><div class="op-name">🚨 Escalada japonesa</div><div class="op-detail">JGB 30Y ≥<em>4.000%</em> con cierre oficial JSDA → caja 80% con el mismo origen. Sin JSDA, se registra otro día de cruce y no se ejecuta.</div></div><div class="op-alloc"><div class="op-cap">// Caja</div><div class="op-pct">80%</div></div></div>
+<div class="op-setup"><div class="op-n">C</div><div><div class="op-name">🟡 Des-escalada con confirmación</div><div class="op-detail">MOVE &lt;70, estrés bonos &lt;40 o 10Y &lt;4.600% cambia el color a amarillo. La caja queda <em>66%</em> esa sesión; solo baja a 60% si el cruce persiste una segunda.</div></div><div class="op-alloc"><div class="op-cap">// 1ª sesión</div><div class="op-pct">66%</div></div></div>
+<div class="op-setup"><div class="op-n">D</div><div><div class="op-name">Sin cambios</div><div class="op-detail">Si ninguna rama cruza, caja <em>66%</em> y libro intacto. Todo gatillo a menos de 10pb exige verificación externa.</div></div><div class="op-alloc"><div class="op-cap">// Caja</div><div class="op-pct">66%</div></div></div>
+<div class="op-setup"><div class="op-n">Ø</div><div><div class="op-name">Verde · estructuralmente inalcanzable</div><div class="op-detail">CORI confirmado <em>22.9% NORMAL</em>, a 33.33 puntos de Warning. No existe umbral de despliegue autorizado y el antiguo 40% sigue retirado.</div></div><div class="op-alloc"><div class="op-cap">// Estado</div><div class="op-pct">NONE</div></div></div>
+</div></div>
+<div class="exp fade">
+<div><div class="exp-label">// Capital de referencia</div><div class="exp-amount"><span class="exp-cur">USD</span><input class="exp-field" id="capInput" inputmode="numeric" type="text" value="100,000"/></div><div class="exp-presets"><button class="cp" data-p="10000">10K</button><button class="cp" data-p="25000">25K</button><button class="cp" data-p="50000">50K</button><button class="cp active" data-p="100000">100K</button><button class="cp" data-p="250000">250K</button></div><div class="exp-note"><b>Plan A · 17A:</b> Rama A ejecutada. Caja 66%, núcleo 9%, duración corta 17%, XLV 3%, refino 0%, oro 3% y convexidad 2%. La siguiente escalada está a 8.9pb en el 30Y o 7.6pb en el 10Y; Japón ya tiene el nivel cruzado y espera confirmación JSDA.</div></div>
+<div>
+<div class="exp-bar"><span class="exp-seg" data-cat="cash" style="flex:66"></span><span class="exp-seg" data-cat="equity" style="flex:9"></span><span class="exp-seg" data-cat="fixed" style="flex:17"></span><span class="exp-seg" data-cat="defense" style="flex:3"></span><span class="exp-seg" data-cat="energy" style="flex:0"></span><span class="exp-seg" data-cat="metals" style="flex:3"></span><span class="exp-seg" data-cat="hedge" style="flex:2"></span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="cash"></span><span class="exp-cat">Cash / T-Bills ultracortos<span class="d">Rama A · +6 puntos</span></span><span class="exp-pct">66%</span><span class="exp-usd" data-sh="0.66">$66,000</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="equity"></span><span class="exp-cat">Núcleo estratégico VOO/SPY<span class="d">solo invalida en 🚨</span></span><span class="exp-pct">9%</span><span class="exp-usd" data-sh="0.09">$9,000</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="fixed"></span><span class="exp-cat">Duración corta 1–3Y<span class="d">prima ~55.2pb · evitar long-end</span></span><span class="exp-pct">17%</span><span class="exp-usd" data-sh="0.17">$17,000</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="defense"></span><span class="exp-cat">Salud XLV<span class="d">reducida por ejecución</span></span><span class="exp-pct">3%</span><span class="exp-usd" data-sh="0.03">$3,000</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="energy"></span><span class="exp-cat">Refino VLO/PSX/MPC<span class="d">cerrado por Rama A</span></span><span class="exp-pct">0%</span><span class="exp-usd" data-sh="0.00">$0</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="metals"></span><span class="exp-cat">Oro GLD<span class="d">29/100 BAJISTA · sin ampliar</span></span><span class="exp-pct">3%</span><span class="exp-usd" data-sh="0.03">$3,000</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="hedge"></span><span class="exp-cat">Convexidad SPX / VIX<span class="d">regla de simetría · LIVE</span></span><span class="exp-pct">2%</span><span class="exp-usd" data-sh="0.02">$2,000</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="defense"></span><span class="exp-cat">Defensa LMT/RTX/ITA<span class="d">tesis muerta desde 11A</span></span><span class="exp-pct">0%</span><span class="exp-usd" data-sh="0.00">$0</span></div>
+</div></div>
+</div></section>
+<footer class="footer"><div class="wrap"><div class="brand">WAR ROOM v3 · TERMINAL DE SEÑALES</div><span class="sub">17 AGO 2026 · UST 30Y GATILLO DISPARADO · MOVE 75.63 · A/D 0.51 · DEFCON 2 · ROJO ↓ · CAJA 66%</span><p class="disc">Propósito informativo y educativo. No constituye asesoramiento de inversión personalizado, recomendación de compra/venta ni análisis registrado. Verificar precios, liquidez, spreads, calendario y riesgo propio antes de operar.</p></div></footer>
+<script>
+const tk=document.getElementById('tkTrack');tk.innerHTML+=tk.innerHTML;
+
+function svgNode(tag,attrs={}){
+  const node=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.entries(attrs).forEach(([key,value])=>node.setAttribute(key,value));
+  return node;
+}
+
+function renderLineChart(config, ids, labelAttr, dateAttr, viewWidth, viewHeight){
+  const grid=document.getElementById(ids.grid), seriesLayer=document.getElementById(ids.series), leaders=document.getElementById(ids.leaders);
+  if(!grid||!seriesLayer||!leaders)return;
+  [grid,seriesLayer,leaders].forEach(layer=>layer.replaceChildren());
+  const normalized=config.series.map(s=>({...s,norm:s.values.map(value=>(value/s.values[0])*100)}));
+  const all=normalized.flatMap(s=>s.norm);
+  const rawMin=Math.min(...all), rawMax=Math.max(...all);
+  const pad=Math.max((rawMax-rawMin)*.12,.25);
+  const min=Math.floor((rawMin-pad)*2)/2, max=Math.ceil((rawMax+pad)*2)/2;
+  const {top,bottom,labelX,leaderKnee}=config.plot;
+  const y=value=>bottom-((value-min)/(max-min))*(bottom-top);
+  const step=(max-min)>20?10:(max-min)>10?4:2;
+  const gridValues=[];
+  const first=Math.ceil(min/step)*step;
+  for(let value=first;value<=max;value+=step)gridValues.push(value);
+  if(!gridValues.some(value=>Math.abs(value-100)<.01))gridValues.push(100);
+  gridValues.sort((a,b)=>a-b).forEach(value=>grid.appendChild(svgNode('line',{x1:24,y1:y(value).toFixed(2),x2:viewWidth-30,y2:y(value).toFixed(2),stroke:Math.abs(value-100)<.01?'#1a232e':'#121a24','stroke-width':Math.abs(value-100)<.01?'1.4':'1'})));
+  normalized.forEach(s=>{
+    const points=s.norm.map((value,index)=>[config.x[index],y(value)]);
+    seriesLayer.appendChild(svgNode('polyline',{fill:'none',stroke:s.color,'stroke-width':s.width,points:points.map(([px,py])=>`${px},${py.toFixed(2)}`).join(' '),'vector-effect':'non-scaling-stroke'}));
+    const [lastX,lastY]=points.at(-1);
+    seriesLayer.appendChild(svgNode('circle',{cx:lastX,cy:lastY.toFixed(2),r:4,fill:s.color}));
+    leaders.appendChild(svgNode('polyline',{fill:'none',stroke:s.color,'stroke-width':'1.25','stroke-opacity':'.55','stroke-dasharray':'4 4',points:`${lastX},${lastY.toFixed(2)} ${leaderKnee},${lastY.toFixed(2)} ${leaderKnee+22},${s.lane} ${labelX},${s.lane}`,'vector-effect':'non-scaling-stroke'}));
+    const label=document.querySelector(`[${labelAttr}="${s.key}"]`);if(label)label.style.top=`${(s.lane/viewHeight)*100}%`;
+  });
+  config.x.forEach((px,index)=>{const label=document.querySelector(`[${dateAttr}="${index}"]`);if(label)label.style.left=`${(px/viewWidth)*100}%`;});
+}
+
+const NORMALIZED_CHART={
+  x:[90,455,820],plot:{top:28,bottom:184,labelX:1040,leaderKnee:900},
+  series:[
+    {key:'VIX',values:[14.64,14.25,15.19],color:'#2ea8ff',width:2.8,lane:86},
+    {key:'MOVE',values:[69.23,69.58,75.63],color:'#ffb000',width:2.8,lane:118},
+    {key:'BONDS',values:[32.9,36.1,64.7],color:'#ff2e4d',width:3,lane:162}
+  ]
+};
+renderLineChart(NORMALIZED_CHART,{grid:'normalizedGrid',series:'normalizedSeries',leaders:'normalizedLeaders'},'data-norm-label','data-norm-date',1080,220);
+
+const RISK_CHART={
+  x:[60,230,390],plot:{top:24,bottom:148,labelX:498,leaderKnee:445},
+  series:[
+    {key:'JP10Y',values:[2.866,2.878,2.923],color:'#2ea8ff',width:2.7,lane:118},
+    {key:'JP30Y',values:[3.992,4.015,4.074],color:'#ff2e4d',width:2.7,lane:54},
+    {key:'JP40Y',values:[4.075,4.089,4.136],color:'#ffb000',width:2.7,lane:86}
+  ]
+};
+renderLineChart(RISK_CHART,{grid:'riskGrid',series:'riskSeries',leaders:'riskLeaders'},'data-risk-label','data-risk-date',520,180);
+
+const MEM=[
+  {tick:'WTI',unit:'$',now:'84.82',d:'▲2.94%',cls:'up',tone:'tone-risk',series:[83.27,81.25,82.40,84.82],color:'#ffb000',start:'$83.27'},
+  {tick:'SPX',unit:'',now:'7,745.06',d:'▼0.52%',cls:'dn',series:[7748.50,7798.99,7785.76,7745.06],color:'#2ea8ff',start:'7,748.50'},
+  {tick:'VIX',unit:'',now:'15.19',d:'▲6.60%',cls:'up',inv:true,series:[14.54,14.64,14.25,15.19],color:'#ff2e4d',start:'14.54'},
+  {tick:'SKEW',unit:'',now:'138.36',d:'▲2.97%',cls:'up',inv:true,series:[135.59,135.59,134.37,138.36],color:'#7d8a93',start:'135.59'},
+  {tick:'GOLD',unit:'$',now:'4,415.42',d:'▲0.96%',cls:'up',series:[4407.43,4348.675,4373.48,4415.415],color:'#ffb000',start:'$4,407.43'},
+  {tick:'BTC',unit:'$',now:'64.347K',d:'▲2.38%',cls:'up',series:[63.54490,63.43708,62.84914,64.34699],color:'#ff2e4d',start:'$63.545K'},
+  {tick:'DXY',unit:'',now:'99.586',d:'→−0.06%',cls:'nt',series:[99.990,99.971,99.646,99.586],color:'#2ea8ff',start:'99.990'}
+];
+
+const MEM_DELTA_TOLERANCE=0.15;
+const MEM_FLAT_THRESHOLD=0.10;
+function spark(s,color){const w=150,h=30,mn=Math.min(...s),mx=Math.max(...s),pad=(mx-mn||1)*.15,lo=mn-pad,hi=mx+pad;const pts=s.map((v,i)=>[6+(w-12)*(i/(s.length-1)),h-2-((v-lo)/(hi-lo))*(h-4)]);const last=pts.at(-1);return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" style="width:100%;height:30px"><polyline fill="none" stroke="${color}" stroke-width="1.8" points="${pts.map(p=>p.join(',')).join(' ')}"/><circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="2.6" fill="${color}"/></svg>`;}
+function memDisplayValue(m){return `${m.approx?'~':''}${m.unit}${m.now}`}
+function memArrow(text){return text.includes('▲')?'▲':text.includes('▼')?'▼':'→'}
+function memDeclaredDelta(text){const match=text.match(/([+-]?\d+(?:\.\d+)?)%/);return match?parseFloat(match[1]):NaN}
+function memExpectedArrow(delta){if(Math.abs(delta)<MEM_FLAT_THRESHOLD)return '→';return delta>0?'▲':'▼'}
+function memExpectedClass(arrow){return arrow==='▲'?'up':arrow==='▼'?'dn':'nt'}
+function auditMemory(){
+  MEM.forEach(m=>{
+    const previous=m.series[m.series.length-2],current=m.series[m.series.length-1];
+    const seriesDelta=((current-previous)/Math.abs(previous))*100;
+    const declared=memDeclaredDelta(m.d),arrow=memArrow(m.d),expectedClass=memExpectedClass(arrow);
+    if(m.cls!==expectedClass)console.warn(`[MEM] ${m.tick}: clase ${m.cls} incompatible con ${arrow}.`);
+    if(m.deltaException){
+      if(!m.d.includes('*')||typeof m.officialPrev!=='number')console.warn(`[MEM] ${m.tick}: excepción incompleta.`);
+      else{const officialDelta=((current-m.officialPrev)/Math.abs(m.officialPrev))*100;if(Number.isFinite(declared)&&Math.abs(Math.abs(officialDelta)-Math.abs(declared))>MEM_DELTA_TOLERANCE)console.warn(`[MEM] ${m.tick}: officialPrev ${officialDelta.toFixed(2)}% vs delta ${declared.toFixed(2)}%.`);}
+    }else{
+      if(Number.isFinite(declared)&&Math.abs(Math.abs(seriesDelta)-Math.abs(declared))>MEM_DELTA_TOLERANCE)console.warn(`[MEM] ${m.tick}: serie ${seriesDelta.toFixed(2)}% vs delta ${declared.toFixed(2)}%.`);
+      if(arrow!==memExpectedArrow(seriesDelta))console.warn(`[MEM] ${m.tick}: flecha ${arrow} contradice serie ${seriesDelta.toFixed(2)}%.`);
+    }
+  });
+}
+auditMemory();
+
+document.getElementById('memGrid').innerHTML=MEM.map(m=>`<div class="mem-cell"><div class="mem-tick"><span>${m.tick}</span>${m.stale?`<span class="mem-stale">${m.stale}</span>`:''}</div><div class="mem-now">${memDisplayValue(m)}<span class="mem-d ${m.cls}${m.inv?' inv':''}${m.tone?' '+m.tone:''}">${m.d}</span></div>${spark(m.series,m.color)}<div class="mem-4d"><span>12A ${m.start||m.unit+m.series[0]}</span><span>17A ${memDisplayValue(m)}</span></div></div>`).join('');
+
+document.querySelectorAll('.sem-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.sem-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');const sev=b.dataset.sev;document.querySelectorAll('.sem-card').forEach(c=>{c.style.display=(sev==='all'||c.dataset.sev===sev)?'':'none'});}));
+document.querySelectorAll('.op-tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.op-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.querySelectorAll('.op-panel').forEach(p=>p.classList.remove('active'));document.getElementById('plan'+t.dataset.plan).classList.add('active');}));
+const capInput=document.getElementById('capInput');
+function recalc(){const v=parseFloat(capInput.value.replace(/[^0-9.]/g,''))||0;document.querySelectorAll('.exp-usd').forEach(el=>{el.textContent='$'+Math.round(v*parseFloat(el.dataset.sh)).toLocaleString('en-US')});}
+const exposureTotal=[...document.querySelectorAll('.exp-usd')].reduce((sum,el)=>sum+parseFloat(el.dataset.sh||0),0);
+if(Math.abs(exposureTotal-1)>.0001)console.warn(`[EXPOSURE] La asignación suma ${(exposureTotal*100).toFixed(2)}%, no 100%.`);
+capInput.addEventListener('input',recalc);
+document.querySelectorAll('.cp').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.cp').forEach(x=>x.classList.remove('active'));b.classList.add('active');capInput.value=parseInt(b.dataset.p).toLocaleString('en-US');recalc();}));
+recalc();
+if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.fade').forEach(el=>io.observe(el));}else{document.querySelectorAll('.fade').forEach(el=>el.classList.add('vis'));}
+</script>
+</body>
+</html>
