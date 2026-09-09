@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="War Room · 9 sep 2026. El 10Y cerró en 4.841% y disparó la Rama A. Caja 74%, núcleo RV y oro a cero. La amplitud se rompió con 225 mínimos contra 39 máximos; Brent superó $101 y el Tesoro triplicó recompras sin frenar los rendimientos." name="description"/>
+<meta content="article" property="og:type"/>
+<meta content="War Room · Terminal de Señales" property="og:site_name"/>
+<meta content="WAR ROOM — 9 SEP 2026 · El gatillo cruzó" property="og:title"/>
+<meta content="10Y 4.841% al cierre: Rama A ejecutada. Caja 74%, núcleo RV y oro a cero. 225 mínimos vs 39 máximos y Brent sobre $101." property="og:description"/>
+<meta content="{{OG_IMAGE_URL}}" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<title>WAR ROOM v4.5 — 9 Septiembre 2026 · Rama A ejecutada · caja 74%</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&amp;family=Archivo:wght@400;600;800;900&amp;family=Archivo+Black&amp;display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   SISTEMA — NO TOCAR
+   Template estable: estructura, componentes e interactivos base.
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#04060a; --panel:#0b1016; --panel-2:#0f1620; --grid:#1a232e; --grid-soft:#121a24;
+  --ink:#e8eef2; --white:#fff; --ink-dim:#7d8a93; --ink-faint:#48555d;
+  --signal:#00ff9c; --alert:#ffb000; --risk:#ff2e4d; --info:#2ea8ff; --rumor:#c084fc;
+  --g-signal:0 0 6px rgba(0,255,156,.9),0 0 16px rgba(0,255,156,.45);
+  --g-alert:0 0 6px rgba(255,176,0,.9),0 0 16px rgba(255,176,0,.4);
+  --g-risk:0 0 6px rgba(255,46,77,.9),0 0 16px rgba(255,46,77,.4);
+  --g-info:0 0 6px rgba(46,168,255,.9),0 0 16px rgba(46,168,255,.4);
+  --g-rumor:0 0 6px rgba(192,132,252,.9),0 0 16px rgba(192,132,252,.4);
+  --mono:'JetBrains Mono',monospace; --display:'Archivo','Archivo Black',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--mono);-webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 12% 0%,rgba(0,255,156,.06),transparent 60%),
+    radial-gradient(ellipse 70% 50% at 92% 22%,rgba(46,168,255,.05),transparent 55%),
+    radial-gradient(ellipse 60% 40% at 50% 100%,rgba(255,176,0,.04),transparent 60%),
+    linear-gradient(var(--grid-soft) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid-soft) 1px,transparent 1px);
+  background-size:100% 100%,100% 100%,100% 100%,52px 52px,52px 52px;
+  background-attachment:fixed;position:relative;overflow-x:hidden;
+}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:999;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.15) 0,rgba(0,0,0,.15) 1px,transparent 1px,transparent 3px);
+  opacity:.5;mix-blend-mode:multiply}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px;position:relative;z-index:2}
+
+/* glows */
+.s{color:var(--signal);text-shadow:var(--g-signal)} .a{color:var(--alert);text-shadow:var(--g-alert)}
+.r{color:var(--risk);text-shadow:var(--g-risk)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ===== TICKER ===== */
+.ticker{border-bottom:1px solid var(--grid);background:rgba(6,9,13,.92);backdrop-filter:blur(8px);
+  overflow:hidden;white-space:nowrap;font-size:12px;letter-spacing:.4px;position:sticky;top:0;z-index:60}
+.tk-track{display:inline-block;padding:9px 0;animation:scroll 38s linear infinite}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk{display:inline-block;padding:0 20px;color:var(--ink-dim);border-right:1px solid var(--grid-soft)}
+.tk b{color:var(--ink);font-weight:700}
+
+/* ===== REGIMEN BAR ===== */
+.regime{border-bottom:1px solid var(--grid);background:rgba(8,11,15,.6);padding:11px 0}
+.regime .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.regime-left{display:flex;align-items:center;gap:14px}
+.rg-dot{width:9px;height:9px;border-radius:50%;background:var(--risk);box-shadow:var(--g-risk);animation:pulse 1.6s infinite}
+.rg-label{font-size:10px;letter-spacing:3px;color:var(--ink-faint);text-transform:uppercase}
+.rg-val{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:.5px}
+.defbars{display:flex;gap:4px}
+.defbar{width:26px;height:6px;background:var(--grid);border-radius:1px}
+.defbar.on{background:var(--risk);box-shadow:var(--g-risk)}
+.regime-date{font-size:11px;color:var(--ink-dim);letter-spacing:1px}
+
+/* ===== HERO (01) ===== */
+.hero{padding:64px 0 52px;border-bottom:1px solid var(--grid)}
+.hero .wrap{display:grid;grid-template-columns:1.55fr 1fr;gap:48px;align-items:start}
+.kick{font-size:11px;letter-spacing:4px;color:var(--alert);text-transform:uppercase;text-shadow:var(--g-alert);
+  display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.kick::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:var(--g-signal);animation:pulse 1.6s infinite}
+h1.headline{font-family:var(--display);font-weight:900;font-size:clamp(38px,5.4vw,68px);line-height:.95;
+  letter-spacing:-1.5px;text-transform:uppercase}
+h1.headline .em{color:var(--bg);-webkit-text-stroke:1.4px var(--risk);
+  filter:drop-shadow(0 0 7px rgba(255,46,77,.65)) drop-shadow(0 0 18px rgba(255,46,77,.35))}
+.lede{margin-top:24px;color:var(--ink-dim);font-size:14.5px;line-height:1.75;max-width:600px}
+.lede b{color:var(--ink)}
+.verdict-badge{display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:9px 16px;
+  border:1px solid var(--risk);border-radius:3px;background:rgba(255,46,77,.07);
+  font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--risk);text-shadow:var(--g-risk)}
+.verdict-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--risk);box-shadow:var(--g-risk)}
+/* live panel */
+.livebox{border:1px solid var(--grid);background:rgba(11,16,22,.7);border-radius:4px;overflow:hidden}
+.lb-head{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid var(--grid);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+.lb-live{color:var(--signal);text-shadow:var(--g-signal);display:flex;align-items:center;gap:6px}
+.lb-live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--signal);box-shadow:var(--g-signal);animation:pulse 1.4s infinite}
+.lb-row{display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--grid-soft);font-size:12.5px}
+.lb-row:last-child{border-bottom:none}
+.lb-tick{font-weight:700;color:var(--ink)}
+.lb-name{color:var(--ink-faint);font-size:10.5px;letter-spacing:.5px}
+.lb-val{text-align:right;font-weight:700}
+.lb-delta{font-size:10px}
+.up{color:var(--signal)} .dn{color:var(--risk)} .nt{color:var(--ink-dim)}
+
+/* ===== SECTION SHELL ===== */
+section{padding:62px 0;border-bottom:1px solid var(--grid)}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:34px}
+.sec-num{font-family:var(--display);font-weight:900;font-size:13px;color:var(--alert);text-shadow:var(--g-alert);white-space:nowrap}
+.sec-title{font-family:var(--display);font-weight:800;font-size:clamp(20px,3vw,30px);letter-spacing:-.5px;text-transform:uppercase}
+.sec-title em{font-style:normal;color:var(--signal);text-shadow:var(--g-signal)}
+.sec-line{flex:1;height:1px;background:var(--grid)}
+.sec-sub{font-size:10.5px;color:var(--ink-faint);letter-spacing:1px;white-space:nowrap}
+
+/* ===== 4-DAY MEMORY STRIP ===== */
+.memory{background:rgba(11,16,22,.5)}
+.mem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--grid)}
+.mem-cell{background:var(--bg);padding:16px 16px 14px}
+.mem-tick{font-size:10px;letter-spacing:1.5px;color:var(--ink-faint);text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.mem-stale{font-size:8px;letter-spacing:.35px;text-transform:none;color:var(--alert);white-space:nowrap}
+.mem-now{font-family:var(--display);font-weight:800;font-size:21px;margin-top:6px;display:flex;align-items:baseline;gap:7px}
+.mem-d{font-size:10px;font-weight:700}
+.tk .inv.dn,.mem-d.inv.dn{color:var(--signal)!important}
+.tk .inv.up,.mem-d.inv.up{color:var(--risk)!important}
+.mem-d.tone-risk{color:var(--risk)!important}
+.mem-footnote{font-size:10px;color:var(--ink-faint);margin-top:12px;letter-spacing:.5px;line-height:1.65}
+.mem-errata{border-left:2px solid var(--alert);padding-left:11px;color:var(--ink-dim)}
+.mem-errata b{color:var(--alert);text-shadow:var(--g-alert)}
+.mem-4d{font-size:9.5px;color:var(--ink-faint);margin-top:7px;letter-spacing:.5px;display:flex;justify-content:space-between}
+
+/* ===== TESIS 3 FUERZAS (02) ===== */
+.thesis-q{font-family:var(--display);font-weight:800;font-size:clamp(18px,2.4vw,26px);line-height:1.3;
+  letter-spacing:-.3px;max-width:780px;margin-bottom:34px}
+.thesis-q em{font-style:normal;color:var(--risk);text-shadow:var(--g-risk)}
+.forces{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.force{border:1px solid var(--grid);background:var(--panel);border-radius:4px;padding:22px;position:relative;overflow:hidden}
+.force::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--alert);box-shadow:var(--g-alert)}
+.force-n{font-family:var(--display);font-weight:900;font-size:30px;color:var(--grid);line-height:1}
+.force-t{font-weight:700;font-size:13.5px;margin-top:12px;color:var(--ink)}
+.force-x{font-size:12px;line-height:1.65;color:var(--ink-dim);margin-top:9px}
+.force-x b{color:var(--ink)}
+
+/* ===== CRONOLOGIA (03) ===== */
+.tl{display:flex;flex-direction:column;gap:1px;background:var(--grid)}
+.tl-ev{background:var(--bg);padding:16px 20px;display:grid;grid-template-columns:120px 1fr auto;gap:18px;align-items:start;transition:background .2s}
+.tl-ev:hover{background:var(--panel)}
+.tl-ev.crit{border-left:3px solid var(--risk)}
+.tl-meta{font-size:10px;letter-spacing:1px}
+.tl-time{color:var(--alert);font-weight:700}.tl-src{color:var(--ink-faint);display:block;margin-top:3px}
+.tl-t{font-weight:700;font-size:13.5px;color:var(--ink)}
+.tl-b{font-size:12px;color:var(--ink-dim);line-height:1.6;margin-top:5px}
+.tl-tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.tl-tag{font-size:9px;letter-spacing:1px;padding:3px 7px;border:1px solid var(--grid);border-radius:2px;color:var(--ink-faint)}
+.tl-tag.hot{border-color:var(--alert);color:var(--alert)}
+.tl-tag.crit{border-color:var(--risk);color:var(--risk)}
+
+/* ===== RUMOR CHANNEL (04) — NUEVO ===== */
+.rumor-note{font-size:11px;color:var(--ink-faint);margin-bottom:20px;letter-spacing:.5px;padding:10px 14px;
+  border:1px dashed var(--rumor);border-radius:3px;background:rgba(192,132,252,.04)}
+.rumor-note b{color:var(--rumor);text-shadow:var(--g-rumor)}
+.rumors{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.rumor{border:1px solid var(--grid);border-top:2px solid var(--rumor);background:var(--panel);border-radius:4px;padding:18px}
+.rumor-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.rumor-conf{font-size:9px;letter-spacing:1.5px;padding:3px 8px;border-radius:2px;text-transform:uppercase;font-weight:700}
+.conf-mid{background:rgba(255,176,0,.12);color:var(--alert)}
+.conf-hi{background:rgba(0,255,156,.12);color:var(--signal)}
+.rumor-src{font-size:10px;color:var(--rumor);text-shadow:var(--g-rumor);letter-spacing:1px}
+.rumor-t{font-weight:700;font-size:13px;color:var(--ink);line-height:1.45}
+.rumor-impact{font-size:11px;color:var(--ink-dim);line-height:1.6;margin-top:9px;padding-top:9px;border-top:1px solid var(--grid-soft)}
+.rumor-impact b{color:var(--ink)}
+
+/* ===== DATA VIVA (05) ===== */
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.chart-card{border:1px solid var(--grid);background:var(--panel);border-radius:4px;overflow:hidden}
+.chart-card.wide{grid-column:1/-1}
+.ch-head{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--grid)}
+.ch-sym{font-weight:700;font-size:13px}
+.ch-meta{font-size:10px;color:var(--ink-faint);letter-spacing:.5px}
+.ch-tag{font-size:9px;letter-spacing:1px;padding:3px 8px;border-radius:2px;text-transform:uppercase}
+.ch-body{padding:16px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:10.5px;color:var(--ink-dim);margin-top:10px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+
+
+/* ===== DATA VIVA · responsive chart labels fix ===== */
+.chart-card{min-width:0}
+.ch-head>div{min-width:0}
+.chart-plot{position:relative;width:100%;height:200px;min-width:0;overflow:visible}
+.chart-plot.small{height:160px}
+.chart-plot svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.chart-label{position:absolute;z-index:2;font-family:var(--mono);font-size:11px;line-height:1;white-space:nowrap;pointer-events:none;color:var(--ink-dim);letter-spacing:-.15px;text-shadow:none}
+.chart-label.date{font-size:10px;color:var(--ink-faint)}
+.chart-label.alert{color:var(--alert);text-shadow:var(--g-alert)}
+.chart-label.risk{color:var(--risk);text-shadow:var(--g-risk)}
+.chart-label.anchor-c{transform:translateX(-50%)}
+
+/* ===== SEÑAL VS RUIDO (06) ===== */
+.sr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sr-col{border:1px solid var(--grid);border-radius:4px;padding:22px;background:var(--panel)}
+.sr-col.sig{border-top:2px solid var(--signal)}
+.sr-col.noise{border-top:2px solid var(--ink-faint)}
+.sr-h{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.sr-h.sig{color:var(--signal);text-shadow:var(--g-signal)}
+.sr-h.noise{color:var(--ink-dim)}
+.sr-item{display:grid;grid-template-columns:24px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid var(--grid-soft);font-size:12.5px;line-height:1.55}
+.sr-item:last-child{border-bottom:none}
+.sr-n{font-family:var(--display);font-weight:900;color:var(--grid)}
+.sr-item b{color:var(--ink)}.sr-item span{color:var(--ink-dim)}
+
+/* ===== SEMAFORO (07) ===== */
+.sem-tools{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.sem-btn{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;background:var(--panel);
+  border:1px solid var(--grid);color:var(--ink-dim);padding:8px 14px;border-radius:3px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:.2s}
+.sem-btn:hover{border-color:var(--ink-faint)}
+.sem-btn.active{border-color:var(--ink);color:var(--ink)}
+.sem-btn .dot{width:7px;height:7px;border-radius:50%}
+.sem-btn[data-sev="critical"] .dot{background:var(--risk);box-shadow:var(--g-risk)}
+.sem-btn[data-sev="alert"] .dot{background:var(--alert);box-shadow:var(--g-alert)}
+.sem-btn[data-sev="watch"] .dot{background:var(--info);box-shadow:var(--g-info)}
+.sem-btn[data-sev="all"] .dot{background:var(--ink-dim)}
+.sem-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:12px}
+.sem-card{border:1px solid var(--grid);background:var(--panel);border-radius:4px;padding:16px;border-left:3px solid var(--ink-faint)}
+.sem-card[data-sev="critical"]{border-left-color:var(--risk)}
+.sem-card[data-sev="alert"]{border-left-color:var(--alert)}
+.sem-card[data-sev="watch"]{border-left-color:var(--info)}
+.sem-tag{font-size:9px;letter-spacing:1.5px;color:var(--ink-faint)}
+.sem-name{font-weight:700;font-size:13.5px;margin:6px 0 8px}
+.sem-desc{font-size:11.5px;color:var(--ink-dim);line-height:1.55}
+
+/* ===== OPERATIVA (08) ===== */
+.op-tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.op-tab{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  background:var(--panel);border:1px solid var(--grid);color:var(--ink-dim);padding:11px 18px;border-radius:3px;cursor:pointer;transition:.2s}
+.op-tab.active{border-color:var(--signal);color:var(--signal);text-shadow:var(--g-signal);background:rgba(0,255,156,.05)}
+.op-panel{display:none}.op-panel.active{display:block}
+.op-setups{display:flex;flex-direction:column;gap:1px;background:var(--grid)}
+.op-setup{background:var(--bg);display:grid;grid-template-columns:40px 1fr auto;gap:16px;align-items:center;padding:16px 18px}
+.op-n{font-family:var(--display);font-weight:900;font-size:18px;color:var(--grid)}
+.op-name{font-weight:700;font-size:13.5px}
+.op-detail{font-size:11.5px;color:var(--ink-dim);line-height:1.5;margin-top:4px}
+.op-detail em{font-style:normal;color:var(--alert);text-shadow:var(--g-alert)}
+.op-alloc{text-align:right}
+.op-cap{font-size:9px;letter-spacing:1px;color:var(--ink-faint)}
+.op-pct{font-family:var(--display);font-weight:900;font-size:22px;color:var(--signal);text-shadow:var(--g-signal)}
+
+/* exposure */
+.exp{margin-top:36px;border:1px solid var(--grid);border-radius:4px;background:var(--panel);padding:24px;display:grid;grid-template-columns:1fr 1.3fr;gap:30px}
+.exp-label{font-size:10px;letter-spacing:2px;color:var(--ink-faint);text-transform:uppercase;margin-bottom:10px}
+.exp-amount{display:flex;align-items:baseline;gap:8px;font-family:var(--display);font-weight:900;font-size:32px}
+.exp-cur{font-size:13px;color:var(--ink-faint)}
+.exp-field{background:transparent;border:none;border-bottom:1px solid var(--grid);color:var(--ink);font-family:var(--display);font-weight:900;font-size:32px;width:220px;outline:none}
+.exp-presets{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.cp{font-family:var(--mono);font-size:10px;background:var(--bg);border:1px solid var(--grid);color:var(--ink-dim);padding:6px 11px;border-radius:2px;cursor:pointer}
+.cp.active{border-color:var(--signal);color:var(--signal)}
+.exp-note{font-size:11px;color:var(--ink-dim);line-height:1.6;margin-top:16px}
+.exp-note b{color:var(--ink)}
+.exp-bar{display:flex;height:14px;border-radius:3px;overflow:hidden;margin-bottom:16px}
+.exp-seg[data-cat="cash"]{background:var(--info)}.exp-seg[data-cat="energy"]{background:var(--alert)}
+.exp-seg[data-cat="defense"]{background:var(--signal)}.exp-seg[data-cat="metals"]{background:var(--alert)}
+.exp-seg[data-cat="hedge"]{background:var(--risk)}.exp-seg[data-cat="semi"]{background:var(--info)}
+.exp-seg[data-cat="fixed"]{background:repeating-linear-gradient(135deg,var(--info) 0 4px,rgba(46,168,255,.24) 4px 8px)}
+.exp-seg[data-cat="equity"]{background:repeating-linear-gradient(135deg,var(--signal) 0 4px,rgba(0,255,156,.22) 4px 8px)}
+.exp-seg[data-cat="alt"]{background:repeating-linear-gradient(135deg,var(--risk) 0 4px,rgba(255,46,77,.20) 4px 8px)}
+.exp-row{display:grid;grid-template-columns:14px 1fr auto auto auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--grid-soft);font-size:12px}
+.exp-sw{width:11px;height:11px;border-radius:2px}
+.exp-sw[data-cat="cash"]{background:var(--info)}.exp-sw[data-cat="energy"]{background:var(--alert)}
+.exp-sw[data-cat="defense"]{background:var(--signal)}.exp-sw[data-cat="metals"]{background:var(--alert)}
+.exp-sw[data-cat="hedge"]{background:var(--risk)}.exp-sw[data-cat="semi"]{background:var(--info)}
+.exp-sw[data-cat="fixed"]{background:repeating-linear-gradient(135deg,var(--info) 0 3px,rgba(46,168,255,.24) 3px 6px)}
+.exp-sw[data-cat="equity"]{background:repeating-linear-gradient(135deg,var(--signal) 0 3px,rgba(0,255,156,.22) 3px 6px)}
+.exp-sw[data-cat="alt"]{background:repeating-linear-gradient(135deg,var(--risk) 0 3px,rgba(255,46,77,.20) 3px 6px)}
+.exp-cat .d{font-size:10px;color:var(--ink-faint);display:block;margin-top:2px}
+.exp-pct{color:var(--ink-dim)}.exp-usd{font-weight:700;text-align:right;min-width:78px}
+
+
+
+/* ===== v4.2 · HORIZONTES / CARTERAS DE REFERENCIA ===== */
+.hz-frame{color:var(--ink-dim);font-size:12.5px;line-height:1.75;margin-bottom:22px;
+  max-width:720px;padding:14px 18px;border-left:3px solid var(--ink-faint);
+  background:rgba(15,22,32,.5)}
+.hz-frame b{color:var(--ink)}
+.hz-status{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--grid);border:1px solid var(--grid);border-radius:4px;
+  overflow:hidden;margin-bottom:20px}
+.hzs-block{background:var(--panel);padding:13px 16px}
+.hzs-block.wide{grid-column:span 2}
+.hzs-l{display:block;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+.hzs-v{display:block;font-family:var(--display);font-weight:800;font-size:13px;
+  letter-spacing:.3px;color:var(--ink);margin-top:5px}
+.hzs-v.up{color:var(--signal);text-shadow:var(--g-signal)}
+.hzs-v.dn{color:var(--risk);text-shadow:var(--g-risk)}
+.hzs-v.faint{font-family:var(--mono);font-weight:400;font-size:11.5px;color:var(--ink-dim)}
+.hz-sub{font-size:11.5px;color:var(--ink-dim);line-height:1.65;margin:-5px 0 16px}
+.pos{border:1px solid var(--grid);background:var(--panel);border-radius:4px;
+  padding:18px;margin-bottom:12px;border-left:3px solid var(--info)}
+.pos[data-stop="thesis"]{border-left-color:var(--alert)}
+.pos[data-stop="none"]{border-left-color:var(--ink-faint)}
+.pos-head{display:grid;grid-template-columns:60px 1fr auto;gap:14px;align-items:baseline}
+.pos-w{font-family:var(--display);font-weight:900;font-size:20px;color:var(--signal);text-shadow:var(--g-signal)}
+.pos-nm{font-weight:700;font-size:13.5px;color:var(--ink)}
+.pos-nm em{display:block;font-style:normal;font-weight:400;font-size:10.5px;color:var(--ink-faint);margin-top:3px}
+.pos-state{font-family:var(--display);font-weight:800;font-size:10.5px;letter-spacing:1px;white-space:nowrap}
+.pos-state.up{color:var(--signal);text-shadow:var(--g-signal)}
+.pos-state.dn{color:var(--risk);text-shadow:var(--g-risk)}
+.pos-state.nt{color:var(--ink-dim)}
+.pos-why{font-size:12.5px;line-height:1.65;color:var(--ink-dim);margin:11px 0 13px}
+.pos-why b{color:var(--ink)}
+.pos-levels{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--grid)}
+.pl{background:var(--bg);padding:11px 14px;font-family:var(--display);font-weight:800;font-size:13px;color:var(--ink)}
+.pl b{display:block;font-family:var(--mono);font-weight:400;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+.pl em{font-style:normal;font-size:10.5px;font-weight:400;margin-left:5px}
+.pl.tp{color:var(--signal)} .pl.tp em{color:var(--signal)}
+.pl.sl{color:var(--risk)} .pl.sl em{color:var(--risk)}
+.hz-log{margin-top:20px;border:1px solid var(--grid);border-radius:4px;background:var(--panel);padding:18px}
+.hzl-head{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint);margin-bottom:13px}
+.hzl-row{display:grid;grid-template-columns:80px 1fr;gap:14px;padding:9px 0;border-bottom:1px solid var(--grid-soft);font-size:12.5px;line-height:1.6}
+.hzl-row:last-child{border-bottom:none}
+.hzl-date{font-family:var(--display);font-weight:800;font-size:11px;color:var(--alert);text-shadow:var(--g-alert)}
+.hzl-what{color:var(--ink)}
+.hzl-what em{display:block;font-style:normal;color:var(--ink-dim);font-size:11.5px;margin-top:4px}
+.hzl-empty{font-size:11.5px;color:var(--ink-dim);line-height:1.6}
+.exp-row[data-empty="1"]{opacity:.32}
+.exp-risk{font-size:11px;color:var(--risk);text-align:right;white-space:nowrap;min-width:72px}
+.exp-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  margin-top:14px;padding-top:13px;border-top:1px solid var(--grid);
+  font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-faint)}
+.exp-total b{font-family:var(--display);font-size:14px;letter-spacing:.3px;text-transform:none}
+.exp-total b.r{color:var(--risk);text-shadow:var(--g-risk)}
+.exp-hz{font-size:10px;color:var(--info);letter-spacing:1px;margin-bottom:10px;text-transform:uppercase}
+
+@media(max-width:640px){
+  .pos-head{grid-template-columns:56px 1fr;gap:10px}
+  .pos-state{grid-column:1/-1;padding-top:6px}
+  .pos-levels{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .hzs-block.wide{grid-column:span 1}
+  .hzl-row{grid-template-columns:1fr;gap:4px}
+  .exp-total{align-items:flex-start;flex-direction:column}
+}
+
+
+/* ===== v4.3 · CALIBRACIÓN / BANDA 90 DÍAS ===== */
+.hz-context{border:1px solid var(--grid);border-radius:4px;background:var(--panel);padding:18px;margin-bottom:20px}
+.hzc-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:var(--display);font-weight:800;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;margin-bottom:15px}
+.hzc-head span{font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:1.5px;color:var(--ink-faint);text-transform:none}
+.hzc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.hzc-k{display:block;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+.hzc-v{display:block;font-family:var(--display);font-weight:800;font-size:14px;color:var(--ink);margin:5px 0 4px}
+.hzc-v.r{color:var(--risk);text-shadow:var(--g-risk)}
+.hzc-v.a{color:var(--alert);text-shadow:var(--g-alert)}
+.hzc-d{display:block;font-size:10.5px;line-height:1.5;color:var(--ink-dim)}
+.hzc-note{font-size:9.5px;color:var(--ink-faint);line-height:1.55;margin-top:13px;padding-top:11px;border-top:1px solid var(--grid-soft)}
+.pos-range{display:grid;grid-template-columns:76px 1fr auto;gap:12px;align-items:center;margin-top:11px;padding-top:11px;border-top:1px solid var(--grid-soft);min-width:0}
+.pr-l{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint)}
+.pr-track{position:relative;height:6px;min-width:0}
+.pr-band{position:absolute;top:0;height:6px;background:var(--grid);border-radius:1px}
+.pr-now{position:absolute;top:-3px;width:2px;height:12px;background:var(--ink);box-shadow:0 0 6px rgba(232,238,242,.6)}
+.pr-tp{position:absolute;top:-2px;width:2px;height:10px;background:var(--signal);box-shadow:var(--g-signal)}
+.pr-sl{position:absolute;top:-2px;width:2px;height:10px;background:var(--risk);box-shadow:var(--g-risk)}
+.pr-v{font-size:10.5px;color:var(--ink-dim);white-space:nowrap}
+.pr-v em{font-style:normal;color:var(--ink-faint);font-size:9.5px;margin-left:3px}
+/* conserva el porcentaje matemático del marcador sin provocar overflow cuando un objetivo está fuera de banda */
+.pos-range[data-out="right"] .pr-track{width:53.6%;margin-left:.6%;justify-self:start}
+.pos-range[data-out="left"] .pr-track{width:52%;margin-left:44.1%}
+.pos-range-missing{font-size:10px;line-height:1.55;color:var(--ink-faint);margin-top:10px;padding-top:10px;border-top:1px dashed var(--grid-soft)}
+.pos-range-missing b{color:var(--ink-dim);font-weight:700}
+.pl-sub{font-size:10.5px;font-weight:400;color:var(--signal);white-space:nowrap}
+@media(max-width:640px){
+  .pos-range{grid-template-columns:1fr;gap:7px}
+  .pr-track{order:3;width:100%}
+  .pr-v{white-space:normal}
+  .pos-range[data-out="right"] .pr-track{width:53.6%;margin-left:.6%}
+  .pos-range[data-out="left"] .pr-track{width:52%;margin-left:44.1%}
+  .hzc-head{align-items:flex-start;flex-direction:column}
+}
+
+
+/* ===== v4.4 · 01C · HILOS NARRATIVOS ===== */
+.threads-sec{background:rgba(11,16,22,.35)}
+.th-intro{color:var(--ink-dim);font-size:13px;line-height:1.7;margin-bottom:20px;max-width:640px}
+.threads{border:1px solid var(--grid);border-radius:4px;background:var(--panel);overflow:hidden}
+.thread-row{display:grid;grid-template-columns:1fr 116px 104px;gap:14px;align-items:center;
+  padding:14px 18px;border-bottom:1px solid var(--grid-soft);font-size:12.5px;
+  border-left:3px solid var(--ink-faint)}
+.thread-row:last-child{border-bottom:none}
+.thread-row[data-state="turned"]{border-left-color:var(--alert);background:rgba(255,176,0,.045)}
+.thread-row[data-state="closed"]{border-left-color:var(--ink-faint);opacity:.55}
+.th-name{color:var(--ink);font-weight:700;line-height:1.45}
+.th-note{display:block;font-weight:400;font-size:11.5px;color:var(--ink-dim);
+  line-height:1.6;margin-top:5px}
+.th-n{font-family:var(--display);font-weight:800;font-size:11px;color:var(--ink-dim);
+  letter-spacing:.3px;white-space:nowrap}
+.th-since{display:block;font-family:var(--mono);font-weight:400;font-size:9px;
+  letter-spacing:1px;color:var(--ink-faint);margin-top:3px}
+.th-state{font-family:var(--display);font-weight:800;font-size:9.5px;letter-spacing:1.5px;
+  text-align:right;white-space:nowrap}
+.th-state.open{color:var(--info)}
+.th-state.turned{color:var(--alert);text-shadow:var(--g-alert)}
+.th-state.closed{color:var(--ink-faint)}
+.th-foot{margin-top:16px;padding:14px 18px;border-left:3px solid var(--grid);
+  background:rgba(15,22,32,.5);font-size:12px;line-height:1.7;color:var(--ink-faint)}
+.th-foot b{color:var(--ink-dim)}
+
+@media(max-width:640px){
+  .thread-row{grid-template-columns:1fr 92px;gap:6px 12px}
+  .th-name{grid-column:1/-1}
+  .th-state{text-align:left}
+  .th-n{order:3}
+}
+
+
+/* ===== v4.5 · MARCADOR DE CARTERA ===== */
+.pos-contrib{font-family:var(--display);font-weight:800;font-size:10.5px;
+  letter-spacing:.3px;white-space:nowrap;color:var(--ink-dim)}
+.pos-contrib.up{color:var(--signal);text-shadow:var(--g-signal)}
+.pos-contrib.dn{color:var(--risk);text-shadow:var(--g-risk)}
+.pos-contrib.nt{color:var(--ink-faint)}
+.pnl-sub{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;
+  letter-spacing:.8px;color:var(--ink-faint);margin-top:4px;text-transform:none}
+.pos-head{grid-template-columns:60px 1fr auto auto}
+.mark-note{margin-top:16px;padding-top:13px;border-top:1px solid var(--grid-soft);
+  font-size:11px;line-height:1.7;color:var(--ink-faint)}
+.mark-note b{color:var(--ink-dim)}
+@media(max-width:640px){
+  .pos-head{grid-template-columns:56px 1fr}
+  .pos-contrib{grid-column:1/-1;padding-top:4px}
+}
+
+/* footer */
+.footer{padding:40px 0;text-align:center}
+.footer .brand{font-family:var(--display);font-weight:900;font-size:16px;letter-spacing:1px}
+.footer .sub{display:block;font-size:10px;color:var(--ink-faint);letter-spacing:1px;margin-top:8px}
+.disc{font-size:9px;color:var(--ink-faint);max-width:600px;margin:18px auto 0;line-height:1.6}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:1fr;gap:32px}
+  .forces{grid-template-columns:1fr}
+  .charts,.sr,.exp{grid-template-columns:1fr}
+  .tl-ev{grid-template-columns:1fr;gap:8px}
+  .tl-tags{justify-content:flex-start}
+  .op-setup{grid-template-columns:32px 1fr;gap:12px}
+  .op-alloc{grid-column:2;text-align:left;margin-top:6px}
+}
+
+@media(max-width:560px){
+  .wrap{padding:0 14px}
+  section{padding:46px 0}
+  .hero{padding:46px 0 42px}
+  .regime .wrap{gap:10px}.regime-left{gap:10px;flex-wrap:wrap}.rg-label{letter-spacing:2px}.rg-val{font-size:13px}
+  h1.headline{font-size:clamp(34px,12vw,48px);letter-spacing:-1px}
+  .lede{font-size:13.5px;line-height:1.65}
+  .sec-head{flex-wrap:wrap;align-items:flex-start;gap:10px;margin-bottom:26px}
+  .sec-line{flex-basis:100%;order:5}
+  .sec-sub{white-space:normal;line-height:1.4}
+  .ch-head{flex-direction:column;align-items:flex-start;gap:9px;padding:12px 12px}
+  .ch-sym,.ch-meta{display:block;line-height:1.35}.ch-meta{margin-top:4px}
+  .ch-body{padding:12px}
+  .chart-plot{height:178px}.chart-plot.small{height:142px}
+  .chart-label{font-size:10px}.chart-label.date{font-size:9px}
+  .legend{font-size:10px;line-height:1.55;gap:10px}
+  .lb-row{grid-template-columns:44px 1fr;align-items:start}
+  .lb-val{grid-column:2;text-align:left}
+  .mem-grid{grid-template-columns:repeat(auto-fit,minmax(136px,1fr))}
+  .mem-cell{padding:14px 12px}
+  .mem-cell:last-child:nth-child(odd){grid-column:1/-1}
+  .tl-ev{padding:14px}
+  .op-tab{width:100%;justify-content:center}
+  .exp{padding:18px;gap:22px}
+  .exp-field{width:150px;font-size:28px}.exp-amount{font-size:28px}
+  .exp-row{grid-template-columns:14px 1fr auto auto;gap:10px}
+  .exp-usd{grid-column:2/3;text-align:left;min-width:0;color:var(--ink)}
+  .exp-risk{grid-column:3/5;text-align:right}
+}
+/* ===== MOTION / REVEAL ===== */
+.fade{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.fade.vis{opacity:1;transform:none}
+
+/* ===== AUDIT / DATA INTEGRITY ===== */
+.audit-note{font-size:11px;color:var(--ink-dim);margin:0 0 20px;letter-spacing:.35px;padding:11px 14px;
+  border:1px dashed var(--alert);border-radius:3px;background:rgba(255,176,0,.045);line-height:1.6}
+.audit-note b{color:var(--alert);text-shadow:var(--g-alert)}
+
+
+/* ===== v4 · REGISTRO / PRE-REGISTRO / PROTOCOLO ===== */
+/* 01B · scorecard */
+.scorecard{background:rgba(11,16,22,.35)}
+.sc-table{border:1px solid var(--grid);border-radius:4px;overflow:hidden;background:var(--panel)}
+.sc-head{display:grid;grid-template-columns:1fr 1fr 116px;gap:16px;padding:11px 18px;
+  border-bottom:1px solid var(--grid);background:rgba(15,22,32,.7);
+  font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+.sc-row{display:grid;grid-template-columns:1fr 1fr 116px;gap:16px;padding:16px 18px;
+  border-bottom:1px solid var(--grid-soft);font-size:12.5px;line-height:1.65;align-items:start}
+.sc-row:last-child{border-bottom:none}
+.sc-said{color:var(--ink-dim);border-left:2px solid var(--grid);padding-left:12px}
+.sc-did{color:var(--ink-dim)}
+.sc-said b,.sc-did b{color:var(--ink);font-weight:700}
+.sc-v{font-family:var(--display);font-weight:800;font-size:10.5px;letter-spacing:1.2px;
+  text-align:right;white-space:nowrap;padding-top:1px}
+.sc-v.hit{color:var(--signal);text-shadow:var(--g-signal)}
+.sc-v.part{color:var(--alert);text-shadow:var(--g-alert)}
+.sc-v.miss{color:var(--risk);text-shadow:var(--g-risk)}
+.sc-row[data-v="miss"]{background:rgba(255,46,77,.045)}
+.sc-mea{margin-top:18px;padding:15px 18px;border-left:3px solid var(--risk);
+  background:rgba(255,46,77,.05);font-size:12.5px;line-height:1.75;color:var(--ink-dim)}
+.sc-mea b{color:var(--risk);text-shadow:var(--g-risk)}
+
+/* barra 00 · contador público */
+.rg-record{display:flex;align-items:center;gap:8px;font-size:10px;letter-spacing:.5px}
+.rr-label{font-size:9px;letter-spacing:2px;color:var(--ink-faint);text-transform:uppercase}
+.rr-n{font-family:var(--display);font-weight:800;font-size:11px}
+.rr-n.hit{color:var(--signal)} .rr-n.part{color:var(--alert)} .rr-n.miss{color:var(--risk)}
+.rr-ed{font-size:9px;color:var(--ink-faint);border-left:1px solid var(--grid);padding-left:8px}
+
+/* 09 · pre-registro */
+.prereg{background:rgba(11,16,22,.35)}
+.pr-intro{color:var(--ink-dim);font-size:13px;line-height:1.7;margin-bottom:26px;max-width:640px}
+.pr-intro b{color:var(--ink)}
+.pr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.pr-item{border:1px solid var(--grid);border-left:3px solid var(--ink-faint);
+  background:var(--panel);border-radius:4px;padding:18px}
+.pr-item[data-sev="critical"]{border-left-color:var(--risk)}
+.pr-item[data-sev="alert"]{border-left-color:var(--alert)}
+.pr-item[data-sev="watch"]{border-left-color:var(--info)}
+.pr-tag{font-family:var(--display);font-weight:800;font-size:10.5px;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--ink);margin-bottom:11px}
+.pr-cond{font-size:12.5px;line-height:1.65;color:var(--ink-dim)}
+.pr-cond b{color:var(--ink)} .pr-cond em{font-style:normal;color:var(--ink-faint)}
+.pr-act{font-size:12px;line-height:1.6;color:var(--ink-dim);margin-top:9px;
+  padding-top:9px;border-top:1px solid var(--grid-soft)}
+.pr-act b{color:var(--ink)}
+.pr-dist{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;
+  font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint)}
+.pr-dist b{font-family:var(--display);font-size:12px;letter-spacing:.3px;color:var(--ink)}
+.pr-dist b.stale{color:var(--alert);text-shadow:var(--g-alert)}
+.scen{margin-top:30px;border:1px solid var(--grid);border-radius:4px;background:var(--panel);padding:20px}
+.scen-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:1px;
+  text-transform:uppercase;margin-bottom:16px}
+.scen-head span{font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:1.5px;color:var(--ink-faint)}
+.scen-row{display:grid;grid-template-columns:180px 1fr 46px 108px;gap:12px;align-items:center;height:34px;font-size:11.5px}
+.scen-nm{color:var(--ink-dim)}
+.scen-track{height:8px;background:var(--grid-soft);border-radius:1px;position:relative}
+.scen-fill{position:absolute;left:0;top:0;height:8px;border-radius:1px}
+.scen-fill.t-signal{background:var(--signal);box-shadow:0 0 8px rgba(0,255,156,.5)}
+.scen-fill.t-alert{background:var(--alert);box-shadow:0 0 8px rgba(255,176,0,.5)}
+.scen-fill.t-risk{background:var(--risk);box-shadow:0 0 8px rgba(255,46,77,.5)}
+.scen-fill.t-info{background:var(--info);box-shadow:0 0 8px rgba(46,168,255,.5)}
+.scen-pct{font-family:var(--display);font-weight:800;font-size:13px;text-align:right}
+.scen-d{font-size:10px;text-align:right}
+.scen-d.up{color:var(--signal)} .scen-d.dn{color:var(--risk)}
+.scen-note{margin-top:14px;padding-top:13px;border-top:1px solid var(--grid-soft);font-size:11.5px;line-height:1.7;color:var(--ink-faint)}
+
+/* 08 · leyenda de ramas */
+.legend-box{margin-top:28px;border:1px solid var(--grid);border-radius:4px;background:rgba(15,22,32,.5)}
+.legend-box summary{padding:13px 18px;cursor:pointer;font-size:11px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--ink-dim);list-style:none;user-select:none}
+.legend-box summary::-webkit-details-marker{display:none}
+.legend-box summary::before{content:"▸ ";color:var(--alert)}
+.legend-box[open] summary::before{content:"▾ "}
+.legend-box[open] summary{border-bottom:1px solid var(--grid);color:var(--ink)}
+.lg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;padding:18px}
+.lg-grid div{font-size:11.5px;line-height:1.6}
+.lg-grid b{display:block;color:var(--alert);text-shadow:var(--g-alert);
+  font-family:var(--display);font-size:11px;letter-spacing:1px;margin-bottom:4px}
+.lg-grid span{color:var(--ink-dim)}
+
+@media(max-width:860px){
+  .sc-head{display:none}
+  .sc-row{grid-template-columns:1fr;gap:9px;padding:16px}
+  .sc-said::before{content:"AYER DIJE";display:block;font-size:9px;letter-spacing:2px;color:var(--ink-faint);margin-bottom:5px}
+  .sc-did::before{content:"HOY PASÓ";display:block;font-size:9px;letter-spacing:2px;color:var(--ink-faint);margin-bottom:5px}
+  .sc-v{text-align:left}
+}
+@media(max-width:560px){
+  .rr-label{display:none}
+  .scen-row{grid-template-columns:1fr 44px 96px;height:auto;padding:7px 0}
+  .scen-track{grid-column:1/-1;order:3}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .tk-track{animation:none;transform:none}
+  .fade{opacity:1!important;transform:none!important}
+}
+
+
+/* ===== v4.1 · NIVELES / NO OPERÉ / CALENDARIO ===== */
+.disc b{color:var(--ink-dim);font-weight:700}
+
+/* 07B · niveles */
+.levels{background:rgba(11,16,22,.35)}
+.lv-intro{color:var(--ink-dim);font-size:13px;line-height:1.7;margin-bottom:22px;max-width:660px}
+.lv-table{border:1px solid var(--grid);border-radius:4px;overflow:hidden;background:var(--panel)}
+.lv-head{display:grid;grid-template-columns:1.5fr 100px 1.5fr 116px 1.8fr;gap:14px;
+  padding:11px 18px;border-bottom:1px solid var(--grid);background:rgba(15,22,32,.7);
+  font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint)}
+.lv-row{display:grid;grid-template-columns:1.5fr 100px 1.5fr 116px 1.8fr;gap:14px;
+  padding:14px 18px;border-bottom:1px solid var(--grid-soft);font-size:12.5px;
+  line-height:1.55;align-items:center;border-left:3px solid transparent}
+.lv-row:last-child{border-bottom:none}
+.lv-row[data-prox="near"]{border-left-color:var(--risk);background:rgba(255,46,77,.04)}
+.lv-row[data-prox="mid"]{border-left-color:var(--alert)}
+.lv-row[data-prox="far"]{border-left-color:var(--info)}
+.lv-row[data-prox="stale"]{border-left-color:var(--ink-faint)}
+.lv-nm{color:var(--ink);font-weight:700}
+.lv-nm em,.lv-trig em{display:block;font-style:normal;font-weight:400;font-size:10px;
+  color:var(--ink-faint);letter-spacing:.3px;margin-top:3px}
+.lv-now{font-family:var(--display);font-weight:800;font-size:15px;color:var(--ink)}
+.lv-now.stale{color:var(--ink-dim)}
+.lv-trig{color:var(--ink-dim);font-weight:700}
+.lv-dist{font-family:var(--display);font-weight:800;font-size:12.5px;letter-spacing:.3px}
+.lv-dist.near{color:var(--risk);text-shadow:var(--g-risk)}
+.lv-dist.mid{color:var(--alert);text-shadow:var(--g-alert)}
+.lv-dist.far{color:var(--info)}
+.lv-dist.stale{color:var(--ink-faint);font-family:var(--mono);font-weight:400;font-size:11px}
+.lv-dist.up{color:var(--signal);text-shadow:var(--g-signal)}
+.lv-act{color:var(--ink-dim);font-size:11.5px;line-height:1.5}
+.lv-note{margin-top:18px;padding:15px 18px;border-left:3px solid var(--alert);
+  background:rgba(255,176,0,.045);font-size:12.5px;line-height:1.75;color:var(--ink-dim)}
+.lv-note b{color:var(--ink)}
+
+/* 06B · lo que no operé */
+.nop-intro{color:var(--ink-dim);font-size:13px;line-height:1.7;margin-bottom:22px;max-width:640px}
+.nop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.nop-item{border:1px solid var(--grid);background:var(--panel);border-radius:4px;
+  padding:18px;font-size:12.5px;line-height:1.65;color:var(--ink-dim);position:relative}
+.nop-item::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--ink-faint)}
+.nop-item b{color:var(--ink);display:block;margin-bottom:7px}
+.nop-item b + b,.nop-item b:not(:first-of-type){display:inline;margin:0}
+.nop-why{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--alert);border:1px solid rgba(255,176,0,.35);border-radius:2px;padding:2px 8px;margin-bottom:11px}
+.nop-foot{margin-top:18px;padding:15px 18px;border-left:3px solid var(--grid);
+  background:rgba(15,22,32,.5);font-size:12.5px;line-height:1.75;color:var(--ink-dim)}
+
+/* calendario dentro de 09 */
+.cal{margin-top:26px;border:1px solid var(--grid);border-radius:4px;background:var(--panel);padding:20px}
+.cal-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+.cal-head span{font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:1.5px;color:var(--ink-faint)}
+.cal-row{display:grid;grid-template-columns:130px 1fr 88px;gap:14px;align-items:start;
+  padding:12px 0;border-bottom:1px solid var(--grid-soft)}
+.cal-row:last-child{border-bottom:none}
+.cal-when{font-family:var(--display);font-weight:800;font-size:11.5px;letter-spacing:.5px;color:var(--ink)}
+.cal-what{font-size:12.5px;line-height:1.55;color:var(--ink)}
+.cal-when em,.cal-what em{display:block;font-style:normal;font-weight:400;font-size:10.5px;
+  color:var(--ink-faint);line-height:1.55;margin-top:3px}
+.cal-imp{font-family:var(--display);font-weight:800;font-size:9.5px;letter-spacing:1.5px;text-align:right}
+.cal-imp.high{color:var(--risk);text-shadow:var(--g-risk)}
+.cal-imp.mid{color:var(--alert);text-shadow:var(--g-alert)}
+.cal-imp.open{color:var(--ink-faint)}
+
+/* chart triggers */
+.trigger-lbl{right:8px;transform:translateY(-50%);font-size:clamp(8px,2.15vw,9px);letter-spacing:1.2px;
+  background:rgba(4,6,10,.85);padding:clamp(1px,.3vw,2px) clamp(4px,1.2vw,6px);border-radius:2px;white-space:nowrap}
+
+@media(max-width:980px){
+  .lv-head{display:none}
+  .lv-row{grid-template-columns:1fr 1fr;gap:6px 14px;padding:16px 18px;align-items:start}
+  .lv-nm{grid-column:1/-1}
+  .lv-now::before{content:"CIERRE";display:block;font-size:9px;letter-spacing:2px;color:var(--ink-faint);margin-bottom:3px}
+  .lv-trig::before{content:"NIVEL";display:block;font-size:9px;letter-spacing:2px;color:var(--ink-faint);margin-bottom:3px}
+  .lv-dist{grid-column:1/-1;padding-top:6px}
+  .lv-dist::before{content:"DISTANCIA · ";font-family:var(--mono);font-weight:400;font-size:9px;letter-spacing:2px;color:var(--ink-faint)}
+  .lv-act{grid-column:1/-1;padding-top:8px;border-top:1px solid var(--grid-soft)}
+}
+@media(max-width:560px){
+  .cal-row{grid-template-columns:1fr 80px}
+  .cal-when{grid-column:1/-1}
+}
+/* ═══════════════════════════════════════════════════════════════
+   CSS DE LA EDICIÓN — VACIAR Y REEMPLAZAR CADA DÍA
+   Régimen, componentes excepcionales y posiciones responsive.
+   ═══════════════════════════════════════════════════════════════ */
+/* ===== RÉGIMEN DEL DÍA · 9S ===== */
+body.red-down h1.headline .em{color:var(--bg);-webkit-text-stroke:1.5px var(--risk);filter:drop-shadow(0 0 7px rgba(255,46,77,.72)) drop-shadow(0 0 20px rgba(255,46,77,.3))}
+body.red-down .verdict-badge{border-color:var(--risk);background:rgba(255,46,77,.055);color:var(--risk);text-shadow:var(--g-risk)}
+body.red-down .verdict-badge::before{background:var(--risk);box-shadow:var(--g-risk)}
+body.red-down .rg-dot{background:var(--risk);box-shadow:var(--g-risk);animation:pulse 2s infinite}
+body.red-down .defbar.on{background:var(--risk);box-shadow:var(--g-risk)}
+body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba(0,255,156,.035),transparent 82%)}
+.tk .tone-risk{color:var(--risk);text-shadow:var(--g-risk)}
+.mem-d.tone-risk{color:var(--risk)!important;text-shadow:var(--g-risk)}
+.audit-note strong{color:var(--ink)}
+.qa-live{color:var(--signal);text-shadow:var(--g-signal)}
+.bar-chart{position:relative;height:auto;padding:4px 0 0}
+.bar-row{display:grid;grid-template-columns:90px 1fr 74px;gap:12px;align-items:center;height:34px;font-size:11px}
+.bar-name{color:var(--ink-dim)}
+.bar-track{height:8px;background:var(--grid-soft);position:relative;border-radius:1px;overflow:visible}
+.bar-zero{position:absolute;left:50%;top:-5px;bottom:-5px;width:1px;background:var(--grid)}
+.bar-fill{position:absolute;top:0;height:8px;border-radius:1px;box-shadow:0 0 10px currentColor}
+.bar-fill.pos{left:50%}.bar-fill.neg{right:50%}
+.bar-fill.t-risk{background:var(--risk);color:var(--risk)}.bar-fill.t-signal{background:var(--signal);color:var(--signal)}
+.bar-val{text-align:right;font-weight:700}
+@media(max-width:420px){.rg-record{order:3;width:100%;justify-content:flex-start;padding-top:8px;border-top:1px solid var(--grid-soft)}.bar-row{grid-template-columns:62px 1fr 60px;gap:7px;font-size:9.5px}}
+</style>
+</head>
+<body class="red-down">
+<!-- ===== 00 · TICKER + RÉGIMEN ===== -->
+<div class="ticker"><div class="tk-track" id="tkTrack">
+<span class="tk"><b>SPX</b> 7,636 <span class="dn">▼ 0.48%</span></span>
+<span class="tk"><b>10Y</b> 4.841% <span class="up tone-risk">▲ 4.9pb</span></span>
+<span class="tk"><b>30Y</b> 5.292% <span class="up tone-risk">▲ 4.4pb</span></span>
+<span class="tk"><b>MOVE</b> 76.74 <span class="up inv">▲ 0.60</span></span>
+<span class="tk"><b>VIX</b> 16.47 <span class="up inv">▲ 0.76</span></span>
+<span class="tk"><b>SKEW</b> 148.86 <span class="dn inv">▼ 2.72</span></span>
+<span class="tk"><b>HY OAS</b> 2.67% <span class="dn">▼ 1pb</span></span>
+<span class="tk"><b>USD/JPY</b> 153.589 <span class="dn">▼ 42p</span></span>
+<span class="tk"><b>WTI</b> $96.05 <span class="up tone-risk">▲ 3.3%</span></span>
+<span class="tk"><b>GOLD</b> $4,399.61 <span class="up">▲ 0.99%</span></span>
+</div></div>
+<div class="regime"><div class="wrap">
+<div class="regime-left"><span class="rg-dot"></span><span class="rg-label">RÉGIMEN · SESIÓN 16</span><span class="rg-val r">ROJO ↓ · RAMA A EJECUTADA</span></div>
+<div class="defbars"><span class="defbar"></span><span class="defbar"></span><span class="defbar on"></span><span class="defbar on"></span><span class="defbar"></span></div>
+<div class="rg-record" title="Registro público de decisiones — arranca el 3 sep 2026"><span class="rr-label">REGISTRO</span><span class="rr-n hit">17✓</span><span class="rr-n part">1◐</span><span class="rr-n miss">5✕</span><span class="rr-ed">ED. 4</span></div>
+<span class="regime-date">MIÉRCOLES 9 SEP 2026 · POST-CIERRE</span>
+</div></div>
+<!-- ===== 01 · VEREDICTO (HERO) ===== -->
+<section class="hero" style="border-top:none"><div class="wrap">
+<div><div class="kick fade">// 01 · Veredicto del día</div>
+<h1 class="headline fade">EL GATILLO<br/>CRUZÓ.<br/><span class="em">RAMA A</span> EJECUTADA.</h1>
+<p class="lede fade">El 10Y cerró en <b>4.841%</b>, por encima del 4.800% escrito el 4 de septiembre, y por primera vez en dieciséis sesiones el protocolo dejó de vigilar para ejecutar. Se liquidan <b>9% de núcleo RV</b> y <b>3% de oro</b>; la caja pasa de <b>62% a 74%</b>. Debajo del índice, el mercado empeoró más: <b>225 nuevos mínimos contra 39 máximos</b> y apenas <b>26.05%</b> de volumen comprador. El Tesoro triplicó recompras a <b>$6.000M</b> y el rendimiento subió igual. El vector sigue <b>↓</b>; no hay un grado inferior dentro del marco.</p>
+<div class="verdict-badge fade">RAMA A · CAJA 74%</div></div>
+<div class="livebox fade"><div class="lb-head"><span>Terminal · cierre</span><span class="lb-live">9S LIVE</span></div>
+<div class="lb-row"><span class="lb-tick">10Y</span><span class="lb-name">gatillo 4.800%</span><span class="lb-val r">4.841% <span class="lb-delta">+4.1pb sobre</span></span></div>
+<div class="lb-row"><span class="lb-tick">BREADTH</span><span class="lb-name">NYSE · extremos</span><span class="lb-val r">225L / 39H <span class="lb-delta">26.05% vol↑</span></span></div>
+<div class="lb-row"><span class="lb-tick">30Y</span><span class="lb-name">setup #5 · 5.300%</span><span class="lb-val r">5.292% <span class="lb-delta">0.8pb</span></span></div>
+<div class="lb-row"><span class="lb-tick">CREDIT</span><span class="lb-name">HY OAS · contador</span><span class="lb-val a">2.67% <span class="lb-delta">1/2</span></span></div>
+<div class="lb-row"><span class="lb-tick">WTI</span><span class="lb-name">settle</span><span class="lb-val r">$96.05 <span class="lb-delta">+3.3%</span></span></div>
+<div class="lb-row"><span class="lb-tick">JPY</span><span class="lb-name">USD/JPY · #7</span><span class="lb-val s">153.589 <span class="lb-delta">+641p</span></span></div>
+</div></div></section>
+<!-- ===== 01B · REGISTRO ===== -->
+<section class="scorecard"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 01B</div><h2 class="sec-title">Ayer dije / hoy pasó</h2><div class="sec-line"></div><div class="sec-sub">pre-registro 8S contrastado al cierre 9S</div></div>
+<div class="sc-table fade"><div class="sc-head"><span>Lo que pre-registré el 8 de septiembre</span><span>Lo que pasó el 9 de septiembre</span><span>Veredicto</span></div>
+<div class="sc-row" data-v="hit"><span class="sc-said">Escenario base: el 10Y cierra <b>&gt;4.800%</b> y dispara Rama A.</span><span class="sc-did">Cerró <b>4.841%</b>, verificado como cierre. Núcleo RV 9%→0%, oro 3%→0% y caja 62%→74%.</span><span class="sc-v hit">✓ ACIERTO</span></div>
+<div class="sc-row" data-v="hit"><span class="sc-said">El vector gira a <b>↓</b> por dos sesiones de deterioro.</span><span class="sc-did">La amplitud empeoró a <b>225 mínimos / 39 máximos</b> y 26.05% de volumen comprador.</span><span class="sc-v hit">✓ ACIERTO</span></div>
+<div class="sc-row" data-v="miss"><span class="sc-said">No operar largo de crudo/XLE por riesgo de gap binario.</span><span class="sc-did">Brent superó <b>$101</b> y XLE fue el único sector verde. Cuarta sesión consecutiva de coste de oportunidad.</span><span class="sc-v miss">✕ FALLO</span></div>
+<div class="sc-row" data-v="miss"><span class="sc-said">No operar oro: el mecanismo geopolítico había perdido contra tasas.</span><span class="sc-did">El spot rebotó <b>+0.99%</b>. La tesis pasa de muerta a revisada: respuesta con retardo, no ausencia.</span><span class="sc-v miss">✕ FALLO</span></div>
+<div class="sc-row" data-v="hit"><span class="sc-said">No adelantar el Setup #5 sin cierre de 30Y ≥5.300%.</span><span class="sc-did">El 30Y cerró <b>5.292%</b>, a 0.8pb. Decimoquinto fallo del setup; no se anticipa.</span><span class="sc-v hit">✓ ACIERTO</span></div>
+<div class="sc-row" data-v="miss"><span class="sc-said">IPC de agosto: jueves 10.</span><span class="sc-did">El BLS lo publica el <b>viernes 11 a las 08:30 ET</b>. Error de calendario, sin coste operativo.</span><span class="sc-v miss">✕ FALLO</span></div>
+</div><div class="sc-mea fade"><b>ME CULPA · 9 SEP:</b> la fecha del IPC se tomó de un feed social y era incorrecta. Desde hoy, una fecha macro entra solo con fuente emisora o queda declarada como no verificada. El coste fue cero porque la acción estaba escrita sobre el cierre del 10Y, no sobre el dato.</div>
+</div></section>
+<!-- ===== 01C · HILOS ===== -->
+<section class="threads-sec"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 01C</div><h2 class="sec-title">Lo que sigue abierto</h2><div class="sec-line"></div><div class="sec-sub">seis asuntos · uno gira · uno nuevo</div></div><p class="th-intro fade">El cruce del 10Y cierra una fase del hilo de tasas, pero no la historia: ahora pasa a segunda escalada. Entra una nueva pregunta estructural sobre la capacidad del Tesoro para contener el extremo largo.</p><div class="threads fade" id="threadsList"></div><p class="th-foot fade">Los nombres se conservan entre ediciones. Un hilo que gira mantiene identidad y explica qué cambió; ninguno desaparece en silencio.</p></div></section>
+<!-- ===== MEM · MEMORIA 4 DÍAS ===== -->
+<section class="memory"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// MEM</div><h2 class="sec-title">Lo que cambió en 4 ediciones</h2><div class="sec-line"></div><div class="sec-sub">3S · 4S · 8S · 9S</div></div><div class="mem-grid fade" id="memGrid"></div><p class="mem-footnote fade">▸ Ventana FIFO: salió 2S y entró 9S. Hoy: WTI <b>$96.05 settle</b>; SPX <b>7,636 verificado</b>; VIX <b>16.47</b>; SKEW <b>148.86</b>; GOLD spot <b>$4,399.61</b>; BTC <b>$78.286K</b>. El 10Y gobierna por cierre verificado de <b>4.841%</b>, no por ticker.</p><p class="mem-footnote mem-errata fade"><b>INTEGRIDAD:</b> el IPC de agosto queda corregido a <b>viernes 11 de septiembre · 08:30 ET</b>. El error de calendario de la edición previa no se borra; se corrige a la vista.</p></div></section>
+<!-- ===== 02 · TESIS EN 3 FUERZAS ===== -->
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 02</div><h2 class="sec-title">La tesis en 3 fuerzas</h2><div class="sec-line"></div><div class="sec-sub">demanda de Treasuries · Ormuz · amplitud</div></div><p class="thesis-q fade">El gatillo no fue un accidente de pantalla. La recompra del Tesoro no frenó el rendimiento, el shock de energía siguió empujando inflación y el índice escondió una ruptura mucho mayor por debajo. <em>La ejecución de la Rama A es la consecuencia; el problema es el precio de equilibrio del capital.</em></p><div class="forces">
+<div class="force fade"><div class="force-n">01</div><div class="force-t">El Tesoro compra más y el bono cae igual</div><div class="force-x">La recompra subió a <b>$6.000M</b>, triple de lo habitual, y el 10Y cerró en <b>4.841%</b>. La subasta a 10 años se adjudicó en <b>4.834%</b> frente a 4.683% previa. El problema ya no parece de liquidez: es de precio.</div></div>
+<div class="force fade"><div class="force-n">02</div><div class="force-t">Ormuz sigue cotizando inflación</div><div class="force-x">Brent cerró <b>101.21</b> y WTI settle <b>96.05</b>, séptima sesión al alza. Por segunda jornada, acciones y bonos cayeron juntos con la escalada militar: el mercado trata la guerra como shock de oferta.</div></div>
+<div class="force fade"><div class="force-n">03</div><div class="force-t">El índice aguanta; la mediana se rompe</div><div class="force-x">El S&amp;P perdió <b>0.48%</b>, pero hubo <b>225 mínimos contra 39 máximos</b>, A/D <b>0.37</b> y volumen comprador <b>26.05%</b>. IWM cayó 1.37% y RSP 0.96%: la concentración se agudiza.</div></div>
+</div></div></section>
+<!-- ===== 03 · CRONOLOGÍA ===== -->
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 03</div><h2 class="sec-title">Cronología táctica</h2><div class="sec-line"></div><div class="sec-sub">recompra · subasta · gatillo · amplitud · crédito</div></div><div class="tl">
+<div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">9S · Tesoro</span><span class="tl-src">RECOMPRA</span></div><div><div class="tl-t">La recompra se triplica a $6.000M</div><div class="tl-b">El emisor intenta contener la curva larga y el rendimiento sube igual. Se abre un hilo estructural nuevo.</div></div><div class="tl-tags"><span class="tl-tag crit">DEMANDA</span></div></div>
+<div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">9S · cierre</span><span class="tl-src">10Y / EFE</span></div><div><div class="tl-t">4.841%: el gatillo cruza al cierre</div><div class="tl-b">La condición estaba escrita antes de la sesión. Rama A ejecuta <b>12 puntos</b> y la caja sube a <b>74%</b> bajo Defecto 23.</div></div><div class="tl-tags"><span class="tl-tag crit">EJECUTA</span></div></div>
+<div class="tl-ev crit fade"><div class="tl-meta"><span class="tl-time">9S · NYSE</span><span class="tl-src">NBD</span></div><div><div class="tl-t">Los nuevos mínimos se multiplican por 2.3</div><div class="tl-b"><b>225 mínimos</b> frente a 39 máximos; volumen comprador 26.05%. El deterioro se ensancha mientras el índice cae menos de medio punto.</div></div><div class="tl-tags"><span class="tl-tag crit">FRÁGIL</span></div></div>
+<div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">9S · crédito</span><span class="tl-src">HY OAS</span></div><div><div class="tl-t">El contador de des-escalada revive</div><div class="tl-b">HY OAS se estrecha de 2.68% a <b>2.67%</b>. Es la primera observación: <b>1/2</b>, aunque el bloque de crédito 4W siga deteriorado.</div></div><div class="tl-tags"><span class="tl-tag hot">1/2</span></div></div>
+<div class="tl-ev fade"><div class="tl-meta"><span class="tl-time">9S · Japón</span><span class="tl-src">FX / JGB</span></div><div><div class="tl-t">El yen suma 42 pips y el JGB se aleja del umbral</div><div class="tl-b">USD/JPY <b>153.589</b>; proxy JGB 30Y <b>3.954%</b>. El #7 mejora y la presión sobre Rama B baja.</div></div><div class="tl-tags"><span class="tl-tag">#7</span></div></div>
+</div></div></section>
+<!-- ===== 04 · CANAL RUMOR ===== -->
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 04</div><h2 class="sec-title">Canal rumor</h2><div class="sec-line"></div><div class="sec-sub">Fed · BOJ · BTC</div></div><div class="rumor-note fade"><b>CANAL NO CONFIRMADO:</b> referencias de terceros sirven para hipótesis o sentiment. No modifican ramas, precios ni calendario.</div><div class="rumors">
+<div class="rumor fade"><div class="rumor-head"><span class="rumor-src">FEED · MERCADO FED</span><span class="rumor-conf conf-mid">confianza baja</span></div><div class="rumor-t">Circula una probabilidad de subida de la Fed de 63.6% para el FOMC del 16.</div><div class="rumor-impact"><b>Lectura:</b> se conserva como sentiment. La señal verificable es el 2Y en 4.434%, 80.4pb por encima de fondos federales.</div></div>
+<div class="rumor fade"><div class="rumor-head"><span class="rumor-src">KYODO · VÍA FEED</span><span class="rumor-conf conf-mid">confianza media</span></div><div class="rumor-t">Sigue viva la versión de una subida de 25pb del Banco de Japón en septiembre.</div><div class="rumor-impact"><b>Lectura:</b> puede explicar el yen, pero la decisión sigue sin confirmación primaria. El precio sí es verificable.</div></div>
+<div class="rumor fade"><div class="rumor-head"><span class="rumor-src">FEED · BTC</span><span class="rumor-conf conf-mid">confianza baja</span></div><div class="rumor-t">Un “golden cross” y mapas de liquidaciones se usan como argumento alcista.</div><div class="rumor-impact"><b>Lectura:</b> OI cae 0.48% y los mapas siguen sin invalidación operativa. Quedan fuera del libro.</div></div>
+</div></div></section>
+<!-- ===== 05 · DATA VIVA ===== -->
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 05</div><h2 class="sec-title">Data viva</h2><div class="sec-line"></div><div class="sec-sub">10Y · MOVE · dispersión 9S</div></div><p class="audit-note fade"><b>AUDITORÍA:</b> NBD y Vol Analyzer están frescos al 9-sep. Terminal de Señales usa cierres de hoy, pero sus velas 1W pueden seguir abiertas. Japan/Carry está D-1; CORI es semanal por diseño; TIPS y FCI siguen stale. El 10Y gobierna por cierre externo verificado; BTC conserva dirección, no magnitud porcentual.</p><div class="charts">
+<div class="chart-card wide fade"><div class="ch-head"><div><span class="ch-sym">UST 10Y</span><span class="ch-meta">3S → 4S → 8S → 9S · rendimiento %</span></div><span class="ch-tag" style="color:var(--risk);border:1px solid var(--risk)">TRIGGER</span></div><div class="ch-body"><div class="chart-plot"><svg preserveaspectratio="none" viewbox="0 0 1080 220"><g id="normalizedGrid"></g><g id="normalizedSeries"></g><g id="normalizedLeaders"></g></svg><span class="chart-label date" data-norm-date="0" style="left:8%;bottom:4px">3S</span><span class="chart-label date anchor-c" data-norm-date="1" style="left:36%;bottom:4px">4S</span><span class="chart-label date anchor-c" data-norm-date="2" style="left:64%;bottom:4px">8S</span><span class="chart-label date anchor-c" data-norm-date="3" style="left:82%;bottom:4px">9S</span><span class="chart-label risk" data-norm-label="UST10" style="right:1%;top:28%">UST10</span><span class="chart-label trigger-lbl r" data-trigger-label="A10">4.800% · CRUZADO</span></div><div class="legend"><span><i style="background:var(--risk)"></i>4.772 → 4.784 → 4.792 → 4.841%</span><span><b>Lectura:</b> el nivel ya no es proximidad: quedó 4.1pb por debajo del cierre y la rama ejecutó.</span></div></div></div>
+<div class="chart-card fade"><div class="ch-head"><div><span class="ch-sym">MOVE</span><span class="ch-meta">3S → 4S → 8S → 9S</span></div><span class="ch-tag qa-live" style="border:1px solid var(--signal)">VIVO</span></div><div class="ch-body"><div class="chart-plot small"><svg preserveaspectratio="none" viewbox="0 0 520 180"><g id="riskGrid"></g><g id="riskSeries"></g><g id="riskLeaders"></g></svg><span class="chart-label date" data-risk-date="0" style="left:10%;bottom:4px">3S</span><span class="chart-label date anchor-c" data-risk-date="1" style="left:36%;bottom:4px">4S</span><span class="chart-label date anchor-c" data-risk-date="2" style="left:62%;bottom:4px">8S</span><span class="chart-label date anchor-c" data-risk-date="3" style="left:80%;bottom:4px">9S</span><span class="chart-label alert" data-risk-label="MOVE" style="right:1%;top:30%">MOVE</span><span class="chart-label trigger-lbl s" data-trigger-label="C70">70.00 · DES-ESCALA</span></div><div class="legend"><span><i style="background:var(--alert)"></i>74.68 → 73.10 → 76.14 → 76.74</span><span><b>Lectura:</b> segunda sesión alejándose de 70; contador 0/2.</span></div></div></div>
+<div class="chart-card fade"><div class="ch-head"><div><span class="ch-sym">DISPERSIÓN 9S</span><span class="ch-meta">energía / megacap frente a tamaño y equiponderado</span></div><span class="ch-tag" style="color:var(--info);border:1px solid var(--info)">CONCENTRACIÓN</span></div><div class="ch-body"><div class="bar-chart" id="sectorBars"></div><div class="legend"><span><b>Lectura:</b> XLE es el único sector verde; QQQ cae poco, mientras IWM y RSP concentran el daño.</span></div></div></div>
+</div></div></section>
+<!-- ===== 06 · SEÑAL VS RUIDO ===== -->
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 06</div><h2 class="sec-title">Señal vs ruido</h2><div class="sec-line"></div><div class="sec-sub">qué mueve el marco · qué queda fuera</div></div><div class="sr">
+<div class="sr-col sig fade"><div class="sr-h sig">Señal</div>
+<div class="sr-item"><span class="sr-n">01</span><span><b>10Y 4.841%.</b> Cruce de cierre verificado: primera ejecución de Rama A.</span></div>
+<div class="sr-item"><span class="sr-n">02</span><span><b>225 mínimos / 39 máximos.</b> La amplitud se rompe mucho más que el índice.</span></div>
+<div class="sr-item"><span class="sr-n">03</span><span><b>Recompra $6.000M.</b> El Tesoro compra más y el rendimiento sube igual.</span></div>
+<div class="sr-item"><span class="sr-n">04</span><span><b>Brent 101.21 / WTI 96.05.</b> El shock de oferta sigue trasladándose a tasas.</span></div>
+<div class="sr-item"><span class="sr-n">05</span><span><b>HY OAS 2.67%.</b> Primera observación de estrechamiento; contador 1/2.</span></div>
+</div><div class="sr-col noise fade"><div class="sr-h noise">Ruido / bloqueado</div>
+<div class="sr-item"><span class="sr-n">01</span><span><b>63.6% de subida Fed.</b> Atribuido a feed; sin volumen verificable.</span></div>
+<div class="sr-item"><span class="sr-n">02</span><span><b>JGB 30Y proxy 3.954%.</b> JSDA ausente por 18ª sesión; no ejecuta Rama B.</span></div>
+<div class="sr-item"><span class="sr-n">03</span><span><b>“Golden cross” de BTC.</b> Titular sin invalidación de trade.</span></div>
+<div class="sr-item"><span class="sr-n">04</span><span><b>Oro 4,444 de prensa.</b> Es futuro; gobierna spot 4,399.61.</span></div>
+<div class="sr-item"><span class="sr-n">05</span><span><b>IPC jueves 10.</b> Fecha incorrecta de la edición anterior; BLS confirma viernes 11.</span></div>
+</div></div></div></section>
+<!-- ===== 06B · LO QUE NO OPERÉ ===== -->
+<section class="nop"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 06B</div><h2 class="sec-title">Lo que no operé</h2><div class="sec-line"></div><div class="sec-sub">seis rechazos · una ejecución de rama</div></div><p class="nop-intro fade">La Rama A sí se ejecutó. Fuera de esa mecánica, no se agregó riesgo nuevo.</p><div class="nop-grid fade">
+<div class="nop-item"><span class="nop-why">Por prematuro</span><b>Largo de crudo / XLE.</b>Cuarta sesión de coste de oportunidad. Se mantiene fuera por riesgo de gap político no stopeable.</div>
+<div class="nop-item"><span class="nop-why">Sin invalidación</span><b>Corto de IGV.</b>La dirección sigue funcionando, pero no hay nivel escrito de salida.</div>
+<div class="nop-item"><span class="nop-why">Sin invalidación</span><b>Corto de renta variable por amplitud rota.</b>La tesis es fuerte; el S&amp;P sigue demasiado cerca de máximos para inventar un stop.</div>
+<div class="nop-item"><span class="nop-why">Por duplicar el libro</span><b>Largo de oro tras el rebote.</b>Sería recomprar por Plan B el activo que Rama A acaba de liquidar por régimen.</div>
+<div class="nop-item"><span class="nop-why">Sin invalidación</span><b>Corto de BTC hacia 77.4K–77.9K.</b>OI cae 0.48%; el mapa de liquidaciones no es un setup.</div>
+<div class="nop-item"><span class="nop-why">Por prematuro</span><b>Adelantar Setup #5.</b>30Y a 5.292%, exactamente 0.8pb por debajo del 5.300% escrito.</div>
+</div><p class="nop-foot fade">La simetría manda: ayer 0.8pb bastaron para no disparar el 10Y; hoy 0.8pb bastan para no anticipar el 30Y.</p></div></section>
+<!-- ===== 07 · SEMÁFORO ===== -->
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 07</div><h2 class="sec-title">Semáforo de activos</h2><div class="sec-line"></div><div class="sec-sub">rojo ↓ · sesión 16 · primera escalada ejecutada</div></div><div class="sem-tools fade"><button class="sem-btn active" data-sev="all"><span class="dot"></span>Todos</button><button class="sem-btn" data-sev="critical"><span class="dot"></span>Crítico</button><button class="sem-btn" data-sev="alert"><span class="dot"></span>Alerta</button><button class="sem-btn" data-sev="watch"><span class="dot"></span>Monitoreo</button></div><div class="sem-grid">
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · TASAS</div><div class="sem-name">UST 10Y / 30Y</div><div class="sem-desc">10Y <b>4.841%</b> ejecutó Rama A. 30Y <b>5.292%</b>, a 0.8pb del Setup #5.</div></div>
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · AMPLITUD</div><div class="sem-name">NYSE / tamaño</div><div class="sem-desc"><b>225 mínimos vs 39 máximos</b>, A/D 0.37, volumen comprador 26.05%. IWM −1.37%.</div></div>
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · VOLATILIDAD</div><div class="sem-name">MOVE / VIX / SKEW</div><div class="sem-desc">MOVE <b>76.74</b>, VIX <b>16.47</b>, SKEW <b>P79</b>. El cuerpo acelera mientras la cola se abarata.</div></div>
+<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · ENERGÍA</div><div class="sem-name">Brent / WTI / XLE</div><div class="sem-desc">Brent <b>101.21</b>, WTI settle <b>96.05</b>. Tendencia fuerte con riesgo de gap político.</div></div>
+<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · SALUD</div><div class="sem-name">XLV / Rama H</div><div class="sem-desc">XLV <b>166.58</b>, a 1.58 puntos de la invalidación de 165.00.</div></div>
+<div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · JAPÓN / FX</div><div class="sem-name">Yen / JGB / BOJ</div><div class="sem-desc">USD/JPY <b>153.589</b>; #7 +641p. JGB 30Y proxy 3.954%; JSDA ausente 18ª.</div></div>
+</div></div></section>
+<!-- ===== 07B · NIVELES DE LA SESIÓN ===== -->
+<section class="levels"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 07B</div><h2 class="sec-title">Niveles de la sesión</h2><div class="sec-line"></div><div class="sec-sub">cierre 9S · nivel · distancia · consecuencia</div></div><p class="lv-intro fade">El 4.800% deja de ser nivel de vigilancia y pasa al registro de ejecución. El nuevo riesgo de escalada se fija antes de la próxima sesión.</p><div class="lv-table fade"><div class="lv-head"><span>Instrumento</span><span>Cierre 9S</span><span>Nivel</span><span>Distancia</span><span>Qué activa</span></div>
+<div class="lv-row" data-prox="near"><span class="lv-nm">UST 10Y<em>segunda escalada</em></span><span class="lv-now">4.841%</span><span class="lv-trig">&gt;4.900%<em>al cierre</em></span><span class="lv-dist near">5.9pb</span><span class="lv-act">Rama A-2 · liquida XLV 3% · caja 74%→77%</span></div>
+<div class="lv-row" data-prox="near"><span class="lv-nm">UST 30Y<em>setup #5</em></span><span class="lv-now">5.292%</span><span class="lv-trig">≥5.300%<em>al cierre</em></span><span class="lv-dist near">0.8pb</span><span class="lv-act">Reabre payer swaptions / puts TLT</span></div>
+<div class="lv-row" data-prox="mid"><span class="lv-nm">UST 30Y<em>Rama A-2</em></span><span class="lv-now">5.292%</span><span class="lv-trig">&gt;5.400%<em>al cierre</em></span><span class="lv-dist mid">10.8pb</span><span class="lv-act">Segunda escalada · mismo destino XLV 3%</span></div>
+<div class="lv-row" data-prox="stale"><span class="lv-nm">JGB 30Y<em>proxy · JSDA ausente 18ª</em></span><span class="lv-now stale">3.954%</span><span class="lv-trig">≥4.000%<em>cierre oficial JSDA</em></span><span class="lv-dist stale">sin fuente</span><span class="lv-act">Rama B; el proxy se aleja, pero no puede ejecutar</span></div>
+<div class="lv-row" data-prox="mid"><span class="lv-nm">MOVE<em>des-escalada</em></span><span class="lv-now">76.74</span><span class="lv-trig">&lt;70.00<em>dos cierres</em></span><span class="lv-dist mid">6.74 pts · 0/2</span><span class="lv-act">Rama C · vía 1</span></div>
+<div class="lv-row" data-prox="mid"><span class="lv-nm">HY OAS<em>des-escalada</em></span><span class="lv-now">2.67%</span><span class="lv-trig">2ª observación<em>estrechando</em></span><span class="lv-dist up">1 de 2</span><span class="lv-act">Rama C · vía más viva</span></div>
+<div class="lv-row" data-prox="far"><span class="lv-nm">SKEW / VIX<em>Rama F-bis</em></span><span class="lv-now">P79 / P38</span><span class="lv-trig">≤60 / ≤25<em>mismo cierre</em></span><span class="lv-dist far">fallan 2/2</span><span class="lv-act">Reabre 2% de convexidad</span></div>
+<div class="lv-row" data-prox="mid"><span class="lv-nm">USD/JPY<em>setup #7</em></span><span class="lv-now">153.589</span><span class="lv-trig">150.00 obj · 163.00 inval</span><span class="lv-dist up">+641 pips</span><span class="lv-act">Corto vivo · no ampliar</span></div>
+<div class="lv-row" data-prox="near"><span class="lv-nm">XLV<em>Rama H</em></span><span class="lv-now">166.58</span><span class="lv-trig">&lt;165.00<em>al cierre</em></span><span class="lv-dist near">1.58 · 0.95%</span><span class="lv-act">Liquida 3% · caja 74%→77%</span></div>
+</div><p class="lv-note fade"><b>Defecto 23 ya tuvo consecuencia real:</b> la Rama A histórica declaraba 80%, pero solo tenía 12 puntos enumerados. La ejecución válida termina en <b>74%</b>; los 8 puntos restantes no se inventan. La moratoria de reparación sigue activa porque el 10Y está a menos de 10pb del nuevo umbral 4.900%.</p></div></section>
+<!-- ===== 08 · HORIZONTES ===== -->
+<section><div class="wrap">
+<div class="sec-head fade"><div class="sec-num">// 08</div><h2 class="sec-title">Cómo se estructura esto</h2><div class="sec-line"></div><div class="sec-sub">estructura de referencia por horizonte · 3M vs 6M</div></div>
+<p class="hz-frame fade"><b>Estas dos carteras son estructuras de referencia. No son un libro operado ni una cartera modelo para replicar.</b> Sirven para mostrar cómo se traduce la lectura del régimen a una asignación con horizonte, tesis e invalidación declaradas. No contemplan la situación financiera, el horizonte real ni la tolerancia al riesgo de quien lee.</p><div class="hz-context fade">
+<div class="hzc-head">De dónde viene el mercado</div>
+<div class="hzc-grid">
+<div class="hzc"><span class="hzc-k">Tasas</span><span class="hzc-v r">4.509% → 4.841%</span><span class="hzc-d">10Y · cerró sobre 4.800% y disparó Rama A; ahora 5.9pb debajo del 4.900%</span></div>
+<div class="hzc"><span class="hzc-k">Oro</span><span class="hzc-v a">$4.007 → $4.400</span><span class="hzc-d">oro rebota 0.99% en 9S; la respuesta geopolítica aparece con retardo</span></div>
+<div class="hzc"><span class="hzc-k">Equity</span><span class="hzc-v">7.443 → 7.636</span><span class="hzc-d">el índice cede y tamaño/equiponderado vuelven a caer más que QQQ</span></div>
+<div class="hzc"><span class="hzc-k">Régimen</span><span class="hzc-v r">🟡 → 🔴</span><span class="hzc-d">sigue rojo; vector ↓ y primera Rama A ejecutada</span></div>
+</div>
+<p class="hzc-note">La banda de 90 días calibra contra el mercado observado entre mayo y septiembre; mejora la referencia, pero no representa un ciclo completo.</p>
+</div>
+<div class="op-tabs fade"><button class="op-tab active" data-hz="3m">Horizonte 3 meses</button><button class="op-tab" data-hz="6m">Horizonte 6 meses</button></div>
+<div class="op-panel active" id="hz3m">
+<div class="hz-status" data-state="flat" data-hz="3m">
+<div class="hzs-block"><span class="hzs-l">Cartera 3M · referencia</span><span class="hzs-v">abierta 3 SEP · cierra 3 DIC</span></div>
+<div class="hzs-block"><span class="hzs-l">Sesión</span><span class="hzs-v">4 de 63</span></div>
+<div class="hzs-block"><span class="hzs-l">P&amp;L desde apertura</span><span class="hzs-v" id="pnl3m">—</span></div>
+<div class="hzs-block"><span class="hzs-l">Posiciones vivas</span><span class="hzs-v">6 de 7</span></div>
+<div class="hzs-block wide"><span class="hzs-l">Último cambio</span><span class="hzs-v r">4 SEP · convexidad cerrada; +5 puntos a caja</span></div>
+</div>
+<p class="hz-sub">El horizonte de tres meses no cambia composición. La volatilidad sube, pero la cobertura cerrada el 4S sigue invalidada por SKEW P88; los marcadores se actualizan y la caja permanece en 45%.</p>
+<div class="pos" data-mark="cash3m" data-stop="none"><div class="pos-head"><span class="pos-w">45%</span><span class="pos-nm">Caja / letras ultracortas<em>reserva líquida · estructura 3M</em></span><span class="pos-state up">VIVA · sin cambios desde 4 SEP</span><span class="pos-contrib" data-mark="cash3m">—</span></div><p class="pos-why">Los 5 puntos liberados por la convexidad siguen en caja. La estructura no reasigna ese peso mientras la condición de reapertura continúe bloqueada.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>—</span><span class="pl"><b>Take profit</b>—</span><span class="pl"><b>Stop</b>— · caja</span></div></div>
+<div class="pos" data-mark="dur3m" data-stop="thesis"><div class="pos-head"><span class="pos-w">20%</span><span class="pos-nm">Duración corta 1–3Y<em>frente corto · referencia por 2Y</em></span><span class="pos-state nt">VIVA · 2Y 4.434%</span><span class="pos-contrib" data-mark="dur3m">—</span></div><p class="pos-why">El 2Y sube a 4.434% y paga cerca de 77 puntos básicos sobre los fondos federales. La referencia conserva 20%: el frente corto sigue remunerando mejor que perseguir duración larga a dos días del IPC.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>2Y 4.342%</span><span class="pl tp"><b>Take profit</b>Prima 2Y−Fed &gt;70pb</span><span class="pl sl"><b>Stop · tesis</b>10Y &gt;5.00% desordenado o prima &lt;40pb <em>no por precio</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:100.0%"></i></span><span class="pr-v">4.211% <em>20 jul</em> — 4.434% <em>9 sep</em></span></div></div>
+<div class="pos" data-mark="gold" data-stop="price"><div class="pos-head"><span class="pos-w">10%</span><span class="pos-nm">Oro<em>hedge de tasa real · GLD / spot</em></span><span class="pos-state dn">VIVA · +0.99% spot</span><span class="pos-contrib" data-mark="gold">—</span></div><p class="pos-why">El spot rebota a 4,399.61 pese al alza de tasas. El stop de 4,000 sigue intacto y la demanda de bancos centrales mantiene la tesis de fondo.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>4,472.10</span><span class="pl tp"><b>Take profit</b>4,650.00 <em>+4.0%</em></span><span class="pl sl"><b>Stop · precio</b>4,000.00 <em>−10.6%</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:-1.1%"></i><i class="pr-now" style="left:54.3%"></i><i class="pr-tp" style="left:99.8%"></i></span><span class="pr-v">$4.007 <em>20 jul</em> — $4.651 <em>24 ago</em></span></div></div>
+<div class="pos" data-mark="equity" data-stop="thesis"><div class="pos-head"><span class="pos-w">10%</span><span class="pos-nm">Núcleo RV<em>VOO / SPY · exposición estratégica</em></span><span class="pos-state dn">VIVA · SPY −0.46%</span><span class="pos-contrib" data-mark="equity">—</span></div><p class="pos-why">SPY cierra en 762.40 y el equiponderado vuelve a quedar atrás. El núcleo se conserva por horizonte, sin añadir riesgo mientras amplitud y crédito deterioren.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>SPY 773.12</span><span class="pl tp"><b>Take profit</b>— · horizonte</span><span class="pl sl"><b>Stop · tesis</b>Escalada de régimen <em>no por precio</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:74.1%"></i></span><span class="pr-v">7.443 <em>20 jul</em> — 7.754 <em>10 ago</em></span></div></div>
+<div class="pos" data-mark="xlv" data-stop="price"><div class="pos-head"><span class="pos-w">8%</span><span class="pos-nm">XLV salud<em>pata defensiva</em></span><span class="pos-state dn">VIVA · 166.58 · cerca de 165</span><span class="pos-contrib" data-mark="xlv">—</span></div><p class="pos-why">XLV queda en 166.58 con tendencia bajista fuerte y a 1.3% del stop de 165. La referencia mantiene tamaño y prohíbe promediar.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>173.26</span><span class="pl tp"><b>Take profit</b>190.00 <em>+9.7%</em></span><span class="pl sl"><b>Stop · precio</b>165.00 <em>−4.8%</em></span></div><p class="pos-range-missing"><b>Banda 90d omitida:</b> las fuentes de referencia no publican una serie de precio de XLV suficiente para verificar mínimo y máximo. No se estiman extremos.</p></div>
+<div class="pos" data-mark="jpy" data-stop="price"><div class="pos-head"><span class="pos-w">7%</span><span class="pos-nm">Corto USD/JPY<em>setup #7 · largo yen</em></span><span class="pos-state up">VIVA · 153.589</span><span class="pos-contrib" data-mark="jpy">—</span></div><p class="pos-why">USD/JPY cae a 153.589. Desde la apertura de la estructura en 155.752 el largo yen gana ~174 pips; el BOJ del 17–18 sigue como catalizador y 163.00 como invalidación.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>155.752</span><span class="pl tp"><b>Take profit</b>150.00 <em>+3.7%</em></span><span class="pl sl"><b>Stop · precio</b>163.00 <em>−4.7%</em></span></div><div class="pos-range" data-out="left"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:105.5%"></i><i class="pr-now" style="left:0.0%"></i><i class="pr-tp" style="left:-47.1%"></i></span><span class="pr-v">153.589 <em>9 sep</em> — 162.53 <em>20 jul</em></span></div></div>
+<div class="pos" data-mark="convex" data-stop="thesis"><div class="pos-head"><span class="pos-w">0%</span><span class="pos-nm">Convexidad<em>puts SPX / VIX calls</em></span><span class="pos-state r">CERRADA 4 SEP · stop de tesis</span><span class="pos-contrib" data-mark="convex">—</span></div><p class="pos-why">SKEW alcanzó percentil 86 y cruzó el stop fijado en ≥85. La referencia cierra la posición y mueve sus 5 puntos a caja. P&amp;L no calculable sin precio directo del vehículo.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>Puts SPX / VIX calls</span><span class="pl tp"><b>Take profit</b>Repunte de vol</span><span class="pl sl"><b>Stop · tesis</b>SKEW pct ≥85 · VIX pct ≥60 · 45d <em>no por precio</em></span></div></div>
+<p class="mark-note">El resultado combina precio de cierre para las posiciones con mercado directo, <b>duración modificada declarada</b> para los tramos de curva (1,90 en 1–3 años · 5,40 en 3–7 años) y <b>devengo a la tasa de referencia</b> para la caja. Los tramos de curva son una aproximación, no una valuación. Una posición cerrada conserva su resultado del día del cierre y sigue contando.</p><div class="hz-log"><div class="hzl-head">Cambios de cartera</div><div class="hzl-empty">4 SEP · Convexidad 5% → 0% por SKEW P86 ≥85. Caja 40% → 45%. Cambio registrado por stop de tesis; el histórico no se reescribe.</div></div>
+</div>
+<div class="op-panel" id="hz6m">
+<div class="hz-status" data-state="flat" data-hz="6m">
+<div class="hzs-block"><span class="hzs-l">Cartera 6M · referencia</span><span class="hzs-v">abierta 3 SEP · cierra 3 MAR 2027</span></div>
+<div class="hzs-block"><span class="hzs-l">Sesión</span><span class="hzs-v">4 · seguimiento</span></div>
+<div class="hzs-block"><span class="hzs-l">P&amp;L desde apertura</span><span class="hzs-v" id="pnl6m">—</span></div>
+<div class="hzs-block"><span class="hzs-l">Posiciones vivas</span><span class="hzs-v">7 de 8</span></div>
+<div class="hzs-block wide"><span class="hzs-l">Último cambio</span><span class="hzs-v r">4 SEP · convexidad cerrada; +4 puntos a caja</span></div>
+</div>
+<p class="hz-sub">A seis meses tampoco cambia la composición. Energía protege el shock de oferta, mientras duración, oro y equity absorben el alza de tasas; la convexidad permanece cerrada por su stop de tesis.</p>
+<div class="pos" data-mark="cash6m" data-stop="none"><div class="pos-head"><span class="pos-w">29%</span><span class="pos-nm">Caja / letras<em>reserva líquida · estructura 6M</em></span><span class="pos-state up">VIVA · sin cambios desde 4 SEP</span><span class="pos-contrib" data-mark="cash6m">—</span></div><p class="pos-why">Los 4 puntos liberados por la convexidad permanecen en caja. La estructura 6M mantiene más beta, pero no reasigna por una sola sesión de volatilidad.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>—</span><span class="pl"><b>Take profit</b>—</span><span class="pl"><b>Stop</b>— · caja</span></div></div>
+<div class="pos" data-mark="dur6m" data-stop="thesis"><div class="pos-head"><span class="pos-w">20%</span><span class="pos-nm">Duración intermedia 3–7Y<em>apuesta a techo de tasas</em></span><span class="pos-state a">VIVA · 10Y 4.841%</span><span class="pos-contrib" data-mark="dur6m">—</span></div><p class="pos-why">El 10Y cierra en 4.841% y cruza el gatillo de la Rama A. La posición semestral tolera el movimiento, aunque el shock energético debilita la tesis de techo de tasas antes del IPC.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>10Y 4.772%</span><span class="pl tp"><b>Take profit</b>10Y &lt;4.50% <em>obj. 1</em><br/><span class="pl-sub">10Y &lt;4.20% · objetivo 2</span></span><span class="pl sl"><b>Stop · tesis</b>Precios pagados &gt;70 dos trimestres <em>no por precio</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:100.0%"></i><i class="pr-tp" style="left:-3.2%"></i></span><span class="pr-v">4.509% <em>22 jun</em> — 4.841% <em>9 sep</em></span></div></div>
+<div class="pos" data-mark="equity" data-stop="thesis"><div class="pos-head"><span class="pos-w">20%</span><span class="pos-nm">Núcleo RV<em>VOO / SPY · exposición estratégica</em></span><span class="pos-state dn">VIVA · SPY −0.46%</span><span class="pos-contrib" data-mark="equity">—</span></div><p class="pos-why">El horizonte de seis meses conserva el núcleo pese al retroceso. La participación sigue frágil y el riesgo nuevo no aumenta hasta ver reparación en amplitud y crédito.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>SPY 773.12</span><span class="pl tp"><b>Take profit</b>— · horizonte</span><span class="pl sl"><b>Stop · tesis</b>Escalada de régimen <em>no por precio</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:74.1%"></i></span><span class="pr-v">7.443 <em>20 jul</em> — 7.754 <em>10 ago</em></span></div></div>
+<div class="pos" data-mark="gold" data-stop="price"><div class="pos-head"><span class="pos-w">12%</span><span class="pos-nm">Oro<em>hedge estructural · GLD / spot</em></span><span class="pos-state dn">VIVA · +0.99% spot</span><span class="pos-contrib" data-mark="gold">—</span></div><p class="pos-why">El oro cede a 4,399.61 y falla como refugio durante la escalada. La demanda de bancos centrales sigue vigente; el stop de 4,000 conserva la disciplina de precio.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>4,472.10</span><span class="pl tp"><b>Take profit</b>5,200.00 <em>+16.3%</em></span><span class="pl sl"><b>Stop · precio</b>4,000.00 <em>−10.6%</em></span></div><div class="pos-range" data-out="right"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:-1.1%"></i><i class="pr-now" style="left:54.3%"></i><i class="pr-tp" style="left:185.2%"></i></span><span class="pr-v">$4.007 <em>20 jul</em> — $4.651 <em>24 ago</em></span></div></div>
+<div class="pos" data-mark="xle" data-stop="thesis"><div class="pos-head"><span class="pos-w">8%</span><span class="pos-nm">XLE energía<em>cobertura de inflación de oferta</em></span><span class="pos-state up">VIVA · XLE +0.83%</span><span class="pos-contrib" data-mark="xle">—</span></div><p class="pos-why">Brent sube a 101.21 y XLE gana 0.83%, coherentes con el shock de oferta. El stop intermedio sigue siendo Brent bajo 85 durante dos cierres.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>64.62</span><span class="pl tp"><b>Take profit</b>72.00 <em>+11.4%</em></span><span class="pl sl"><b>Stop · tesis</b>Brent bajo $85 · dos cierres <em>no por precio de XLE</em></span></div><p class="pos-range-missing"><b>Banda 90d omitida:</b> la serie de referencia no publica precio de XLE en las fechas necesarias. Brent aparece solo como proxy aproximado; se evita convertir ese proxy en extremos inventados del ETF.</p></div>
+<div class="pos" data-mark="jpy" data-stop="price"><div class="pos-head"><span class="pos-w">8%</span><span class="pos-nm">Corto USD/JPY<em>setup #7 · largo yen</em></span><span class="pos-state up">VIVA · 153.589</span><span class="pos-contrib" data-mark="jpy">—</span></div><p class="pos-why">USD/JPY cae a 153.589 con el BOJ a nueve días. La estructura gana desde 155.752 y mantiene 163.00 como invalidación.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>155.752</span><span class="pl tp"><b>Take profit</b>150.00 <em>+3.7%</em></span><span class="pl sl"><b>Stop · precio</b>163.00 <em>−4.7%</em></span></div><div class="pos-range" data-out="left"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:105.5%"></i><i class="pr-now" style="left:0.0%"></i><i class="pr-tp" style="left:-47.1%"></i></span><span class="pr-v">153.589 <em>9 sep</em> — 162.53 <em>20 jul</em></span></div></div>
+<div class="pos" data-mark="convex" data-stop="thesis"><div class="pos-head"><span class="pos-w">0%</span><span class="pos-nm">Convexidad<em>puts SPX / VIX calls</em></span><span class="pos-state r">CERRADA 4 SEP · stop de tesis</span><span class="pos-contrib" data-mark="convex">—</span></div><p class="pos-why">El mismo stop de tesis se cumple: SKEW P86 ≥85. Los 4 puntos pasan a caja. No se calcula retorno sin precio del vehículo.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>Puts SPX / VIX calls</span><span class="pl tp"><b>Take profit</b>Repunte de vol</span><span class="pl sl"><b>Stop · tesis</b>SKEW pct ≥85 · VIX pct ≥60 · 45d <em>no por precio</em></span></div></div>
+<div class="pos" data-mark="xlv" data-stop="price"><div class="pos-head"><span class="pos-w">3%</span><span class="pos-nm">XLV salud<em>defensiva residual</em></span><span class="pos-state dn">VIVA · 166.58 · cerca de 165</span><span class="pos-contrib" data-mark="xlv">—</span></div><p class="pos-why">XLV termina en 166.58, a 1.3% del stop de 165. No se amplía ni se promedia.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>173.26</span><span class="pl tp"><b>Take profit</b>190.00 <em>+9.7%</em></span><span class="pl sl"><b>Stop · precio</b>165.00 <em>−4.8%</em></span></div><p class="pos-range-missing"><b>Banda 90d omitida:</b> no hay serie de precio de XLV suficiente en los informes de referencia para fijar extremos verificables.</p></div>
+<p class="mark-note">El resultado combina precio de cierre para las posiciones con mercado directo, <b>duración modificada declarada</b> para los tramos de curva (1,90 en 1–3 años · 5,40 en 3–7 años) y <b>devengo a la tasa de referencia</b> para la caja. Los tramos de curva son una aproximación, no una valuación. Una posición cerrada conserva su resultado del día del cierre y sigue contando.</p><div class="hz-log"><div class="hzl-head">Cambios de cartera</div><div class="hzl-empty">4 SEP · Convexidad 4% → 0% por SKEW P86 ≥85. Caja 25% → 29%. Primer cambio publicado de la estructura 6M.</div></div>
+</div>
+<div class="exp fade">
+<div>
+<div class="exp-label">Capital de referencia</div>
+<div class="exp-amount"><span class="exp-cur">USD</span><input class="exp-field" id="capInput" inputmode="decimal" value="10,000"/></div>
+<div class="exp-presets"><button class="cp" data-p="5000">5K</button><button class="cp active" data-p="10000">10K</button><button class="cp" data-p="25000">25K</button><button class="cp" data-p="50000">50K</button><button class="cp" data-p="100000">100K</button></div>
+<p class="exp-note"><b>Estructura de referencia · sin carácter de recomendación.</b> La calculadora traduce pesos a montos y estima únicamente el riesgo de las posiciones con stop de precio. Los stops de tesis no se convierten en una pérdida monetaria ficticia.</p>
+</div>
+<div>
+<div class="exp-label">Distribución por horizonte</div>
+<div class="exp-hz" id="expHzLabel">Horizonte activo · 3 meses</div>
+<div class="exp-bar">
+<span class="exp-seg" data-cat="cash" data-sh-3m="0.45" data-sh-6m="0.29" style="flex:45"></span>
+<span class="exp-seg" data-cat="fixed" data-sh-3m="0.2" data-sh-6m="0" style="flex:20"></span>
+<span class="exp-seg" data-cat="fixed" data-sh-3m="0" data-sh-6m="0.2" style="flex:0"></span>
+<span class="exp-seg" data-cat="equity" data-sh-3m="0.1" data-sh-6m="0.2" style="flex:10"></span>
+<span class="exp-seg" data-cat="metals" data-sh-3m="0.1" data-sh-6m="0.12" style="flex:10"></span>
+<span class="exp-seg" data-cat="defense" data-sh-3m="0.08" data-sh-6m="0.03" style="flex:8"></span>
+<span class="exp-seg" data-cat="alt" data-sh-3m="0.07" data-sh-6m="0.08" style="flex:7"></span>
+<span class="exp-seg" data-cat="hedge" data-sh-3m="0" data-sh-6m="0" style="flex:0"></span>
+<span class="exp-seg" data-cat="energy" data-sh-3m="0" data-sh-6m="0.08" style="flex:0"></span>
+</div>
+<div class="exp-row"><span class="exp-sw" data-cat="cash"></span><span class="exp-cat">Caja / letras<span class="d">reserva líquida</span></span><span class="exp-pct">45%</span><span class="exp-usd" data-sh-3m="0.45" data-sh-6m="0.29">$4,500</span><span class="exp-risk" data-risk-3m="0" data-risk-6m="0">—</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="fixed"></span><span class="exp-cat">Duración corta<span class="d">1–3 años</span></span><span class="exp-pct">20%</span><span class="exp-usd" data-sh-3m="0.2" data-sh-6m="0">$2,000</span><span class="exp-risk" data-risk-3m="0" data-risk-6m="0">—</span></div>
+<div class="exp-row" data-empty="1"><span class="exp-sw" data-cat="fixed"></span><span class="exp-cat">Duración intermedia<span class="d">3–7 años</span></span><span class="exp-pct">0%</span><span class="exp-usd" data-sh-3m="0" data-sh-6m="0.2">$0</span><span class="exp-risk" data-risk-3m="0" data-risk-6m="0">—</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="equity"></span><span class="exp-cat">Núcleo RV<span class="d">VOO / SPY</span></span><span class="exp-pct">10%</span><span class="exp-usd" data-sh-3m="0.1" data-sh-6m="0.2">$1,000</span><span class="exp-risk" data-risk-3m="0" data-risk-6m="0">—</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="metals"></span><span class="exp-cat">Oro<span class="d">hedge de tasa real</span></span><span class="exp-pct">10%</span><span class="exp-usd" data-sh-3m="0.1" data-sh-6m="0.12">$1,000</span><span class="exp-risk" data-risk-3m="0.1056" data-risk-6m="0.1056">−$106</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="defense"></span><span class="exp-cat">Salud<span class="d">XLV defensivo</span></span><span class="exp-pct">8%</span><span class="exp-usd" data-sh-3m="0.08" data-sh-6m="0.03">$800</span><span class="exp-risk" data-risk-3m="0.0477" data-risk-6m="0.0477">−$38</span></div>
+<div class="exp-row"><span class="exp-sw" data-cat="alt"></span><span class="exp-cat">Corto USD/JPY<span class="d">largo yen · #7</span></span><span class="exp-pct">7%</span><span class="exp-usd" data-sh-3m="0.07" data-sh-6m="0.08">$700</span><span class="exp-risk" data-risk-3m="0.0465" data-risk-6m="0.0465">−$33</span></div>
+<div class="exp-row" data-empty="1"><span class="exp-sw" data-cat="hedge"></span><span class="exp-cat">Convexidad<span class="d">puts / VIX calls</span></span><span class="exp-pct">0%</span><span class="exp-usd" data-sh-3m="0" data-sh-6m="0">$0</span><span class="exp-risk" data-risk-3m="0" data-risk-6m="0">—</span></div>
+<div class="exp-row" data-empty="1"><span class="exp-sw" data-cat="energy"></span><span class="exp-cat">Energía<span class="d">XLE · 6M</span></span><span class="exp-pct">0%</span><span class="exp-usd" data-sh-3m="0" data-sh-6m="0.08">$0</span><span class="exp-risk" data-risk-3m="0" data-risk-6m="0">—</span></div>
+<div class="exp-total"><span>Riesgo total si saltan todos los stops de precio</span><b class="r" id="expRiskTotal">−$176 · 1.8% del capital</b></div>
+</div>
+</div>
+<details class="legend-box">
+<summary>¿Qué son las Ramas? · leyenda del protocolo</summary>
+<div class="lg-grid">
+<div><b>Rama A</b><span>Escalada de tasas EE.UU. Si el 10Y cierra sobre 4.800%, se ejecutan los 12 puntos enumerados y la caja operativa queda en 74% mientras el defecto aritmético siga abierto.</span></div>
+<div><b>Rama B</b><span>Escalada japonesa. Si el JGB 30Y cierra en 4.000% o más con fuente oficial, se aplican los mismos 12 puntos.</span></div>
+<div><b>Rama C</b><span>Des-escalada. Dispara con MOVE bajo 70 durante dos cierres o con una segunda observación consecutiva de estrechamiento del HY OAS.</span></div>
+<div><b>Rama D</b><span>Sin cambios. Es el estado por defecto cuando ningún gatillo real se activa.</span></div>
+<div><b>Rama F</b><span>La cobertura original cerró el 4S por SKEW P86. La reapertura F-bis exige SKEW ≤60 y VIX ≤25 en el mismo cierre.</span></div>
+<div><b>Referencia ≠ registro</b><span>Las carteras 3M/6M ilustran estructura. Las ramas y el bucle 01B ↔ 09 auditan decisiones reales.</span></div>
+<div><b>pct / percentil</b><span>Percentil histórico. P5 significa que solo el 5% de las sesiones tuvo una lectura más baja.</span></div>
+<div><b>Stale / vivo</b><span>Stale significa dato de una sesión anterior: se muestra como vigilancia y queda fuera de gatillos.</span></div>
+</div>
+</details>
+</div></section>
+<!-- ===== 09 · PRE-REGISTRO ===== -->
+<section class="prereg"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 09</div><h2 class="sec-title">Mañana apuesto</h2><div class="sec-line"></div><div class="sec-sub">sellado 9 sep 2026 · 21:00 UTC · para jueves 10</div></div><p class="pr-intro fade">La primera escalada ya ocurrió. El próximo cierre se evalúa contra niveles nuevos o contra las vías de alivio existentes; no se modifica nada intrasesión.</p><div class="pr-grid fade">
+<div class="pr-item" data-sev="critical"><div class="pr-tag">🚨 RAMA A-2 · segunda escalada</div><div class="pr-cond">10Y cierra <b>&gt;4.900%</b> <em>o</em> 30Y <b>&gt;5.400%</b>. Solo cierre.</div><div class="pr-act">Liquidar el 3% de XLV y moverlo a caja: <b>74% → 77%</b>. Si coincide con Rama H, ejecutar una sola vez.</div><div class="pr-dist"><span>DISTANCIA</span><b>5.9pb / 10.8pb</b></div></div>
+<div class="pr-item" data-sev="critical"><div class="pr-tag">🚨 RAMA B · escalada Japón</div><div class="pr-cond">JGB 30Y cierra <b>≥4.000%</b> verificado por JSDA. El proxy 3.954% no sustituye la fuente oficial.</div><div class="pr-act">Se mantiene la rama histórica bajo Defecto 23; no se ejecuta con proxy.</div><div class="pr-dist"><span>FUENTE</span><b class="stale">AUSENTE 18ª</b></div></div>
+<div class="pr-item" data-sev="alert"><div class="pr-tag">🟡 RAMA C · des-escalada</div><div class="pr-cond">MOVE <b>&lt;70</b> dos cierres <em>o</em> 10Y <b>&lt;4.600%</b> <em>o</em> segunda observación consecutiva de HY OAS estrechando.</div><div class="pr-act">Si dispara: caja <b>74% → 64%</b>; núcleo RV +6 y duración corta +4.</div><div class="pr-dist"><span>ESTADO</span><b>MOVE 0/2 · OAS 1/2</b></div></div>
+<div class="pr-item" data-sev="watch"><div class="pr-tag">🟢 RAMA F-BIS · convexidad</div><div class="pr-cond">SKEW <b>pct ≤60</b> <em>y</em> VIX <b>pct ≤25</b> en el mismo cierre.</div><div class="pr-act">Reabre 2% solo por esta condición conjunta. Hoy fallan ambas piernas.</div><div class="pr-dist"><span>ESTADO</span><b>P79 / P38</b></div></div>
+<div class="pr-item" data-sev="critical"><div class="pr-tag">🔴 RAMA H · salud</div><div class="pr-cond">XLV cierra <b>&lt;165.00</b>.</div><div class="pr-act">Liquidar el 3% íntegro: caja <b>74% → 77%</b>. Sin promedio ni espera.</div><div class="pr-dist"><span>DISTANCIA</span><b>1.58 · 0.95%</b></div></div>
+<div class="pr-item" data-sev="watch"><div class="pr-tag">⚪ RAMA D · sin cambios</div><div class="pr-cond">Si ninguna condición anterior se cumple.</div><div class="pr-act">Caja <b>74%</b>, duración corta 23%, salud 3%. Libro intacto.</div><div class="pr-dist"><span>ESTADO</span><b>VIGENTE</b></div></div>
+<div class="pr-item" data-sev="watch"><div class="pr-tag">📌 IPC · viernes 11</div><div class="pr-cond">El IPC de agosto se publica el <b>viernes 11 · 08:30 ET</b>, verificado por BLS.</div><div class="pr-act">No se pre-registra acción sobre el dato. La acción se toma sobre el cierre del 10Y que produzca.</div><div class="pr-dist"><span>VENTANA</span><b>11 SEP</b></div></div>
+</div><div class="cal fade"><div class="cal-head">Catalizadores <span>lo que puede mover los niveles</span></div>
+<div class="cal-row" data-w="high"><span class="cal-when">VIE 11 SEP<em>08:30 ET</em></span><span class="cal-what">IPC de agosto<em>fecha verificada por BLS; último dato clave antes del FOMC</em></span><span class="cal-imp high">BINARIO</span></div>
+<div class="cal-row" data-w="mid"><span class="cal-when">MIÉ 16 SEP<em>reunión</em></span><span class="cal-what">FOMC<em>el 2Y paga 80.4pb sobre fondos federales</em></span><span class="cal-imp high">ALTO</span></div>
+<div class="cal-row" data-w="mid"><span class="cal-when">17–18 SEP<em>reunión</em></span><span class="cal-what">Banco de Japón<em>catalizador directo para el #7; subida filtrada sigue no confirmada</em></span><span class="cal-imp mid">ALTO</span></div>
+<div class="cal-row" data-w="open"><span class="cal-when">ABIERTO<em>sin fecha</em></span><span class="cal-what">Nueva recompra / intervención del Tesoro<em>confirmaría o mataría el hilo sobre control del extremo largo</em></span><span class="cal-imp open">ABIERTO</span></div>
+</div><div class="scen fade"><div class="scen-head">Escenarios a 48–72h <span>probabilidad · variación vs 8S</span></div>
+<div class="scen-row"><span class="scen-nm">Rango post-gatillo · 4.80–4.90%</span><span class="scen-track"><i class="scen-fill t-alert" style="width:38%"></i></span><span class="scen-pct">38%</span><span class="scen-d up">▲ desde 33%</span></div>
+<div class="scen-row"><span class="scen-nm">Segunda escalada · 10Y &gt;4.90%</span><span class="scen-track"><i class="scen-fill t-risk" style="width:32%"></i></span><span class="scen-pct">32%</span><span class="scen-d dn">▼ desde 40%*</span></div>
+<div class="scen-row"><span class="scen-nm">Alivio técnico sin des-escalar</span><span class="scen-track"><i class="scen-fill t-info" style="width:22%"></i></span><span class="scen-pct">22%</span><span class="scen-d up">▲ desde 17%</span></div>
+<div class="scen-row"><span class="scen-nm">Des-escalada efectiva a 🟡</span><span class="scen-track"><i class="scen-fill t-signal" style="width:8%"></i></span><span class="scen-pct">8%</span><span class="scen-d dn">▼ desde 10%</span></div>
+<p class="scen-note">*La categoría cambió: el 40% de ayer era probabilidad de primera Rama A, ya realizada. Hoy 32% mide una segunda escalada por encima de 4.900%.</p></div></div></section>
+<footer class="footer"><div class="wrap"><div class="brand">WAR ROOM v4.5 · TERMINAL DE SEÑALES</div><span class="sub">EDICIÓN 9 SEP 2026 · POST-CIERRE · TERMINAL DE SEÑALES</span><p class="disc">Propósito informativo y educativo. No constituye asesoramiento de inversión personalizado, recomendación de compra/venta ni análisis registrado. <b>Los niveles publicados son los gatillos y las invalidaciones de un libro propio, con su tamaño y su horizonte: no son puntos de entrada sugeridos para terceros y no contemplan la situación financiera de quien lee.</b> Verificar precios, liquidez, spreads, calendario y riesgo propio antes de operar.</p></div></footer>
+<script>
+const tk=document.getElementById('tkTrack');tk.innerHTML+=tk.innerHTML;
+
+function svgNode(tag,attrs={}){
+  const node=document.createElementNS('http://www.w3.org/2000/svg',tag);
+  Object.entries(attrs).forEach(([key,value])=>node.setAttribute(key,value));
+  return node;
+}
+
+function renderLineChart(config, ids, labelAttr, dateAttr, viewWidth, viewHeight){
+  const grid=document.getElementById(ids.grid), seriesLayer=document.getElementById(ids.series), leaders=document.getElementById(ids.leaders);
+  if(!grid||!seriesLayer||!leaders)return;
+  [grid,seriesLayer,leaders].forEach(layer=>layer.replaceChildren());
+  const normalized=config.series.map(s=>({...s,norm:s.values.map(value=>(value/s.values[0])*100)}));
+  const all=normalized.flatMap(s=>s.norm);
+  /* v4.2 — los triggers marcados participan de la escala, de forma declarada */
+  const scaleTriggers=(config.triggers||[])
+    .filter(t=>t.includeInScale)
+    .map(t=>(t.value/config.series[0].values[0])*100);
+  const rawMin=Math.min(...all,...scaleTriggers), rawMax=Math.max(...all,...scaleTriggers);
+  const pad=Math.max((rawMax-rawMin)*.12,.25);
+  const min=Math.floor((rawMin-pad)*2)/2, max=Math.ceil((rawMax+pad)*2)/2;
+  const {top,bottom,labelX,leaderKnee}=config.plot;
+  const y=value=>bottom-((value-min)/(max-min))*(bottom-top);
+  const step=(max-min)>45?20:(max-min)>20?10:(max-min)>10?4:2;
+  const gridValues=[];
+  const first=Math.ceil(min/step)*step;
+  for(let value=first;value<=max;value+=step)gridValues.push(value);
+  if(!gridValues.some(value=>Math.abs(value-100)<.01))gridValues.push(100);
+  gridValues.sort((a,b)=>a-b).forEach(value=>grid.appendChild(svgNode('line',{x1:24,y1:y(value).toFixed(2),x2:viewWidth-30,y2:y(value).toFixed(2),stroke:Math.abs(value-100)<.01?'#1a232e':'#121a24','stroke-width':Math.abs(value-100)<.01?'1.4':'1'})));
+  /* v4.2 — líneas de gatillo en unidades reales */
+  (config.triggers||[]).forEach(function(t){
+    const ref=config.series[0];
+    const normValue=(t.value/ref.values[0])*100;
+    if(normValue<min||normValue>max)return;
+    const ty=y(normValue);
+    grid.appendChild(svgNode('line',{x1:24,y1:ty.toFixed(2),x2:viewWidth-30,y2:ty.toFixed(2),
+      stroke:t.color,'stroke-width':'1.5','stroke-dasharray':'6 4','stroke-opacity':'.75',
+      'vector-effect':'non-scaling-stroke'}));
+    const label=document.querySelector(`[data-trigger-label="${t.key}"]`);
+    if(label)label.style.top=`${(ty/viewHeight)*100}%`;
+  });
+  normalized.forEach(s=>{
+    const points=s.norm.map((value,index)=>[config.x[index],y(value)]);
+    seriesLayer.appendChild(svgNode('polyline',{fill:'none',stroke:s.color,'stroke-width':s.width,points:points.map(([px,py])=>`${px},${py.toFixed(2)}`).join(' '),'vector-effect':'non-scaling-stroke'}));
+    const [lastX,lastY]=points.at(-1);
+    seriesLayer.appendChild(svgNode('circle',{cx:lastX,cy:lastY.toFixed(2),r:4,fill:s.color}));
+    leaders.appendChild(svgNode('polyline',{fill:'none',stroke:s.color,'stroke-width':'1.25','stroke-opacity':'.55','stroke-dasharray':'4 4',points:`${lastX},${lastY.toFixed(2)} ${leaderKnee},${lastY.toFixed(2)} ${leaderKnee+22},${s.lane} ${labelX},${s.lane}`,'vector-effect':'non-scaling-stroke'}));
+    const label=document.querySelector(`[${labelAttr}="${s.key}"]`);if(label)label.style.top=`${(s.lane/viewHeight)*100}%`;
+  });
+  config.x.forEach((px,index)=>{const label=document.querySelector(`[${dateAttr}="${index}"]`);if(label)label.style.left=`${(px/viewWidth)*100}%`;});
+}
+
+const NORMALIZED_CHART={
+  x:[80,380,680,880],plot:{top:28,bottom:184,labelX:1040,leaderKnee:900},
+  series:[{key:'UST10',values:[4.772,4.784,4.792,4.841],color:'#ff2e4d',width:3,lane:92}],
+  triggers:[{key:'A10',value:4.800,color:'#ff2e4d',includeInScale:true}]
+};
+renderLineChart(NORMALIZED_CHART,{grid:'normalizedGrid',series:'normalizedSeries',leaders:'normalizedLeaders'},'data-norm-label','data-norm-date',1080,220);
+
+const RISK_CHART={
+  x:[60,190,320,410],plot:{top:24,bottom:148,labelX:498,leaderKnee:440},
+  series:[{key:'MOVE',values:[74.68,73.10,76.14,76.74],color:'#ffb000',width:3,lane:58}],
+  triggers:[{key:'C70',value:70.00,color:'#00ff9c'}]
+};
+renderLineChart(RISK_CHART,{grid:'riskGrid',series:'riskSeries',leaders:'riskLeaders'},'data-risk-label','data-risk-date',520,180);
+
+const SECTOR_BARS=[
+  {name:'XLE',value:0.83,tone:'signal'},
+  {name:'QQQ',value:-0.29,tone:'risk'},
+  {name:'SPY',value:-0.46,tone:'risk'},
+  {name:'RSP',value:-0.96,tone:'risk'},
+  {name:'IJH',value:-1.06,tone:'risk'},
+  {name:'IWM',value:-1.37,tone:'risk'}
+];
+function renderDivergingBars(){
+  const root=document.getElementById('sectorBars');if(!root)return;
+  const max=Math.max(...SECTOR_BARS.map(d=>Math.abs(d.value)));
+  root.innerHTML=SECTOR_BARS.map(d=>{const width=(Math.abs(d.value)/max)*49;const side=d.value>=0?'pos':'neg';const tone=d.tone==='signal'?'t-signal':'t-risk';const valTone=d.tone==='signal'?'up':'r';const sign=d.value>=0?'+':'−';return `<div class="bar-row"><span class="bar-name">${d.name}</span><div class="bar-track"><i class="bar-zero"></i><i class="bar-fill ${side} ${tone}" style="width:${width.toFixed(2)}%"></i></div><span class="bar-val ${valTone}">${sign}${Math.abs(d.value).toFixed(2)}%</span></div>`}).join('');
+}
+renderDivergingBars();
+
+const MEM=[
+  {tick:'WTI',unit:'$',now:'96.05',d:'▲3.25%',cls:'up',tone:'tone-risk',series:[91.71,91.48,93.03,96.05],color:'#ff2e4d',start:'$91.71'},
+  {tick:'SPX',unit:'',now:'7,636',d:'▼0.49%',cls:'dn',series:[7745.62,7718.60,7673.52,7636.00],color:'#ff2e4d',start:'7,745.62'},
+  {tick:'VIX',unit:'',now:'16.47',d:'▲4.84%',cls:'up',inv:true,series:[14.31,14.52,15.71,16.47],color:'#ff2e4d',start:'14.31'},
+  {tick:'SKEW',unit:'',now:'148.86',d:'▼1.79%',cls:'dn',inv:true,series:[144.12,150.63,151.58,148.86],color:'#00ff9c',start:'144.12'},
+  {tick:'GOLD',unit:'$',now:'4,399.61',d:'▲0.99%',cls:'up',series:[4472.10,4430.60,4356.395,4399.61],color:'#00ff9c',start:'$4,472.10'},
+  {tick:'BTC',unit:'$',now:'78.286K',d:'▼0.33%',cls:'dn',series:[81.488,79.777,78.546,78.286],color:'#ff2e4d',start:'$81.488K'},
+  {tick:'DXY',unit:'',now:'99.549',d:'— n/d',cls:'nt',stale:'9S · STALE',series:[99.549,99.549,99.549,99.549],gaps:[0,1,2,3],color:'#2ea8ff',start:'99.549'}
+];
+/* ═══ HILOS NARRATIVOS · §3D ═══
+   name  : nombre estable en lenguaje llano. NO cambia entre ediciones.
+   n     : número de sesiones que lleva abierto. Solo avanza.
+   state : 'open' | 'turned' | 'closed'
+   note  : qué pasó hoy con este hilo. Obligatoria en turned y closed.
+   since : fecha de apertura, para trazabilidad.                            */
+const THREADS=[
+  {name:'El cierre oficial del bono japonés que no se publica',n:18,state:'open',since:'14 ago',note:'JSDA sigue ausente. El proxy cae a 3.954% y se aleja del 4.000%; la Rama B continúa bloqueada.'},
+  {name:'El yen se aprecia desde la intervención',n:10,state:'open',since:'28 ago',note:'USD/JPY cae a 153.589; el setup acumula 641 pips a favor y el BOJ del 17–18 sigue como catalizador.'},
+  {name:'Los precios pagados de servicios no bajan',n:7,state:'open',since:'31 ago',note:'Sin nueva lectura. El 2Y en 4.434% y el crudo sobre $100 mantienen viva la presión de inflación antes del IPC.'},
+  {name:'El bono a diez años se acerca al nivel que sube la caja al 80%',n:16,state:'turned',since:'24 ago',note:'Giró: el 10Y cerró 4.841% y la Rama A ejecutó. Por Defecto 23 la caja terminó en 74%; desde mañana el foco pasa a 4.900%.'},
+  {name:'La amplitud se rompe debajo del índice',n:3,state:'open',since:'4 sep',note:'Se agrava: 225 mínimos contra 39 máximos, A/D 0.37 y volumen comprador 26.05% con el S&P apenas −0.48%.'},
+  {name:'El Tesoro intenta contener el extremo largo y el mercado no responde',n:1,state:'open',since:'9 sep',note:'Nuevo: recompra triplicada a $6.000M y el 10Y sube al máximo desde noviembre de 2023. Se confirma si una segunda intervención tampoco baja el rendimiento.'}
+];
+
+/* ═══ MARCADORES DE CARTERA · §3C ═══
+   Precios de cierre de la sesión. Se actualizan cada día junto con MEM.
+   kind: 'price'  → precio directo. r = (now − entry) / entry
+         'short'  → precio directo invertido. r = −(now − entry) / entry
+         'yield'  → rendimiento. r = −dur × (now − entry)/100 + carry×0.6
+         'cash'   → devengo. r = rate × sessions / 252
+         'closed' → resultado realizado, congelado. No se recalcula.       */
+const MARKS={
+  rate:0.0363,        /* tasa de referencia para el devengo de caja */
+  sessions:4,         /* sesiones desde la apertura del 3 SEP */
+  items:{
+    cash3m:   {kind:'cash'},
+    dur3m:    {kind:'yield', entry:4.342, now:4.434, dur:1.90},
+    gold:     {kind:'price', entry:4472.10, now:4399.61},
+    equity:   {kind:'price', entry:773.12,  now:762.40},
+    xlv:      {kind:'price', entry:173.26,  now:166.58},
+    jpy:      {kind:'short', entry:155.752, now:153.589},
+    convex:   {kind:'closed', realized:0.0, since:'4 sep',
+               note:'Cerrada por invalidación de tesis, sin precio de opciones publicable.'},
+    cash6m:   {kind:'cash'},
+    dur6m:    {kind:'yield', entry:4.772, now:4.841, dur:5.40},
+    xle:      {kind:'price', entry:64.62, now:65.16}
+  }
+};
+
+const MEM_DATES=['3S','4S','8S','9S'];
+
+const MEM_DELTA_TOLERANCE=0.15;
+const MEM_FLAT_THRESHOLD=0.10;
+function spark(s,color,gaps){
+  const w=150,h=30,mn=Math.min(...s),mx=Math.max(...s),
+        pad=(mx-mn||1)*.15,lo=mn-pad,hi=mx+pad;
+  const G=Array.isArray(gaps)?gaps:[];
+  const pts=s.map((v,i)=>[6+(w-12)*(i/(s.length-1)),h-2-((v-lo)/(hi-lo))*(h-4)]);
+  let segs='';
+  for(let i=1;i<pts.length;i++){
+    const hole=G.includes(i)||G.includes(i-1);
+    segs+=`<line x1="${pts[i-1][0].toFixed(1)}" y1="${pts[i-1][1].toFixed(1)}" `+
+          `x2="${pts[i][0].toFixed(1)}" y2="${pts[i][1].toFixed(1)}" `+
+          `stroke="${color}" stroke-width="1.8" `+
+          `${hole?'stroke-dasharray="3 3" stroke-opacity=".35"':''}/>`;
+  }
+  const last=pts.at(-1);
+  const dot=G.includes(s.length-1)?'':
+    `<circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="2.6" fill="${color}"/>`;
+  return `<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" `+
+         `style="width:100%;height:30px">${segs}${dot}</svg>`;
+}
+function memDisplayValue(m){return `${m.approx?'~':''}${m.unit}${m.now}`}
+function memArrow(text){return text.includes('▲')?'▲':text.includes('▼')?'▼':'→'}
+function memDeclaredDelta(text){const match=text.match(/([+-]?\d+(?:\.\d+)?)%/);return match?parseFloat(match[1]):NaN}
+function memExpectedArrow(delta){if(Math.abs(delta)<MEM_FLAT_THRESHOLD)return '→';return delta>0?'▲':'▼'}
+function memExpectedClass(arrow){return arrow==='▲'?'up':arrow==='▼'?'dn':'nt'}
+function auditMemory(){
+  MEM.forEach(m=>{
+    const previous=m.series[m.series.length-2],current=m.series[m.series.length-1];
+    const seriesDelta=((current-previous)/Math.abs(previous))*100;
+    const declared=memDeclaredDelta(m.d),arrow=memArrow(m.d),expectedClass=memExpectedClass(arrow);
+    if(m.cls!==expectedClass)console.warn(`[MEM] ${m.tick}: clase ${m.cls} incompatible con ${arrow}.`);
+    if(m.deltaException){
+      if(!m.d.includes('*')||typeof m.officialPrev!=='number')console.warn(`[MEM] ${m.tick}: excepción incompleta.`);
+      else{const officialDelta=((current-m.officialPrev)/Math.abs(m.officialPrev))*100;if(Number.isFinite(declared)&&Math.abs(Math.abs(officialDelta)-Math.abs(declared))>MEM_DELTA_TOLERANCE)console.warn(`[MEM] ${m.tick}: officialPrev ${officialDelta.toFixed(2)}% vs delta ${declared.toFixed(2)}%.`);}
+    }else{
+      if(Number.isFinite(declared)&&Math.abs(Math.abs(seriesDelta)-Math.abs(declared))>MEM_DELTA_TOLERANCE)console.warn(`[MEM] ${m.tick}: serie ${seriesDelta.toFixed(2)}% vs delta ${declared.toFixed(2)}%.`);
+      if(arrow!==memExpectedArrow(seriesDelta))console.warn(`[MEM] ${m.tick}: flecha ${arrow} contradice serie ${seriesDelta.toFixed(2)}%.`);
+    }
+    if(Array.isArray(m.gaps)&&m.gaps.includes(m.series.length-1)&&!/n\/d/i.test(m.d))
+      console.warn(`[MEM] ${m.tick}: último punto marcado como hueco pero el delta no es "— n/d".`);
+  });
+}
+auditMemory();
+
+document.getElementById('memGrid').innerHTML=MEM.map(m=>`<div class="mem-cell"><div class="mem-tick"><span>${m.tick}</span>${m.stale?`<span class="mem-stale">${m.stale}</span>`:''}</div><div class="mem-now">${memDisplayValue(m)}<span class="mem-d ${m.cls}${m.inv?' inv':''}${m.tone?' '+m.tone:''}">${m.d}</span></div>${spark(m.series,m.color,m.gaps)}<div class="mem-4d"><span>${MEM_DATES[0]} ${m.start||m.unit+m.series[0]}</span><span>${MEM_DATES[3]} ${memDisplayValue(m)}</span></div></div>`).join('');
+/* ── render de hilos ── */
+(function renderThreads(){
+  const box=document.getElementById('threadsList');
+  if(!box||typeof THREADS==='undefined')return;
+  const LABEL={open:'ABIERTO',turned:'GIRÓ',closed:'CERRADO'};
+  box.innerHTML=THREADS.map(t=>`
+    <div class="thread-row" data-state="${t.state}">
+      <span class="th-name">${t.name}${t.note?`<span class="th-note">${t.note}</span>`:''}</span>
+      <span class="th-n">${t.n}ª sesión${t.since?`<span class="th-since">desde ${t.since}</span>`:''}</span>
+      <span class="th-state ${t.state}">${LABEL[t.state]||'?'}</span>
+    </div>`).join('');
+})();
+
+/* ── assert de coherencia (§3D) ── */
+(function auditThreads(){
+  if(typeof THREADS==='undefined')return;
+  const VALID=['open','turned','closed'];
+  if(THREADS.length<3||THREADS.length>6)
+    console.warn(`[HILOS] Hay ${THREADS.length} hilos; el rango de §3D.1 es 3 a 6.`);
+  THREADS.forEach(t=>{
+    if(!VALID.includes(t.state))
+      console.warn(`[HILOS] "${t.name}": estado "${t.state}" inválido. Solo open/turned/closed.`);
+    if(!Number.isFinite(t.n)||t.n<1)
+      console.warn(`[HILOS] "${t.name}": ordinal de sesiones ausente o inválido.`);
+    if((t.state==='turned'||t.state==='closed')&&!t.note)
+      console.warn(`[HILOS] "${t.name}": estado ${t.state} sin nota. Es obligatoria (§3D.1).`);
+    if(t.name.length>92)
+      console.warn(`[HILOS] "${t.name}": nombre demasiado largo; se corta en mobile.`);
+  });
+  const dup=THREADS.map(t=>t.name).filter((n,i,a)=>a.indexOf(n)!==i);
+  if(dup.length)console.warn(`[HILOS] Nombres duplicados: ${dup.join(', ')}`);
+})();
+
+
+/* ── cálculo de retornos por marcador ── */
+function markReturn(m){
+  if(!m)return null;
+  const carry=MARKS.rate*MARKS.sessions/252;
+  switch(m.kind){
+    case 'cash':   return carry;
+    case 'price':  return (m.now-m.entry)/m.entry;
+    case 'short':  return -(m.now-m.entry)/m.entry;
+    case 'yield':  return -m.dur*((m.now-m.entry)/100)+carry*0.6;
+    case 'closed': return m.realized;
+    default:       return null;
+  }
+}
+
+/* ── render del marcador ── */
+(function renderMarks(){
+  if(typeof MARKS==='undefined')return;
+  const fmt=v=>(v>=0?'+':'')+(v*100).toFixed(2)+'%';
+  const pts=v=>(v>=0?'+':'')+(v*100).toFixed(2);
+
+  ['3m','6m'].forEach(hz=>{
+    const panel=document.getElementById('hz'+hz);
+    if(!panel)return;
+    let total=0, marcadas=0, sinMarca=0;
+
+    panel.querySelectorAll('.pos').forEach(pos=>{
+      const key=pos.dataset.mark;
+      const m=key?MARKS.items[key]:null;
+      const r=markReturn(m);
+      const usd=pos.querySelector('.pos-w');
+      const w=usd?parseFloat(usd.textContent)/100:0;
+      const cell=pos.querySelector('.pos-contrib');
+      if(r===null){ sinMarca++; if(cell)cell.textContent='—'; return; }
+      marcadas++;
+      total+=w*r;
+      if(cell){
+        cell.textContent=fmt(r)+' · '+pts(w*r)+' pts';
+        cell.className='pos-contrib '+(r>0.0005?'up':r<-0.0005?'dn':'nt');
+      }
+    });
+
+    const box=document.getElementById('pnl'+hz);
+    if(!box)return;
+    if(sinMarca){
+      box.className='hzs-v faint';
+      box.innerHTML='n/d · '+sinMarca+' posición(es) sin marcador';
+      return;
+    }
+    box.className='hzs-v '+(total>0.0005?'up':total<-0.0005?'dn':'nt');
+    box.innerHTML=fmt(total)+
+      '<span class="pnl-sub">'+MARKS.sessions+' sesiones · '+marcadas+' posiciones marcadas</span>';
+  });
+})();
+
+(function auditMarks(){
+  if(typeof MARKS==='undefined')return;
+  if(!(MARKS.rate>0&&MARKS.rate<0.25))
+    console.warn(`[MARKS] Tasa de referencia fuera de rango: ${MARKS.rate}`);
+  if(!Number.isInteger(MARKS.sessions)||MARKS.sessions<1)
+    console.warn(`[MARKS] Contador de sesiones inválido: ${MARKS.sessions}`);
+
+  Object.entries(MARKS.items).forEach(([k,m])=>{
+    if(m.kind==='price'||m.kind==='short'||m.kind==='yield'){
+      if(!(m.entry>0)||!(m.now>0))
+        console.warn(`[MARKS] ${k}: entry o now ausente o no positivo.`);
+      const mv=Math.abs((m.now-m.entry)/m.entry);
+      if(mv>0.35)
+        console.warn(`[MARKS] ${k}: movimiento de ${(mv*100).toFixed(1)}% desde la apertura. ¿Error de tipeo?`);
+    }
+    if(m.kind==='yield'&&!(m.dur>0&&m.dur<15))
+      console.warn(`[MARKS] ${k}: duración modificada fuera de rango: ${m.dur}`);
+    if(m.kind==='closed'&&!m.since)
+      console.warn(`[MARKS] ${k}: resultado cerrado sin fecha de congelamiento.`);
+  });
+
+  ['3m','6m'].forEach(hz=>{
+    const panel=document.getElementById('hz'+hz);
+    if(!panel)return;
+    const sin=[...panel.querySelectorAll('.pos')].filter(p=>!p.dataset.mark||!MARKS.items[p.dataset.mark]);
+    if(sin.length)
+      console.warn(`[MARKS] Cartera ${hz}: ${sin.length} posición(es) sin data-mark válido; el P&L queda en n/d.`);
+  });
+})();
+
+
+document.querySelectorAll('.sem-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.sem-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');const sev=b.dataset.sev;document.querySelectorAll('.sem-card').forEach(c=>{c.style.display=(sev==='all'||c.dataset.sev===sev)?'':'none'});}));
+document.querySelectorAll('.op-tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.op-tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.querySelectorAll('.op-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('hz'+t.dataset.hz).classList.add('active');
+  setHorizon(t.dataset.hz);
+}));
+const capInput=document.getElementById('capInput');
+let HORIZON='3m';
+function setHorizon(hz){
+  HORIZON=hz;
+  const lab=document.getElementById('expHzLabel');
+  if(lab)lab.textContent='Horizonte activo · '+(hz==='3m'?'3 meses':'6 meses');
+  recalc();
+}
+function recalc(){
+  const v=parseFloat(capInput.value.replace(/[^0-9.]/g,''))||0;
+  const shAttr='data-sh-'+HORIZON, rkAttr='data-risk-'+HORIZON;
+  let riskTotal=0;
+  document.querySelectorAll('.exp-usd').forEach(el=>{
+    const sh=parseFloat(el.getAttribute(shAttr))||0;
+    el.textContent='$'+Math.round(v*sh).toLocaleString('en-US');
+    const row=el.closest('.exp-row');
+    if(row)row.setAttribute('data-empty',sh===0?'1':'0');
+    const pct=row&&row.querySelector('.exp-pct');
+    if(pct)pct.textContent=(sh*100).toFixed(0)+'%';
+    const risk=row&&row.querySelector('.exp-risk');
+    if(risk){
+      const r=parseFloat(risk.getAttribute(rkAttr))||0;
+      const loss=v*sh*r;
+      riskTotal+=loss;
+      risk.textContent=loss?'−$'+Math.round(loss).toLocaleString('en-US'):'—';
+    }
+  });
+  document.querySelectorAll('.exp-seg').forEach(seg=>{
+    const sh=parseFloat(seg.getAttribute(shAttr))||0;
+    seg.style.flex=sh*100;
+  });
+  const t=document.getElementById('expRiskTotal');
+  if(t)t.textContent='−$'+Math.round(riskTotal).toLocaleString('en-US')+' · '+(v?(riskTotal/v*100).toFixed(1):'0.0')+'% del capital';
+}
+['3m','6m'].forEach(hz=>{
+  const total=[...document.querySelectorAll('.exp-usd')].reduce((sum,el)=>sum+(parseFloat(el.getAttribute('data-sh-'+hz))||0),0);
+  if(Math.abs(total-1)>.0001)console.warn(`[EXPOSURE] La cartera ${hz.toUpperCase()} suma ${(total*100).toFixed(2)}%, no 100%.`);
+});
+capInput.addEventListener('input',recalc);
+document.querySelectorAll('.cp').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.cp').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  capInput.value=parseInt(b.dataset.p).toLocaleString('en-US');
+  recalc();
+}));
+recalc();
+if('IntersectionObserver'  in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.fade').forEach(el=>io.observe(el));}else{document.querySelectorAll('.fade').forEach(el=>el.classList.add('vis'));}
+</script>
+</body>
+</html>
