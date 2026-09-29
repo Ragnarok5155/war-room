@@ -4,14 +4,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="WAR ROOM · 28 septiembre 2026. Crédito rompe el umbral: HY OAS 2,93% y CCC 11,28%; 10Y 5,234%, WTI 96,31 y amplitud 16/453. Régimen ROJO ↓ confirmado; libro 98/0/2. Carteras 3M/6M con P&amp;L completo y visible." name="description"/>
+<meta content="WAR ROOM v4.6.1 · 28 septiembre 2026. Crédito rompe el umbral; régimen ROJO ↓ confirmado y libro 98/0/2. Nueva sección Cripto con puente macro, panel compacto, derivados, flujo ETF y lectura de grupos de liquidación. Carteras 3M/6M con P&amp;L visible." name="description"/>
 <meta content="website" property="og:type"/>
 <meta content="War Room · Terminal de Señales" property="og:site_name"/>
-<meta content="WAR ROOM v4.5 — 28 Septiembre 2026 · HY 2,93% · 10Y 5,234% · libro 98/0/2" property="og:title"/>
+<meta content="WAR ROOM v4.6.1 — 28 Septiembre 2026 · CRIPTO + PUENTE MACRO · HY 2,93% · 10Y 5,234% · 98/0/2" property="og:title"/>
 <meta content="El crédito cruza el gatillo: HY 2,93% y CCC 11,28%. El crudo supera 100 $ en Brent, el 10Y marca 5,234% y la amplitud cae a 16 máximos / 453 mínimos. Re-escalada ejecutada a 98% caja." property="og:description"/>
 <meta content="war-room-28-09-26-og.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<title>WAR ROOM v4.5 — 28 Septiembre 2026 · HY 2,93% · 10Y 5,234% · 98/0/2</title>
+<title>WAR ROOM v4.6.1 — 28 Septiembre 2026 · Cripto + puente macro · 98/0/2</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&amp;family=Archivo:wght@400;600;800;900&amp;family=Archivo+Black&amp;display=swap" rel="stylesheet"/>
@@ -115,10 +115,10 @@ section{padding:62px 0;border-bottom:1px solid var(--grid)}
 /* ===== 4-DAY MEMORY STRIP ===== */
 .memory{background:rgba(11,16,22,.5)}
 .mem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--grid)}
-.mem-cell{background:var(--bg);padding:16px 16px 14px}
-.mem-tick{font-size:10px;letter-spacing:1.5px;color:var(--ink-faint);text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.mem-stale{font-size:8px;letter-spacing:.35px;text-transform:none;color:var(--alert);white-space:nowrap}
-.mem-now{font-family:var(--display);font-weight:800;font-size:21px;margin-top:6px;display:flex;align-items:baseline;gap:7px}
+.mem-cell{background:var(--bg);padding:16px 16px 14px;min-width:0;overflow:hidden}
+.mem-tick{font-size:10px;letter-spacing:1.5px;color:var(--ink-faint);text-transform:uppercase;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;min-width:0}
+.mem-stale{font-size:8px;letter-spacing:.35px;text-transform:none;color:var(--alert);white-space:normal;line-height:1.35;text-align:right;max-width:68%;overflow-wrap:anywhere}
+.mem-now{font-family:var(--display);font-weight:800;font-size:21px;margin-top:6px;display:flex;align-items:baseline;gap:7px;min-width:0;flex-wrap:wrap}
 .mem-d{font-size:10px;font-weight:700}
 .tk .inv.dn,.mem-d.inv.dn{color:var(--signal)!important}
 .tk .inv.up,.mem-d.inv.up{color:var(--risk)!important}
@@ -274,6 +274,165 @@ section{padding:62px 0;border-bottom:1px solid var(--grid)}
 
 
 
+
+
+/* ===== v4.6.1 · 05B MERCADO CRIPTO · JERARQUÍA + MAPA VIVO ===== */
+.crypto-section{
+  --lv-1:var(--info);
+  --lv-2:var(--signal);
+  --lv-3:var(--alert);
+  --lv-4:color-mix(in srgb,var(--alert) 62%,var(--risk));
+  --lv-5:var(--risk);
+  background:rgba(11,16,22,.28);position:relative;overflow:hidden
+}
+.crypto-section::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 45% at 82% 8%,rgba(46,168,255,.07),transparent 58%),radial-gradient(ellipse 55% 38% at 8% 92%,rgba(0,255,156,.035),transparent 62%)}
+.crypto-section .wrap{position:relative}
+.crypto-kicker{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+.bridge{display:grid;grid-template-columns:minmax(260px,.36fr) minmax(0,1fr);gap:28px;border:1px solid var(--grid);background:linear-gradient(135deg,rgba(15,22,32,.92),rgba(7,11,16,.82));border-radius:4px;padding:22px;position:relative;overflow:hidden}
+.bridge::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--bridge-color,var(--info));box-shadow:0 0 12px var(--bridge-color,var(--info))}
+.bridge-state{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:172px;min-width:0}
+.bridge-state[data-state="linked"]{--bridge-color:var(--info)}
+.bridge-state[data-state="own"]{--bridge-color:var(--alert)}
+.bridge-state[data-state="opposite"]{--bridge-color:var(--signal)}
+.bridge-state-key{font-family:var(--display);font-weight:900;font-size:clamp(24px,2.65vw,32px);line-height:.95;letter-spacing:-.5px;color:var(--bridge-color);text-shadow:0 0 14px color-mix(in srgb,var(--bridge-color) 42%,transparent);white-space:nowrap;max-width:100%}
+.bridge-state-sub{font-size:10px;line-height:1.45;color:var(--ink-dim);letter-spacing:1px;text-transform:uppercase;max-width:170px}
+.bridge-dotline{display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:1.4px;color:var(--ink-faint);text-transform:uppercase}
+.bridge-dot{width:7px;height:7px;border-radius:50%;background:var(--bridge-color);box-shadow:0 0 10px var(--bridge-color)}
+.bridge-state[data-state="opposite"] .bridge-dot{animation:pulse 1.6s infinite}
+.bridge-copy{display:flex;flex-direction:column;justify-content:center;gap:9px;min-width:0}
+.bridge-copy p{font-size:13px;line-height:1.72;color:var(--ink-dim)}
+.bridge-copy p b{color:var(--ink)}
+.bridge-copy em{font-style:normal;font-weight:700}
+.bridge-copy .n-risk{color:var(--risk)}
+.bridge-copy .n-up{color:var(--signal)}
+.bridge-copy .n-warn{color:var(--alert)}
+.bridge-copy .n-info{color:var(--info)}
+.bridge-copy p.bridge-link{border-left:3px solid var(--bridge-color,var(--info));padding:10px 12px;background:color-mix(in srgb,var(--bridge-color,var(--info)) 6%,transparent);color:var(--ink)}
+.bridge-copy p:last-child{color:var(--ink);font-weight:500}
+.bridge-memory-head{margin-top:18px;display:flex;align-items:end;justify-content:space-between;gap:16px}
+.bmh-title{font-family:var(--display);font-weight:900;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink)}
+.bmh-sub{font-size:9.5px;line-height:1.5;color:var(--ink-faint);text-align:right}
+.bridge-memory{margin-top:9px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--grid);border:1px solid var(--grid);border-radius:4px;overflow:hidden}
+.bm-cell{background:var(--panel);padding:14px;min-height:124px;border-top:2px solid var(--ink-faint)}
+.bm-cell[data-state="linked"]{border-top-color:var(--info)}
+.bm-cell[data-state="own"]{border-top-color:var(--alert)}
+.bm-cell[data-state="opposite"]{border-top-color:var(--signal)}
+.bm-cell[data-state="gap"]{border:1px dashed var(--ink-faint);border-top-width:2px;background:rgba(4,6,10,.7);opacity:.45}
+.bm-date{font-size:8.5px;line-height:1.45;letter-spacing:1.15px;text-transform:uppercase;color:var(--ink-faint)}
+.bm-date-short{display:none}
+.bm-state{font-family:var(--display);font-weight:900;color:var(--bm-color,var(--ink));font-size:13px;letter-spacing:.5px;margin-top:5px}
+.bm-cell[data-state="linked"]{--bm-color:var(--info)}.bm-cell[data-state="own"]{--bm-color:var(--alert)}.bm-cell[data-state="opposite"]{--bm-color:var(--signal)}
+.bm-line{font-size:10.5px;line-height:1.58;color:var(--ink-dim);margin-top:8px}
+.bm-line strong{color:var(--ink);font-weight:700}
+.crypto-compact{display:grid;grid-template-columns:1.05fr .95fr 1.3fr 1.15fr;gap:10px;margin-top:14px}
+.crypto-metric{border:1px solid var(--grid);background:var(--panel);border-radius:4px;padding:16px;min-width:0;position:relative;overflow:hidden}
+.crypto-metric::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--metric-color,var(--info));opacity:.8}
+.crypto-metric.btc{--metric-color:var(--alert)}
+.crypto-metric.cap{--metric-color:var(--info)}
+.crypto-metric.dom{--metric-color:var(--info)}
+.crypto-metric.alt{--metric-color:var(--signal)}
+.crypto-metric.solid{border-color:transparent}
+.crypto-metric.solid::before{display:none}
+.crypto-metric.solid.btc{background:var(--alert)}
+.crypto-metric.solid.cap{background:var(--info)}
+.crypto-metric.solid .cm-label,.crypto-metric.solid .cm-value,.crypto-metric.solid .cm-sub,.crypto-metric.solid .cm-sub b{color:var(--bg);text-shadow:none}
+.cm-label{font-size:9px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink-faint)}
+.cm-value{font-family:var(--display);font-weight:900;font-size:clamp(26px,3vw,36px);line-height:1.05;margin-top:9px;color:var(--ink)}
+.cm-sub{font-size:10.5px;line-height:1.55;color:var(--ink-dim);margin-top:7px}
+.metric-chip{display:flex;gap:7px;flex-wrap:wrap;align-items:center;width:max-content;max-width:100%;margin-top:10px;padding:6px 8px;border-radius:2px;background:rgba(4,6,10,.82);color:var(--ink-dim);font-size:9px;line-height:1.45}
+.metric-chip b{font-weight:800}.metric-chip .risk{color:var(--risk)}.metric-chip .upv{color:var(--signal)}.metric-chip .warn{color:var(--alert)}.metric-chip .info{color:var(--info)}
+.metric-delta{margin-top:9px;padding-top:8px;border-top:1px solid var(--grid-soft);font-size:9px;line-height:1.5;color:var(--ink-faint)}
+.metric-delta b{font-weight:700;color:var(--ink-dim)}
+.dom-bar{height:9px;display:flex;overflow:hidden;border-radius:2px;background:var(--grid-soft);margin-top:12px}
+.dom-seg{height:100%;transform:scaleX(0);transition:transform .72s cubic-bezier(.22,.8,.23,1);transform-origin:left center}
+.crypto-ready .dom-seg{transform:scaleX(1)}
+.dom-seg.btc{background:var(--alert);transition-delay:.02s}.dom-seg.eth{background:var(--info);transition-delay:.10s}.dom-seg.other{background:var(--ink-faint);transition-delay:.18s}
+.dom-legend{display:flex;gap:9px;flex-wrap:wrap;margin-top:8px;font-size:9px;color:var(--ink-faint)}
+.dom-legend b{color:var(--ink-dim);font-weight:500}
+.alt-gauge{position:relative;height:8px;margin-top:14px;background:linear-gradient(90deg,var(--alert) 0 25%,var(--grid) 25% 50%,var(--info) 50% 75%,var(--signal) 75% 100%);border-radius:2px}
+.alt-marker{position:absolute;left:0;top:50%;width:11px;height:11px;border:2px solid var(--white);background:var(--panel);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 9px rgba(255,255,255,.35);transition:left .72s cubic-bezier(.2,.95,.24,1.12)}
+.crypto-ready .alt-marker{left:var(--pos)}
+.crypto-detail{margin-top:14px;border:1px solid var(--grid);background:rgba(11,16,22,.7);border-radius:4px;overflow:hidden}
+.crypto-detail summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-dim);user-select:none}
+.crypto-detail summary::-webkit-details-marker{display:none}
+.crypto-detail summary::after{content:"＋";font-family:var(--mono);font-size:15px;color:var(--alert)}
+.crypto-detail[open] summary{color:var(--ink);border-bottom:1px solid var(--grid)}
+.crypto-detail[open] summary::after{content:"−"}
+.crypto-detail-body{padding:18px}
+.crypto-sourcebar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:10px 12px;border:1px dashed var(--grid);background:rgba(4,6,10,.45);font-size:9.5px;line-height:1.5;color:var(--ink-faint);margin-bottom:16px}
+.crypto-sourcebar b{color:var(--ink-dim)}
+.crypto-table-wrap{overflow-x:auto;border:1px solid var(--grid);border-radius:3px}
+.crypto-table{width:100%;min-width:760px;border-collapse:collapse;font-size:11px}
+.crypto-table th{padding:9px 11px;text-align:right;background:rgba(15,22,32,.8);border-bottom:1px solid var(--grid);font-size:8.5px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink-faint);white-space:nowrap}
+.crypto-table th:first-child,.crypto-table td:first-child{text-align:left}
+.crypto-table td{padding:11px;border-bottom:1px solid var(--grid-soft);text-align:right;color:var(--ink-dim);white-space:nowrap}
+.crypto-table tr:last-child td{border-bottom:none}.crypto-table td strong{color:var(--ink)}
+.crypto-table tr.asset-neg td:first-child{border-left:2px solid var(--risk)}
+.crypto-table tr.asset-pos td:first-child{border-left:2px solid var(--signal)}
+.crypto-table td.delta-neg{color:var(--risk);font-weight:800;background:color-mix(in srgb,var(--risk) 8%,transparent)}
+.crypto-table td.delta-pos{color:var(--signal);font-weight:800;background:color-mix(in srgb,var(--signal) 8%,transparent)}
+.crypto-table td.fund-pos{color:var(--signal)}.crypto-table td.fund-neg{color:var(--risk)}.crypto-table td.fund-hot{color:var(--lv-4);font-weight:800}
+.crypto-table td.rsi-1{color:var(--lv-1)}.crypto-table td.rsi-2{color:var(--lv-2)}.crypto-table td.rsi-3{color:var(--lv-3)}.crypto-table td.rsi-4{color:var(--lv-4)}.crypto-table td.rsi-5{color:var(--lv-5);font-weight:800}
+.crypto-note{white-space:normal!important;text-align:left!important;min-width:180px;font-size:9.5px;color:var(--ink-faint)!important}
+.crypto-note.token-gold{color:var(--alert)!important;font-weight:700}
+.crypto-detail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.cd-card{border:1px solid var(--grid);background:var(--panel);padding:14px;border-radius:3px;min-height:142px;position:relative;overflow:hidden}
+.cd-k{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-faint)}
+.cd-v{font-family:var(--display);font-weight:900;font-size:24px;color:var(--level-color,var(--ink));margin-top:8px}
+.cd-x{font-size:10px;line-height:1.55;color:var(--ink-dim);margin-top:7px}
+.lv-scale{position:relative;display:grid;grid-template-columns:repeat(5,1fr);height:7px;margin-top:12px;border-radius:2px;overflow:visible;background:var(--grid-soft)}
+.lv-scale i{display:block;height:7px}.lv-scale i:nth-child(1){background:var(--lv-1)}.lv-scale i:nth-child(2){background:var(--lv-2)}.lv-scale i:nth-child(3){background:var(--lv-3)}.lv-scale i:nth-child(4){background:var(--lv-4)}.lv-scale i:nth-child(5){background:var(--lv-5)}
+.lv-marker{position:absolute;left:var(--pos);top:50%;width:10px;height:10px;border:2px solid var(--white);border-radius:50%;background:var(--panel);transform:translate(-50%,-50%);box-shadow:0 0 8px rgba(255,255,255,.28)}
+.lv-pair{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;margin-top:9px;font-size:9px;color:var(--ink-faint)}
+.lv-pair strong{font-family:var(--display);font-size:13px;color:var(--pair-color,var(--ink));text-align:right}
+.lv-mini{position:relative;height:5px;background:linear-gradient(90deg,var(--lv-1) 0 20%,var(--lv-2) 20% 40%,var(--lv-3) 40% 60%,var(--lv-4) 60% 80%,var(--lv-5) 80% 100%);border-radius:2px}
+.lv-mini::after{content:"";position:absolute;left:var(--pos);top:50%;width:7px;height:7px;border-radius:50%;border:1px solid var(--white);background:var(--panel);transform:translate(-50%,-50%)}
+.lv-extreme{animation:neon-flash 1.6s ease-in-out infinite}
+@keyframes neon-flash{0%,100%{opacity:1;text-shadow:0 0 8px currentColor,0 0 22px currentColor}50%{opacity:.55;text-shadow:0 0 4px currentColor}}
+.conflict-note{margin-top:12px;padding:11px 13px;border-left:3px solid var(--alert);background:rgba(255,176,0,.045);font-size:10.5px;line-height:1.65;color:var(--ink-dim)}
+.conflict-note b{color:var(--alert)}
+.liq-panel{margin-top:16px;border:1px solid var(--grid);background:var(--panel);border-radius:4px;padding:18px}
+.liq-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:12px}
+.liq-title{font-family:var(--display);font-weight:800;font-size:13px;color:var(--ink)}
+.liq-meta{font-size:9px;line-height:1.5;color:var(--ink-faint);text-align:right;max-width:460px}
+.liq-honesty{padding:10px 12px;border-left:3px solid var(--alert);background:rgba(255,176,0,.045);font-size:9.5px;line-height:1.6;color:var(--ink-dim);margin-bottom:12px}
+.liq-honesty b{color:var(--alert)}
+.liq-map-scroll{width:100%;overflow-x:auto;overscroll-behavior-inline:contain;padding-bottom:4px}
+.liq-svg{display:block;width:100%;min-width:760px;height:auto;aspect-ratio:1000/450;background:rgba(4,6,10,.28);border:1px solid var(--grid-soft);border-radius:3px}
+.liq-grid-line{stroke:var(--grid);stroke-width:1;stroke-dasharray:4 5;opacity:.85}
+.liq-axis-label{fill:var(--ink-faint);font-family:var(--mono);font-size:10px}
+.liq-axis-label.hot{fill:var(--ink-dim)}
+.liq-axis-bin{font-size:8.1px;letter-spacing:-.1px}
+.liq-bar-svg{transform-box:fill-box;transform-origin:center bottom;transform:scaleY(0);transition:transform .55s cubic-bezier(.22,.8,.23,1) var(--delay),opacity .16s,stroke .16s;pointer-events:none}
+.crypto-ready .liq-bar-svg{transform:scaleY(1)}
+.liq-bar-svg.peak{filter:drop-shadow(0 0 7px currentColor) drop-shadow(0 0 14px currentColor)}
+.liq-bar-svg.is-selected{stroke:var(--white);stroke-width:1.3;filter:drop-shadow(0 0 7px currentColor) drop-shadow(0 0 14px currentColor)}
+.liq-hit-target{fill:transparent;cursor:pointer;outline:none}
+.liq-hit-target:focus-visible{fill:rgba(232,238,242,.035);stroke:var(--ink);stroke-width:1;stroke-dasharray:3 3}
+.liq-tip{pointer-events:none;display:none}
+.liq-tip.is-open{display:block}
+.liq-tip-box{fill:var(--panel-2);stroke-width:1.25}
+.liq-tip-kicker{fill:var(--ink-faint);font-family:var(--mono);font-size:7.8px;letter-spacing:1.2px}
+.liq-tip-main{fill:var(--white);font-family:var(--display);font-weight:800;font-size:10.5px}
+.liq-tip-sub{fill:var(--ink-dim);font-family:var(--mono);font-size:8.2px}
+.liq-tip-line{stroke-width:1;stroke-dasharray:3 3;opacity:.8}
+.liq-curve{fill:none;stroke-width:2.4;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .7s ease .56s}
+.crypto-ready .liq-curve{stroke-dashoffset:0}
+.liq-area-long{fill:color-mix(in srgb,var(--risk) 11%,transparent)}
+.liq-area-short{fill:color-mix(in srgb,var(--signal) 11%,transparent)}
+.liq-price-line{stroke:var(--risk);stroke-width:1.7;stroke-dasharray:7 6;opacity:0;transition:opacity .18s linear 1.28s}
+.liq-price-label{fill:var(--risk);font-family:var(--display);font-weight:800;font-size:11px;opacity:0;transition:opacity .18s linear 1.28s}
+.crypto-ready .liq-price-line,.crypto-ready .liq-price-label{opacity:1}
+.liq-curve-label{font-family:var(--mono);font-size:9px;letter-spacing:.4px}
+.liq-curve-label.long{fill:var(--risk)}.liq-curve-label.short{fill:var(--signal)}
+.liq-read{margin-top:12px;padding-top:12px;border-top:1px solid var(--grid-soft);font-size:11px;line-height:1.65;color:var(--ink-dim)}
+.liq-read b{color:var(--ink)}
+.crypto-legend{margin-top:10px;font-size:9.5px;line-height:1.6;color:var(--ink-faint)}
+.crypto-legend b{color:var(--ink-dim)}
+@media(max-width:980px){.bridge{grid-template-columns:1fr}.bridge-state{min-height:0}.bridge-state-sub{max-width:none}.crypto-compact{grid-template-columns:1fr 1fr}.crypto-detail-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.bridge{padding:17px}.bridge-memory-head{align-items:flex-start;flex-direction:column;gap:4px}.bmh-sub{text-align:left}.bridge-memory{grid-template-columns:1fr 1fr}.bm-date-long{display:none}.bm-date-short{display:inline}.crypto-compact{grid-template-columns:1fr}.crypto-detail-body{padding:12px}.crypto-detail-grid{grid-template-columns:1fr}.liq-head{flex-direction:column}.liq-meta{text-align:left}.crypto-sourcebar{font-size:9px}.crypto-detail summary{align-items:flex-start;flex-direction:column}.liq-panel{padding:12px}.liq-svg{min-width:720px}}
+@media(prefers-reduced-motion:reduce){.lv-extreme{animation:none!important}.liq-bar-svg{transform:scaleY(1)!important;transition:none!important}.liq-curve{stroke-dashoffset:0!important;transition:none!important}.liq-price-line,.liq-price-label{opacity:1!important;transition:none!important}}
+
 /* ===== v4.2 · HORIZONTES / CARTERAS DE REFERENCIA ===== */
 .hz-frame{color:var(--ink-dim);font-size:12.5px;line-height:1.75;margin-bottom:22px;
   max-width:720px;padding:14px 18px;border-left:3px solid var(--ink-faint);
@@ -410,7 +569,7 @@ section{padding:62px 0;border-bottom:1px solid var(--grid)}
 }
 
 
-/* ===== v4.5 · MARCADOR DE CARTERA ===== */
+/* ===== v4.5 · MARCADOR DE CARTERA (preservado en v4.6) ===== */
 .pos-contrib{font-family:var(--display);font-weight:800;font-size:10.5px;
   letter-spacing:.3px;white-space:nowrap;color:var(--ink-dim)}
 .pos-contrib.up{color:var(--signal);text-shadow:var(--g-signal)}
@@ -689,10 +848,10 @@ body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba
 .bar-chart{position:relative;height:auto;padding:4px 0 0}
 .bar-row{display:grid;grid-template-columns:90px 1fr 74px;gap:12px;align-items:center;height:34px;font-size:11px}
 .bar-name{color:var(--ink-dim)}
-.bar-track{height:8px;background:var(--grid-soft);position:relative;border-radius:1px;overflow:visible}
-.bar-zero{position:absolute;left:50%;top:-5px;bottom:-5px;width:1px;background:var(--grid)}
-.bar-fill{position:absolute;top:0;height:8px;border-radius:1px;box-shadow:0 0 10px currentColor}
-.bar-fill.pos{left:50%}.bar-fill.neg{right:50%}
+.bar-track{height:8px;background:var(--grid-soft);position:relative;border-radius:1px;overflow:hidden}
+.bar-zero{position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--ink-faint);opacity:.65;z-index:2}
+.bar-fill{position:absolute;top:0;height:8px;border-radius:1px;box-shadow:0 0 8px currentColor;padding:0;margin:0;border:0;display:block;z-index:1}
+.bar-fill.bar-pos{left:50%}.bar-fill.bar-neg{right:50%}
 .bar-fill.t-risk{background:var(--risk);color:var(--risk)}.bar-fill.t-signal{background:var(--signal);color:var(--signal)}
 .bar-val{text-align:right;font-weight:700}
 @media(max-width:420px){.rg-record{order:3;width:100%;justify-content:flex-start;padding-top:8px;border-top:1px solid var(--grid-soft)}.bar-row{grid-template-columns:62px 1fr 60px;gap:7px;font-size:9.5px}}
@@ -738,7 +897,7 @@ body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba
 </div></div></section>
 
 <!-- ===== 01B · REGISTRO ===== -->
-<section class="scorecard"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 01B</div><h2 class="sec-title">Ayer dije / hoy pasó</h2><div class="sec-line"></div><div class="sec-sub">pre-registro 25S · cierre 28S · 6 decisiones auditadas</div></div>
+<section class="scorecard"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 01B</div><h2 class="sec-title">Ayer dije / hoy pasó</h2><div class="sec-line"></div><div class="sec-sub" id="scoreGapNote">pre-registro del 25S contrastado al cierre del 28S · continuidad auditada</div></div>
 <div class="sc-table fade"><div class="sc-head"><span>Lo que quedó escrito el 25 de septiembre</span><span>Lo que pasó hoy</span><span>Veredicto</span></div>
 <div class="sc-row" data-v="hit"><div class="sc-said"><b>Re-escalada 88 → 98:</b> HY OAS &gt;2.80%, XLF &lt;53.55 o VIX &gt;20 con MOVE &gt;100 → duración 10→0 y caja 88→98.</div><div class="sc-did">HY publica <b>2.93%</b>, 13pb sobre el umbral. Una condición bastaba y se ejecuta <b>98/0/2</b>.</div><div class="sc-v hit">✓ ACIERTO</div></div>
 <div class="sc-row" data-v="hit"><div class="sc-said"><b>Duración corta:</b> cerrar si 2Y &gt;5.00% o si HY OAS publica <b>&gt;2.80%</b>; la igualdad no activa.</div><div class="sc-did">El 2Y queda en <b>4.928%</b>, pero HY <b>2.93%</b> activa la segunda pata. El 10% se cierra y vuelve a caja.</div><div class="sc-v hit">✓ ACIERTO</div></div>
@@ -755,8 +914,8 @@ body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba
 <p class="th-intro fade">Los cinco hilos del 25S siguen en pantalla. Japón suma otra sesión sin fuente oficial; el yen apenas cambia; la presión de costes gana evidencia; el extremo largo acelera; y la concentración de IA queda más visible cuando el sector cae pero el líder aguanta.</p><div class="threads fade" id="threadsList"></div><p class="th-foot fade">El hilo del Tesoro ya no está en estado GIRÓ: hoy confirma la dirección del giro de ayer. Ningún hilo se cierra todavía.</p></div></section>
 
 <!-- ===== MEM · MEMORIA 4 DÍAS ===== -->
-<section class="memory"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// MEM</div><h2 class="sec-title">Lo que cambió en 4 ediciones</h2><div class="sec-line"></div><div class="sec-sub">23S · 24S · 25S · 28S</div></div><div class="mem-grid fade" id="memGrid"></div>
-<p class="mem-footnote fade">▸ Ventana FIFO publicada: salió 22S y entró 28S. Hoy: WTI <b>$96.31</b>, SPX <b>7,683.69</b>, VIX <b>16.08</b>, SKEW <b>144.91</b>, GOLD <b>$4,117.05</b> y BTC <b>$83.542K</b>. DXY no tiene un nivel 28S reconciliable en los inputs: se conserva <b>101.280</b> como último nivel publicado, se marca hueco y solo se registra la dirección +0.16% como contexto. <span class="mem-errata"><b>FE DE ERRATAS · SERIE HISTÓRICA:</b> SPX 23S publicado 7,702.65; cierre oficial revisado <b>7,706.03</b>. SPX 25S publicado <b>7,742.33</b>; el cierre de referencia usado por el análisis 28S es <b>7,743.80</b>. WTI 25S publicado <b>92.57</b>; el cierre oficial implícito en el +4.22% de hoy es <b>≈92.41</b>. Los puntos publicados no se reescriben; los deltas con * usan la referencia oficial.</span></p></div></section>
+<section class="memory"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// MEM</div><h2 class="sec-title">Lo que cambió en 4 ediciones</h2><div class="sec-line"></div><div class="sec-sub" id="memWindowLabel">24S · 25S · — · 28S</div></div><div class="mem-grid fade" id="memGrid"></div>
+<p class="mem-footnote fade">▸ Ventana FIFO publicada: salió 23S y entró 28S. <span id="memGapNote"></span> Hoy: WTI <b>$96.31</b>, SPX <b>7,683.69</b>, VIX <b>16.08</b>, SKEW <b>144.91</b>, GOLD <b>$4,117.05</b> y BTC <b>$83.542K</b>. DXY no tiene un nivel 28S reconciliable en los inputs: se conserva <b>101.280</b> como último nivel publicado, se marca hueco y solo se registra la dirección +0.16% como contexto. <span class="mem-errata"><b>FE DE ERRATAS · SERIE HISTÓRICA:</b> SPX 23S publicado 7,702.65; cierre oficial revisado <b>7,706.03</b>. SPX 25S publicado <b>7,742.33</b>; el cierre de referencia usado por el análisis 28S es <b>7,743.80</b>. WTI 25S publicado <b>92.57</b>; el cierre oficial implícito en el +4.22% de hoy es <b>≈92.41</b>. Los puntos publicados no se reescriben; los deltas con * usan la referencia oficial.</span></p></div></section>
 
 <!-- ===== 02 · TESIS EN 3 FUERZAS ===== -->
 <section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 02</div><h2 class="sec-title">La tesis en 3 fuerzas</h2><div class="sec-line"></div><div class="sec-sub">crédito · tasa real · shock de oferta</div></div>
@@ -789,6 +948,43 @@ body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba
 <div class="chart-card fade"><div class="ch-head"><div><span class="ch-sym">VIX</span><span class="ch-meta">23S → 24S → 25S → 28S</span></div><span class="ch-tag" style="color:var(--alert);border:1px solid var(--alert)">16.08 · P27</span></div><div class="ch-body"><div class="chart-plot small"><svg preserveaspectratio="none" viewbox="0 0 520 180"><g id="riskGrid"></g><g id="riskSeries"></g><g id="riskLeaders"></g></svg><span class="chart-label date" data-risk-date="0" style="left:10%;bottom:4px">23S</span><span class="chart-label date anchor-c" data-risk-date="1" style="left:36%;bottom:4px">24S</span><span class="chart-label date anchor-c" data-risk-date="2" style="left:62%;bottom:4px">25S</span><span class="chart-label date anchor-c" data-risk-date="3" style="left:80%;bottom:4px">28S</span><span class="chart-label alert" data-risk-label="VIX" style="right:1%;top:30%">VIX</span></div><div class="legend"><span><i style="background:var(--alert)"></i>15.17 → 15.68 → 14.88 → 16.08</span><span><b>Lectura:</b> el nivel sigue por debajo de 20, pero la aceleración cambia: VIX +8.06% y MOVE, índice de volatilidad de bonos, <b>101.82 · P98</b> ya no describen calma conjunta.</span></div></div></div>
 <div class="chart-card fade"><div class="ch-head"><div><span class="ch-sym">DISPERSIÓN · 28S</span><span class="ch-meta">cierre · activos clave</span></div><span class="ch-tag" style="color:var(--risk);border:1px solid var(--risk)">DESCUENTO SUBE</span></div><div class="ch-body"><div class="bar-chart" id="sectorBars"></div><div class="legend"><span><b>Lectura:</b> VIX <b>+8.06%</b>, WTI <b>+4.22%</b>, oro <b>−3.9%</b>, S&amp;P <b>−0.77%</b> y BTC cerca de <b>−1.2%</b>. XLV es la excepción defensiva con <b>+0.33%</b>.</span></div></div></div>
 </div></div></section>
+
+
+<!-- ===== 05B · MERCADO CRIPTO ===== -->
+<section class="crypto-section" id="cryptoSection"><div class="wrap">
+<div class="sec-head fade"><div class="sec-num">// 05B</div><h2 class="sec-title">Mercado <em>cripto</em></h2><div class="sec-line"></div><div class="sec-sub">puente macro · estructura · derivados · liquidaciones</div></div>
+<div class="bridge fade" id="cryptoBridge">
+  <div class="bridge-state" id="cryptoBridgeState" data-state="linked">
+    <div><div class="crypto-kicker">EL PUENTE · ESTADO DEL DÍA</div><div class="bridge-state-key" id="bridgeStateKey">CONECTADO</div><div class="bridge-state-sub" id="bridgeStateSub">con el mercado tradicional</div></div>
+    <div class="bridge-dotline"><span class="bridge-dot"></span><span>contexto, no señal de compra o venta</span></div>
+  </div>
+  <div class="bridge-copy" id="bridgeNarrative"></div>
+</div>
+<div class="bridge-memory-head fade"><div class="bmh-title">Los últimos cuatro días</div><div class="bmh-sub">Cómo se comportó el mercado cripto frente al tradicional en cada sesión</div></div>
+<div class="bridge-memory fade" id="bridgeMemory" aria-label="Memoria de cuatro ediciones del puente macro"></div>
+<div class="crypto-compact fade" id="cryptoCompact">
+  <article class="crypto-metric solid btc"><div class="cm-label">Bitcoin · 24 horas</div><div class="cm-value crypto-count" data-count="83118" data-prefix="$" data-decimals="0">$83,118</div><div class="metric-chip"><b class="risk">▼ 1.05%</b><span>24 horas</span></div></article>
+  <article class="crypto-metric solid cap"><div class="cm-label">Capitalización total</div><div class="cm-value crypto-count" data-count="2.86" data-prefix="$" data-suffix="T" data-decimals="2">$2.86T</div><div class="cm-sub">volumen 24h · <b>$111.85B</b></div><div class="metric-chip" id="capDeltaChip"></div></article>
+  <article class="crypto-metric dom"><div class="cm-label">Dominancia</div><div class="cm-value crypto-count" data-count="58.6" data-suffix="%" data-decimals="1">58.6%</div><div class="dom-bar" id="dominanceBar"><i class="dom-seg btc" style="width:58.6%"></i><i class="dom-seg eth" style="width:11.5%"></i><i class="dom-seg other" style="width:30%"></i></div><div class="dom-legend"><b>BTC 58.6%</b><b>ETH 11.5%</b><b>OTROS 30.0%</b></div><div class="metric-delta" id="domDelta"></div></article>
+  <article class="crypto-metric alt"><div class="cm-label">Temporada de altcoins</div><div class="cm-value crypto-count" data-count="63" data-suffix="/100" data-decimals="0">63/100</div><div class="alt-gauge"><i class="alt-marker" id="altMarker" style="--pos:63%"></i></div><div class="metric-delta" id="altDelta"></div></article>
+</div>
+<details class="crypto-detail fade" id="cryptoDetail">
+  <summary><span>Ver el detalle</span><span>activos · sentimiento · derivados · flujos · liquidaciones</span></summary>
+  <div class="crypto-detail-body">
+    <div class="crypto-sourcebar"><span><b>FUENTES:</b> <span id="cryptoSources"></span></span><span><b>CORTE:</b> <span id="cryptoAsof"></span></span></div>
+    <div class="crypto-table-wrap"><table class="crypto-table"><thead><tr><th>Activo</th><th>Precio</th><th>24h</th><th>Financiación</th><th>Interés abierto</th><th>RSI 4h</th><th>Nota</th></tr></thead><tbody id="cryptoAssetRows"></tbody></table></div>
+    <div class="crypto-detail-grid" id="cryptoDetailGrid"></div>
+    <div class="conflict-note" id="cryptoConflict"></div>
+    <div class="liq-panel" id="liqPanel">
+      <div class="liq-head"><div><div class="crypto-kicker">MAPA DE LIQUIDACIONES · PERFIL RECONSTRUIDO</div><div class="liq-title">Binance BTC/USDT perpetuo · ventana de un día</div></div><div class="liq-meta" id="liqMeta"></div></div>
+      <div class="liq-honesty" id="liqHonesty"></div>
+      <div class="liq-map-scroll"><div id="liqChart"></div></div>
+      <div class="liq-read" id="liqRead"></div>
+      <div class="crypto-legend"><b>Qué no es:</b> estos niveles no son gatillos, no entran al protocolo de ramas ni a la sección 07B.</div>
+    </div>
+  </div>
+</details>
+</div></section>
 
 <!-- ===== 06 · SEÑAL VS RUIDO ===== -->
 <section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 06</div><h2 class="sec-title">Señal vs ruido</h2><div class="sec-line"></div><div class="sec-sub">qué decide · qué se deja fuera</div></div><div class="sr">
@@ -963,9 +1159,73 @@ body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba
 <div class="scen-row"><span class="scen-nm">Cola · Japón / contraparte cripto / sorpresa Fed</span><span class="scen-track"><i class="scen-fill t-info" style="width:10%"></i></span><span class="scen-pct">10%</span><span class="scen-d nt">→ desde 10%</span></div>
 <p class="scen-note">Las cuatro ramas suman 100%. La rama de “pausa” del 30% desaparece como estado autónomo y ese 30% se reasigna entre crédito y Ormuz; para que el control automático pueda reconciliar deltas, Ormuz declara que ocupa el bloque de 30% que antes era la pausa. El libro no cambia bajo ninguno de los cuatro escenarios salvo que se cumpla la des-escalada de dos publicaciones.</p></div></div></section>
 
-<footer class="footer"><div class="wrap"><div class="brand">WAR ROOM v4.5 · TERMINAL DE SEÑALES</div><span class="sub">EDICIÓN 28 SEP 2026 · POST-CIERRE · TERMINAL DE SEÑALES</span><p class="disc">Propósito informativo y educativo. No constituye asesoramiento de inversión personalizado, recomendación de compra/venta ni análisis registrado. <b>Los niveles publicados son los gatillos y las invalidaciones de un libro propio, con su tamaño y su horizonte: no son puntos de entrada sugeridos para terceros y no contemplan la situación financiera de quien lee.</b> Verificar precios, liquidez, spreads, calendario y riesgo propio antes de operar.</p></div></footer>
+<footer class="footer"><div class="wrap"><div class="brand">WAR ROOM v4.6.1 · TERMINAL DE SEÑALES</div><span class="sub">EDICIÓN 28 SEP 2026 · POST-CIERRE · TERMINAL DE SEÑALES</span><p class="disc">Propósito informativo y educativo. No constituye asesoramiento de inversión personalizado, recomendación de compra/venta ni análisis registrado. <b>Los niveles publicados son los gatillos y las invalidaciones de un libro propio, con su tamaño y su horizonte: no son puntos de entrada sugeridos para terceros y no contemplan la situación financiera de quien lee.</b> Verificar precios, liquidez, spreads, calendario y riesgo propio antes de operar.</p></div></footer>
 <script>
 const tk=document.getElementById('tkTrack');tk.innerHTML+=tk.innerHTML;
+
+/* ═══ HUECOS DE PUBLICACIÓN · §3E ═══
+   Sesiones de mercado sin informe publicado. Se declaran acá una vez
+   y todos los mecanismos del informe las leen de este único lugar. */
+const GAPS_PUB=[
+  {date:'1 sep', reason:'Sesión de mercado sin análisis publicado'},
+  {date:'26 sep', reason:'Sin edición: carga de trabajo'}
+];
+
+const BRIDGE=[
+  {date:'Jueves 24 de septiembre',short:'Jue 24 sep',state:'linked',line:'Cayó con el índice y los bonos: el movimiento <strong>vino de las tasas</strong>.'},
+  {date:'Viernes 25 de septiembre',short:'Vie 25 sep',state:'opposite',line:'Rebotó mientras el índice cedía. <strong>El flujo de fondos sostuvo el precio</strong> cuando nada más lo hacía.'},
+  {date:'Sábado 26 de septiembre',short:'Sáb 26 sep',state:null,line:'No hubo informe publicado.'},
+  {date:'Lunes 28 de septiembre',short:'Lun 28 sep',state:'linked',line:'Bajó junto con el oro y el índice. La <strong>tasa real</strong> explica los tres.'}
+];
+
+const CRYPTO={
+  asof:'28 sep 2026 · 12:07',
+  source:'CoinMarketCap · Coinglass · Global Asset Data Analytics',
+  bridge:{
+    state:'linked',
+    linkIndex:3,
+    narrative:[
+      'El bitcóin cerró cerca de <b>83.500 dólares</b>, alrededor de un <em class="n-risk">1,2% abajo</em>, y el resto del mercado cayó más: solo <em class="n-risk">12 de las 100 monedas principales</em> terminaron en verde y el índice de temporada de altcoins cayó de <b>74</b> a <em class="n-risk">63</em>.',
+      'El interés abierto en futuros se contrajo alrededor de <em class="n-warn">1,7%</em> mientras el volumen se disparaba y las liquidaciones rondaban <em class="n-warn">130 millones de dólares</em>, firma de un <b>desapalancamiento ordenado</b> y no de una liquidación forzada.',
+      'El mismo día, el oro cayó cerca de <em class="n-risk">3,9%</em>, el índice S&amp;P 500 bajó <em class="n-risk">0,77%</em> y el índice de volatilidad subió alrededor de <em class="n-risk">8%</em>.',
+      '<b>El vínculo es la tasa real:</b> con el bono a diez años cerrando en <em class="n-info">5,234%</em>, el oro y el bitcóin recibieron el mismo aumento del tipo de descuento.',
+      'No es una historia aislada de cripto: hoy el mercado digital leyó el endurecimiento macro en la misma dirección que el resto.'
+    ]
+  },
+  market:{cap:'2.86T',vol:'111.85B',capDelta:null},
+  dominance:{btc:58.6,eth:11.5,other:30.0},
+  sentiment:{fear:67,altseason:63,greenCoins:12,conflict:'Otro proveedor publica 74 para miedo y codicia; se usa CoinMarketCap (67 en la captura del día) y la discrepancia se declara.'},
+  derivatives:{oiPerp:'390.19B',oiFut:'1.14B',oiDelta:-1.70,funding:0.0038,liq24h:'130M'},
+  vol:{btc:37.86,eth:52.60},
+  etf:{value:'-3.2M',date:'27 sep',lag:1},
+  series:{
+    cap:[2.91,2.89,null,2.86],
+    btcDom:[58.1,58.3,null,58.6],
+    altseason:[74,74,null,63],
+    fear:[72,70,null,67]
+  },
+  assets:[
+    {t:'BTC',p:'83,118',d:-1.05,fund:0.0018,oi:'53.47B',rsi:42.13},
+    {t:'ETH',p:'2,676',d:+0.23,fund:0.0074,oi:'33.69B',rsi:49.23},
+    {t:'SOL',p:'118.12',d:-2.89,fund:0.0027,oi:'7.32B',rsi:46.20},
+    {t:'XRP',p:'1.4893',d:-1.47,fund:0.0084,oi:'3.47B',rsi:44.90},
+    {t:'XAU',p:'4,123.67',d:-2.46,fund:0.0175,oi:'2.36B',rsi:14.13,note:'Oro tokenizado · volumen +378% en 24 horas.'}
+  ],
+  liquidation:{
+    price:82897,
+    asof:'28 sep · 23:40',
+    source:'Coinglass · Binance BTC/USDT Perpetuo · ventana 1 día',
+    unit:'millones de dólares',
+    reading:'Lectura de picos sobre el gráfico publicado. Los valores son aproximados y su utilidad es la forma del perfil, no la cifra exacta.',
+    bins:[
+      {p:74483,v:1.2},{p:75191,v:2.1},{p:79321,v:4.8},{p:79675,v:12.3},{p:80029,v:5.2},{p:80383,v:8.1},
+      {p:81032,v:8.4},{p:81386,v:21.6},{p:81740,v:18.5},{p:82094,v:42.5},{p:82448,v:24.5},{p:82802,v:10.2},
+      {p:83923,v:36.0},{p:84277,v:29.1},{p:84631,v:26.0},{p:84985,v:18.5},{p:85339,v:12.8},{p:85929,v:3.1},
+      {p:86283,v:9.5},{p:86637,v:6.0},{p:90885,v:1.5},{p:91298,v:2.4},{p:92006,v:1.1}
+    ]
+  }
+};
+
 
 function svgNode(tag,attrs={}){
   const node=document.createElementNS('http://www.w3.org/2000/svg',tag);
@@ -1042,18 +1302,21 @@ const SECTOR_BARS=[
 function renderDivergingBars(){
   const root=document.getElementById('sectorBars');if(!root)return;
   const max=Math.max(...SECTOR_BARS.map(d=>Math.abs(d.value)));
-  root.innerHTML=SECTOR_BARS.map(d=>{const width=(Math.abs(d.value)/max)*49;const side=d.value>=0?'pos':'neg';const tone=d.tone==='signal'?'t-signal':'t-risk';const valTone=d.tone==='signal'?'up':'r';const sign=d.value>=0?'+':'−';return `<div class="bar-row"><span class="bar-name">${d.name}</span><div class="bar-track"><i class="bar-zero"></i><i class="bar-fill ${side} ${tone}" style="width:${width.toFixed(2)}%"></i></div><span class="bar-val ${valTone}">${sign}${Math.abs(d.value).toFixed(2)}%</span></div>`}).join('');
+  root.innerHTML=SECTOR_BARS.map(d=>{const width=(Math.abs(d.value)/max)*49;const side=d.value>=0?'bar-pos':'bar-neg';const tone=d.tone==='signal'?'t-signal':'t-risk';const valTone=d.tone==='signal'?'up':'r';const sign=d.value>=0?'+':'−';return `<div class="bar-row"><span class="bar-name">${d.name}</span><div class="bar-track"><i class="bar-zero"></i><i class="bar-fill ${side} ${tone}" style="width:${width.toFixed(2)}%"></i></div><span class="bar-val ${valTone}">${sign}${Math.abs(d.value).toFixed(2)}%</span></div>`}).join('');
 }
 renderDivergingBars();
 
+const MEM_DATES=['24S','25S',GAPS_PUB.some(g=>g.date==='26 sep')?'—':'26S','28S'];
+const MEM_GAP_INDEXES=MEM_DATES.map((d,i)=>d==='—'?i:null).filter(i=>i!==null);
+const MEM_GAP_NOTE='La ventana incluye el 26S sin edición publicada. Los tres puntos restantes son cierres verificados; el delta del 28S compara contra el 25S, que es el último punto publicado.';
 const MEM=[
-  {tick:'WTI',unit:'$',now:'96.31',d:'▲4.22%*',cls:'up',tone:'tone-risk',deltaException:true,officialPrev:92.41,series:[92.16,94.61,92.57,96.31],color:'#ff2e4d',start:'$92.16'},
-  {tick:'SPX',unit:'',now:'7,683.69',d:'▼0.77%*',cls:'dn',deltaException:true,officialPrev:7743.80,series:[7702.65,7703.93,7742.33,7683.69],color:'#ff2e4d',start:'7,702.65'},
-  {tick:'VIX',unit:'',now:'16.08',d:'▲8.06%',cls:'up',inv:true,series:[15.17,15.68,14.88,16.08],color:'#ff2e4d',start:'15.17'},
-  {tick:'SKEW',unit:'',now:'144.91',d:'▼0.77%',cls:'dn',inv:true,series:[144.80,146.15,146.04,144.91],color:'#00ff9c',start:'144.80'},
-  {tick:'GOLD',unit:'$',now:'4,117.05',d:'▼3.85%',cls:'dn',series:[4285.95,4273.80,4281.82,4117.05],color:'#ff2e4d',start:'$4,285.95'},
-  {tick:'BTC',unit:'$',now:'83.542K',d:'▼0.78%',cls:'dn',series:[84.306,84.3699,84.2001,83.5420],color:'#ff2e4d',start:'$84.306K'},
-  {tick:'DXY',unit:'',now:'101.280',d:'— n/d',cls:'nt',stale:'nivel 25S · dirección 28S +0.16%',series:[101.143,101.259,101.280,101.280],gaps:[3],color:'#ffb000',start:'101.143'}
+  {tick:'WTI',unit:'$',now:'96.31',d:'▲4.22%*',cls:'up',tone:'tone-risk',deltaException:true,officialPrev:92.41,series:[94.61,92.57,92.57,96.31],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'$94.61'},
+  {tick:'SPX',unit:'',now:'7,683.69',d:'▼0.77%*',cls:'dn',deltaException:true,officialPrev:7743.80,series:[7703.93,7742.33,7742.33,7683.69],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'7,703.93'},
+  {tick:'VIX',unit:'',now:'16.08',d:'▲8.06%',cls:'up',inv:true,series:[15.68,14.88,14.88,16.08],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'15.68'},
+  {tick:'SKEW',unit:'',now:'144.91',d:'▼0.77%',cls:'dn',inv:true,series:[146.15,146.04,146.04,144.91],gaps:MEM_GAP_INDEXES,color:'#00ff9c',start:'146.15'},
+  {tick:'GOLD',unit:'$',now:'4,117.05',d:'▼3.85%',cls:'dn',series:[4273.80,4281.82,4281.82,4117.05],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'$4,273.80'},
+  {tick:'BTC',unit:'$',now:'83.542K',d:'▼0.78%',cls:'dn',series:[84.3699,84.2001,84.2001,83.5420],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'$84.370K'},
+  {tick:'DXY',unit:'',now:'101.280',d:'— n/d',cls:'nt',stale:'nivel 25S · dirección 28S +0.16%',series:[101.259,101.280,101.280,101.280],gaps:[...MEM_GAP_INDEXES,3],color:'#ffb000',start:'101.259'}
 ];
 /* ═══ HILOS NARRATIVOS · §3D ═══
    name  : nombre estable en lenguaje llano. NO cambia entre ediciones.
@@ -1078,7 +1341,7 @@ const THREADS=[
          'closed' → resultado realizado, congelado. No se recalcula.       */
 const MARKS={
   rate:0.0411,        /* subasta letra 3M 4.110% · input 28S */
-  sessions:17,       /* sesiones desde la apertura del 3 SEP */
+  sessions:17,       /* sesiones DE MERCADO desde la apertura del 3 SEP; no se descuenta GAPS_PUB */
   items:{
     cash3m:   {kind:'cashpath', pnlWeight:0.65, ret:0.002069737484737485, note:'Devengo acumulado preservado: primeras 14 sesiones con peso 45%; 24S y 25S con 65%; 28S suma 65% a la referencia 3M de 4.110%.'},
     dur3m:    {kind:'closed', entry:4.342, realized:-0.009280333333333332, pnlWeight:0.20, since:'23 sep', note:'Cierre por stop de tesis publicado: 10Y >5.00% o 30Y >5.40%. Resultado congelado al cierre 23S.'},
@@ -1093,7 +1356,6 @@ const MARKS={
   }
 };
 
-const MEM_DATES=['23S','24S','25S','28S'];
 
 const MEM_DELTA_TOLERANCE=0.15;
 const MEM_FLAT_THRESHOLD=0.10;
@@ -1149,7 +1411,7 @@ document.getElementById('memGrid').innerHTML=MEM.map(m=>`<div class="mem-cell"><
   box.innerHTML=THREADS.map(t=>`
     <div class="thread-row" data-state="${t.state}">
       <span class="th-name">${t.name}${t.note?`<span class="th-note">${t.note}</span>`:''}</span>
-      <span class="th-n">${t.n}ª sesión${t.since?`<span class="th-since">desde ${t.since}</span>`:''}</span>
+      <span class="th-n">${t.n}ª sesión${t.since?`<span class="th-since">desde ${t.since}${GAPS_PUB.length?' · '+Math.min(1,GAPS_PUB.length)+' hueco':''}</span>`:''}</span>
       <span class="th-state ${t.state}">${LABEL[t.state]||'?'}</span>
     </div>`).join('');
 })();
@@ -1172,6 +1434,187 @@ document.getElementById('memGrid').innerHTML=MEM.map(m=>`<div class="mem-cell"><
   });
   const dup=THREADS.map(t=>t.name).filter((n,i,a)=>a.indexOf(n)!==i);
   if(dup.length)console.warn(`[HILOS] Nombres duplicados: ${dup.join(', ')}`);
+})();
+
+
+
+/* ── v4.6 · continuidad declarada ── */
+(function renderContinuity(){
+  const currentGap=GAPS_PUB.find(g=>g.date==='26 sep');
+  const score=document.getElementById('scoreGapNote');
+  if(score)score.textContent=currentGap?'pre-registro del 25S contrastado al cierre del 28S · 1 sesión sin edición en el medio':'pre-registro del 25S contrastado al cierre del 28S';
+  const mw=document.getElementById('memWindowLabel');if(mw)mw.textContent=MEM_DATES.join(' · ');
+  const mn=document.getElementById('memGapNote');if(mn)mn.textContent=MEM_GAP_NOTE;
+})();
+
+/* ── v4.6.1 · render de mercado cripto ── */
+const BRIDGE_LABELS={
+  linked:{key:'CONECTADO',sub:'con el mercado tradicional'},
+  own:{key:'DESCORRELACIÓN',sub:'movimiento propio del mercado cripto'},
+  opposite:{key:'OPUESTO',sub:'desempeño contrario al mercado tradicional'}
+};
+function lastPublished(series,skipLast=true){
+  const end=skipLast?series.length-1:series.length;
+  for(let i=end-1;i>=0;i--)if(series[i]!=null)return {value:series[i],index:i};
+  return null;
+}
+function firstPublished(series){for(let i=0;i<series.length;i++)if(series[i]!=null)return {value:series[i],index:i};return null}
+function pctDelta(now,base){return ((now-base)/base)*100}
+function signed(v,dec=1,suffix='%'){return `${v>0?'+':''}${v.toFixed(dec)}${suffix}`}
+function metricTone(v){return v<0?'risk':v>0?'upv':'warn'}
+function levelForFear(v){return v<=24?1:v<=44?2:v<=55?3:v<=74?4:5}
+function levelForVol(v){return v<20?1:v<40?2:v<60?3:v<80?4:5}
+function levelForOI(v){return v<-5?5:v<-2?4:v<=2?3:v<=5?2:5}
+function levelForRSI(v){return v<30?1:v<45?2:v<=55?3:v<=70?4:5}
+function levelColor(level){return `var(--lv-${level})`}
+function levelScale(pos){return `<div class="lv-scale" style="--pos:${Math.max(0,Math.min(100,pos))}%"><i></i><i></i><i></i><i></i><i></i><span class="lv-marker"></span></div>`}
+function cumulativeProfile(bins,price){
+  const sorted=[...bins].sort((a,b)=>a.p-b.p),longs=sorted.filter(b=>b.p<price),shorts=sorted.filter(b=>b.p>price);
+  const longTotal=longs.reduce((s,b)=>s+b.v,0),shortTotal=shorts.reduce((s,b)=>s+b.v,0);
+  let remaining=longTotal;
+  const longPts=longs.map(b=>{const value=remaining;remaining-=b.v;return {p:b.p,value}}).concat([{p:price,value:0}]);
+  let running=0;
+  const shortPts=[{p:price,value:0}].concat(shorts.map(b=>{running+=b.v;return {p:b.p,value:running}}));
+  return {longPts,shortPts,longTotal,shortTotal};
+}
+function renderLiquidationMap(){
+  const host=document.getElementById('liqChart');if(!host)return;
+  const {bins,price}=CRYPTO.liquidation,sorted=[...bins].sort((a,b)=>a.p-b.p),maxV=Math.max(...sorted.map(b=>b.v));
+  const minP=sorted[0].p,maxP=sorted[sorted.length-1].p,W=1000,H=452,left=58,right=24,top=44,base=306,plotW=W-left-right,plotH=base-top;
+  const x=p=>left+(p-minP)/(maxP-minP)*plotW;
+  const yv=v=>base-(v/maxV)*(plotH*.72);
+  const prof=cumulativeProfile(sorted,price),cumMax=Math.max(prof.longTotal,prof.shortTotal);
+  const yc=v=>base-(v/cumMax)*(plotH*.9);
+  const peak=sorted.find(b=>b.v===maxV);
+  const colorFor=v=>{const r=v/maxV;return r>=.66?'var(--risk)':r>=.40?'var(--lv-4)':r>=.20?'var(--alert)':'var(--info)'};
+  const gridVals=[0,10,20,30,40,46.39];
+  const grid=gridVals.map(v=>{const y=v===0?base:base-(v/46.39)*(plotH*.72);return `<line class="liq-grid-line" x1="${left}" x2="${W-right}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}"/><text class="liq-axis-label" x="${left-9}" y="${(y+3).toFixed(1)}" text-anchor="end">${v===0?'0':v.toFixed(v===46.39?2:0)+'M'}</text>`}).join('');
+  const barW=Math.max(5,Math.min(12,plotW/(sorted.length*3.05)));
+  const maxDist=Math.max(...sorted.map(b=>Math.abs(b.p-price)));
+  const zones=sorted.map((b,i)=>{
+    const prev=sorted[i-1],next=sorted[i+1];
+    const lo=i===0?b.p:Math.round((prev.p+b.p)/2);
+    const hi=i===sorted.length-1?b.p:Math.round((b.p+next.p)/2);
+    return {lo,hi};
+  });
+  const bars=sorted.map((b,i)=>{const xx=x(b.p)-barW/2,yy=yv(b.v),hh=base-yy,dist=Math.abs(b.p-price)/maxDist,delay=Math.round((1-dist)*260),c=colorFor(b.v),hitW=Math.max(18,barW+8),hx=x(b.p)-hitW/2,z=zones[i],aria=`Nivel aproximado ${b.p.toLocaleString('en-US')} USDT; zona visual ${z.lo.toLocaleString('en-US')} a ${z.hi.toLocaleString('en-US')} USDT; concentración aproximada ${b.v.toFixed(1)} millones de dólares`;
+    return `<rect class="liq-bar-svg${b===peak?' peak':''}" data-bar-index="${i}" x="${xx.toFixed(1)}" y="${yy.toFixed(1)}" width="${barW.toFixed(1)}" height="${hh.toFixed(1)}" rx="0.8" fill="${c}" color="${c}" style="--delay:${delay}ms"/><rect class="liq-hit-target" data-liq-index="${i}" tabindex="0" role="button" aria-label="${aria}" x="${hx.toFixed(1)}" y="${Math.max(top,yy-8).toFixed(1)}" width="${hitW.toFixed(1)}" height="${(base-Math.max(top,yy-8)+8).toFixed(1)}"/>`}).join('');
+  const path=(pts,fnY)=>pts.map((pt,i)=>`${i?'L':'M'} ${x(pt.p).toFixed(1)} ${fnY(pt.value).toFixed(1)}`).join(' ');
+  const longPath=path(prof.longPts,yc),shortPath=path(prof.shortPts,yc);
+  const longArea=`M ${x(prof.longPts[0].p).toFixed(1)} ${base} `+prof.longPts.map(pt=>`L ${x(pt.p).toFixed(1)} ${yc(pt.value).toFixed(1)}`).join(' ')+` L ${x(price).toFixed(1)} ${base} Z`;
+  const shortArea=`M ${x(price).toFixed(1)} ${base} `+prof.shortPts.map(pt=>`L ${x(pt.p).toFixed(1)} ${yc(pt.value).toFixed(1)}`).join(' ')+` L ${x(prof.shortPts[prof.shortPts.length-1].p).toFixed(1)} ${base} Z`;
+  const tickMarks=sorted.map((b,i)=>`<line class="liq-grid-line" x1="${x(b.p).toFixed(1)}" x2="${x(b.p).toFixed(1)}" y1="${(base+4).toFixed(1)}" y2="${(base+10).toFixed(1)}" style="opacity:${i%2?0.35:0.52}"/>`).join('');
+  const tickLabelY1=344,tickLabelY2=363;
+  const tickRows=sorted.map((b,i)=>{
+    const xx=x(b.p).toFixed(1),yy=i%2===0?tickLabelY1:tickLabelY2;
+    return `<text class="liq-axis-label liq-axis-bin" x="${xx}" y="${yy}" text-anchor="middle">${b.p.toLocaleString('en-US')}</text>`;
+  }).join('');
+  const centerGuides=sorted.filter((b,i)=>i>0&&i<sorted.length-1&&Math.abs(b.p-price)<1600).map(b=>`<line class="liq-grid-line" x1="${x(b.p).toFixed(1)}" x2="${x(b.p).toFixed(1)}" y1="${top}" y2="${base}" style="opacity:.18"/>`).join('');
+  host.innerHTML=`<svg class="liq-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Perfil reconstruido de liquidaciones BTC USDT con histograma y curvas acumuladas">
+    ${grid}${centerGuides}<path class="liq-area-long" d="${longArea}"/><path class="liq-area-short" d="${shortArea}"/>${bars}
+    <path class="liq-curve" pathLength="1" d="${longPath}" stroke="var(--risk)"/><path class="liq-curve" pathLength="1" d="${shortPath}" stroke="var(--signal)"/>
+    <text class="liq-curve-label long" x="${left+8}" y="${top+12}">largos acumulados · ${prof.longTotal.toFixed(1)}M</text><text class="liq-curve-label short" x="${W-right-8}" y="${top+12}" text-anchor="end">cortos acumulados · ${prof.shortTotal.toFixed(1)}M</text>
+    <line class="liq-price-line" x1="${x(price).toFixed(1)}" x2="${x(price).toFixed(1)}" y1="${top-4}" y2="${base+4}"/><text class="liq-price-label" x="${x(price).toFixed(1)}" y="${top-14}" text-anchor="middle">PRECIO ACTUAL · ${price.toLocaleString('en-US')}</text>
+    ${tickMarks}${tickRows}
+    <g class="liq-tip" id="liqTip" aria-hidden="true">
+      <line class="liq-tip-line" id="liqTipLine" x1="0" x2="0" y1="0" y2="0"/>
+      <rect class="liq-tip-box" id="liqTipBox" x="0" y="0" width="206" height="54" rx="3"/>
+      <text class="liq-tip-kicker" id="liqTipKicker" x="0" y="0">ZONA DE LIQUIDACIÓN</text>
+      <text class="liq-tip-main" id="liqTipMain" x="0" y="0"></text>
+      <text class="liq-tip-sub" id="liqTipSub" x="0" y="0"></text>
+    </g>
+    <text class="liq-axis-label hot" x="${left}" y="417">precio BTC/USDT · tocar una barra para ver su zona</text><text class="liq-axis-label hot" x="${W-right}" y="417" text-anchor="end">barra = concentración aproximada · color = % del pico</text>
+  </svg>`;
+  const svg=host.querySelector('.liq-svg'),tip=host.querySelector('#liqTip'),tipBox=host.querySelector('#liqTipBox'),tipLine=host.querySelector('#liqTipLine'),tipKicker=host.querySelector('#liqTipKicker'),tipMain=host.querySelector('#liqTipMain'),tipSub=host.querySelector('#liqTipSub');
+  const tipW=206,tipH=54;
+  function clearLiqSelection(){
+    host.querySelectorAll('.liq-bar-svg.is-selected').forEach(el=>el.classList.remove('is-selected'));
+    tip.classList.remove('is-open');tip.setAttribute('aria-hidden','true');
+  }
+  function selectLiqBin(i){
+    const b=sorted[i],z=zones[i],cx=x(b.p),barTop=yv(b.v),c=colorFor(b.v);
+    const tx=Math.min(Math.max(cx-tipW/2,left+4),W-right-tipW-4);
+    const ty=Math.max(top+22,barTop-tipH-14);
+    host.querySelectorAll('.liq-bar-svg.is-selected').forEach(el=>el.classList.remove('is-selected'));
+    const bar=host.querySelector(`[data-bar-index="${i}"]`);if(bar)bar.classList.add('is-selected');
+    tipBox.setAttribute('x',tx.toFixed(1));tipBox.setAttribute('y',ty.toFixed(1));tipBox.setAttribute('stroke',c);
+    tipLine.setAttribute('x1',cx.toFixed(1));tipLine.setAttribute('x2',cx.toFixed(1));tipLine.setAttribute('y1',(ty+tipH).toFixed(1));tipLine.setAttribute('y2',Math.max(ty+tipH+4,barTop-4).toFixed(1));tipLine.setAttribute('stroke',c);
+    tipKicker.setAttribute('x',(tx+11).toFixed(1));tipKicker.setAttribute('y',(ty+14).toFixed(1));
+    tipMain.setAttribute('x',(tx+11).toFixed(1));tipMain.setAttribute('y',(ty+31).toFixed(1));tipMain.textContent=`≈ ${b.p.toLocaleString('en-US')} USDT`;
+    tipSub.setAttribute('x',(tx+11).toFixed(1));tipSub.setAttribute('y',(ty+45).toFixed(1));tipSub.textContent=`zona visual ${z.lo.toLocaleString('en-US')}–${z.hi.toLocaleString('en-US')} · ≈${b.v.toFixed(1)}M`;
+    tip.classList.add('is-open');tip.setAttribute('aria-hidden','false');
+  }
+  host.querySelectorAll('.liq-hit-target').forEach(hit=>{
+    hit.addEventListener('click',ev=>{ev.stopPropagation();selectLiqBin(Number(hit.dataset.liqIndex))});
+    hit.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();selectLiqBin(Number(hit.dataset.liqIndex))}});
+  });
+  svg.addEventListener('click',ev=>{if(!ev.target.closest('.liq-hit-target'))clearLiqSelection()});
+  document.getElementById('liqRead').innerHTML=`<b>Lectura:</b> el pico absoluto está cerca de <b>${peak.p.toLocaleString('en-US')}</b> con ≈<b>${peak.v.toFixed(1)}M</b>. Tocá una barra para ver su nivel y su zona visual aproximada. El perfil suma ≈<b>${prof.longTotal.toFixed(1)}M</b> debajo del precio y ≈<b>${prof.shortTotal.toFixed(1)}M</b> arriba.`;
+}
+(function renderCrypto(){
+  const section=document.getElementById('cryptoSection');if(!section)return;
+  const label=BRIDGE_LABELS[CRYPTO.bridge.state]||BRIDGE_LABELS.own;
+  const state=document.getElementById('cryptoBridgeState');state.dataset.state=CRYPTO.bridge.state;
+  state.style.setProperty('--bridge-color',CRYPTO.bridge.state==='opposite'?'var(--signal)':CRYPTO.bridge.state==='own'?'var(--alert)':'var(--info)');
+  document.getElementById('bridgeStateKey').textContent=label.key;
+  document.getElementById('bridgeStateSub').textContent=label.sub;
+  document.getElementById('bridgeNarrative').innerHTML=CRYPTO.bridge.narrative.map((x,i)=>`<p${i===CRYPTO.bridge.linkIndex?' class="bridge-link"':''}>${x}</p>`).join('');
+  document.getElementById('bridgeMemory').innerHTML=BRIDGE.map(b=>`<div class="bm-cell" data-state="${b.state||'gap'}"><div class="bm-date"><span class="bm-date-long">${b.date}</span><span class="bm-date-short">${b.short}</span></div><div class="bm-state">${b.state?(BRIDGE_LABELS[b.state]?.key||'—'):'SIN EDICIÓN'}</div><div class="bm-line">${b.line}</div></div>`).join('');
+  document.getElementById('cryptoSources').textContent=CRYPTO.source;
+  document.getElementById('cryptoAsof').textContent=CRYPTO.asof;
+  const capNow=CRYPTO.series.cap.at(-1),capPrev=lastPublished(CRYPTO.series.cap),capFirst=firstPublished(CRYPTO.series.cap),capD1=pctDelta(capNow,capPrev.value),capD4=pctDelta(capNow,capFirst.value);
+  document.getElementById('capDeltaChip').innerHTML=`<b class="${metricTone(capD1)}">${capD1<0?'▼':'▲'} ${Math.abs(capD1).toFixed(2)}%</b><span>vs 25S</span><b class="${metricTone(capD4)}">${capD4<0?'▼':'▲'} ${Math.abs(capD4).toFixed(2)}%</b><span>vs 24S</span>`;
+  const domNow=CRYPTO.series.btcDom.at(-1),domPrev=lastPublished(CRYPTO.series.btcDom).value,domFirst=firstPublished(CRYPTO.series.btcDom).value;
+  document.getElementById('domDelta').innerHTML=`<b>${signed(domNow-domPrev,1,' pp')}</b> vs 25S · <b>${signed(domNow-domFirst,1,' pp')}</b> vs 24S`;
+  const altNow=CRYPTO.series.altseason.at(-1),altPrev=lastPublished(CRYPTO.series.altseason).value,altFirst=firstPublished(CRYPTO.series.altseason).value;
+  document.getElementById('altDelta').innerHTML=`<b class="dn">${signed(altNow-altPrev,0,' pts')}</b> vs 25S · <b class="dn">${signed(altNow-altFirst,0,' pts')}</b> vs 24S`;
+  document.getElementById('cryptoAssetRows').innerHTML=CRYPTO.assets.map(a=>{const fundClass=a.fund>0.015?'fund-hot':a.fund>=0?'fund-pos':'fund-neg',rsiLevel=levelForRSI(a.rsi);return `<tr class="${a.d>=0?'asset-pos':'asset-neg'}"><td><strong>${a.t}</strong></td><td>$${a.p}</td><td class="${a.d>=0?'delta-pos':'delta-neg'}">${a.d>=0?'+':''}${a.d.toFixed(2)}%</td><td class="${fundClass}">${a.fund.toFixed(4)}%</td><td>${a.oi}</td><td class="rsi-${rsiLevel}">${a.rsi.toFixed(2)}</td><td class="crypto-note${a.t==='XAU'?' token-gold':''}">${a.note||'—'}</td></tr>`}).join('');
+  const fearLevel=levelForFear(CRYPTO.sentiment.fear),volB=levelForVol(CRYPTO.vol.btc),volE=levelForVol(CRYPTO.vol.eth),oiLevel=levelForOI(CRYPTO.derivatives.oiDelta);
+  const extremeClass=l=>l===5?' lv-extreme':'';
+  document.getElementById('cryptoDetailGrid').innerHTML=[
+    `<div class="cd-card" style="--level-color:${levelColor(fearLevel)}"><div class="cd-k">Miedo y codicia</div><div class="cd-v${extremeClass(fearLevel)}">${CRYPTO.sentiment.fear}</div>${levelScale(CRYPTO.sentiment.fear)}<div class="cd-x">CoinMarketCap · codicia · escala 0–100</div></div>`,
+    `<div class="cd-card"><div class="cd-k">Volatilidad implícita</div><div class="lv-pair"><span>Bitcoin</span><div class="lv-mini" style="--pos:${CRYPTO.vol.btc}%"></div><strong style="--pair-color:${levelColor(volB)}" class="${extremeClass(volB).trim()}">${CRYPTO.vol.btc.toFixed(2)}</strong></div><div class="lv-pair"><span>Ethereum</span><div class="lv-mini" style="--pos:${CRYPTO.vol.eth}%"></div><strong style="--pair-color:${levelColor(volE)}" class="${extremeClass(volE).trim()}">${CRYPTO.vol.eth.toFixed(2)}</strong></div><div class="cd-x">Bitcoin → verde · Ethereum → ámbar según la escala común.</div></div>`,
+    `<div class="cd-card" style="--level-color:${levelColor(oiLevel)}"><div class="cd-k">Interés abierto</div><div class="cd-v${extremeClass(oiLevel)}">$${CRYPTO.derivatives.oiPerp}</div>${levelScale((CRYPTO.derivatives.oiDelta+10)/20*100)}<div class="cd-x"><b style="color:${levelColor(oiLevel)}">${CRYPTO.derivatives.oiDelta.toFixed(2)}%</b> en 24h · escala en U · financiación ${CRYPTO.derivatives.funding.toFixed(4)}% · liquidaciones $${CRYPTO.derivatives.liq24h}</div></div>`,
+    `<div class="cd-card"><div class="cd-k">Flujo ETF cripto</div><div class="cd-v">${CRYPTO.etf.value.startsWith('-')?'−$'+CRYPTO.etf.value.slice(1):'$'+CRYPTO.etf.value}</div><div class="cd-x">${CRYPTO.etf.date} · ${CRYPTO.etf.lag} sesión de rezago. Dato rezagado: no describe el cierre actual.</div></div>`
+  ].join('');
+  document.getElementById('cryptoConflict').innerHTML=`<b>CONFLICTO DE PROVEEDORES:</b> ${CRYPTO.sentiment.conflict} Un proveedor por métrica; no se promedian metodologías distintas.`;
+  document.getElementById('liqMeta').textContent=`${CRYPTO.liquidation.source} · ${CRYPTO.liquidation.asof}`;
+  document.getElementById('liqHonesty').innerHTML=`<b>LECTURA DE PICOS:</b> sobre el mapa de Coinglass del ${CRYPTO.liquidation.asof} · Binance BTC/USDT Perpetuo, ventana de un día. Los valores son aproximados: informa la <b>forma del perfil</b> y dónde está la concentración, no la cifra exacta de cada barra.`;
+  renderLiquidationMap();
+})();
+
+function formatCryptoCount(el,value){
+  const dec=parseInt(el.dataset.decimals||'0',10),prefix=el.dataset.prefix||'',suffix=el.dataset.suffix||'';
+  return prefix+value.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec})+suffix;
+}
+function animateCrypto(){
+  const section=document.getElementById('cryptoSection');if(!section||section.dataset.animated==='1')return;
+  section.dataset.animated='1';
+  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  section.classList.add('crypto-ready');
+  section.querySelectorAll('.crypto-count').forEach(el=>{
+    const end=parseFloat(el.dataset.count);if(!Number.isFinite(end))return;
+    if(reduced){el.textContent=formatCryptoCount(el,end);return;}
+    const start=performance.now(),dur=600;
+    const tick=now=>{const p=Math.min(1,(now-start)/dur),ease=1-Math.pow(1-p,3);el.textContent=formatCryptoCount(el,end*ease);if(p<1)requestAnimationFrame(tick);};
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ── QA v4.6.1 · controles locales complementarios al Preflight ── */
+(function auditV461(){
+  const valid=['linked','own','opposite'];
+  if(!Array.isArray(GAPS_PUB)||!GAPS_PUB.length)console.warn('[v4.6.1] GAPS_PUB ausente o vacío.');
+  if(!valid.includes(CRYPTO.bridge.state))console.warn('[v4.6.1] Estado del puente inválido.');
+  if(!Array.isArray(CRYPTO.bridge.narrative)||CRYPTO.bridge.narrative.length<3||CRYPTO.bridge.narrative.length>5)console.warn('[v4.6.1] Narrativa del puente fuera de 3–5 frases.');
+  if(!Array.isArray(BRIDGE)||BRIDGE.length!==4)console.warn('[v4.6.1] Memoria del puente debe tener cuatro posiciones.');
+  if(!CRYPTO.asof)console.warn('[v4.6.1] Falta asof de cripto.');
+  if(!CRYPTO.series||Object.values(CRYPTO.series).some(s=>!Array.isArray(s)||s.length!==4))console.warn('[v4.6.1] Series cripto deben tener cuatro posiciones.');
+  if(!CRYPTO.liquidation||!Array.isArray(CRYPTO.liquidation.bins)||CRYPTO.liquidation.bins.length<20||CRYPTO.liquidation.bins.length>24)console.warn('[v4.6.1] Mapa: se esperan 20–24 bins.');
+  const solid=[...document.querySelectorAll('.crypto-metric.solid')];if(solid.length!==2)console.warn('[v4.6.1] Deben existir exactamente dos cajas sólidas.');
+  const flashes=[...document.querySelectorAll('#cryptoSection .lv-extreme')];if(flashes.length>2)console.warn('[v4.6.1] Máximo dos destellos por edición.');
+  const cryptoMarks=[...document.querySelectorAll('.pos[data-mark]')].filter(p=>/btc|eth|sol|xrp|crypto/i.test(p.dataset.mark||''));
+  if(cryptoMarks.length)console.warn('[v4.6.1] Cripto entró a carteras de referencia: debe permanecer fuera.');
 })();
 
 
@@ -1317,7 +1760,13 @@ document.querySelectorAll('.cp').forEach(b=>b.addEventListener('click',()=>{
   recalc();
 }));
 recalc();
-if('IntersectionObserver'  in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.fade').forEach(el=>io.observe(el));}else{document.querySelectorAll('.fade').forEach(el=>el.classList.add('vis'));}
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+  const cryptoTarget=document.getElementById('cryptoSection');
+  if(cryptoTarget){const cio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){animateCrypto();cio.unobserve(e.target)}}),{threshold:.16});cio.observe(cryptoTarget);}
+}else{document.querySelectorAll('.fade').forEach(el=>el.classList.add('vis'));animateCrypto();} 
+
 </script>
 </body>
 </html>
