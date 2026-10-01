@@ -4,14 +4,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="WAR ROOM v4.6.1 · 28 septiembre 2026. Crédito rompe el umbral; régimen ROJO ↓ confirmado y libro 98/0/2. Nueva sección Cripto con puente macro, panel compacto, derivados, flujo ETF y lectura de grupos de liquidación. Carteras 3M/6M con P&amp;L visible." name="description"/>
+<meta content="WAR ROOM v4.6.1 · 30 septiembre 2026. PCE core 3,0% por debajo de lo esperado, 10Y en 5,298%, crédito HY en 3,08% y GDPNow en 3,7%. Régimen ROJO ↓, libro 98/0/2 y carteras 3M/6M con P&amp;L derivado al cierre." name="description"/>
 <meta content="website" property="og:type"/>
 <meta content="War Room · Terminal de Señales" property="og:site_name"/>
-<meta content="WAR ROOM v4.6.1 — 28 Septiembre 2026 · CRIPTO + PUENTE MACRO · HY 2,93% · 10Y 5,234% · 98/0/2" property="og:title"/>
-<meta content="El crédito cruza el gatillo: HY 2,93% y CCC 11,28%. El crudo supera 100 $ en Brent, el 10Y marca 5,234% y la amplitud cae a 16 máximos / 453 mínimos. Re-escalada ejecutada a 98% caja." property="og:description"/>
-<meta content="war-room-28-09-26-og.png" property="og:image"/>
+<meta content="WAR ROOM v4.6.1 — 30 Septiembre 2026 · PCE 3,0% · 10Y 5,298% · HY 3,08% · 98/0/2" property="og:title"/>
+<meta content="La inflación sorprendió a la baja y el 10Y subió igual. HY OAS amplía a 3,08%, GDPNow cae a 3,7% y la amplitud sigue rota. El libro permanece en 98% caja, 0% duración corta y 2% convexidad." property="og:description"/>
+<meta content="war-room-30-09-26-og.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<title>WAR ROOM v4.6.1 — 28 Septiembre 2026 · Cripto + puente macro · 98/0/2</title>
+<title>WAR ROOM v4.6.1 — 30 Septiembre 2026 · PCE 3,0% · 10Y 5,298% · HY 3,08% · 98/0/2</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&amp;family=Archivo:wght@400;600;800;900&amp;family=Archivo+Black&amp;display=swap" rel="stylesheet"/>
@@ -832,17 +832,14 @@ section{padding:62px 0;border-bottom:1px solid var(--grid)}
    CSS DE LA EDICIÓN — VACIAR Y REEMPLAZAR CADA DÍA
    Régimen, componentes excepcionales y posiciones responsive.
    ═══════════════════════════════════════════════════════════════ */
-/* ===== RÉGIMEN DEL DÍA · 28S ===== */
+/* ===== RÉGIMEN DEL DÍA · 30S ===== */
 body.red-down h1.headline .em{color:var(--bg);-webkit-text-stroke:1.5px var(--risk);filter:drop-shadow(0 0 7px rgba(255,46,77,.72)) drop-shadow(0 0 20px rgba(255,46,77,.3))}
 body.red-down .verdict-badge{border-color:var(--risk);background:rgba(255,46,77,.055);color:var(--risk);text-shadow:var(--g-risk)}
 body.red-down .verdict-badge::before{background:var(--risk);box-shadow:var(--g-risk)}
 body.red-down .rg-dot{background:var(--risk);box-shadow:var(--g-risk);animation:pulse 2s infinite}
 body.red-down .defbar.on{background:var(--risk);box-shadow:var(--g-risk)}
-body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba(0,255,156,.035),transparent 82%)}
-.tk .tone-risk{color:var(--risk);text-shadow:var(--g-risk)}
-.mem-d.tone-risk{color:var(--risk)!important;text-shadow:var(--g-risk)}
+body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba(46,168,255,.025),transparent 82%)}
 .audit-note strong{color:var(--ink)}
-.qa-live{color:var(--signal);text-shadow:var(--g-signal)}
 .hzs-block.pnl-focus{background:rgba(46,168,255,.065);box-shadow:inset 0 -2px 0 rgba(46,168,255,.28)}
 .hzs-block.pnl-focus .hzs-l{color:var(--info)}
 .bar-chart{position:relative;height:auto;padding:4px 0 0}
@@ -854,101 +851,101 @@ body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba
 .bar-fill.bar-pos{left:50%}.bar-fill.bar-neg{right:50%}
 .bar-fill.t-risk{background:var(--risk);color:var(--risk)}.bar-fill.t-signal{background:var(--signal);color:var(--signal)}
 .bar-val{text-align:right;font-weight:700}
+.missing-now{color:var(--ink-faint)!important;text-shadow:none!important}
 @media(max-width:420px){.rg-record{order:3;width:100%;justify-content:flex-start;padding-top:8px;border-top:1px solid var(--grid-soft)}.bar-row{grid-template-columns:62px 1fr 60px;gap:7px;font-size:9.5px}}
 </style>
 </head>
 <body class="red-down">
 <!-- ===== 00 · TICKER + RÉGIMEN ===== -->
 <div class="ticker"><div class="tk-track" id="tkTrack">
-<span class="tk"><b>SPX</b> 7,683.69 <span class="dn">▼ 0.77%</span></span>
-<span class="tk"><b>10Y</b> 5.234% <span class="up">▲ 6.7pb</span></span>
-<span class="tk"><b>REAL 10Y</b> ~2.90% <span class="up">▲ ~7pb</span></span>
-<span class="tk"><b>30Y</b> 5.551% <span class="up">▲ 5.8pb</span></span>
-<span class="tk"><b>MOVE</b> 101.82 <span class="up inv">▲ 6.06%</span></span>
-<span class="tk"><b>VIX</b> 16.08 <span class="up inv">▲ 8.06%</span></span>
-<span class="tk"><b>SKEW</b> 144.91 <span class="dn inv">▼ 0.77%</span></span>
-<span class="tk"><b>HY OAS</b> 2.93% <span class="up inv">▲ 13pb · obs 25S</span></span>
-<span class="tk"><b>CCC OAS</b> 11.28% <span class="up inv">▲ 16pb</span></span>
-<span class="tk"><b>WTI</b> $96.31 <span class="up tone-risk">▲ 4.22%</span></span>
-<span class="tk"><b>DXY</b> nivel n/d <span class="nt">dirección ▲0.16% · panel stale</span></span>
-<span class="tk"><b>USD/JPY</b> 157.408 <span class="nt">→ +14 pips vs 25S</span></span>
-<span class="tk"><b>GOLD</b> $4,117.05 <span class="dn">▼ 3.9%</span></span>
-<span class="tk"><b>BTC</b> $83.542K <span class="dn">▼ ~1.2%</span></span>
+<span class="tk"><b>SPX</b> 7,651.54 <span class="dn">▼ 0.25%</span></span>
+<span class="tk"><b>10Y</b> 5.298% <span class="up">▲ 4pb</span></span>
+<span class="tk"><b>REAL 10Y</b> ~2.95% <span class="up">▲ ~4pb</span></span>
+<span class="tk"><b>30Y</b> 5.631% <span class="up">▲ ~4pb</span></span>
+<span class="tk"><b>MOVE</b> 110.46 <span class="up inv">▲ 3.61%</span></span>
+<span class="tk"><b>VIX</b> 16.33 <span class="up inv">▲ 1.87%</span></span>
+<span class="tk"><b>SKEW</b> 141.92 <span class="dn inv">▼ 1.84%</span></span>
+<span class="tk"><b>HY OAS</b> 3.08% <span class="up inv">▲ 15pb · obs 29S</span></span>
+<span class="tk"><b>CCC OAS</b> 11.57% <span class="up inv">▲ 29pb</span></span>
+<span class="tk"><b>WTI</b> $93.07 <span class="up">▲ 1.45%</span></span>
+<span class="tk"><b>DXY</b> 101.454 <span class="up">▲ 0.08%</span></span>
+<span class="tk"><b>USD/JPY</b> 157.370 <span class="nt">→ 0.03%</span></span>
+<span class="tk"><b>GOLD</b> $4,157.14 <span class="dn">▼ 0.59%</span></span>
+<span class="tk"><b>BTC</b> $83.833K <span class="up">▲ 0.21%</span></span>
 </div></div>
 <div class="regime"><div class="wrap">
-<div class="regime-left"><span class="rg-dot"></span><span class="rg-label">RÉGIMEN · SESIÓN 29</span><span class="rg-val r">ROJO ↓ · CONFIRMADO · CAJA 98% / DURACIÓN CORTA 0% / CONVEXIDAD 2%</span></div>
+<div class="regime-left"><span class="rg-dot"></span><span class="rg-label">RÉGIMEN · SESIÓN 31</span><span class="rg-val r">ROJO ↓ · CONFIRMADO · CAJA 98% / DURACIÓN CORTA 0% / CONVEXIDAD 2%</span></div>
 <div class="defbars"><span class="defbar"></span><span class="defbar"></span><span class="defbar"></span><span class="defbar"></span><span class="defbar on"></span></div>
-<div class="rg-record" title="Registro público de decisiones — arranca el 3 sep 2026"><span class="rr-label">REGISTRO</span><span class="rr-n hit">62✓</span><span class="rr-n part">14◐</span><span class="rr-n miss">23✕</span><span class="rr-ed">ED. 16</span></div>
-<span class="regime-date">LUNES 28 SEP 2026 · POST-CIERRE</span>
+<div class="rg-record" title="Registro público de decisiones — arranca el 3 sep 2026"><span class="rr-label">REGISTRO</span><span class="rr-n hit">68✓</span><span class="rr-n part">14◐</span><span class="rr-n miss">23✕</span><span class="rr-ed">ED. 17</span></div>
+<span class="regime-date">MIÉRCOLES 30 SEP 2026 · POST-CIERRE</span>
 </div></div>
 
 <!-- ===== 01 · VEREDICTO (HERO) ===== -->
 <section class="hero" style="border-top:none"><div class="wrap">
-<div><div class="kick">// 01 · VEREDICTO</div><h1 class="headline">CRÉDITO ROMPE EL UMBRAL Y FUERZA LA RE-ESCALADA.<br/>EL LIBRO QUEDA EN <span class="em">98/0/2</span>.</h1>
-<p class="lede">El diferencial de crédito high yield (HY OAS) publica <b>2.93%</b>, <b>13 puntos básicos por encima</b> del gatillo estricto. Eso ejecuta la regla escrita: duración corta <b>10% → 0%</b> y caja <b>88% → 98%</b>. El 10Y sube a <b>5.234%</b>, WTI a <b>$96.31 · +4.22%</b> y la amplitud cae a <b>16 máximos / 453 mínimos</b>. Cero de seis frentes mejoran: el vector vuelve a <b>↓ confirmado</b>.</p>
-<span class="verdict-badge">ROJO ↓ · RE-ESCALADA EJECUTADA</span></div>
-<div class="livebox"><div class="lb-head"><span>CIERRE · 28 SEP</span><span class="lb-live">POST-CIERRE</span></div>
-<div class="lb-row"><span class="lb-tick">HY</span><span class="lb-name">diferencial OAS high yield · dato 25S</span><span class="lb-val r">2.93% <small class="lb-delta">+13pb</small></span></div>
-<div class="lb-row"><span class="lb-tick">10Y</span><span class="lb-name">Tesoro EE.UU.</span><span class="lb-val r">5.234% <small class="lb-delta">+6.7pb</small></span></div>
-<div class="lb-row"><span class="lb-tick">WTI</span><span class="lb-name">crudo · cierre verificado</span><span class="lb-val r">$96.31 <small class="lb-delta">+4.22%</small></span></div>
-<div class="lb-row"><span class="lb-tick">SPX</span><span class="lb-name">S&amp;P 500</span><span class="lb-val dn">7,683.69 <small class="lb-delta">−0.77%</small></span></div>
-<div class="lb-row"><span class="lb-tick">VIX</span><span class="lb-name">volatilidad equity</span><span class="lb-val r">16.08 <small class="lb-delta">+8.06%</small></span></div>
-<div class="lb-row"><span class="lb-tick">GOLD</span><span class="lb-name">oro spot</span><span class="lb-val dn">4,117.05 <small class="lb-delta">≈−3.9%</small></span></div>
+<div><div class="kick">// 01 · VEREDICTO</div><h1 class="headline">LA INFLACIÓN CEDIÓ. EL PRECIO DEL DINERO <span class="em">NO</span>.</h1>
+<p class="lede">El core PCE salió en <b>3.0% interanual</b> frente a <b>3.3% esperado</b> y, aun así, el 10Y cerró en <b>5.298%</b>. El crédito high yield amplió a <b>3.08%</b> y CCC a <b>11.57%</b>; GDPNow bajó de <b>5.02% a 3.7%</b> en cinco días. El S&amp;P 500 cedió <b>0.25%</b>. El libro permanece en <b>98/0/2</b>: esperar cobrando sigue siendo la postura operativa publicada.</p>
+<span class="verdict-badge">ROJO ↓ · ESPERAR COBRANDO</span></div>
+<div class="livebox"><div class="lb-head"><span>CIERRE · 30 SEP</span><span class="lb-live">POST-CIERRE</span></div>
+<div class="lb-row"><span class="lb-tick">HY</span><span class="lb-name">diferencial high yield · obs 29S</span><span class="lb-val r">3.08% <small class="lb-delta">+15pb</small></span></div>
+<div class="lb-row"><span class="lb-tick">10Y</span><span class="lb-name">Tesoro EE.UU.</span><span class="lb-val r">5.298% <small class="lb-delta">+4pb</small></span></div>
+<div class="lb-row"><span class="lb-tick">GDP</span><span class="lb-name">GDPNow 3T</span><span class="lb-val r">3.7% <small class="lb-delta">−130pb / 5d</small></span></div>
+<div class="lb-row"><span class="lb-tick">SPX</span><span class="lb-name">S&amp;P 500 cash</span><span class="lb-val dn">7,651.54 <small class="lb-delta">−0.25%</small></span></div>
+<div class="lb-row"><span class="lb-tick">MOVE</span><span class="lb-name">volatilidad de bonos</span><span class="lb-val r">110.46 <small class="lb-delta">P99</small></span></div>
+<div class="lb-row"><span class="lb-tick">BTC</span><span class="lb-name">Binance · referencia estructural</span><span class="lb-val up">83,833 <small class="lb-delta">+0.21%</small></span></div>
 </div></div></section>
 
 <!-- ===== 01B · REGISTRO ===== -->
-<section class="scorecard"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 01B</div><h2 class="sec-title">Ayer dije / hoy pasó</h2><div class="sec-line"></div><div class="sec-sub" id="scoreGapNote">pre-registro del 25S contrastado al cierre del 28S · continuidad auditada</div></div>
-<div class="sc-table fade"><div class="sc-head"><span>Lo que quedó escrito el 25 de septiembre</span><span>Lo que pasó hoy</span><span>Veredicto</span></div>
-<div class="sc-row" data-v="hit"><div class="sc-said"><b>Re-escalada 88 → 98:</b> HY OAS &gt;2.80%, XLF &lt;53.55 o VIX &gt;20 con MOVE &gt;100 → duración 10→0 y caja 88→98.</div><div class="sc-did">HY publica <b>2.93%</b>, 13pb sobre el umbral. Una condición bastaba y se ejecuta <b>98/0/2</b>.</div><div class="sc-v hit">✓ ACIERTO</div></div>
-<div class="sc-row" data-v="hit"><div class="sc-said"><b>Duración corta:</b> cerrar si 2Y &gt;5.00% o si HY OAS publica <b>&gt;2.80%</b>; la igualdad no activa.</div><div class="sc-did">El 2Y queda en <b>4.928%</b>, pero HY <b>2.93%</b> activa la segunda pata. El 10% se cierra y vuelve a caja.</div><div class="sc-v hit">✓ ACIERTO</div></div>
-<div class="sc-row" data-v="hit"><div class="sc-said"><b>F-bis:</b> SKEW percentil ≥85 y VIX percentil ≥60 juntos, o 2 NOV. No ampliar.</div><div class="sc-did">SKEW queda en <b>P54</b> y VIX en <b>P27</b>. No hay cierre ni ampliación; la convexidad sigue en 2%.</div><div class="sc-v hit">✓ ACIERTO</div></div>
-<div class="sc-row" data-v="hit"><div class="sc-said"><b>Real 10Y:</b> revisar el libro si DFII10 cierra <b>&gt;3.00%</b>.</div><div class="sc-did">La tasa real implícita queda en <b>≈2.90%</b>, a 10pb. No dispara la revisión independiente.</div><div class="sc-v hit">✓ ACIERTO</div></div>
-<div class="sc-row" data-v="hit"><div class="sc-said"><b>Setup #5:</b> cerrar en la apertura del lunes 28 porque el time-stop ya estaba satisfecho.</div><div class="sc-did">Se cierra hoy por regla; el 30Y termina en <b>5.551%</b> y supera el objetivo 5.50%. Resultado del setup: <b>+19.8pb</b> a favor desde la entrada.</div><div class="sc-v hit">✓ ACIERTO</div></div>
-<div class="sc-row" data-v="miss"><div class="sc-said"><b>Escenario 35%:</b> “El squeeze se impone · índice rompe y breadth no acompaña”.</div><div class="sc-did">El S&amp;P 500 cae <b>−0.77%</b> y no rompe máximos. La amplitud también empeora a <b>16/453</b>.</div><div class="sc-v miss">✕ FALLO</div></div>
+<section class="scorecard"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 01B</div><h2 class="sec-title">Ayer dije / hoy pasó</h2><div class="sec-line"></div><div class="sec-sub" id="scoreGapNote">pre-registro del 28S contrastado al cierre del 30S · 1 sesión sin edición</div></div>
+<div class="sc-table fade"><div class="sc-head"><span>Lo que quedó escrito el 28 de septiembre</span><span>Lo que pasó al cierre del 30</span><span>Veredicto</span></div>
+<div class="sc-row" data-v="hit"><div class="sc-said"><b>Techo operativo:</b> si dispara XLF &lt;53.55, VIX &gt;20 con MOVE &gt;100, 2Y &gt;5.00% o real 10Y &gt;3.00%, mantener 98/0/2.</div><div class="sc-did">XLF cerró en <b>53.40</b>, por debajo de 53.55. El tamaño no cambió: <b>98/0/2</b>.</div><div class="sc-v hit">✓ ACIERTO</div></div>
+<div class="sc-row" data-v="hit"><div class="sc-said"><b>Des-escalada:</b> HY OAS &lt;2.80% en dos publicaciones consecutivas antes de reabrir duración.</div><div class="sc-did">HY publicó <b>3.08%</b> (obs 29S). No hubo ni una lectura válida por debajo de 2.80%; duración sigue en 0%.</div><div class="sc-v hit">✓ ACIERTO</div></div>
+<div class="sc-row" data-v="hit"><div class="sc-said"><b>F-bis:</b> cerrar convexidad solo con SKEW percentil ≥85 y VIX percentil ≥60 juntos, o el 2 NOV.</div><div class="sc-did">SKEW quedó en <b>P29</b> y VIX en <b>P33</b>. La condición conjunta sigue lejos; convexidad permanece en 2%.</div><div class="sc-v hit">✓ ACIERTO</div></div>
+<div class="sc-row" data-v="hit"><div class="sc-said"><b>Real 10Y:</b> si cierra &gt;3.00%, reclasificar diagnóstico sin alterar el tamaño.</div><div class="sc-did">10Y <b>5.298%</b> y breakeven cerca de <b>2.35%</b> dejan una tasa real implícita de ≈<b>2.95%</b>. No cruzó 3.00%.</div><div class="sc-v hit">✓ ACIERTO</div></div>
+<div class="sc-row" data-v="hit"><div class="sc-said"><b>Rama B:</b> JGB 30Y ≥4.000% solo ejecuta con cierre oficial autorizado; el proxy no cuenta.</div><div class="sc-did">El proxy sigue sobre 4%, pero el cierre oficial continúa <b>n/d</b>. La rama permanece bloqueada.</div><div class="sc-v hit">✓ ACIERTO</div></div>
+<div class="sc-row" data-v="hit"><div class="sc-said"><b>Setup #7:</b> USD/JPY &gt;159 antes del 9 OCT reduce convicción; &gt;160 invalida. No mover stop.</div><div class="sc-did">USD/JPY cerró en <b>157.370</b>: no tocó 159 ni 160. La regla y el stop quedan intactos.</div><div class="sc-v hit">✓ ACIERTO</div></div>
 </div>
-<div class="sc-mea fade"><b>MEA CULPA · 35%:</b> le asigné 35% al squeeze y el S&amp;P cayó 0.77%. Además, el escenario de crédito del 25% no se cuenta como acierto predictivo: el HY de 2.93% correspondía al 25S y se publicó con una sesión de rezago. Fue una ejecución correcta sobre un dato tardío. Queda fuera de la evaluación predictiva.</div>
 </div></section>
 
 <!-- ===== 01C · HILOS ===== -->
-<section class="threads-sec"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 01C</div><h2 class="sec-title">Lo que sigue abierto</h2><div class="sec-line"></div><div class="sec-sub">cinco heredados · ninguna desaparición silenciosa</div></div>
-<p class="th-intro fade">Los cinco hilos del 25S siguen en pantalla. Japón suma otra sesión sin fuente oficial; el yen apenas cambia; la presión de costes gana evidencia; el extremo largo acelera; y la concentración de IA queda más visible cuando el sector cae pero el líder aguanta.</p><div class="threads fade" id="threadsList"></div><p class="th-foot fade">El hilo del Tesoro ya no está en estado GIRÓ: hoy confirma la dirección del giro de ayer. Ningún hilo se cierra todavía.</p></div></section>
+<section class="threads-sec"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 01C</div><h2 class="sec-title">Lo que sigue abierto</h2><div class="sec-line"></div><div class="sec-sub">cinco heredados · uno nuevo · nombres estables</div></div>
+<p class="th-intro fade">El hueco del 29S no adelanta el reloj editorial: cada hilo heredado suma una edición. Tasas, crédito y Japón siguen abiertos; la novedad es memoria, donde Micron vuelve a poner sobreoferta y capex en el centro del ciclo.</p><div class="threads fade" id="threadsList"></div><p class="th-foot fade">Ningún hilo heredado desaparece. El sexto empieza hoy y queda separado del hilo de concentración de IA: uno sigue la financiación del capex; el otro, la oferta física de memoria.</p></div></section>
 
 <!-- ===== MEM · MEMORIA 4 DÍAS ===== -->
-<section class="memory"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// MEM</div><h2 class="sec-title">Lo que cambió en 4 ediciones</h2><div class="sec-line"></div><div class="sec-sub" id="memWindowLabel">24S · 25S · — · 28S</div></div><div class="mem-grid fade" id="memGrid"></div>
-<p class="mem-footnote fade">▸ Ventana FIFO publicada: salió 23S y entró 28S. <span id="memGapNote"></span> Hoy: WTI <b>$96.31</b>, SPX <b>7,683.69</b>, VIX <b>16.08</b>, SKEW <b>144.91</b>, GOLD <b>$4,117.05</b> y BTC <b>$83.542K</b>. DXY no tiene un nivel 28S reconciliable en los inputs: se conserva <b>101.280</b> como último nivel publicado, se marca hueco y solo se registra la dirección +0.16% como contexto. <span class="mem-errata"><b>FE DE ERRATAS · SERIE HISTÓRICA:</b> SPX 23S publicado 7,702.65; cierre oficial revisado <b>7,706.03</b>. SPX 25S publicado <b>7,742.33</b>; el cierre de referencia usado por el análisis 28S es <b>7,743.80</b>. WTI 25S publicado <b>92.57</b>; el cierre oficial implícito en el +4.22% de hoy es <b>≈92.41</b>. Los puntos publicados no se reescriben; los deltas con * usan la referencia oficial.</span></p></div></section>
+<section class="memory"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// MEM</div><h2 class="sec-title">Lo que cambió en 4 ediciones</h2><div class="sec-line"></div><div class="sec-sub" id="memWindowLabel">25S · — · 28S · 30S</div></div><div class="mem-grid fade" id="memGrid"></div>
+<p class="mem-footnote fade">▸ Ventana FIFO publicada: salió 24S y entró 30S. <span id="memGapNote"></span> Hoy: WTI <b>$93.07</b>, SPX <b>7,651.54</b>, VIX <b>16.33</b>, SKEW <b>141.92</b>, GOLD <b>$4,157.14</b>, BTC <b>$83.833K</b> y DXY <b>101.454</b>. <span class="mem-errata"><b>INTEGRIDAD DE SERIE:</b> los puntos heredados permanecen exactamente como se publicaron. La casilla “—” conserva el hueco histórico del 26S; el 29S queda declarado en GAPS_PUB y no se reconstruye.</span></p></div></section>
 
 <!-- ===== 02 · TESIS EN 3 FUERZAS ===== -->
-<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 02</div><h2 class="sec-title">La tesis en 3 fuerzas</h2><div class="sec-line"></div><div class="sec-sub">crédito · tasa real · shock de oferta</div></div>
-<p class="thesis-q fade">La sesión deja de discutir si el régimen está frágil. <em>El crédito cruza, el dinero real se encarece y el shock de oferta ya está en el precio.</em></p><div class="forces">
-<div class="force fade"><div class="force-n">01</div><div class="force-t">El crédito dejó de ser benigno</div><div class="force-x">HY pasa de <b>2.80% a 2.93%</b> y CCC de <b>11.12% a 11.28%</b>. La jerarquía por calidad sigue limpia: IG +2pb, BB +12, B +14 y CCC +16. El deterioro ya alcanzó al agregado y ejecuta la regla.</div></div>
-<div class="force fade"><div class="force-n">02</div><div class="force-t">La tasa real manda, con un flanco abierto</div><div class="force-x">El 10Y llega a <b>5.234%</b> con breakeven a <b>2.34%</b>, dejando tasa real implícita cerca de <b>2.90%</b>. Pero Dallas Fed suma presión de costes: precios pagados +8.1 y recibidos +6.9. El mecanismo sigue real; la composición ya no es pura.</div></div>
-<div class="force fade"><div class="force-n">03</div><div class="force-t">Ormuz ya no es cola: es descuento</div><div class="force-x">WTI sube <b>4.22%</b>, Brent supera <b>$100</b>, acciones y bonos caen y el oro pierde cerca de <b>3.9%</b>. La amplitud se hunde a <b>16 máximos / 453 mínimos</b>. No hay rotación defensiva limpia: sube el tipo de descuento para casi todo.</div></div>
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 02</div><h2 class="sec-title">La tesis en 3 fuerzas</h2><div class="sec-line"></div><div class="sec-sub">tasa real · crédito · interior del mercado</div></div>
+<p class="thesis-q fade">El dato de inflación fue benigno y el bono largo cayó igual. <em>La presión se desplazó hacia la tasa real, el crédito y la calidad interna del mercado.</em></p><div class="forces">
+<div class="force fade"><div class="force-n">01</div><div class="force-t">La tasa real absorbió casi todo el movimiento</div><div class="force-x">Core PCE <b>3.0% vs 3.3% esperado</b>; 10Y <b>5.298%</b>. En la ventana de 20 observaciones del panel, <b>47 de 51 pb</b> de suba nominal vienen de tasa real y solo 4 pb de compensación por inflación.</div></div>
+<div class="force fade"><div class="force-n">02</div><div class="force-t">El crédito siguió abriendo y el crecimiento perdió respaldo</div><div class="force-x">HY pasa de <b>2.93% a 3.08%</b>; CCC de <b>11.28% a 11.57%</b>. A la vez, GDPNow cae de <b>5.02% a 3.7%</b> en cinco días. El gatillo del 28S no se revierte; gana confirmación.</div></div>
+<div class="force fade"><div class="force-n">03</div><div class="force-t">El índice aguanta mejor que su interior</div><div class="force-x">MOVE está en <b>110.46 · P99</b> y VIX en <b>16.34 · P33</b>. La amplitud mejora desde el extremo del 28S, pero sigue débil: <b>20 máximos / 305 mínimos</b> y solo <b>24.47%</b> de participación sobre 50 días.</div></div>
 </div></div></section>
 
 <!-- ===== 03 · CRONOLOGÍA ===== -->
-<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 03</div><h2 class="sec-title">Cronología táctica</h2><div class="sec-line"></div><div class="sec-sub">lo que cambió la lectura del 28S</div></div><div class="tl fade">
-<div class="tl-ev crit"><div class="tl-meta"><span class="tl-time">FRED</span><span class="tl-src">CRÉDITO · DATO 25S</span></div><div><div class="tl-t">HY OAS publica 2.93% y activa la re-escalada</div><div class="tl-b">El dato llega con una sesión de rezago estructural. La ejecución ocurre hoy porque hoy existe el dato publicable: <b>88/10/2 → 98/0/2</b>.</div></div><div class="tl-tags"><span class="tl-tag crit">GATILLO</span></div></div>
-<div class="tl-ev crit"><div class="tl-meta"><span class="tl-time">PRIMARIO</span><span class="tl-src">TREASURY</span></div><div><div class="tl-t">Las letras salen más caras</div><div class="tl-b">3 meses <b>4.110%</b> y 6 meses <b>4.285%</b>, +9.5 y +13.0pb contra la subasta anterior. El mercado monetario paga una prima creciente sobre EFFR 3.88%.</div></div><div class="tl-tags"><span class="tl-tag crit">TASAS</span></div></div>
-<div class="tl-ev crit"><div class="tl-meta"><span class="tl-time">GEOPOL</span><span class="tl-src">ORMUZ</span></div><div><div class="tl-t">El crudo salta más de 4%</div><div class="tl-b">WTI cierra en <b>$96.31</b> y tres fuentes externas ubican Brent por encima de <b>$100</b>. El shock de oferta deja de ser riesgo de cola y entra al precio.</div></div><div class="tl-tags"><span class="tl-tag crit">ENERGÍA</span></div></div>
-<div class="tl-ev crit"><div class="tl-meta"><span class="tl-time">CIERRE</span><span class="tl-src">NYSE</span></div><div><div class="tl-t">La amplitud se rompe debajo del índice</div><div class="tl-b">S&amp;P <b>−0.77%</b>; avances/descensos <b>0.36</b>, volumen comprador 27.12% y <b>16 máximos / 453 mínimos</b>. El panel pasa a CONTEXTO FRÁGIL.</div></div><div class="tl-tags"><span class="tl-tag crit">AMPLITUD</span></div></div>
-<div class="tl-ev"><div class="tl-meta"><span class="tl-time">24H</span><span class="tl-src">CRIPTO</span></div><div><div class="tl-t">Desapalancamiento ordenado, amplitud destruida</div><div class="tl-b">BTC queda en <b>83.4–83.5K</b>; Altseason baja <b>74 → 63</b> y solo 12 de 100 monedas quedan verdes. El interés abierto cae mientras el volumen sube: cierre de posiciones en lugar de capitulación.</div></div><div class="tl-tags"><span class="tl-tag hot">RIESGO</span></div></div>
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 03</div><h2 class="sec-title">Cronología táctica</h2><div class="sec-line"></div><div class="sec-sub">qué cambió desde la edición del 28S</div></div><div class="tl fade">
+<div class="tl-ev crit"><div class="tl-meta"><span class="tl-time">PCE</span><span class="tl-src">INFLACIÓN</span></div><div><div class="tl-t">El dato salió más suave y el 10Y subió igual</div><div class="tl-b">Core PCE <b>3.0% interanual</b> frente a 3.3% esperado. El 10Y terminó en <b>5.298%</b>, máximo desde 2002: la sesión vuelve a señalar tasa real y prima por plazo.</div></div><div class="tl-tags"><span class="tl-tag crit">TASAS</span></div></div>
+<div class="tl-ev crit"><div class="tl-meta"><span class="tl-time">FRED</span><span class="tl-src">CRÉDITO · OBS 29S</span></div><div><div class="tl-t">HY y CCC amplían después del gatillo</div><div class="tl-b">HY <b>3.08%</b>, +15 pb (puntos básicos) frente a la publicación que activó la re-escalada; CCC <b>11.57%</b>, +29 pb. El deterioro por calidad sigue ordenado.</div></div><div class="tl-tags"><span class="tl-tag crit">CRÉDITO</span></div></div>
+<div class="tl-ev crit"><div class="tl-meta"><span class="tl-time">AHORA</span><span class="tl-src">GDPNow</span></div><div><div class="tl-t">La estimación de crecimiento pierde 130 pb en cinco días</div><div class="tl-b">GDPNow 3T baja de <b>5.02% a 3.7%</b>. La economía aún no está en contracción, pero el dato que justificaba convivir con tasas altas se debilitó.</div></div><div class="tl-tags"><span class="tl-tag hot">CRECIMIENTO</span></div></div>
+<div class="tl-ev"><div class="tl-meta"><span class="tl-time">CIERRE</span><span class="tl-src">NYSE</span></div><div><div class="tl-t">La amplitud repara algo, sin salir de frágil</div><div class="tl-b"><b>20 máximos / 305 mínimos</b>, avances/descensos <b>0.69</b> y volumen comprador <b>43.1%</b>. Mejor que 16/453 del 28S, todavía lejos de una reparación amplia.</div></div><div class="tl-tags"><span class="tl-tag hot">AMPLITUD</span></div></div>
+<div class="tl-ev"><div class="tl-meta"><span class="tl-time">24H</span><span class="tl-src">CRIPTO</span></div><div><div class="tl-t">Bitcoin se desacopla del deterioro macro</div><div class="tl-b">BTC termina cerca de <b>83.8K · +0.21%</b> mientras Dow cae 0.86% y el 10Y sube. Volumen de futuros BTC <b>+25.11%</b> con demanda spot débil: sostén interno, no alivio macro.</div></div><div class="tl-tags"><span class="tl-tag hot">DESCORRELACIÓN</span></div></div>
+<div class="tl-ev"><div class="tl-meta"><span class="tl-time">POST</span><span class="tl-src">MICRON</span></div><div><div class="tl-t">La oferta de memoria vuelve a ser una variable de ciclo</div><div class="tl-b">El trimestre bate expectativas, pero la guía de margen queda algo por debajo y el capex proyectado supera <b>$50.000M</b> frente a $27.000M. Se abre un hilo separado sobre capacidad futura.</div></div><div class="tl-tags"><span class="tl-tag hot">SEMIS</span></div></div>
 </div></div></section>
 
 <!-- ===== 04 · CANAL RUMOR ===== -->
-<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 04</div><h2 class="sec-title">Canal rumor</h2><div class="sec-line"></div><div class="sec-sub">hipótesis tempranas · no son gatillos</div></div><p class="rumor-note fade"><b>CANAL VIOLETA:</b> hechos atribuidos pero sin verificación primaria suficiente, o causalidades todavía abiertas. Se vigilan; nunca sustituyen precios, cierres ni reglas.</p><div class="rumors fade">
-<div class="rumor"><div class="rumor-head"><span class="rumor-src">FED · mercado</span><span class="rumor-conf conf-mid">MEDIA</span></div><div class="rumor-t">El mercado asignaría cerca de 70% a una subida de tasas el mes que viene</div><div class="rumor-impact"><b>Si confirma:</b> explicaría la presión del frente corto. No se usa como probabilidad propia; las subastas a 3M/6M son la evidencia observable.</div></div>
-<div class="rumor"><div class="rumor-head"><span class="rumor-src">MIZUHO · feed</span><span class="rumor-conf conf-mid">MEDIA</span></div><div class="rumor-t">Dos medidas de amplitud no vistas desde 2000 con el índice cerca de máximos</div><div class="rumor-impact"><b>Si confirma:</b> refuerza el diagnóstico de concentración. El informe no necesita ese dato para decidir: el panel propio ya muestra 16 máximos contra 453 mínimos.</div></div>
-<div class="rumor"><div class="rumor-head"><span class="rumor-src">IRÁN · agencias</span><span class="rumor-conf conf-mid">MEDIA</span></div><div class="rumor-t">Ormuz sería el centro de la negociación mientras circulan versiones opuestas sobre concesiones nucleares</div><div class="rumor-impact"><b>Si confirma:</b> la prima de energía seguirá siendo binaria. Se registra el conflicto de titulares; el precio verificado del crudo gobierna el tablero por encima del rumor.</div></div>
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 04</div><h2 class="sec-title">Canal rumor</h2><div class="sec-line"></div><div class="sec-sub">hipótesis atribuidas · no son gatillos</div></div><p class="rumor-note fade"><b>CANAL VIOLETA:</b> afirmaciones de terceros o reportes sin verificación primaria suficiente. Se muestran con autor y confianza; ninguna cambia el protocolo por sí sola.</p><div class="rumors fade">
+<div class="rumor"><div class="rumor-head"><span class="rumor-src">FINANCE LANCELOT · ciclo</span><span class="rumor-conf conf-mid">MEDIA</span></div><div class="rumor-t">La expansión de capacidad de memoria podría convertir el capex actual en sobreoferta futura</div><div class="rumor-impact"><b>Si confirma:</b> el riesgo pasa de concentración financiera a exceso físico de oferta. El dato verificable de hoy es el salto de capex de Micron; la conclusión de ciclo queda atribuida.</div></div>
+<div class="rumor"><div class="rumor-head"><span class="rumor-src">STANDARD CHARTERED · ENA</span><span class="rumor-conf conf-mid">MEDIA</span></div><div class="rumor-t">La casa proyecta un recorrido extremo para ENA ligado al crecimiento de USDe</div><div class="rumor-impact"><b>Si confirma:</b> explica parte de la rotación idiosincrática en altcoins. No se extrapola al mercado cripto completo y no habilita posición.</div></div>
+<div class="rumor"><div class="rumor-head"><span class="rumor-src">GATE · BENUSDT</span><span class="rumor-conf conf-mid">BAJA</span></div><div class="rumor-t">Usuarios reportan créditos anómalos y liquidaciones tras un supuesto error de dividendo</div><div class="rumor-impact"><b>Si confirma:</b> suma riesgo de contraparte y operación a la lista cripto. La plataforma no había publicado explicación verificable al corte del anexo.</div></div>
 </div></div></section>
 
 <!-- ===== 05 · DATA VIVA ===== -->
-<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 05</div><h2 class="sec-title">Data viva</h2><div class="sec-line"></div><div class="sec-sub">10Y · VIX · dispersión 28S</div></div>
-<p class="audit-note fade"><b>AUDITORÍA:</b> el análisis 28S es la fuente principal y separa dato efectivo de fecha de publicación. Crédito ICE BofA usa observación <b>25S</b>; el 10Y <b>5.234%</b>, USD/JPY <b>157.408</b> y oro <b>4,117.05</b> salen del input post-cierre. Para completar el P&amp;L se congelan cierres externos del 28S: <b>SPY 765.49</b>, <b>XLV 171.26</b> y <b>XLE 62.12</b>. La caja usa la subasta 3M <b>4.110%</b>. Todo queda embebido en <code>MARKS</code>. El informe queda autocontenido y sin feeds en vivo.</p><div class="charts">
-<div class="chart-card wide fade"><div class="ch-head"><div><span class="ch-sym">UST 10Y · señal</span><span class="ch-meta">23S → 24S → 25S → 28S</span></div><span class="ch-tag" style="color:var(--risk);border:1px solid var(--risk)">5.234%</span></div><div class="ch-body"><div class="chart-plot"><svg preserveaspectratio="none" viewbox="0 0 1080 220"><g id="normalizedGrid"></g><g id="normalizedSeries"></g><g id="normalizedLeaders"></g></svg><span class="chart-label date" data-norm-date="0" style="left:8%;bottom:4px">23S</span><span class="chart-label date anchor-c" data-norm-date="1" style="left:36%;bottom:4px">24S</span><span class="chart-label date anchor-c" data-norm-date="2" style="left:64%;bottom:4px">25S</span><span class="chart-label date anchor-c" data-norm-date="3" style="left:82%;bottom:4px">28S</span><span class="chart-label risk" data-norm-label="UST10" style="right:1%;top:28%">UST10</span><span class="chart-label trigger-lbl r" data-trigger-label="A10">5.300% · DETERIORO</span></div><div class="legend"><span><i style="background:var(--risk)"></i>5.11 → 5.18 → 5.167 → 5.234%</span><span><b>Lectura:</b> el 10Y vuelve a subir y queda a <b>6.6pb</b> del gatillo 5.30%. El breakeven 10Y sigue en 2.34%; la tasa real implícita ronda 2.90%.</span></div></div></div>
-<div class="chart-card fade"><div class="ch-head"><div><span class="ch-sym">VIX</span><span class="ch-meta">23S → 24S → 25S → 28S</span></div><span class="ch-tag" style="color:var(--alert);border:1px solid var(--alert)">16.08 · P27</span></div><div class="ch-body"><div class="chart-plot small"><svg preserveaspectratio="none" viewbox="0 0 520 180"><g id="riskGrid"></g><g id="riskSeries"></g><g id="riskLeaders"></g></svg><span class="chart-label date" data-risk-date="0" style="left:10%;bottom:4px">23S</span><span class="chart-label date anchor-c" data-risk-date="1" style="left:36%;bottom:4px">24S</span><span class="chart-label date anchor-c" data-risk-date="2" style="left:62%;bottom:4px">25S</span><span class="chart-label date anchor-c" data-risk-date="3" style="left:80%;bottom:4px">28S</span><span class="chart-label alert" data-risk-label="VIX" style="right:1%;top:30%">VIX</span></div><div class="legend"><span><i style="background:var(--alert)"></i>15.17 → 15.68 → 14.88 → 16.08</span><span><b>Lectura:</b> el nivel sigue por debajo de 20, pero la aceleración cambia: VIX +8.06% y MOVE, índice de volatilidad de bonos, <b>101.82 · P98</b> ya no describen calma conjunta.</span></div></div></div>
-<div class="chart-card fade"><div class="ch-head"><div><span class="ch-sym">DISPERSIÓN · 28S</span><span class="ch-meta">cierre · activos clave</span></div><span class="ch-tag" style="color:var(--risk);border:1px solid var(--risk)">DESCUENTO SUBE</span></div><div class="ch-body"><div class="bar-chart" id="sectorBars"></div><div class="legend"><span><b>Lectura:</b> VIX <b>+8.06%</b>, WTI <b>+4.22%</b>, oro <b>−3.9%</b>, S&amp;P <b>−0.77%</b> y BTC cerca de <b>−1.2%</b>. XLV es la excepción defensiva con <b>+0.33%</b>.</span></div></div></div>
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 05</div><h2 class="sec-title">Data viva</h2><div class="sec-line"></div><div class="sec-sub">10Y · VIX · dispersión 30S</div></div>
+<p class="audit-note fade"><b>AUDITORÍA:</b> DXY, índice del dólar, cierra en <b>101.454</b>. El análisis 30S es la fuente principal y separa fecha de observación de fecha de publicación. Crédito ICE BofA usa observación <b>29S</b>; el cierre cash del S&amp;P es <b>7,651.54</b> y el 10Y verificado <b>5.298%</b>. Para el marcador de carteras se congelan los valores del archivo de tickers: <b>SPY 762.63</b>, <b>XLV 168.42</b>, <b>XLE 61.50</b>, <b>XAUUSD 4,157.135</b> y <b>USD/JPY 157.370</b>. La letra 3M usa <b>4.125%</b>. El 30Y <b>5.631%</b> queda rotulado como ticker porque no hubo cierre externo verificado.</p><div class="charts">
+<div class="chart-card wide fade"><div class="ch-head"><div><span class="ch-sym">UST 10Y · señal</span><span class="ch-meta">24S → 25S → 28S → 30S</span></div><span class="ch-tag" style="color:var(--risk);border:1px solid var(--risk)">5.298%</span></div><div class="ch-body"><div class="chart-plot"><svg preserveaspectratio="none" viewbox="0 0 1080 220"><g id="normalizedGrid"></g><g id="normalizedSeries"></g><g id="normalizedLeaders"></g></svg><span class="chart-label date" data-norm-date="0" style="left:8%;bottom:4px">24S</span><span class="chart-label date anchor-c" data-norm-date="1" style="left:36%;bottom:4px">25S</span><span class="chart-label date anchor-c" data-norm-date="2" style="left:64%;bottom:4px">28S</span><span class="chart-label date anchor-c" data-norm-date="3" style="left:82%;bottom:4px">30S</span><span class="chart-label risk" data-norm-label="UST10" style="right:1%;top:28%">UST10</span><span class="chart-label trigger-lbl r" data-trigger-label="A10">5.300% · NIVEL DE CONTROL</span></div><div class="legend"><span><i style="background:var(--risk)"></i>5.180 → 5.167 → 5.234 → 5.298%</span><span><b>Lectura:</b> el 10Y queda a <b>0.2 pb</b> de 5.30%. El PCE suave no produjo el alivio que esperaba el mercado.</span></div></div></div>
+<div class="chart-card fade"><div class="ch-head"><div><span class="ch-sym">VIX</span><span class="ch-meta">24S → 25S → 28S → 30S</span></div><span class="ch-tag" style="color:var(--alert);border:1px solid var(--alert)">16.34 · P33</span></div><div class="ch-body"><div class="chart-plot small"><svg preserveaspectratio="none" viewbox="0 0 520 180"><g id="riskGrid"></g><g id="riskSeries"></g><g id="riskLeaders"></g></svg><span class="chart-label date" data-risk-date="0" style="left:10%;bottom:4px">24S</span><span class="chart-label date anchor-c" data-risk-date="1" style="left:36%;bottom:4px">25S</span><span class="chart-label date anchor-c" data-risk-date="2" style="left:62%;bottom:4px">28S</span><span class="chart-label date anchor-c" data-risk-date="3" style="left:80%;bottom:4px">30S</span><span class="chart-label alert" data-risk-label="VIX" style="right:1%;top:30%">VIX</span></div><div class="legend"><span><i style="background:var(--alert)"></i>15.68 → 14.88 → 16.08 → 16.34</span><span><b>Lectura:</b> VIX sigue normal mientras MOVE está en <b>110.46 · P99</b>. La brecha entre volatilidad de acciones y bonos se consolida como parte del régimen.</span></div></div></div>
+<div class="chart-card fade"><div class="ch-head"><div><span class="ch-sym">DISPERSIÓN · 30S</span><span class="ch-meta">variación diaria · activos clave</span></div><span class="ch-tag" style="color:var(--risk);border:1px solid var(--risk)">INTERIOR DÉBIL</span></div><div class="ch-body"><div class="bar-chart" id="sectorBars"></div><div class="legend"><span><b>Lectura:</b> MOVE <b>+3.61%</b>, VIX <b>+1.87%</b>, XLF <b>−1.13%</b>, WTI <b>+1.45%</b>, S&amp;P <b>−0.25%</b> y QQQ <b>+0.25%</b>. Tecnología aguanta mientras financieras y el mercado amplio ceden.</span></div></div></div>
 </div></div></section>
-
 
 <!-- ===== 05B · MERCADO CRIPTO ===== -->
 <section class="crypto-section" id="cryptoSection"><div class="wrap">
@@ -963,10 +960,10 @@ body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba
 <div class="bridge-memory-head fade"><div class="bmh-title">Los últimos cuatro días</div><div class="bmh-sub">Cómo se comportó el mercado cripto frente al tradicional en cada sesión</div></div>
 <div class="bridge-memory fade" id="bridgeMemory" aria-label="Memoria de cuatro ediciones del puente macro"></div>
 <div class="crypto-compact fade" id="cryptoCompact">
-  <article class="crypto-metric solid btc"><div class="cm-label">Bitcoin · 24 horas</div><div class="cm-value crypto-count" data-count="83118" data-prefix="$" data-decimals="0">$83,118</div><div class="metric-chip"><b class="risk">▼ 1.05%</b><span>24 horas</span></div></article>
-  <article class="crypto-metric solid cap"><div class="cm-label">Capitalización total</div><div class="cm-value crypto-count" data-count="2.86" data-prefix="$" data-suffix="T" data-decimals="2">$2.86T</div><div class="cm-sub">volumen 24h · <b>$111.85B</b></div><div class="metric-chip" id="capDeltaChip"></div></article>
-  <article class="crypto-metric dom"><div class="cm-label">Dominancia</div><div class="cm-value crypto-count" data-count="58.6" data-suffix="%" data-decimals="1">58.6%</div><div class="dom-bar" id="dominanceBar"><i class="dom-seg btc" style="width:58.6%"></i><i class="dom-seg eth" style="width:11.5%"></i><i class="dom-seg other" style="width:30%"></i></div><div class="dom-legend"><b>BTC 58.6%</b><b>ETH 11.5%</b><b>OTROS 30.0%</b></div><div class="metric-delta" id="domDelta"></div></article>
-  <article class="crypto-metric alt"><div class="cm-label">Temporada de altcoins</div><div class="cm-value crypto-count" data-count="63" data-suffix="/100" data-decimals="0">63/100</div><div class="alt-gauge"><i class="alt-marker" id="altMarker" style="--pos:63%"></i></div><div class="metric-delta" id="altDelta"></div></article>
+  <article class="crypto-metric solid btc"><div class="cm-label">Bitcoin · 24 horas</div><div class="cm-value crypto-count" data-count="83833" data-prefix="$" data-decimals="0">$83,833</div><div class="metric-chip"><b class="upv">▲ 0.21%</b><span>24 horas</span></div></article>
+  <article class="crypto-metric solid cap"><div class="cm-label">Capitalización total</div><div class="cm-value missing-now">n/d</div><div class="cm-sub">último publicado 28S · <b>$2.86T</b></div><div class="metric-chip" id="capDeltaChip"><span>dato 30S no provisto</span></div></article>
+  <article class="crypto-metric dom"><div class="cm-label">Dominancia Bitcoin</div><div class="cm-value crypto-count" data-count="58.65" data-suffix="%" data-decimals="2">58.65%</div><div class="dom-bar" id="dominanceBar"><i class="dom-seg btc" style="width:58.65%"></i><i class="dom-seg other" style="width:41.35%"></i></div><div class="dom-legend"><b>BTC 58.65%</b><b>RESTO 41.35%</b></div><div class="metric-delta" id="domDelta"></div></article>
+  <article class="crypto-metric alt"><div class="cm-label">Temporada de altcoins</div><div class="cm-value crypto-count" data-count="66" data-suffix="/100" data-decimals="0">66/100</div><div class="alt-gauge"><i class="alt-marker" id="altMarker" style="--pos:66%"></i></div><div class="metric-delta" id="altDelta"></div></article>
 </div>
 <details class="crypto-detail fade" id="cryptoDetail">
   <summary><span>Ver el detalle</span><span>activos · sentimiento · derivados · flujos · liquidaciones</span></summary>
@@ -976,7 +973,7 @@ body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba
     <div class="crypto-detail-grid" id="cryptoDetailGrid"></div>
     <div class="conflict-note" id="cryptoConflict"></div>
     <div class="liq-panel" id="liqPanel">
-      <div class="liq-head"><div><div class="crypto-kicker">MAPA DE LIQUIDACIONES · PERFIL RECONSTRUIDO</div><div class="liq-title">Binance BTC/USDT perpetuo · ventana de un día</div></div><div class="liq-meta" id="liqMeta"></div></div>
+      <div class="liq-head"><div><div class="crypto-kicker">MAPA DE LIQUIDACIONES · PERFIL RECONSTRUIDO</div><div class="liq-title">Binance BTC/USDT perpetuo · perfil visual 15m</div></div><div class="liq-meta" id="liqMeta"></div></div>
       <div class="liq-honesty" id="liqHonesty"></div>
       <div class="liq-map-scroll"><div id="liqChart"></div></div>
       <div class="liq-read" id="liqRead"></div>
@@ -989,106 +986,105 @@ body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba
 <!-- ===== 06 · SEÑAL VS RUIDO ===== -->
 <section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 06</div><h2 class="sec-title">Señal vs ruido</h2><div class="sec-line"></div><div class="sec-sub">qué decide · qué se deja fuera</div></div><div class="sr">
 <div class="sr-col sig fade"><div class="sr-h sig">Señal</div>
-<div class="sr-item"><span class="sr-n">01</span><span><b>HY 2.93% / CCC 11.28%.</b> Ambos cruzan sus niveles y la jerarquía 2/12/14/16pb por calidad confirma deterioro ordenado.</span></div>
-<div class="sr-item"><span class="sr-n">02</span><span><b>Subastas 3M 4.110% y 6M 4.285%.</b> El primario confirma que el dinero se encarece por competencia real por capital.</span></div>
-<div class="sr-item"><span class="sr-n">03</span><span><b>16 máximos / 453 mínimos.</b> Avances/descensos 0.36 y volumen comprador 27.12%: la fragilidad interna ya no es marginal.</span></div>
-<div class="sr-item"><span class="sr-n">04</span><span><b>10Y 5.234% con breakeven 2.34%.</b> La tasa real implícita queda en ~2.90%, a 10pb del control pre-registrado.</span></div>
-<div class="sr-item"><span class="sr-n">05</span><span><b>WTI +4.22%.</b> Ormuz entra en el precio y abre el canal de inflación que el breakeven todavía no registra.</span></div></div>
+<div class="sr-item"><span class="sr-n">01</span><span><b>HY 3.08% / CCC 11.57%.</b> El deterioro continúa después del gatillo y conserva jerarquía por calidad.</span></div>
+<div class="sr-item"><span class="sr-n">02</span><span><b>10Y 5.298% con PCE suave.</b> La inflación sorprende a la baja y la tasa larga no responde; el panel atribuye 92.2% de la suba reciente a tasa real.</span></div>
+<div class="sr-item"><span class="sr-n">03</span><span><b>GDPNow 3.7%.</b> Perdió 130 pb en cinco días y pone bajo presión el argumento de crecimiento suficientemente fuerte para absorber tasas altas.</span></div>
+<div class="sr-item"><span class="sr-n">04</span><span><b>20 máximos / 305 mínimos.</b> Hay reparación desde el 28S, pero la participación de 50 días sigue en 24.47%.</span></div>
+<div class="sr-item"><span class="sr-n">05</span><span><b>MOVE P99 / VIX P33.</b> El estrés sigue concentrado en bonos y la cobertura de acciones todavía no paga esa tensión.</span></div></div>
 <div class="sr-col noise fade"><div class="sr-h noise">Ruido / bloqueado</div>
-<div class="sr-item"><span class="sr-n">01</span><span><b>El “70% de subida de la Fed”.</b> Es una cifra de feed sin verificación primaria; se trata como sentimiento y queda fuera de precio y probabilidad propia.</span></div>
-<div class="sr-item"><span class="sr-n">02</span><span><b>Brent 108.50 como precisión operativa.</b> Las fuentes coinciden en &gt;$100 pero discrepan en el nivel. Se usa solo el umbral y se descarta una falsa exactitud.</span></div>
-<div class="sr-item"><span class="sr-n">03</span><span><b>Campos WTI/CL1!/BRN1! del feed.</b> Se mueven 0.1–0.5% cuando el subyacente sube &gt;4%: están congelados y siguen desactivados.</span></div>
-<div class="sr-item"><span class="sr-n">04</span><span><b>Panel DXY para niveles.</b> Su VIX es del 25S; solo conserva valor direccional. El nivel del dólar queda n/d en memoria hasta reconciliar fuente.</span></div>
-<div class="sr-item"><span class="sr-n">05</span><span><b>“Crédito 25% acertó”.</b> El dato HY 2.93% ya pertenecía al viernes y llegó hoy por rezago. Contarlo como predicción sería confundir publicación con ocurrencia.</span></div></div>
+<div class="sr-item"><span class="sr-n">01</span><span><b>El S&amp;P “casi plano” en septiembre.</b> El titular de −0.4% oculta que 75% de sus componentes terminó el mes abajo.</span></div>
+<div class="sr-item"><span class="sr-n">02</span><span><b>WTI +1.45% de hoy.</b> Es relevante como contexto de oferta, pero la magnitud diaria no agrega un gatillo nuevo.</span></div>
+<div class="sr-item"><span class="sr-n">03</span><span><b>BTC +0.21%.</b> El precio aislado no prueba fortaleza: el anexo muestra volumen de futuros +25.11% con spot débil.</span></div>
+<div class="sr-item"><span class="sr-n">04</span><span><b>Columna % del bloque de tasas.</b> El archivo usa una base de dos sesiones; se conservan los niveles y se descartan esos porcentajes.</span></div>
+<div class="sr-item"><span class="sr-n">05</span><span><b>Panel de condiciones financieras.</b> Llega con seis días de rezago y llama cómodo a un crédito que acaba de ampliar; queda descartado para decisión.</span></div></div>
 </div></div></section>
 
 <!-- ===== 06B · LO QUE NO OPERÉ ===== -->
-<section class="nop"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 06B</div><h2 class="sec-title">Lo que no operé</h2><div class="sec-line"></div><div class="sec-sub">cinco rechazos · taxonomía fija</div></div><p class="nop-intro fade">La re-escalada ya expresa el deterioro. Los nuevos trades se rechazan cuando duplican el libro, carecen de invalidación o dependen de una fuente bloqueada.</p><div class="nop-grid fade">
-<div class="nop-item"><span class="nop-why">Sin invalidación</span><b>Largo SOXX.</b> Décima evaluación: el sector cae 1.02% y todavía no existe una regla publicada de objetivo/salida que permita dimensionarlo.</div>
-<div class="nop-item"><span class="nop-why">Por internals</span><b>Largo convexidad cripto.</b> BVIV está barato por percentil, pero el riesgo de contraparte de 387.5 M$ sigue abierto. Se rechaza por infraestructura, con independencia del precio.</div>
-<div class="nop-item"><span class="nop-why">Por duplicar el libro</span><b>Largo oro tras −3.9%.</b> Comprar sobreventa mientras la tasa real sube sería apostar contra el diagnóstico que ya justifica la caja.</div>
-<div class="nop-item"><span class="nop-why">Por causa equivocada</span><b>Energía direccional.</b> El shock está en el precio, pero el bloque del feed sigue congelado; perseguir WTI después del +4.22% mezcla señal geopolítica con una base de datos no operable.</div>
-<div class="nop-item"><span class="nop-why">Por regla de tamaño</span><b>Corto S&amp;P por amplitud.</b> La amplitud es crítica, pero ya está expresada en 98% de caja. Añadir beta corta duplicaría el libro.</div>
-</div></div></section>
+<section class="nop"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 06B</div><h2 class="sec-title">Lo que no operé</h2><div class="sec-line"></div><div class="sec-sub">cinco rechazos · taxonomía fija</div></div><p class="nop-intro fade">El deterioro está expresado en caja y en el protocolo. Las ideas nuevas tienen que aportar una invalidación clara o un riesgo distinto; repetir el mismo factor no mejora el libro.</p><div class="nop-grid fade">
+<div class="nop-item"><span class="nop-why">Sin invalidación</span><b>Largo SOXX.</b> El sector rebota por momentos, pero todavía no hay una regla publicada de salida que permita dimensionar una entrada de referencia.</div>
+<div class="nop-item"><span class="nop-why">Por internals</span><b>Largo volatilidad cripto.</b> BVIV está en percentil 10 y acelera, pero el riesgo de contraparte asociado al exploit de Bitget sigue sin resolverse.</div>
+<div class="nop-item"><span class="nop-why">Por prematuro</span><b>Largo oro.</b> XAUUSD rebotó a 4,157, pero la tasa real sigue presionando al alza. La reparación técnica todavía contradice el motor macro.</div>
+<div class="nop-item"><span class="nop-why">Por duplicar el libro</span><b>Corto S&amp;P.</b> La amplitud sigue frágil, pero 98% de caja ya expresa la misma dirección. Añadir beta corta duplica el factor.</div>
+<div class="nop-item"><span class="nop-why">Por causa equivocada</span><b>Largo energía por inventarios.</b> El problema de productos refinados existe, pero comprar XLE solo por el titular mezcla una tesis de inventarios con un ETF que hoy quedó casi plano.</div>
+</div><p class="nop-foot fade">El HYG táctico del informe macro no entra acá como rechazo: es una operación separada del libro de referencia y se pre-registra en 09 con su invalidación.</p></div></section>
 
 <!-- ===== 07 · SEMÁFORO ===== -->
-<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 07</div><h2 class="sec-title">Semáforo de activos</h2><div class="sec-line"></div><div class="sec-sub">rojo ↓ · sesión 29 · confirmado</div></div><div class="sem-tools fade"><button class="sem-btn active" data-sev="all"><span class="dot"></span>Todos</button><button class="sem-btn" data-sev="critical"><span class="dot"></span>Crítico</button><button class="sem-btn" data-sev="alert"><span class="dot"></span>Alerta</button><button class="sem-btn" data-sev="watch"><span class="dot"></span>Monitoreo</button></div><div class="sem-grid">
-<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · GENERAL</div><div class="sem-name">Mercado general</div><div class="sem-desc">ROJO · vector <b>↓ confirmado</b>. Cero de seis frentes mejoran y la re-escalada lleva el libro a <b>98/0/2</b>.</div></div>
-<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · CRÉDITO</div><div class="sem-name">HY / CCC</div><div class="sem-desc">HY <b>2.93%</b> cruza 2.80%; CCC <b>11.28%</b> cruza 11.25%. Dato efectivo 25S, publicado con una sesión de rezago.</div></div>
-<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · RENTA FIJA</div><div class="sem-name">Tasas reales / curva</div><div class="sem-desc">10Y <b>5.234%</b>, 2Y <b>4.928%</b>, 30Y <b>5.551%</b>; real 10Y implícita <b>≈2.90%</b>.</div></div>
-<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · VOLATILIDAD</div><div class="sem-name">MOVE / VIX</div><div class="sem-desc">MOVE <b>101.82 · P98</b>; VIX <b>16.08 · P27</b>. Una pata de la condición conjunta está armada; la otra no.</div></div>
-<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · EQUITY</div><div class="sem-name">Amplitud NYSE</div><div class="sem-desc"><b>16 / 453</b>, A/D <b>0.36</b>, volumen comprador <b>27.12%</b> y McClellan <b>−145.68</b>. CONTEXTO FRÁGIL.</div></div>
-<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · FINANCIERAS</div><div class="sem-name">XLF</div><div class="sem-desc">Cierra <b>54.19</b>, apenas 0.64 sobre el gatillo 53.55. Ya no cambia el tamaño del libro, pero sí el diagnóstico.</div></div>
-<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · ENERGÍA</div><div class="sem-name">WTI / Brent</div><div class="sem-desc">WTI <b>$96.31 · +4.22%</b>; Brent confirmado solo como <b>&gt;$100</b>. Los tres campos internos de energía siguen desactivados por congelación.</div></div>
-<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · METALES</div><div class="sem-name">Oro</div><div class="sem-desc">Spot <b>4,117.05</b>, cerca de −3.9%. La caída con tasas reales al alza confirma sensibilidad al descuento en vez de demanda de refugio.</div></div>
-<div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · JAPÓN / FX</div><div class="sem-name">Yen</div><div class="sem-desc">JGB 30Y oficial sigue <b>n/d · 31ª sesión</b>. USD/JPY <b>157.408</b>, a 259 pips del stop 160.</div></div>
-<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · CRIPTO</div><div class="sem-name">BTC / altcoins</div><div class="sem-desc">BTC <b>83.4–83.5K</b>; Altseason <b>63</b>; solo 12/100 monedas verdes. OI cae con volumen alto: desapalancamiento ordenado.</div></div>
-<div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · SALUD</div><div class="sem-name">XLV</div><div class="sem-desc">Cierra <b>171.26 · +0.33%</b>. Único defensivo verde relevante de la sesión; se observa sin ampliar.</div></div>
-<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · DÓLAR</div><div class="sem-name">DXY</div><div class="sem-desc">DXY, índice del dólar: la dirección del ticker es <b>+0.16%</b>, pero el panel mezcla FX/VIX del 25S. El nivel queda <b>n/d</b> para decisión.</div></div>
+<section><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 07</div><h2 class="sec-title">Semáforo de activos</h2><div class="sec-line"></div><div class="sec-sub">rojo ↓ · sesión 31 · confirmado</div></div><div class="sem-tools fade"><button class="sem-btn active" data-sev="all"><span class="dot"></span>Todos</button><button class="sem-btn" data-sev="critical"><span class="dot"></span>Crítico</button><button class="sem-btn" data-sev="alert"><span class="dot"></span>Alerta</button><button class="sem-btn" data-sev="watch"><span class="dot"></span>Monitoreo</button></div><div class="sem-grid">
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · GENERAL</div><div class="sem-name">Mercado general</div><div class="sem-desc">ROJO · vector <b>↓ confirmado</b>. El libro sigue en <b>98/0/2</b>; el dato benigno de inflación no aflojó tasas ni crédito.</div></div>
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · CRÉDITO</div><div class="sem-name">HY / CCC</div><div class="sem-desc">HY <b>3.08%</b> y CCC <b>11.57%</b>, observación 29S publicada hoy. La ampliación continúa después del primer cruce.</div></div>
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · RENTA FIJA</div><div class="sem-name">Tasas reales / curva</div><div class="sem-desc">10Y <b>5.298%</b>; 2Y <b>4.895%</b>; 30Y <b>5.631%</b> por ticker. Real 10Y implícita cerca de <b>2.95%</b>.</div></div>
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · VOLATILIDAD</div><div class="sem-name">MOVE / VIX</div><div class="sem-desc">MOVE <b>110.46 · P99</b> y VIX <b>16.34 · P33</b>. La condición conjunta tiene una pata activada y otra todavía 3.66 puntos debajo.</div></div>
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · EQUITY</div><div class="sem-name">Amplitud NYSE</div><div class="sem-desc"><b>20 / 305</b>, A/D <b>0.69</b>, volumen comprador <b>43.1%</b> y McClellan <b>−136.86</b>. Mejora marginal; contexto todavía frágil.</div></div>
+<div class="sem-card fade" data-sev="critical"><div class="sem-tag">CRÍTICO · FINANCIERAS</div><div class="sem-name">XLF</div><div class="sem-desc">Cierra <b>53.40</b>, debajo del nivel 53.55 pre-registrado. Confirma transmisión a financieras; no existe tercera escalada de tamaño.</div></div>
+<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · ENERGÍA</div><div class="sem-name">WTI / Brent</div><div class="sem-desc">WTI <b>$93.07 · +1.45%</b> y Brent <b>$98.03 · +1.94%</b>. El canal de productos refinados sigue activo, pero el cierre diario no añade un nuevo gatillo.</div></div>
+<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · METALES</div><div class="sem-name">Oro</div><div class="sem-desc">XAUUSD <b>4,157.14 · −0.59%</b>. La estructura intenta estabilizar, todavía frente a una tasa real en ascenso.</div></div>
+<div class="sem-card fade" data-sev="watch"><div class="sem-tag">MONITOREO · JAPÓN / FX</div><div class="sem-name">Yen / JGB</div><div class="sem-desc">USD/JPY <b>157.370</b>. El cierre oficial de JGB 30Y sigue n/d para la rama; las referencias indirectas continúan sobre 4%.</div></div>
+<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · CRIPTO</div><div class="sem-name">BTC / altcoins</div><div class="sem-desc">BTC <b>83.8K · +0.21%</b>, Altseason <b>66</b>, OI <b>$148.61B · +0.92%</b>. Precio plano con volumen de futuros fuerte y spot débil.</div></div>
+<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · SALUD</div><div class="sem-name">XLV</div><div class="sem-desc">Cierra <b>168.42 · −1.35%</b>. La pata defensiva no aisló al libro de la presión de tasas esta sesión.</div></div>
+<div class="sem-card fade" data-sev="alert"><div class="sem-tag">ALERTA · MEMORIA</div><div class="sem-name">Micron / DRAM</div><div class="sem-desc">El trimestre bate, pero el capex proyectado supera <b>$50.000M</b> y la guía de margen queda algo por debajo. Se abre un hilo de oferta futura.</div></div>
 </div></div></section>
 
 <!-- ===== 07B · NIVELES DE LA SESIÓN ===== -->
-<section class="levels"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 07B</div><h2 class="sec-title">Niveles de la sesión</h2><div class="sec-line"></div><div class="sec-sub">cierre 28S · gatillo · distancia · consecuencia</div></div><p class="lv-intro fade">La re-escalada ya disparó; desde 98% de caja los niveles restantes son de diagnóstico o des-escalada. Se mantienen como máximo tres filas en proximidad.</p><div class="lv-table fade">
-<div class="lv-head"><span>Instrumento</span><span>Cierre 28S</span><span>Nivel</span><span>Distancia</span><span>Qué activa</span></div>
-<div class="lv-row" data-prox="mid"><span class="lv-nm">HY OAS<em>re-escalada ejecutada</em></span><span class="lv-now">2.93% · obs 25S</span><span class="lv-trig">&gt;2.80%</span><span class="lv-dist mid">+13pb sobre</span><span class="lv-act">Ya ejecutó 98/0/2; próximas publicaciones gobiernan des-escalada</span></div>
-<div class="lv-row" data-prox="near"><span class="lv-nm">Real 10Y<em>control diagnóstico</em></span><span class="lv-now">≈2.90%</span><span class="lv-trig">&gt;3.00%</span><span class="lv-dist near">10pb</span><span class="lv-act">Reclasifica diagnóstico; sin venta adicional desde 98% caja</span></div>
-<div class="lv-row" data-prox="near"><span class="lv-nm">UST 2Y<em>frente corto</em></span><span class="lv-now">4.928%</span><span class="lv-trig">&gt;5.000%</span><span class="lv-dist near">7.2pb</span><span class="lv-act">Confirma endurecimiento del frente corto; duración ya está en 0%</span></div>
-<div class="lv-row" data-prox="near"><span class="lv-nm">XLF<em>confirmador financiero</em></span><span class="lv-now">54.19</span><span class="lv-trig">&lt;53.55</span><span class="lv-dist near">0.64 · 1.18%</span><span class="lv-act">Confirma transmisión a financieras y mantiene 98/0/2</span></div>
-<div class="lv-row" data-prox="mid"><span class="lv-nm">VIX / MOVE<em>condición conjunta</em></span><span class="lv-now">16.08 / 101.82</span><span class="lv-trig">VIX &gt;20 y MOVE &gt;100</span><span class="lv-dist mid">VIX: 3.92 pts</span><span class="lv-act">Se registra como deterioro adicional; sin tercera escalada</span></div>
-<div class="lv-row" data-prox="mid"><span class="lv-nm">CCC OAS<em>nuevo confirmador</em></span><span class="lv-now">11.28%</span><span class="lv-trig">&gt;11.50%</span><span class="lv-dist mid">22pb</span><span class="lv-act">Agravaría la cola de crédito tras el primer cruce</span></div>
-<div class="lv-row" data-prox="stale"><span class="lv-nm">JGB 30Y<em>Rama B</em></span><span class="lv-now stale">4.163% proxy · oficial n/d</span><span class="lv-trig">≥4.000%<em>fuente oficial</em></span><span class="lv-dist stale">n/d · 31ª</span><span class="lv-act">No evaluable hasta cierre oficial autorizado</span></div>
-<div class="lv-row" data-prox="mid"><span class="lv-nm">USD/JPY<em>setup #7</em></span><span class="lv-now">157.408</span><span class="lv-trig">159.00 convicción · 160.00 stop</span><span class="lv-dist mid">159 / 259 pips</span><span class="lv-act">&gt;159 antes de 9 OCT baja convicción; &gt;160 invalida</span></div>
-</div><p class="lv-note fade"><b>Regla nueva del dato:</b> las distancias de crédito llevan fecha efectiva. HY 2.93% es observación del 25S publicada el 28S y queda rotulado con esa fecha efectiva.</p></div></section>
+<section class="levels"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 07B</div><h2 class="sec-title">Niveles de la sesión</h2><div class="sec-line"></div><div class="sec-sub">cierre 30S · nivel · distancia · consecuencia</div></div><p class="lv-intro fade">El libro ya está en su techo defensivo operativo. Los niveles de mañana gobiernan diagnóstico, des-escalada y setups separados; las distancias stale se dejan como n/d.</p><div class="lv-table fade">
+<div class="lv-head"><span>Instrumento</span><span>Cierre 30S</span><span>Nivel</span><span>Distancia</span><span>Qué activa</span></div>
+<div class="lv-row" data-prox="mid"><span class="lv-nm">HY OAS<em>crédito</em></span><span class="lv-now">3.08% · obs 29S</span><span class="lv-trig">&gt;3.50%</span><span class="lv-dist mid">42pb</span><span class="lv-act">Deterioro de crédito profundo; tamaño operativo sigue 98/0/2</span></div>
+<div class="lv-row" data-prox="near"><span class="lv-nm">Real 10Y<em>control diagnóstico</em></span><span class="lv-now">≈2.95%</span><span class="lv-trig">&gt;3.00%</span><span class="lv-dist near">≈5pb</span><span class="lv-act">Reclasifica el endurecimiento real a extremo; sin escalón defensivo adicional</span></div>
+<div class="lv-row" data-prox="mid"><span class="lv-nm">VIX / MOVE<em>condición conjunta</em></span><span class="lv-now">16.34 / 110.46</span><span class="lv-trig">VIX &gt;20 y MOVE &gt;100</span><span class="lv-dist mid">VIX: 3.66 pts</span><span class="lv-act">Confirma estrés cruzado de bonos y acciones; mantener techo defensivo</span></div>
+<div class="lv-row" data-prox="near"><span class="lv-nm">Recovery semanal<em>score de reparación</em></span><span class="lv-now">5.4</span><span class="lv-trig">&lt;5.0 al cierre semanal</span><span class="lv-dist near">0.4 pts</span><span class="lv-act">Bloquea cualquier aumento de riesgo y confirma deterioro semanal</span></div>
+<div class="lv-row" data-prox="near"><span class="lv-nm">HYG<em>setup táctico #12</em></span><span class="lv-now">77.21</span><span class="lv-trig">79.00 invalida · 73.50 objetivo</span><span class="lv-dist near">1.79 al stop</span><span class="lv-act">Cierre &gt;79.00 invalida; 73.50 ejecuta objetivo del setup separado</span></div>
+<div class="lv-row" data-prox="stale"><span class="lv-nm">JGB 30Y<em>Rama B</em></span><span class="lv-now stale">proxy &gt;4% · oficial n/d</span><span class="lv-trig">≥4.000%<em>fuente oficial</em></span><span class="lv-dist stale">n/d</span><span class="lv-act">No evaluable hasta cierre oficial autorizado</span></div>
+<div class="lv-row" data-prox="mid"><span class="lv-nm">USD/JPY<em>setup #7</em></span><span class="lv-now">157.370</span><span class="lv-trig">159.00 convicción · 160.00 stop</span><span class="lv-dist mid">163 / 263 pips</span><span class="lv-act">&gt;159 antes de 9 OCT baja convicción; &gt;160 invalida</span></div>
+</div><p class="lv-note fade"><b>Fecha efectiva manda:</b> HY 3.08% es observación del 29S publicada el 30S. El 30Y de 5.631% procede del ticker y no se usa como cierre oficial externo.</p></div></section>
 
 <!-- ===== 08 · HORIZONTES ===== -->
 <section><div class="wrap">
-<div class="sec-head fade"><div class="sec-num">// 08</div><h2 class="sec-title">Cómo se estructura esto</h2><div class="sec-line"></div><div class="sec-sub">estructura de referencia · P&amp;L completo y visible · cierres 28S</div></div>
+<div class="sec-head fade"><div class="sec-num">// 08</div><h2 class="sec-title">Cómo se estructura esto</h2><div class="sec-line"></div><div class="sec-sub">estructura de referencia · P&amp;L completo y visible · cierres 30S</div></div>
 <p class="hz-frame fade"><b>Estas dos carteras son estructuras de referencia. No son un libro operado ni una cartera modelo para replicar.</b> Sirven para mostrar cómo se traduce la lectura del régimen a una asignación con horizonte, tesis e invalidación declaradas. No contemplan la situación financiera, el horizonte real ni la tolerancia al riesgo de quien lee.</p><div class="hz-context fade">
 <div class="hzc-head">De dónde viene el mercado</div>
 <div class="hzc-grid">
-<div class="hzc"><span class="hzc-k">Tasas</span><span class="hzc-v r">4.509% → 5.234%</span><span class="hzc-d">10Y 5.234%, 2Y 4.928% y 30Y 5.551% en el snapshot post-cierre</span></div>
-<div class="hzc"><span class="hzc-k">Oro</span><span class="hzc-v s">$4.007 → $4.117</span><span class="hzc-d">XAUUSD 4,117.05: cierre spot verificado en el análisis y congelado para MARKS</span></div>
-<div class="hzc"><span class="hzc-k">Equity</span><span class="hzc-v">SPY 773.12 → 765.49</span><span class="hzc-d">cierre 28S externo fijo; entrada publicada 773.12 intacta</span></div>
-<div class="hzc"><span class="hzc-k">Régimen</span><span class="hzc-v r">🔴 sesión 29 · 98/0/2</span><span class="hzc-d">ROJO ↓ confirmado; las carteras de referencia no cambian composición aunque el libro operativo escala a 98/0/2</span></div></div>
-<p class="hzc-note">La banda de 90 días sigue siendo referencia observada del régimen reciente. MARKS se congela al cierre 28S: SPY 765.49, XLV 171.26 y XLE 62.12 son cierres externos fijos; XAUUSD 4,117.05, USD/JPY 157.408 y 10Y 5.234% salen del análisis. La caja usa la subasta 3M 4.110%. Entradas publicadas y resultados cerrados permanecen intactos. La publicación es autocontenida: ninguna marca consulta un feed en vivo.</p>
+<div class="hzc"><span class="hzc-k">Tasas</span><span class="hzc-v r">4.509% → 5.298%</span><span class="hzc-d">10Y 5.298%, 2Y 4.895% y 30Y 5.631% en el snapshot post-cierre; 30Y proviene del ticker</span></div>
+<div class="hzc"><span class="hzc-k">Oro</span><span class="hzc-v s">$4.007 → $4.157</span><span class="hzc-d">XAUUSD 4,157.135: cierre del archivo de tickers y congelado para MARKS</span></div>
+<div class="hzc"><span class="hzc-k">Equity</span><span class="hzc-v">SPY 773.12 → 762.63</span><span class="hzc-d">cierre 30S fijo; entrada publicada 773.12 intacta</span></div>
+<div class="hzc"><span class="hzc-k">Régimen</span><span class="hzc-v r">🔴 sesión 31 · 98/0/2</span><span class="hzc-d">ROJO ↓ confirmado; las carteras de referencia no cambian composición aunque el libro operativo escala a 98/0/2</span></div></div>
+<p class="hzc-note">La banda de 90 días sigue siendo referencia observada del régimen reciente. MARKS se congela al cierre 30S: SPY 762.63, XLV 168.42, XLE 61.50, XAUUSD 4,157.135, USD/JPY 157.370 y 10Y 5.298%. La caja usa 3M 4.125% solo para el tramo nuevo; las tasas históricas de legs anteriores quedan intactas. Entradas publicadas y resultados cerrados permanecen congelados.</p>
 </div>
 <div class="op-tabs fade"><button class="op-tab active" data-hz="3m">Horizonte 3 meses</button><button class="op-tab" data-hz="6m">Horizonte 6 meses</button></div>
 <div class="op-panel active" id="hz3m">
 <div class="hz-status" data-hz="3m" data-state="flat">
 <div class="hzs-block"><span class="hzs-l">Cartera 3M · referencia</span><span class="hzs-v">abierta 3 SEP · cierra 3 DIC</span></div>
-<div class="hzs-block"><span class="hzs-l">Sesión</span><span class="hzs-v">17 de 63</span></div>
-<div class="hzs-block pnl-focus"><span class="hzs-l">P&amp;L desde apertura · visible</span><span class="hzs-v dn" id="pnl3m">−1.11%<span class="pnl-sub">17 sesiones · posiciones 100% marcadas · fail-closed satisfecho</span></span></div>
+<div class="hzs-block"><span class="hzs-l">Sesión</span><span class="hzs-v">19 de 63</span></div>
+<div class="hzs-block pnl-focus"><span class="hzs-l">P&amp;L desde apertura · visible</span><span class="hzs-v faint" id="pnl3m">calculando…<span class="pnl-sub">19 sesiones · resultado derivado de MARKS</span></span></div>
 <div class="hzs-block"><span class="hzs-l">Posiciones vivas</span><span class="hzs-v">5 de 7</span></div>
-<div class="hzs-block wide"><span class="hzs-l">Último cambio</span><span class="hzs-v r">23 SEP · duración corta cerrada · sin cambio 28S</span></div>
+<div class="hzs-block wide"><span class="hzs-l">Último cambio</span><span class="hzs-v r">23 SEP · duración corta cerrada · sin cambio 30S</span></div>
 </div>
-<p class="hz-sub">La referencia 3M no cambia de composición. La duración cerrada el 23S conserva su resultado congelado y la caja devenga con el 65% vigente. Con cobertura 100% de marcadores al 28S, el <b>P&amp;L total desde apertura queda en −1.11%</b>.</p>
-<div class="pos" data-mark="cash3m" data-stop="none"><div class="pos-head"><span class="pos-w">65%</span><span class="pos-nm">Caja / letras ultracortas<em>reserva líquida · estructura 3M</em></span><span class="pos-state up">VIVA · carry 4.11% anual</span><span class="pos-contrib up" data-mark="cash3m">+0.21% · +0.13 pts</span></div><p class="pos-why">La caja conserva todo el devengo ya publicado y suma 28S con 65% de peso a la subasta 3M de 4.110%. La tasa histórica no se recalcula hacia atrás.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>—</span><span class="pl"><b>Take profit</b>—</span><span class="pl"><b>Stop</b>— · caja</span></div></div>
-<div class="pos" data-mark="dur3m" data-stop="thesis"><div class="pos-head"><span class="pos-w">0%</span><span class="pos-nm">Duración corta 1–3Y<em>frente corto · referencia por 2Y</em></span><span class="pos-state r">CERRADA 23 SEP · resultado congelado</span><span class="pos-contrib dn" data-mark="dur3m">−0.93% · −0.19 pts</span></div><p class="pos-why">El tramo quedó cerrado el 23S con 2Y en 4.903% porque su stop de tesis ya publicado se activó: <b>10Y &gt;5.00% o 30Y &gt;5.40%</b>, con cierres 23S de 5.11% y 5.402%. El retorno −0.93% y su contribución −0.19 pts siguen congelados con el peso de 20% que tenía al cierre; la entrada 4.342% no se reescribe. Los cierres 28S (2Y 4.928%; 10Y 5.234%; 30Y 5.551%) no reabren ni recalculan esa posición.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>2Y 4.342%</span><span class="pl tp"><b>Take profit</b>Prima 2Y−Fed &gt;70pb</span><span class="pl sl"><b>Stop · tesis</b>10Y &gt;5.00% o 30Y &gt;5.40% al cierre · prima &lt;40pb <em>regla numérica desde 10S</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:100.0%"></i></span><span class="pr-v">4.211% <em>20 jul</em> — 4.903% <em>23 sep</em></span></div></div>
-<div class="pos" data-mark="gold" data-stop="price"><div class="pos-head"><span class="pos-w">10%</span><span class="pos-nm">Oro<em>hedge de tasa real · GLD / spot</em></span><span class="pos-state dn">VIVA · spot 4,117.05</span><span class="pos-contrib dn" data-mark="gold">−7.94% · −0.79 pts</span></div><p class="pos-why">Oro spot se congela en 4,117.05. Desde la entrada publicada 4,472.10 el retorno es −7.94%.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>4,472.10</span><span class="pl tp"><b>Take profit</b>4,650.00 <em>+4.0%</em></span><span class="pl sl"><b>Stop · precio</b>4,000.00 <em>−10.6%</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:-1.1%"></i><i class="pr-now" style="left:17.1%"></i><i class="pr-tp" style="left:99.8%"></i></span><span class="pr-v">$4.007 <em>20 jul</em> — $4.651 <em>24 ago</em></span></div></div>
-<div class="pos" data-mark="equity" data-stop="thesis"><div class="pos-head"><span class="pos-w">10%</span><span class="pos-nm">Núcleo RV<em>VOO / SPY · exposición estratégica</em></span><span class="pos-state dn">VIVA · SPY 765.49</span><span class="pos-contrib dn" data-mark="equity">−0.99% · −0.10 pts</span></div><p class="pos-why">SPY cierra en 765.49. Marcador externo post-cierre congelado; entrada publicada 773.12 intacta.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>SPY 773.12</span><span class="pl tp"><b>Take profit</b>— · horizonte</span><span class="pl sl"><b>Stop · tesis</b>Escalada de régimen <em>no por precio</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:68.9%"></i></span><span class="pr-v">7.443 <em>20 jul</em> — 7.765 <em>21 sep</em></span></div></div>
-<div class="pos" data-mark="xlv" data-stop="price"><div class="pos-head"><span class="pos-w">8%</span><span class="pos-nm">XLV salud<em>pata defensiva</em></span><span class="pos-state dn">VIVA · XLV 171.26</span><span class="pos-contrib dn" data-mark="xlv">−1.15% · −0.09 pts</span></div><p class="pos-why">XLV cierra en 171.26. Marcador externo post-cierre congelado; la entrada 173.26 no se reescribe.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>173.26</span><span class="pl tp"><b>Take profit</b>190.00 <em>+9.7%</em></span><span class="pl sl"><b>Stop · precio</b>165.00 <em>−4.8%</em></span></div><p class="pos-range-missing"><b>Banda 90d omitida:</b> las fuentes de referencia no publican una serie de precio de XLV suficiente para verificar mínimo y máximo. No se estiman extremos.</p></div>
-<div class="pos" data-mark="jpy" data-stop="price"><div class="pos-head"><span class="pos-w">7%</span><span class="pos-nm">Corto USD/JPY<em>setup #7 · largo yen</em></span><span class="pos-state dn">VIVA · 157.408</span><span class="pos-contrib dn" data-mark="jpy">−1.06% · −0.07 pts</span></div><p class="pos-why">USD/JPY queda en 157.408 en el snapshot operativo del análisis. La estructura corta desde 155.752 queda −1.06%; el setup operativo separado conserva 259 pips hasta 160.00; un pip es una centésima de yen. El TP 150.00 queda fuera de la banda observada de 90 días y se conserva porque es un objetivo publicado. No deriva de una invalidación inferida de esa banda.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>155.752</span><span class="pl tp"><b>Take profit</b>150.00 <em>+3.7%</em></span><span class="pl sl"><b>Stop · precio</b>163.00 <em>−4.7%</em></span></div><div class="pos-range" data-out="left"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:105.3%"></i><i class="pr-now" style="left:42.7%"></i><i class="pr-tp" style="left:-40.1%"></i></span><span class="pr-v">153.589 <em>9 sep</em> — 162.53 <em>20 jul</em></span></div></div>
-<div class="pos" data-mark="convex" data-stop="thesis"><div class="pos-head"><span class="pos-w">0%</span><span class="pos-nm">Convexidad<em>puts SPX / VIX calls</em></span><span class="pos-state r">CERRADA 4 SEP · resultado congelado</span><span class="pos-contrib nt" data-mark="convex">+0.00% · +0.00 pts</span></div><p class="pos-why">La posición cerrada conserva el resultado publicado en 0.00% por ausencia de precio del vehículo al cierre. No se recalcula; la F-bis del libro operativo es una capa separada.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>Puts SPX / VIX calls</span><span class="pl tp"><b>Take profit</b>Repunte de vol</span><span class="pl sl"><b>Stop · tesis</b>SKEW pct ≥85 · VIX pct ≥60 · 45d <em>no por precio</em></span></div></div>
-<p class="mark-note">METODOLOGÍA P&amp;L · caja: el devengo es acumulativo por sesión; se conserva todo lo ya publicado y se suma 28S con tasa de referencia 4.110%. La 3M conserva 45% de peso las primeras 14 sesiones y 65% desde 24S. Curva: aproximación ΔPrecio ≈ −duración modificada × Δrendimiento + carry (coste de financiación/devengo); duraciones fijas 1.90 (3M) y 5.40 (6M). Posiciones cerradas conservan resultado congelado y las entradas nunca se reescriben. Si una posición cierra, su contribución queda congelada con el peso que tenía al cierre.</p><div class="hz-log"><div class="hzl-head">Cambios de cartera</div><div class="hzl-empty"><b>28 SEP</b> · Sin cambios de composición. MARKS y P&amp;L actualizados al cierre con cobertura 100%; SPY, XLV y XLE usan cierres externos fijos y oro/yen/tasas salen del input.<br/><b>25 SEP</b> · Sin cambios de composición. MARKS y P&amp;L actualizados al cierre con cobertura 100%; cierres externos fijos para SPY, XLV, XLE y oro.</div><div class="hzl-row"><span class="hzl-date">23 SEP</span><span class="hzl-what"><b>Duración corta 20% → 0% · caja 45% → 65%.</b><em>Stop de tesis publicado: 10Y &gt;5.00% o 30Y &gt;5.40% al cierre. Cierre 23S: 5.11% / 5.402%. Resultado del tramo congelado en −0.93% (−0.19 pts).</em></span></div><div class="hzl-row"><span class="hzl-date">4 SEP</span><span class="hzl-what"><b>Convexidad 5% → 0% · caja 40% → 45%.</b><em>SKEW P86 ≥85 activó el stop de tesis. El histórico no se reescribe.</em></span></div></div>
+<p class="hz-sub">La referencia 3M no cambia de composición. El marcador toma cierres 30S y calcula el resultado desde entradas publicadas, resultados cerrados y tramos de peso-tiempo. El total se deriva al cargar; si falta una sola marca, el panel queda en <b>n/d</b>.</p>
+<div class="pos" data-mark="cash3m" data-stop="none"><div class="pos-head"><span class="pos-w">65%</span><span class="pos-nm">Caja / letras ultracortas<em>reserva líquida · estructura 3M</em></span><span class="pos-state up">VIVA · carry 4.125% anual</span><span class="pos-contrib up" data-mark="cash3m">calculando…</span></div><p class="pos-why">La caja conserva todo el devengo ya publicado y suma 28S con 65% de peso a la subasta 3M de 4.110%. La tasa histórica no se recalcula hacia atrás.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>—</span><span class="pl"><b>Take profit</b>—</span><span class="pl"><b>Stop</b>— · caja</span></div></div>
+<div class="pos" data-mark="dur3m" data-stop="thesis"><div class="pos-head"><span class="pos-w">0%</span><span class="pos-nm">Duración corta 1–3Y<em>frente corto · referencia por 2Y</em></span><span class="pos-state r">CERRADA 23 SEP · resultado congelado</span><span class="pos-contrib dn" data-mark="dur3m">calculando…</span></div><p class="pos-why">El tramo quedó cerrado el 23S con 2Y en 4.903% porque su stop de tesis ya publicado se activó: <b>10Y &gt;5.00% o 30Y &gt;5.40%</b>, con cierres 23S de 5.11% y 5.402%. El retorno −0.93% y su contribución −0.19 pts siguen congelados con el peso de 20% que tenía al cierre; la entrada 4.342% no se reescribe. Los cierres 28S (2Y 4.928%; 10Y 5.234%; 30Y 5.551%) no reabren ni recalculan esa posición.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>2Y 4.342%</span><span class="pl tp"><b>Take profit</b>Prima 2Y−Fed &gt;70pb</span><span class="pl sl"><b>Stop · tesis</b>10Y &gt;5.00% o 30Y &gt;5.40% al cierre · prima &lt;40pb <em>regla numérica desde 10S</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:100.0%"></i></span><span class="pr-v">4.211% <em>20 jul</em> — 4.903% <em>23 sep</em></span></div></div>
+<div class="pos" data-mark="gold" data-stop="price"><div class="pos-head"><span class="pos-w">10%</span><span class="pos-nm">Oro<em>hedge de tasa real · GLD / spot</em></span><span class="pos-state dn">VIVA · spot 4,157.14</span><span class="pos-contrib dn" data-mark="gold">calculando…</span></div><p class="pos-why">Oro spot se congela en 4,157.135 desde el archivo de tickers 30S. La entrada publicada 4,472.10 permanece intacta; el retorno lo calcula MARKS.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>4,472.10</span><span class="pl tp"><b>Take profit</b>4,650.00 <em>+4.0%</em></span><span class="pl sl"><b>Stop · precio</b>4,000.00 <em>−10.6%</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:-1.1%"></i><i class="pr-now" style="left:17.1%"></i><i class="pr-tp" style="left:99.8%"></i></span><span class="pr-v">$4.007 <em>20 jul</em> — $4.651 <em>24 ago</em></span></div></div>
+<div class="pos" data-mark="equity" data-stop="thesis"><div class="pos-head"><span class="pos-w">10%</span><span class="pos-nm">Núcleo RV<em>VOO / SPY · exposición estratégica</em></span><span class="pos-state dn">VIVA · SPY 762.63</span><span class="pos-contrib dn" data-mark="equity">calculando…</span></div><p class="pos-why">SPY cierra en 762.63. Marcador post-cierre congelado; entrada publicada 773.12 intacta.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>SPY 773.12</span><span class="pl tp"><b>Take profit</b>— · horizonte</span><span class="pl sl"><b>Stop · tesis</b>Escalada de régimen <em>no por precio</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:68.9%"></i></span><span class="pr-v">7.443 <em>20 jul</em> — 7.765 <em>21 sep</em></span></div></div>
+<div class="pos" data-mark="xlv" data-stop="price"><div class="pos-head"><span class="pos-w">8%</span><span class="pos-nm">XLV salud<em>pata defensiva</em></span><span class="pos-state dn">VIVA · XLV 168.42</span><span class="pos-contrib dn" data-mark="xlv">calculando…</span></div><p class="pos-why">XLV cierra en 168.42. Marcador post-cierre congelado; la entrada 173.26 no se reescribe.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>173.26</span><span class="pl tp"><b>Take profit</b>190.00 <em>+9.7%</em></span><span class="pl sl"><b>Stop · precio</b>165.00 <em>−4.8%</em></span></div><p class="pos-range-missing"><b>Banda 90d omitida:</b> las fuentes de referencia no publican una serie de precio de XLV suficiente para verificar mínimo y máximo. No se estiman extremos.</p></div>
+<div class="pos" data-mark="jpy" data-stop="price"><div class="pos-head"><span class="pos-w">7%</span><span class="pos-nm">Corto USD/JPY<em>setup #7 · largo yen</em></span><span class="pos-state dn">VIVA · 157.370</span><span class="pos-contrib dn" data-mark="jpy">calculando…</span></div><p class="pos-why">USD/JPY queda en 157.370 en el snapshot 30S. La entrada 155.752 sigue congelada y MARKS deriva el retorno; el setup operativo separado conserva 263 pips hasta 160.00; un pip es una centésima de yen. El TP 150.00 queda fuera de la banda observada de 90 días y se conserva porque es un objetivo publicado. No deriva de una invalidación inferida de esa banda.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>155.752</span><span class="pl tp"><b>Take profit</b>150.00 <em>+3.7%</em></span><span class="pl sl"><b>Stop · precio</b>163.00 <em>−4.7%</em></span></div><div class="pos-range" data-out="left"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:105.3%"></i><i class="pr-now" style="left:42.7%"></i><i class="pr-tp" style="left:-40.1%"></i></span><span class="pr-v">153.589 <em>9 sep</em> — 162.53 <em>20 jul</em></span></div></div>
+<div class="pos" data-mark="convex" data-stop="thesis"><div class="pos-head"><span class="pos-w">0%</span><span class="pos-nm">Convexidad<em>puts SPX / VIX calls</em></span><span class="pos-state r">CERRADA 4 SEP · resultado congelado</span><span class="pos-contrib nt" data-mark="convex">calculando…</span></div><p class="pos-why">La posición cerrada conserva el resultado publicado en 0.00% por ausencia de precio del vehículo al cierre. No se recalcula; la F-bis del libro operativo es una capa separada.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>Puts SPX / VIX calls</span><span class="pl tp"><b>Take profit</b>Repunte de vol</span><span class="pl sl"><b>Stop · tesis</b>SKEW pct ≥85 · VIX pct ≥60 · 45d <em>no por precio</em></span></div></div>
+<p class="mark-note">METODOLOGÍA P&amp;L · caja: el devengo sale de <code>cashpath.legs</code>; cada tramo declara sesiones, peso y tasa. Curva: aproximación ΔPrecio ≈ −duración modificada × Δrendimiento + carry (coste de financiación), con duración fija 5.40 en 6M. Posiciones cerradas conservan resultado congelado y aportan con el peso que tenían al cierre; desde entonces pesan 0. El control verifica peso visible 100%, peso-tiempo 100% ±0.5% y cobertura completa antes de mostrar el total.</p><div class="hz-log"><div class="hzl-head">Cambios de cartera</div><div class="hzl-empty"><b>30 SEP</b> · Sin cambios de composición. MARKS actualizado con cierres 30S y cashpath v2.6; P&amp;L derivado con peso-tiempo 100%.<br/><b>28 SEP</b> · Sin cambios de composición. MARKS y P&amp;L actualizados al cierre con cobertura 100%.<br/><b>25 SEP</b> · Sin cambios de composición. MARKS y P&amp;L actualizados al cierre con cobertura 100%; cierres externos fijos para SPY, XLV, XLE y oro.</div><div class="hzl-row"><span class="hzl-date">23 SEP</span><span class="hzl-what"><b>Duración corta 20% → 0% · caja 45% → 65%.</b><em>Stop de tesis publicado: 10Y &gt;5.00% o 30Y &gt;5.40% al cierre. Cierre 23S: 5.11% / 5.402%. Resultado del tramo congelado en −0.93% (−0.19 pts).</em></span></div><div class="hzl-row"><span class="hzl-date">4 SEP</span><span class="hzl-what"><b>Convexidad 5% → 0% · caja 40% → 45%.</b><em>SKEW P86 ≥85 activó el stop de tesis. El histórico no se reescribe.</em></span></div></div>
 </div>
 <div class="op-panel" id="hz6m">
 <div class="hz-status" data-hz="6m" data-state="flat">
 <div class="hzs-block"><span class="hzs-l">Cartera 6M · referencia</span><span class="hzs-v">abierta 3 SEP · cierra 3 MAR 2027</span></div>
-<div class="hzs-block"><span class="hzs-l">Sesión</span><span class="hzs-v">17 de 126</span></div>
-<div class="hzs-block pnl-focus"><span class="hzs-l">P&amp;L desde apertura · visible</span><span class="hzs-v dn" id="pnl6m">−1.97%<span class="pnl-sub">17 sesiones · posiciones 100% marcadas · fail-closed satisfecho</span></span></div>
+<div class="hzs-block"><span class="hzs-l">Sesión</span><span class="hzs-v">19 de 126</span></div>
+<div class="hzs-block pnl-focus"><span class="hzs-l">P&amp;L desde apertura · visible</span><span class="hzs-v faint" id="pnl6m">calculando…<span class="pnl-sub">19 sesiones · resultado derivado de MARKS</span></span></div>
 <div class="hzs-block"><span class="hzs-l">Posiciones vivas</span><span class="hzs-v">7 de 8</span></div>
-<div class="hzs-block wide"><span class="hzs-l">Último cambio</span><span class="hzs-v r">4 SEP · convexidad cerrada · sin cambio de composición 28S</span></div>
+<div class="hzs-block wide"><span class="hzs-l">Último cambio</span><span class="hzs-v r">4 SEP · convexidad cerrada · sin cambio de composición 30S</span></div>
 </div>
-<p class="hz-sub">La composición 6M tampoco cambia. El <b>P&amp;L total desde apertura es −1.97%</b>; duración intermedia y oro concentran el arrastre, con XLE y el corto de USD/JPY también negativos. Caja aporta carry positivo.</p>
-<div class="pos" data-mark="cash6m" data-stop="none"><div class="pos-head"><span class="pos-w">29%</span><span class="pos-nm">Caja / letras<em>reserva líquida · estructura 6M</em></span><span class="pos-state up">VIVA · carry 4.11% anual</span><span class="pos-contrib up" data-mark="cash6m">+0.25% · +0.07 pts</span></div><p class="pos-why">La caja 6M conserva el devengo de las primeras dieciséis sesiones y suma 28S a 4.110%; el retorno acumulado de caja queda cerca de 0.25%.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>—</span><span class="pl"><b>Take profit</b>—</span><span class="pl"><b>Stop</b>— · caja</span></div></div>
-<div class="pos" data-mark="dur6m" data-stop="thesis"><div class="pos-head"><span class="pos-w">20%</span><span class="pos-nm">Duración intermedia 3–7Y<em>apuesta a techo de tasas</em></span><span class="pos-state dn">VIVA · 10Y 5.234% · marca P&amp;L</span><span class="pos-contrib dn" data-mark="dur6m">−2.33% · −0.47 pts</span></div><p class="pos-why">El 10Y de valuación se congela en 5.234% desde el análisis post-cierre. Es una aproximación con duración modificada 5.40 y carry; la entrada 4.772% permanece intacta.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>10Y 4.772%</span><span class="pl tp"><b>Take profit</b>10Y &lt;4.50% <em>obj. 1</em><br/><span class="pl-sub">10Y &lt;4.20% · objetivo 2</span></span><span class="pl sl"><b>Stop · tesis</b>Precios pagados &gt;70 dos trimestres <em>no por precio</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:100.0%"></i><i class="pr-tp" style="left:-1.8%"></i></span><span class="pr-v">4.509% <em>22 jun</em> — 5.234% <em>28 sep</em></span></div></div>
-<div class="pos" data-mark="equity" data-stop="thesis"><div class="pos-head"><span class="pos-w">20%</span><span class="pos-nm">Núcleo RV<em>VOO / SPY · exposición estratégica</em></span><span class="pos-state dn">VIVA · SPY 765.49</span><span class="pos-contrib dn" data-mark="equity">−0.99% · −0.20 pts</span></div><p class="pos-why">SPY cierra en 765.49. Marcador externo post-cierre congelado; entrada publicada 773.12 intacta.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>SPY 773.12</span><span class="pl tp"><b>Take profit</b>— · horizonte</span><span class="pl sl"><b>Stop · tesis</b>Escalada de régimen <em>no por precio</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:68.9%"></i></span><span class="pr-v">7.443 <em>20 jul</em> — 7.765 <em>21 sep</em></span></div></div>
-<div class="pos" data-mark="gold" data-stop="price"><div class="pos-head"><span class="pos-w">12%</span><span class="pos-nm">Oro<em>hedge de régimen · GLD / spot</em></span><span class="pos-state dn">VIVA · spot 4,117.05</span><span class="pos-contrib dn" data-mark="gold">−7.94% · −0.95 pts</span></div><p class="pos-why">Oro spot se congela en 4,117.05. Desde la entrada publicada 4,472.10 el retorno es −7.94%. El TP 5,200 queda fuera de la banda observada de 90 días y se conserva como objetivo estructural ya publicado; la banda reciente no se usa para reescribirlo.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>4,472.10</span><span class="pl tp"><b>Take profit</b>5,200.00 <em>+16.3%</em></span><span class="pl sl"><b>Stop · precio</b>4,000.00 <em>−10.6%</em></span></div><div class="pos-range" data-out="right"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:-1.1%"></i><i class="pr-now" style="left:17.1%"></i><i class="pr-tp" style="left:185.2%"></i></span><span class="pr-v">$4.007 <em>20 jul</em> — $4.651 <em>24 ago</em></span></div></div>
-<div class="pos" data-mark="xle" data-stop="thesis"><div class="pos-head"><span class="pos-w">8%</span><span class="pos-nm">XLE energía<em>cobertura de inflación de oferta</em></span><span class="pos-state dn">VIVA · XLE 62.12</span><span class="pos-contrib dn" data-mark="xle">−3.87% · −0.31 pts</span></div><p class="pos-why">XLE cierra en 62.12. El marcador externo 28S se congela; la entrada 64.62 permanece intacta.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>64.62</span><span class="pl tp"><b>Take profit</b>72.00 <em>+11.4%</em></span><span class="pl sl"><b>Stop · tesis</b>Brent bajo $85 · dos cierres <em>no por precio de XLE</em></span></div><p class="pos-range-missing"><b>Banda 90d omitida:</b> la serie de referencia no publica precio de XLE en las fechas necesarias. Brent aparece solo como proxy aproximado; se evita convertir ese proxy en extremos inventados del ETF.</p></div>
-<div class="pos" data-mark="jpy" data-stop="price"><div class="pos-head"><span class="pos-w">8%</span><span class="pos-nm">Corto USD/JPY<em>setup #7 · largo yen</em></span><span class="pos-state dn">VIVA · 157.408</span><span class="pos-contrib dn" data-mark="jpy">−1.06% · −0.09 pts</span></div><p class="pos-why">USD/JPY queda en 157.408 en el snapshot operativo del análisis. La estructura corta desde 155.752 queda −1.06%; el setup operativo conserva 259 pips hasta 160.00; un pip es una centésima de yen. El stop de precio de esta cartera de referencia sigue en 163.00 y no se reescribe. El TP 150.00 queda fuera de la banda observada de 90 días y se conserva porque es un objetivo publicado. No deriva de una invalidación inferida de esa banda.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>155.752</span><span class="pl tp"><b>Take profit</b>150.00 <em>+3.7%</em></span><span class="pl sl"><b>Stop · precio</b>163.00 <em>−4.7%</em></span></div><div class="pos-range" data-out="left"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:105.3%"></i><i class="pr-now" style="left:42.7%"></i><i class="pr-tp" style="left:-40.1%"></i></span><span class="pr-v">153.589 <em>9 sep</em> — 162.53 <em>20 jul</em></span></div></div>
-<div class="pos" data-mark="convex" data-stop="thesis"><div class="pos-head"><span class="pos-w">0%</span><span class="pos-nm">Convexidad<em>puts SPX / VIX calls</em></span><span class="pos-state r">CERRADA 4 SEP · resultado congelado</span><span class="pos-contrib nt" data-mark="convex">+0.00% · +0.00 pts</span></div><p class="pos-why">La posición cerrada conserva el resultado publicado en 0.00% por ausencia de precio del vehículo al cierre. No se recalcula; la F-bis del libro operativo es una capa separada.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>Puts SPX / VIX calls</span><span class="pl tp"><b>Take profit</b>Repunte de vol</span><span class="pl sl"><b>Stop · tesis</b>SKEW pct ≥85 · VIX pct ≥60 · 45d <em>no por precio</em></span></div></div>
-<div class="pos" data-mark="xlv" data-stop="price"><div class="pos-head"><span class="pos-w">3%</span><span class="pos-nm">XLV salud<em>defensiva residual</em></span><span class="pos-state dn">VIVA · XLV 171.26</span><span class="pos-contrib dn" data-mark="xlv">−1.15% · −0.03 pts</span></div><p class="pos-why">XLV cierra en 171.26. Marcador externo post-cierre congelado; la entrada 173.26 no se reescribe.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>173.26</span><span class="pl tp"><b>Take profit</b>190.00 <em>+9.7%</em></span><span class="pl sl"><b>Stop · precio</b>165.00 <em>−4.8%</em></span></div><p class="pos-range-missing"><b>Banda 90d omitida:</b> no hay serie de precio de XLV suficiente en los informes de referencia para fijar extremos verificables.</p></div>
-<p class="mark-note">METODOLOGÍA P&amp;L · caja: el devengo es acumulativo por sesión; se conserva todo lo ya publicado y se suma 28S con tasa de referencia 4.110%. La 3M conserva 45% de peso las primeras 14 sesiones y 65% desde 24S. Curva: aproximación ΔPrecio ≈ −duración modificada × Δrendimiento + carry (coste de financiación/devengo); duraciones fijas 1.90 (3M) y 5.40 (6M). Posiciones cerradas conservan resultado congelado y las entradas nunca se reescriben. Si una posición cierra, su contribución queda congelada con el peso que tenía al cierre.</p><div class="hz-log"><div class="hzl-head">Cambios de cartera</div><div class="hzl-empty"><b>28 SEP</b> · Sin cambios de composición. MARKS y P&amp;L actualizados al cierre con cobertura 100%; SPY, XLV y XLE usan cierres externos fijos y oro/yen/tasas salen del input.<br/><b>25 SEP</b> · Sin cambios de composición. MARKS y P&amp;L actualizados al cierre con cobertura 100%; cierres externos fijos para SPY, XLV, XLE y oro.</div><div class="hzl-empty"><b>23 SEP</b> · Sin cambios de composición. MARKS y P&amp;L actualizados al cierre con cobertura 100%.</div><div class="hzl-row"><span class="hzl-date">4 SEP</span><span class="hzl-what"><b>Convexidad 4% → 0% · caja 25% → 29%.</b><em>SKEW P86 ≥85 activó el stop de tesis. Primer cambio publicado de la estructura 6M.</em></span></div></div>
+<p class="hz-sub">La composición 6M tampoco cambia. Duración intermedia, oro, energía y yen se actualizan con cierres 30S; caja devenga por sus tramos. El total se deriva al cargar y aplica fail-closed sobre toda la cartera.</p>
+<div class="pos" data-mark="cash6m" data-stop="none"><div class="pos-head"><span class="pos-w">29%</span><span class="pos-nm">Caja / letras<em>reserva líquida · estructura 6M</em></span><span class="pos-state up">VIVA · carry 4.125% anual</span><span class="pos-contrib up" data-mark="cash6m">calculando…</span></div><p class="pos-why">La caja 6M conserva el devengo de las primeras dieciséis sesiones y suma 28S a 4.110%; el retorno acumulado de caja queda cerca de 0.25%.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>—</span><span class="pl"><b>Take profit</b>—</span><span class="pl"><b>Stop</b>— · caja</span></div></div>
+<div class="pos" data-mark="dur6m" data-stop="thesis"><div class="pos-head"><span class="pos-w">20%</span><span class="pos-nm">Duración intermedia 3–7Y<em>apuesta a techo de tasas</em></span><span class="pos-state dn">VIVA · 10Y 5.298% · marca P&amp;L</span><span class="pos-contrib dn" data-mark="dur6m">calculando…</span></div><p class="pos-why">El 10Y de valuación se congela en 5.298% desde el análisis post-cierre. Es una aproximación con duración modificada 5.40 y carry; la entrada 4.772% permanece intacta.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>10Y 4.772%</span><span class="pl tp"><b>Take profit</b>10Y &lt;4.50% <em>obj. 1</em><br/><span class="pl-sub">10Y &lt;4.20% · objetivo 2</span></span><span class="pl sl"><b>Stop · tesis</b>Precios pagados &gt;70 dos trimestres <em>no por precio</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:100.0%"></i><i class="pr-tp" style="left:-1.8%"></i></span><span class="pr-v">4.509% <em>22 jun</em> — 5.298% <em>30 sep</em></span></div></div>
+<div class="pos" data-mark="equity" data-stop="thesis"><div class="pos-head"><span class="pos-w">20%</span><span class="pos-nm">Núcleo RV<em>VOO / SPY · exposición estratégica</em></span><span class="pos-state dn">VIVA · SPY 762.63</span><span class="pos-contrib dn" data-mark="equity">calculando…</span></div><p class="pos-why">SPY cierra en 762.63. Marcador post-cierre congelado; entrada publicada 773.12 intacta.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>SPY 773.12</span><span class="pl tp"><b>Take profit</b>— · horizonte</span><span class="pl sl"><b>Stop · tesis</b>Escalada de régimen <em>no por precio</em></span></div><div class="pos-range"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-now" style="left:68.9%"></i></span><span class="pr-v">7.443 <em>20 jul</em> — 7.765 <em>21 sep</em></span></div></div>
+<div class="pos" data-mark="gold" data-stop="price"><div class="pos-head"><span class="pos-w">12%</span><span class="pos-nm">Oro<em>hedge de régimen · GLD / spot</em></span><span class="pos-state dn">VIVA · spot 4,157.14</span><span class="pos-contrib dn" data-mark="gold">calculando…</span></div><p class="pos-why">Oro spot se congela en 4,157.135 desde el archivo de tickers 30S. La entrada publicada 4,472.10 permanece intacta; el retorno lo calcula MARKS. El TP 5,200 queda fuera de la banda observada de 90 días y se conserva como objetivo estructural ya publicado; la banda reciente no se usa para reescribirlo.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>4,472.10</span><span class="pl tp"><b>Take profit</b>5,200.00 <em>+16.3%</em></span><span class="pl sl"><b>Stop · precio</b>4,000.00 <em>−10.6%</em></span></div><div class="pos-range" data-out="right"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:-1.1%"></i><i class="pr-now" style="left:17.1%"></i><i class="pr-tp" style="left:185.2%"></i></span><span class="pr-v">$4.007 <em>20 jul</em> — $4.651 <em>24 ago</em></span></div></div>
+<div class="pos" data-mark="xle" data-stop="thesis"><div class="pos-head"><span class="pos-w">8%</span><span class="pos-nm">XLE energía<em>cobertura de inflación de oferta</em></span><span class="pos-state dn">VIVA · XLE 61.50</span><span class="pos-contrib dn" data-mark="xle">calculando…</span></div><p class="pos-why">XLE cierra en 61.50. El marcador 30S se congela; la entrada 64.62 permanece intacta.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>64.62</span><span class="pl tp"><b>Take profit</b>72.00 <em>+11.4%</em></span><span class="pl sl"><b>Stop · tesis</b>Brent bajo $85 · dos cierres <em>no por precio de XLE</em></span></div><p class="pos-range-missing"><b>Banda 90d omitida:</b> la serie de referencia no publica precio de XLE en las fechas necesarias. Brent aparece solo como proxy aproximado; se evita convertir ese proxy en extremos inventados del ETF.</p></div>
+<div class="pos" data-mark="jpy" data-stop="price"><div class="pos-head"><span class="pos-w">8%</span><span class="pos-nm">Corto USD/JPY<em>setup #7 · largo yen</em></span><span class="pos-state dn">VIVA · 157.370</span><span class="pos-contrib dn" data-mark="jpy">calculando…</span></div><p class="pos-why">USD/JPY queda en 157.408 en el snapshot operativo del análisis. La estructura corta desde 155.752 queda −1.06%; el setup operativo conserva 259 pips hasta 160.00; un pip es una centésima de yen. El stop de precio de esta cartera de referencia sigue en 163.00 y no se reescribe. El TP 150.00 queda fuera de la banda observada de 90 días y se conserva porque es un objetivo publicado. No deriva de una invalidación inferida de esa banda.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>155.752</span><span class="pl tp"><b>Take profit</b>150.00 <em>+3.7%</em></span><span class="pl sl"><b>Stop · precio</b>163.00 <em>−4.7%</em></span></div><div class="pos-range" data-out="left"><span class="pr-l">Rango 90d*</span><span class="pr-track"><i class="pr-band" style="left:0%;width:100%"></i><i class="pr-sl" style="left:105.3%"></i><i class="pr-now" style="left:42.7%"></i><i class="pr-tp" style="left:-40.1%"></i></span><span class="pr-v">153.589 <em>9 sep</em> — 162.53 <em>20 jul</em></span></div></div>
+<div class="pos" data-mark="convex" data-stop="thesis"><div class="pos-head"><span class="pos-w">0%</span><span class="pos-nm">Convexidad<em>puts SPX / VIX calls</em></span><span class="pos-state r">CERRADA 4 SEP · resultado congelado</span><span class="pos-contrib nt" data-mark="convex">calculando…</span></div><p class="pos-why">La posición cerrada conserva el resultado publicado en 0.00% por ausencia de precio del vehículo al cierre. No se recalcula; la F-bis del libro operativo es una capa separada.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>Puts SPX / VIX calls</span><span class="pl tp"><b>Take profit</b>Repunte de vol</span><span class="pl sl"><b>Stop · tesis</b>SKEW pct ≥85 · VIX pct ≥60 · 45d <em>no por precio</em></span></div></div>
+<div class="pos" data-mark="xlv" data-stop="price"><div class="pos-head"><span class="pos-w">3%</span><span class="pos-nm">XLV salud<em>defensiva residual</em></span><span class="pos-state dn">VIVA · XLV 168.42</span><span class="pos-contrib dn" data-mark="xlv">calculando…</span></div><p class="pos-why">XLV cierra en 168.42. Marcador post-cierre congelado; la entrada 173.26 no se reescribe.</p><div class="pos-levels"><span class="pl"><b>Entrada</b>173.26</span><span class="pl tp"><b>Take profit</b>190.00 <em>+9.7%</em></span><span class="pl sl"><b>Stop · precio</b>165.00 <em>−4.8%</em></span></div><p class="pos-range-missing"><b>Banda 90d omitida:</b> no hay serie de precio de XLV suficiente en los informes de referencia para fijar extremos verificables.</p></div>
+<p class="mark-note">METODOLOGÍA P&amp;L · caja: el devengo sale de <code>cashpath.legs</code>; cada tramo declara sesiones, peso y tasa. Curva: aproximación ΔPrecio ≈ −duración modificada × Δrendimiento + carry (coste de financiación), con duración fija 5.40 en 6M. Posiciones cerradas conservan resultado congelado y aportan con el peso que tenían al cierre; desde entonces pesan 0. El control verifica peso visible 100%, peso-tiempo 100% ±0.5% y cobertura completa antes de mostrar el total.</p><div class="hz-log"><div class="hzl-head">Cambios de cartera</div><div class="hzl-empty"><b>30 SEP</b> · Sin cambios de composición. MARKS actualizado con cierres 30S y cashpath v2.6; P&amp;L derivado con peso-tiempo 100%.<br/><b>28 SEP</b> · Sin cambios de composición. MARKS y P&amp;L actualizados al cierre con cobertura 100%.<br/><b>25 SEP</b> · Sin cambios de composición. MARKS y P&amp;L actualizados al cierre con cobertura 100%; cierres externos fijos para SPY, XLV, XLE y oro.</div><div class="hzl-empty"><b>23 SEP</b> · Sin cambios de composición. MARKS y P&amp;L actualizados al cierre con cobertura 100%.</div><div class="hzl-row"><span class="hzl-date">4 SEP</span><span class="hzl-what"><b>Convexidad 4% → 0% · caja 25% → 29%.</b><em>SKEW P86 ≥85 activó el stop de tesis. Primer cambio publicado de la estructura 6M.</em></span></div></div>
 </div>
 <div class="exp fade">
 <div>
@@ -1138,28 +1134,28 @@ body.red-down .regime{background:linear-gradient(90deg,rgba(255,46,77,.075),rgba
 </details>
 </div></section>
 <!-- ===== 09 · PRE-REGISTRO ===== -->
-<section class="prereg"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 09</div><h2 class="sec-title">Mañana apuesto</h2><div class="sec-line"></div><div class="sec-sub">sellado 28 sep 2026 · 19:14 ART · para martes 29 sep</div></div><p class="pr-intro fade">El libro llega a su máximo defensivo operable: <b>98/0/2</b>. Desde acá no existe una tercera escalada. Los próximos gatillos cambian diagnóstico mientras el tamaño permanece en 98/0/2. La única vía de vuelta a 88% caja exige dos publicaciones consecutivas de HY por debajo de 2.80%.</p><div class="pr-grid fade">
-<div class="pr-item" data-sev="critical"><div class="pr-tag">🔴 SIN TERCERA ESCALADA · techo operativo</div><div class="pr-cond">Si mañana dispara cualquier gatillo adicional —XLF &lt;53.55, VIX &gt;20 con MOVE &gt;100, 2Y &gt;5.00% o real 10Y &gt;3.00%—.</div><div class="pr-act">Registrar el deterioro y mantener <b>98/0/2</b>. No vender la convexidad para llegar a 100% caja.</div><div class="pr-dist"><span>DISTANCIA</span><b>libro ya en máximo defensivo · sin escalón superior</b></div></div>
-<div class="pr-item" data-sev="alert"><div class="pr-tag">⚪ DES-ESCALADA · 98 → 88</div><div class="pr-cond">HY OAS <b>&lt;2.80%</b> en <b>dos publicaciones consecutivas</b>. Una sola observación no basta.</div><div class="pr-act">Solo tras la segunda publicación: reabrir 10% de duración corta y reducir caja 98% → 88%. Sin excepción por rebote del índice.</div><div class="pr-dist"><span>DISTANCIA</span><b>último dato 2.93%: 13pb por encima · faltan 2 observaciones válidas</b></div></div>
-<div class="pr-item" data-sev="critical"><div class="pr-tag">🔴 F-BIS · convexidad</div><div class="pr-cond">SKEW, prima para cubrirse de una caída, en percentil <b>≥85</b> y VIX percentil <b>≥60</b> juntos, o <b>2 NOV 2026</b>.</div><div class="pr-act">Cerrar solo con condición conjunta o time-stop. No ampliar: el tamaño queda en 2%.</div><div class="pr-dist"><span>DISTANCIA</span><b>SKEW P54: 31 pts · VIX P27: 33 pts</b></div></div>
-<div class="pr-item" data-sev="alert"><div class="pr-tag">🟡 REAL 10Y · diagnóstico</div><div class="pr-cond">Si la tasa real a 10 años cierra <b>&gt;3.00%</b>.</div><div class="pr-act">Reclasificar el diagnóstico a endurecimiento real extremo. <b>No</b> modificar 98/0/2: el libro ya no tiene un escalón defensivo adicional.</div><div class="pr-dist"><span>DISTANCIA</span><b>≈2.90% → 3.00% · 10pb</b></div></div>
-<div class="pr-item" data-sev="watch"><div class="pr-tag">⚪ RAMA B · bono japonés</div><div class="pr-cond">Bono japonés JGB 30Y <b>≥4.000%</b> únicamente con cierre de fuente oficial autorizada.</div><div class="pr-act">Evaluar la rama solo cuando exista cierre oficial. El proxy 4.163% no ejecuta nada.</div><div class="pr-dist"><span>DISTANCIA</span><b>n/d · 31ª sesión sin fuente oficial</b></div></div>
-<div class="pr-item" data-sev="watch"><div class="pr-tag">📕 SETUP #7 · yen</div><div class="pr-cond">USD/JPY <b>157.408</b>; cierre &gt;<b>159.00</b> antes del 9 OCT baja convicción; cierre &gt;<b>160.00</b> invalida.</div><div class="pr-act">Mantener el largo de yen mientras no cierre sobre 160.00. No mover el stop ni ampliar tamaño.</div><div class="pr-dist"><span>DISTANCIA</span><b>159 pips a 159 · 259 pips al stop · 741 pips al objetivo 150</b></div></div>
-</div><p class="pr-intro fade"><b>NO PRE-REGISTRADO:</b> comprar sobreventa en XLU/XLRE/oro, ampliar convexidad, reabrir duración corta con una sola publicación de HY, operar energía con el bloque congelado ni modificar los umbrales bajo moratoria.</p><div class="cal fade">
+<section class="prereg"><div class="wrap"><div class="sec-head fade"><div class="sec-num">// 09</div><h2 class="sec-title">Mañana apuesto</h2><div class="sec-line"></div><div class="sec-sub">sellado 30 sep 2026 · 19:00 ART · para jueves 1 oct</div></div><p class="pr-intro fade">El libro sigue en <b>98/0/2</b>. No hay tercera escalada y tampoco hay instrumento autorizado de reentrada general: mañana se gestionan condiciones, no se fabrica actividad. Payrolls llega el viernes; Micron y las próximas publicaciones de crédito son la antesala.</p><div class="pr-grid fade">
+<div class="pr-item" data-sev="alert"><div class="pr-tag">⚪ DES-ESCALADA · 98 → 88</div><div class="pr-cond">HY OAS <b>&lt;2.80%</b> en <b>dos publicaciones consecutivas</b>.</div><div class="pr-act">Solo tras la segunda publicación: reabrir 10% de duración corta y reducir caja 98% → 88%. Una lectura aislada no habilita nada.</div><div class="pr-dist"><span>DISTANCIA</span><b>3.08% → 2.80% · 28pb · faltan 2 publicaciones</b></div></div>
+<div class="pr-item" data-sev="critical"><div class="pr-tag">🔴 F-BIS · convexidad</div><div class="pr-cond">SKEW, la prima para cubrirse de una caída, en percentil <b>≥85</b> y VIX percentil <b>≥60</b> juntos, o <b>2 NOV 2026</b>.</div><div class="pr-act">Cerrar solo con condición conjunta o time-stop. Mantener tamaño en 2%; no ampliar.</div><div class="pr-dist"><span>DISTANCIA</span><b>SKEW P29: 56 pts · VIX P33: 27 pts</b></div></div>
+<div class="pr-item" data-sev="critical"><div class="pr-tag">🔴 RECOVERY SEMANAL · riesgo</div><div class="pr-cond">Score semanal de reparación <b>&lt;5.0</b> al cierre.</div><div class="pr-act">Mantener bloqueo de aumento de riesgo y registrar confirmación semanal. No existe una escalada por encima de 98/0/2.</div><div class="pr-dist"><span>DISTANCIA</span><b>5.4 → 5.0 · 0.4 pts</b></div></div>
+<div class="pr-item" data-sev="watch"><div class="pr-tag">⚪ RAMA B · bono japonés</div><div class="pr-cond">JGB 30Y <b>≥4.000%</b> únicamente con cierre de fuente oficial autorizada.</div><div class="pr-act">Evaluar la rama solo cuando exista el cierre oficial. Cualquier referencia indirecta permanece bloqueada.</div><div class="pr-dist"><span>DISTANCIA</span><b>n/d · fuente oficial aún ausente</b></div></div>
+<div class="pr-item" data-sev="watch"><div class="pr-tag">📕 SETUP #7 · yen</div><div class="pr-cond">USD/JPY <b>157.370</b>; cierre &gt;<b>159.00</b> antes del 9 OCT baja convicción; cierre &gt;<b>160.00</b> invalida.</div><div class="pr-act">Mantener mientras no cierre sobre 160.00. No mover stop ni ampliar tamaño.</div><div class="pr-dist"><span>DISTANCIA</span><b>163 pips a 159 · 263 pips al stop</b></div></div>
+<div class="pr-item" data-sev="alert"><div class="pr-tag">📕 SETUP #12 · HYG</div><div class="pr-cond">HYG cierra <b>&gt;79.00</b> o alcanza <b>73.50</b>.</div><div class="pr-act">Cerrar si supera 79.00; tomar objetivo en 73.50. El setup es táctico y no altera las carteras de referencia.</div><div class="pr-dist"><span>DISTANCIA</span><b>77.21 · 1.79 al stop · 3.71 al objetivo</b></div></div>
+</div><p class="pr-intro fade"><b>NO PRE-REGISTRADO:</b> desplegar caja por intuición, comprar sobreventa en oro o defensivos, ampliar convexidad cripto, usar niveles de liquidación como gatillo o cambiar umbrales antes de payrolls.</p><div class="cal fade">
 <div class="cal-head">Catalizadores <span>fechas verificables o ABIERTO</span></div>
-<div class="cal-row" data-w="high"><span class="cal-when">ABIERTO<em>FRED · próxima publicación</em></span><span class="cal-what">HY / CCC del 28S<em>confirmar o desmentir la ruptura con dato de una sesión de rezago</em></span><span class="cal-imp high">ALTO</span></div>
-<div class="cal-row" data-w="high"><span class="cal-when">ABIERTO<em>JSDA</em></span><span class="cal-what">Cierre oficial JGB 30Y<em>único desbloqueo de Rama B</em></span><span class="cal-imp high">ALTO</span></div>
-<div class="cal-row" data-w="mid"><span class="cal-when">ABIERTO<em>EE.UU.</em></span><span class="cal-what">Gasto del consumidor / empleo<em>contrastar apuestas de subida con demanda real</em></span><span class="cal-imp mid">ALERTA</span></div>
-<div class="cal-row" data-w="mid"><span class="cal-when">9 OCT<em>setup #7</em></span><span class="cal-what">Ventana de convicción del yen<em>&gt;159 antes de esa fecha devuelve convicción a BAJA</em></span><span class="cal-imp mid">REGLA</span></div>
+<div class="cal-row" data-w="mid"><span class="cal-when">1 OCT<em>corporativo</em></span><span class="cal-what">Micron · digestión de guía y capex<em>medir si la sobreoferta pasa de narrativa a precio</em></span><span class="cal-imp mid">ALERTA</span></div>
+<div class="cal-row" data-w="high"><span class="cal-when">2 OCT<em>EE.UU.</em></span><span class="cal-what">Payrolls de septiembre<em>último dato mayor antes del FOMC del 28 de octubre</em></span><span class="cal-imp high">ALTO</span></div>
+<div class="cal-row" data-w="high"><span class="cal-when">ABIERTO<em>FRED</em></span><span class="cal-what">Próxima publicación HY / CCC<em>confirmar si el crédito sigue ampliando desde 3.08% / 11.57%</em></span><span class="cal-imp high">ALTO</span></div>
+<div class="cal-row" data-w="high"><span class="cal-when">ABIERTO<em>fuente oficial Japón</em></span><span class="cal-what">Cierre JGB 30Y<em>único dato que puede desbloquear Rama B</em></span><span class="cal-imp high">ALTO</span></div>
 <div class="cal-row" data-w="mid"><span class="cal-when">2 NOV<em>time-stop</em></span><span class="cal-what">Convexidad F-bis<em>cierre por tiempo si no invalidó antes</em></span><span class="cal-imp mid">REGLA</span></div></div>
-<div class="scen fade"><div class="scen-head">Escenarios a 48–72h <span>probabilidad · rebalanceado 28S</span></div>
-<div class="scen-row"><span class="scen-nm">El crédito confirma · HY 28S publica ≥2.93%</span><span class="scen-track"><i class="scen-fill t-risk" style="width:40%"></i></span><span class="scen-pct">40%</span><span class="scen-d up">▲ desde 25%</span></div>
-<div class="scen-row"><span class="scen-nm">Rebote técnico sin arreglo interno · VIX &lt;15 / breadth débil</span><span class="scen-track"><i class="scen-fill t-signal" style="width:30%"></i></span><span class="scen-pct">30%</span><span class="scen-d dn">▼ desde 35%</span></div>
-<div class="scen-row"><span class="scen-nm">Ormuz escala · crudo &gt;110 / breakeven rompe al alza</span><span class="scen-track"><i class="scen-fill t-alert" style="width:20%"></i></span><span class="scen-pct">20%</span><span class="scen-d dn">▼ desde 30%</span></div>
-<div class="scen-row"><span class="scen-nm">Cola · Japón / contraparte cripto / sorpresa Fed</span><span class="scen-track"><i class="scen-fill t-info" style="width:10%"></i></span><span class="scen-pct">10%</span><span class="scen-d nt">→ desde 10%</span></div>
-<p class="scen-note">Las cuatro ramas suman 100%. La rama de “pausa” del 30% desaparece como estado autónomo y ese 30% se reasigna entre crédito y Ormuz; para que el control automático pueda reconciliar deltas, Ormuz declara que ocupa el bloque de 30% que antes era la pausa. El libro no cambia bajo ninguno de los cuatro escenarios salvo que se cumpla la des-escalada de dos publicaciones.</p></div></div></section>
+<div class="scen fade"><div class="scen-head">Escenarios a 48–72h <span>probabilidad · rebalanceado 30S</span></div>
+<div class="scen-row"><span class="scen-nm">Crédito sigue deteriorando · HY ≥3.20% / Recovery &lt;5</span><span class="scen-track"><i class="scen-fill t-risk" style="width:35%"></i></span><span class="scen-pct">35%</span><span class="scen-d dn">▼ desde 40%</span></div>
+<div class="scen-row"><span class="scen-nm">Rebote técnico sin reparación · índice rebota / amplitud débil</span><span class="scen-track"><i class="scen-fill t-signal" style="width:30%"></i></span><span class="scen-pct">30%</span><span class="scen-d nt">→ desde 30%</span></div>
+<div class="scen-row"><span class="scen-nm">Payrolls enfría tasas · 10Y &lt;5.20% / crédito no amplía</span><span class="scen-track"><i class="scen-fill t-alert" style="width:25%"></i></span><span class="scen-pct">25%</span><span class="scen-d up">▲ desde 20%</span></div>
+<div class="scen-row"><span class="scen-nm">Cola · Japón / contraparte cripto / sorpresa de liquidez</span><span class="scen-track"><i class="scen-fill t-info" style="width:10%"></i></span><span class="scen-pct">10%</span><span class="scen-d nt">→ desde 10%</span></div>
+<p class="scen-note">Las cuatro ramas suman 100%. Las probabilidades describen el mapa de trabajo del informe, no una predicción de mercado. El tamaño del libro solo cambia con la regla de des-escalada ya publicada.</p></div></div></section>
 
-<footer class="footer"><div class="wrap"><div class="brand">WAR ROOM v4.6.1 · TERMINAL DE SEÑALES</div><span class="sub">EDICIÓN 28 SEP 2026 · POST-CIERRE · TERMINAL DE SEÑALES</span><p class="disc">Propósito informativo y educativo. No constituye asesoramiento de inversión personalizado, recomendación de compra/venta ni análisis registrado. <b>Los niveles publicados son los gatillos y las invalidaciones de un libro propio, con su tamaño y su horizonte: no son puntos de entrada sugeridos para terceros y no contemplan la situación financiera de quien lee.</b> Verificar precios, liquidez, spreads, calendario y riesgo propio antes de operar.</p></div></footer>
+<footer class="footer"><div class="wrap"><div class="brand">WAR ROOM v4.6.1 · TERMINAL DE SEÑALES</div><span class="sub">EDICIÓN 30 SEP 2026 · POST-CIERRE · TERMINAL DE SEÑALES</span><p class="disc">Propósito informativo y educativo. No constituye asesoramiento de inversión personalizado, recomendación de compra/venta ni análisis registrado. <b>Los niveles publicados son los gatillos y las invalidaciones de un libro propio, con su tamaño y su horizonte: no son puntos de entrada sugeridos para terceros y no contemplan la situación financiera de quien lee.</b> Verificar precios, liquidez, spreads, calendario y riesgo propio antes de operar.</p></div></footer>
 <script>
 const tk=document.getElementById('tkTrack');tk.innerHTML+=tk.innerHTML;
 
@@ -1168,60 +1164,61 @@ const tk=document.getElementById('tkTrack');tk.innerHTML+=tk.innerHTML;
    y todos los mecanismos del informe las leen de este único lugar. */
 const GAPS_PUB=[
   {date:'1 sep', reason:'Sesión de mercado sin análisis publicado'},
-  {date:'26 sep', reason:'Sin edición: carga de trabajo'}
+  {date:'26 sep', reason:'Sin edición: carga de trabajo'},
+  {date:'29 sep', reason:'Sin edición publicada; sesión de mercado normal'}
 ];
 
 const BRIDGE=[
-  {date:'Jueves 24 de septiembre',short:'Jue 24 sep',state:'linked',line:'Cayó con el índice y los bonos: el movimiento <strong>vino de las tasas</strong>.'},
   {date:'Viernes 25 de septiembre',short:'Vie 25 sep',state:'opposite',line:'Rebotó mientras el índice cedía. <strong>El flujo de fondos sostuvo el precio</strong> cuando nada más lo hacía.'},
   {date:'Sábado 26 de septiembre',short:'Sáb 26 sep',state:null,line:'No hubo informe publicado.'},
-  {date:'Lunes 28 de septiembre',short:'Lun 28 sep',state:'linked',line:'Bajó junto con el oro y el índice. La <strong>tasa real</strong> explica los tres.'}
+  {date:'Lunes 28 de septiembre',short:'Lun 28 sep',state:'linked',line:'Bajó junto con el oro y el índice. La <strong>tasa real</strong> explica los tres.'},
+  {date:'Miércoles 30 de septiembre',short:'Mié 30 sep',state:'own',line:'BTC quedó casi plano con tasas y crédito peores. <strong>Mandó la mecánica interna</strong>: futuros fuertes y spot débil.'}
 ];
 
 const CRYPTO={
-  asof:'28 sep 2026 · 12:07',
-  source:'CoinMarketCap · Coinglass · Global Asset Data Analytics',
+  asof:'30 sep 2026 · 22:00 UTC / 19:00 ART',
+  source:'Coinglass · CryptoQuant · CoinShares · Terminal de señales · Volatility Analyzer',
   bridge:{
-    state:'linked',
+    state:'own',
     linkIndex:3,
     narrative:[
-      'El bitcóin cerró cerca de <b>83.500 dólares</b>, alrededor de un <em class="n-risk">1,2% abajo</em>, y el resto del mercado cayó más: solo <em class="n-risk">12 de las 100 monedas principales</em> terminaron en verde y el índice de temporada de altcoins cayó de <b>74</b> a <em class="n-risk">63</em>.',
-      'El interés abierto en futuros se contrajo alrededor de <em class="n-warn">1,7%</em> mientras el volumen se disparaba y las liquidaciones rondaban <em class="n-warn">130 millones de dólares</em>, firma de un <b>desapalancamiento ordenado</b> y no de una liquidación forzada.',
-      'El mismo día, el oro cayó cerca de <em class="n-risk">3,9%</em>, el índice S&amp;P 500 bajó <em class="n-risk">0,77%</em> y el índice de volatilidad subió alrededor de <em class="n-risk">8%</em>.',
-      '<b>El vínculo es la tasa real:</b> con el bono a diez años cerrando en <em class="n-info">5,234%</em>, el oro y el bitcóin recibieron el mismo aumento del tipo de descuento.',
-      'No es una historia aislada de cripto: hoy el mercado digital leyó el endurecimiento macro en la misma dirección que el resto.'
+      'Bitcoin terminó cerca de <b>83.833 dólares</b>, <em class="n-up">0,21% arriba</em>, mientras el Dow cayó <em class="n-risk">0,86%</em> y la tasa a diez años cerró en <em class="n-risk">5,298%</em>.',
+      'El volumen de futuros de Bitcoin creció <em class="n-warn">25,11%</em> y el interés abierto total subió <em class="n-warn">0,92%</em>, pero la demanda spot siguió débil.',
+      'Los fondos acumulan <b>3.550 millones de dólares</b> en la semana, aunque el flujo diario se redujo a <b>+66,2M</b> en Bitcoin y <b>−2,8M</b> en Ethereum.',
+      '<b>El vínculo de hoy es la ausencia de vínculo:</b> el deterioro del mercado tradicional no empujó a Bitcoin en la misma dirección; dominaron el posicionamiento de futuros y la falta de spot.',
+      'Eso justifica <b>DESCORRELACIÓN</b>; no equivale a fortaleza ni a una señal de compra.'
     ]
   },
-  market:{cap:'2.86T',vol:'111.85B',capDelta:null},
-  dominance:{btc:58.6,eth:11.5,other:30.0},
-  sentiment:{fear:67,altseason:63,greenCoins:12,conflict:'Otro proveedor publica 74 para miedo y codicia; se usa CoinMarketCap (67 en la captura del día) y la discrepancia se declara.'},
-  derivatives:{oiPerp:'390.19B',oiFut:'1.14B',oiDelta:-1.70,funding:0.0038,liq24h:'130M'},
-  vol:{btc:37.86,eth:52.60},
-  etf:{value:'-3.2M',date:'27 sep',lag:1},
+  market:{cap:null,vol:null,capDelta:null},
+  dominance:{btc:58.65,eth:null,other:41.35},
+  sentiment:{fear:72,altseason:66,greenCoins:null,conflict:'El anexo reporta Fear & Greed en 71–72 según proveedor. Se fija 72 como lectura del panel de sentimiento y se declara el rango; no se promedian metodologías.'},
+  derivatives:{oiPerp:'148.61B',oiDelta:0.92,funding:0.0086,liq24h:'279.65M',oiBtc:'52.82B',oiEth:'33.53B'},
+  vol:{btc:37.48,eth:52.60,ethAsOf:'28 sep · stale'},
+  etf:{value:'+66.2M BTC / −2.8M ETH',date:'30 sep',lag:0},
   series:{
-    cap:[2.91,2.89,null,2.86],
-    btcDom:[58.1,58.3,null,58.6],
-    altseason:[74,74,null,63],
-    fear:[72,70,null,67]
+    cap:[2.89,null,2.86,null],
+    btcDom:[58.3,null,58.6,58.65],
+    altseason:[74,null,63,66],
+    fear:[70,null,67,72]
   },
   assets:[
-    {t:'BTC',p:'83,118',d:-1.05,fund:0.0018,oi:'53.47B',rsi:42.13},
-    {t:'ETH',p:'2,676',d:+0.23,fund:0.0074,oi:'33.69B',rsi:49.23},
-    {t:'SOL',p:'118.12',d:-2.89,fund:0.0027,oi:'7.32B',rsi:46.20},
-    {t:'XRP',p:'1.4893',d:-1.47,fund:0.0084,oi:'3.47B',rsi:44.90},
-    {t:'XAU',p:'4,123.67',d:-2.46,fund:0.0175,oi:'2.36B',rsi:14.13,note:'Oro tokenizado · volumen +378% en 24 horas.'}
+    {t:'BTC',p:'83,738.4',d:+0.21,fund:0.0086,oi:'52.82B',rsi:50.25,note:'Referencia de tabla Coinglass; estructura usa Binance 83,833.17.'},
+    {t:'ETH',p:'2,689.37',d:+0.34,fund:0.0058,oi:'33.53B',rsi:51.29},
+    {t:'SOL',p:'118.31',d:-0.67,fund:-0.0048,oi:'n/d',rsi:47.60},
+    {t:'XRP',p:'1.4918',d:-0.09,fund:null,oi:'n/d',rsi:45.75},
+    {t:'HYPE',p:'91.55',d:+5.90,fund:null,oi:'n/d',rsi:59.64,note:'Rotación selectiva; volumen +52.97%.'}
   ],
   liquidation:{
-    price:82897,
-    asof:'28 sep · 23:40',
-    source:'Coinglass · Binance BTC/USDT Perpetuo · ventana 1 día',
-    unit:'millones de dólares',
-    reading:'Lectura de picos sobre el gráfico publicado. Los valores son aproximados y su utilidad es la forma del perfil, no la cifra exacta.',
+    price:83738.6,
+    asof:'30 sep · corte 22:00 UTC',
+    source:'Coinglass · Binance BTC/USDT Perpetuo · 15m',
+    unit:'unidades visuales relativas',
+    reading:'Perfil reconstruido desde la intensidad visible de la captura. No se asignan millones por bin porque la imagen no expone cifras exactas; informa la forma y la cercanía de las bandas.',
     bins:[
-      {p:74483,v:1.2},{p:75191,v:2.1},{p:79321,v:4.8},{p:79675,v:12.3},{p:80029,v:5.2},{p:80383,v:8.1},
-      {p:81032,v:8.4},{p:81386,v:21.6},{p:81740,v:18.5},{p:82094,v:42.5},{p:82448,v:24.5},{p:82802,v:10.2},
-      {p:83923,v:36.0},{p:84277,v:29.1},{p:84631,v:26.0},{p:84985,v:18.5},{p:85339,v:12.8},{p:85929,v:3.1},
-      {p:86283,v:9.5},{p:86637,v:6.0},{p:90885,v:1.5},{p:91298,v:2.4},{p:92006,v:1.1}
+      {p:76000,v:8},{p:77500,v:10},{p:79000,v:14},{p:80000,v:22},{p:81000,v:34},{p:81750,v:48},
+      {p:82250,v:76},{p:82500,v:88},{p:82750,v:96},{p:83000,v:100},{p:83250,v:92},{p:83500,v:68},
+      {p:84500,v:26},{p:85000,v:44},{p:85500,v:63},{p:86000,v:58},{p:86500,v:71},{p:87000,v:84},
+      {p:87385,v:94},{p:87750,v:86},{p:88000,v:73},{p:89000,v:20}
     ]
   }
 };
@@ -1279,25 +1276,25 @@ function renderLineChart(config, ids, labelAttr, dateAttr, viewWidth, viewHeight
 
 const NORMALIZED_CHART={
   x:[80,380,680,880],plot:{top:28,bottom:184,labelX:1040,leaderKnee:900},
-  series:[{key:'UST10',values:[5.110,5.180,5.167,5.234],color:'#ff2e4d',width:3,lane:92}],
+  series:[{key:'UST10',values:[5.180,5.167,5.234,5.298],color:'#ff2e4d',width:3,lane:92}],
   triggers:[{key:'A10',value:5.300,color:'#ff2e4d',includeInScale:true}]
 };
 renderLineChart(NORMALIZED_CHART,{grid:'normalizedGrid',series:'normalizedSeries',leaders:'normalizedLeaders'},'data-norm-label','data-norm-date',1080,220);
 
 const RISK_CHART={
   x:[60,190,320,410],plot:{top:24,bottom:148,labelX:498,leaderKnee:440},
-  series:[{key:'VIX',values:[15.17,15.68,14.88,16.08],color:'#ffb000',width:3,lane:58}],
+  series:[{key:'VIX',values:[15.68,14.88,16.08,16.34],color:'#ffb000',width:3,lane:58}],
   triggers:[]
 };
 renderLineChart(RISK_CHART,{grid:'riskGrid',series:'riskSeries',leaders:'riskLeaders'},'data-risk-label','data-risk-date',520,180);
 
 const SECTOR_BARS=[
-  {name:'VIX',value:8.06,tone:'risk'},
-  {name:'WTI',value:4.22,tone:'risk'},
-  {name:'GOLD',value:-3.92,tone:'risk'},
-  {name:'BTC',value:-1.20,tone:'risk'},
-  {name:'SPX',value:-0.77,tone:'risk'},
-  {name:'XLV',value:0.33,tone:'signal'}
+  {name:'MOVE',value:3.61,tone:'risk'},
+  {name:'VIX',value:1.87,tone:'risk'},
+  {name:'XLF',value:-1.13,tone:'risk'},
+  {name:'WTI',value:1.45,tone:'risk'},
+  {name:'SPX',value:-0.25,tone:'risk'},
+  {name:'QQQ',value:0.25,tone:'signal'}
 ];
 function renderDivergingBars(){
   const root=document.getElementById('sectorBars');if(!root)return;
@@ -1306,17 +1303,17 @@ function renderDivergingBars(){
 }
 renderDivergingBars();
 
-const MEM_DATES=['24S','25S',GAPS_PUB.some(g=>g.date==='26 sep')?'—':'26S','28S'];
+const MEM_DATES=['25S',GAPS_PUB.some(g=>g.date==='26 sep')?'—':'26S','28S','30S'];
 const MEM_GAP_INDEXES=MEM_DATES.map((d,i)=>d==='—'?i:null).filter(i=>i!==null);
-const MEM_GAP_NOTE='La ventana incluye el 26S sin edición publicada. Los tres puntos restantes son cierres verificados; el delta del 28S compara contra el 25S, que es el último punto publicado.';
+const MEM_GAP_NOTE='La ventana conserva el hueco publicado del 26S para no reescribir historia. El 29S está declarado en GAPS_PUB y no se reconstruye; el delta de hoy compara contra 28S, último cierre publicado.';
 const MEM=[
-  {tick:'WTI',unit:'$',now:'96.31',d:'▲4.22%*',cls:'up',tone:'tone-risk',deltaException:true,officialPrev:92.41,series:[94.61,92.57,92.57,96.31],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'$94.61'},
-  {tick:'SPX',unit:'',now:'7,683.69',d:'▼0.77%*',cls:'dn',deltaException:true,officialPrev:7743.80,series:[7703.93,7742.33,7742.33,7683.69],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'7,703.93'},
-  {tick:'VIX',unit:'',now:'16.08',d:'▲8.06%',cls:'up',inv:true,series:[15.68,14.88,14.88,16.08],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'15.68'},
-  {tick:'SKEW',unit:'',now:'144.91',d:'▼0.77%',cls:'dn',inv:true,series:[146.15,146.04,146.04,144.91],gaps:MEM_GAP_INDEXES,color:'#00ff9c',start:'146.15'},
-  {tick:'GOLD',unit:'$',now:'4,117.05',d:'▼3.85%',cls:'dn',series:[4273.80,4281.82,4281.82,4117.05],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'$4,273.80'},
-  {tick:'BTC',unit:'$',now:'83.542K',d:'▼0.78%',cls:'dn',series:[84.3699,84.2001,84.2001,83.5420],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'$84.370K'},
-  {tick:'DXY',unit:'',now:'101.280',d:'— n/d',cls:'nt',stale:'nivel 25S · dirección 28S +0.16%',series:[101.259,101.280,101.280,101.280],gaps:[...MEM_GAP_INDEXES,3],color:'#ffb000',start:'101.259'}
+  {tick:'WTI',unit:'$',now:'93.07',d:'▼3.36%',cls:'dn',series:[92.57,92.57,96.31,93.069],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'$92.57'},
+  {tick:'SPX',unit:'',now:'7,651.54',d:'▼0.42%',cls:'dn',series:[7742.33,7742.33,7683.69,7651.54],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'7,742.33'},
+  {tick:'VIX',unit:'',now:'16.33',d:'▲1.55%',cls:'up',inv:true,series:[14.88,14.88,16.08,16.33],gaps:MEM_GAP_INDEXES,color:'#ff2e4d',start:'14.88'},
+  {tick:'SKEW',unit:'',now:'141.92',d:'▼2.06%',cls:'dn',inv:true,series:[146.04,146.04,144.91,141.92],gaps:MEM_GAP_INDEXES,color:'#00ff9c',start:'146.04'},
+  {tick:'GOLD',unit:'$',now:'4,157.14',d:'▲0.97%',cls:'up',series:[4281.82,4281.82,4117.05,4157.135],gaps:MEM_GAP_INDEXES,color:'#00ff9c',start:'$4,281.82'},
+  {tick:'BTC',unit:'$',now:'83.833K',d:'▲0.35%',cls:'up',series:[84.2001,84.2001,83.5420,83.83317],gaps:MEM_GAP_INDEXES,color:'#00ff9c',start:'$84.200K'},
+  {tick:'DXY',unit:'',now:'101.454',d:'▲0.17%',cls:'up',stale:'hueco histórico 26S',series:[101.280,101.280,101.280,101.454],gaps:[...MEM_GAP_INDEXES,2],color:'#00ff9c',start:'101.280'}
 ];
 /* ═══ HILOS NARRATIVOS · §3D ═══
    name  : nombre estable en lenguaje llano. NO cambia entre ediciones.
@@ -1325,11 +1322,12 @@ const MEM=[
    note  : qué pasó hoy con este hilo. Obligatoria en turned y closed.
    since : fecha de apertura, para trazabilidad.                            */
 const THREADS=[
-  {name:'El cierre oficial del bono japonés que no se publica',n:31,state:'open',since:'14 ago',note:'La fuente oficial sigue n/d. El proxy marca 4.163%, pero Rama B exige el cierre autorizado y permanece bloqueada.'},
-  {name:'El yen se aprecia desde la intervención',n:23,state:'open',since:'28 ago',note:'USD/JPY termina en 157.408. El setup #7 conserva 259 pips de colchón hasta 160.00; un pip es una centésima de yen; la convicción sigue MEDIA y el stop no se mueve.'},
-  {name:'Los precios pagados de servicios no bajan',n:20,state:'open',since:'31 ago',note:'Dallas Fed no es la misma serie, pero añade presión de costes: precios pagados +8.1 y recibidos +6.9. El hilo sigue abierto sin mezclar indicadores.'},
-  {name:'El Tesoro intenta contener el extremo largo y el mercado no responde',n:14,state:'open',since:'9 sep',note:'El giro de ayer se confirma: 30Y sube a 5.551% y 10Y a 5.234%. El extremo largo vuelve a presionar sin pausa.'},
-  {name:'El rally de IA se concentra mientras crece la oferta futura',n:6,state:'open',since:'21 sep',note:'Semis ceden en bloque mientras NVDA sube 2.1%; el largo de Nasdaq reportado en máximos desde 2017 mantiene el riesgo concentrado.'}
+  {name:'El cierre oficial del bono japonés que no se publica',n:32,state:'open',since:'14 ago',note:'La fuente oficial sigue n/d. Las referencias indirectas continúan por encima de 4%, pero Rama B exige el cierre autorizado; el mercado lleva más sesiones que el reloj editorial por el hueco del 29S.'},
+  {name:'El yen se aprecia desde la intervención',n:24,state:'open',since:'28 ago',note:'USD/JPY termina en 157.370. El setup #7 sigue debajo de 159 y conserva 263 pips hasta el stop 160.00.'},
+  {name:'Los precios pagados de servicios no bajan',n:21,state:'open',since:'31 ago',note:'El PCE fue benigno, pero el hilo de costes de servicios no queda resuelto por una sola lectura agregada. Sigue abierto a la espera de evidencia comparable.'},
+  {name:'El Tesoro intenta contener el extremo largo y el mercado no responde',n:15,state:'open',since:'9 sep',note:'El 10Y sube a 5.298% aun con PCE suave; el 30Y del ticker marca 5.631%. El mercado largo vuelve a rechazar el alivio.'},
+  {name:'El rally de IA se concentra mientras crece la oferta futura',n:7,state:'open',since:'21 sep',note:'Tecnología aguanta mejor que el índice, mientras el crédito de emisores ligados al capex y la oferta de papel siguen tensos. El hilo no se cierra.'},
+  {name:'La sobreoferta de memoria vuelve al centro del ciclo',n:1,state:'open',since:'30 sep',note:'Micron bate el trimestre, pero guía margen algo por debajo y proyecta capex superior a 50.000 millones de dólares frente a 27.000 millones. Se abre seguimiento separado.'}
 ];
 
 /* ═══ MARCADORES DE CARTERA · §3C ═══
@@ -1340,19 +1338,28 @@ const THREADS=[
          'cash'   → devengo. r = rate × sessions / 252
          'closed' → resultado realizado, congelado. No se recalcula.       */
 const MARKS={
-  rate:0.0411,        /* subasta letra 3M 4.110% · input 28S */
-  sessions:17,       /* sesiones DE MERCADO desde la apertura del 3 SEP; no se descuenta GAPS_PUB */
+  rate:0.04125,       /* letra 3M 4.125% · input 30S; solo aplica a tramos nuevos */
+  sessions:19,       /* sesiones DE MERCADO desde la apertura del 3 SEP; incluye 29S aunque no hubo edición */
   items:{
-    cash3m:   {kind:'cashpath', pnlWeight:0.65, ret:0.002069737484737485, note:'Devengo acumulado preservado: primeras 14 sesiones con peso 45%; 24S y 25S con 65%; 28S suma 65% a la referencia 3M de 4.110%.'},
-    dur3m:    {kind:'closed', entry:4.342, realized:-0.009280333333333332, pnlWeight:0.20, since:'23 sep', note:'Cierre por stop de tesis publicado: 10Y >5.00% o 30Y >5.40%. Resultado congelado al cierre 23S.'},
-    gold:     {kind:'price', entry:4472.10, now:4117.05, since:'28 sep', note:'XAUUSD 28S: spot verificado en el análisis post-cierre y congelado.'},
-    equity:   {kind:'price', entry:773.12, now:765.49, since:'28 sep', note:'SPY 28S: cierre regular externo fijo; no feed en vivo.'},
-    xlv:      {kind:'price', entry:173.26, now:171.26, since:'28 sep', note:'XLV 28S: cierre regular externo fijo; no feed en vivo.'},
-    jpy:      {kind:'short', entry:155.752, now:157.408, since:'28 sep', note:'Snapshot operativo del análisis 28S.'},
-    convex:   {kind:'closed', realized:0.0, since:'4 sep', note:'Cerrada en carteras de referencia por invalidación de tesis; resultado congelado. F-bis del libro operativo pertenece a otra capa.'},
-    cash6m:   {kind:'cashpath', ret:0.0025456349206349205, note:'Devengo acumulado preservado hasta 25S; 28S suma una sesión a 4.110%.'},
-    dur6m:    {kind:'yield', entry:4.772, now:5.234, dur:5.40, since:'28 sep', note:'10Y 5.234% tomado del análisis post-cierre y congelado para valuación 6M.'},
-    xle:      {kind:'price', entry:64.62, now:62.12, since:'28 sep', note:'XLE 28S: cierre regular externo fijo; no feed en vivo.'}
+    cash3m:{kind:'cashpath',legs:[
+      {sessions:1,weight:0.40,rate:0.0411,since:'3 sep'},
+      {sessions:13,weight:0.45,rate:0.0411,since:'4 sep · absorbe convexidad'},
+      {sessions:4,weight:0.65,rate:0.0411,since:'23 sep · absorbe duración corta · hasta 29 sep'},
+      {sessions:1,weight:0.65,rate:0.04125,since:'30 sep'}
+    ],note:'Devengo derivado por tramos; no contiene retorno precalculado.'},
+    dur3m:{kind:'closed',entry:4.342,realized:-0.009280333333333332,closeWeight:{'3m':0.20},weightLegs:{'3m':[{sessions:14,weight:0.20},{sessions:5,weight:0}]},since:'23 sep',note:'Resultado congelado; pesa 0 desde el cierre.'},
+    gold:{kind:'price',entry:4472.10,now:4157.135,since:'30 sep',note:'XAUUSD 30S congelado desde tickers.'},
+    equity:{kind:'price',entry:773.12,now:762.63,since:'30 sep',note:'SPY 30S congelado desde tickers.'},
+    xlv:{kind:'price',entry:173.26,now:168.42,since:'30 sep',note:'XLV 30S congelado desde tickers.'},
+    jpy:{kind:'short',entry:155.752,now:157.370,since:'30 sep',note:'USD/JPY 30S congelado desde tickers.'},
+    convex:{kind:'closed',realized:0.0,closeWeight:{'3m':0.05,'6m':0.04},weightLegs:{'3m':[{sessions:1,weight:0.05},{sessions:18,weight:0}],'6m':[{sessions:1,weight:0.04},{sessions:18,weight:0}]},since:'4 sep',note:'Resultado congelado; pesa 0 desde el cierre. F-bis operativa es una capa separada.'},
+    cash6m:{kind:'cashpath',legs:[
+      {sessions:1,weight:0.25,rate:0.0411,since:'3 sep'},
+      {sessions:17,weight:0.29,rate:0.0411,since:'4 sep · absorbe convexidad · hasta 29 sep'},
+      {sessions:1,weight:0.29,rate:0.04125,since:'30 sep'}
+    ],note:'Devengo derivado por tramos; no contiene retorno precalculado.'},
+    dur6m:{kind:'yield',entry:4.772,now:5.298,dur:5.40,since:'30 sep',note:'10Y 5.298% del análisis post-cierre.'},
+    xle:{kind:'price',entry:64.62,now:61.50,since:'30 sep',note:'XLE 30S congelado desde tickers.'}
   }
 };
 
@@ -1411,7 +1418,7 @@ document.getElementById('memGrid').innerHTML=MEM.map(m=>`<div class="mem-cell"><
   box.innerHTML=THREADS.map(t=>`
     <div class="thread-row" data-state="${t.state}">
       <span class="th-name">${t.name}${t.note?`<span class="th-note">${t.note}</span>`:''}</span>
-      <span class="th-n">${t.n}ª sesión${t.since?`<span class="th-since">desde ${t.since}${GAPS_PUB.length?' · '+Math.min(1,GAPS_PUB.length)+' hueco':''}</span>`:''}</span>
+      <span class="th-n">${t.n}ª sesión${t.since?`<span class="th-since">desde ${t.since}${t.n>1?' · 2 huecos de publicación':''}</span>`:''}</span>
       <span class="th-state ${t.state}">${LABEL[t.state]||'?'}</span>
     </div>`).join('');
 })();
@@ -1440,9 +1447,9 @@ document.getElementById('memGrid').innerHTML=MEM.map(m=>`<div class="mem-cell"><
 
 /* ── v4.6 · continuidad declarada ── */
 (function renderContinuity(){
-  const currentGap=GAPS_PUB.find(g=>g.date==='26 sep');
+  const currentGap=GAPS_PUB.find(g=>g.date==='29 sep');
   const score=document.getElementById('scoreGapNote');
-  if(score)score.textContent=currentGap?'pre-registro del 25S contrastado al cierre del 28S · 1 sesión sin edición en el medio':'pre-registro del 25S contrastado al cierre del 28S';
+  if(score)score.textContent=currentGap?'pre-registro del 28S contrastado al cierre del 30S · 1 sesión sin edición en el medio':'pre-registro del 28S contrastado al cierre del 30S';
   const mw=document.getElementById('memWindowLabel');if(mw)mw.textContent=MEM_DATES.join(' · ');
   const mn=document.getElementById('memGapNote');if(mn)mn.textContent=MEM_GAP_NOTE;
 })();
@@ -1459,10 +1466,10 @@ function lastPublished(series,skipLast=true){
   return null;
 }
 function firstPublished(series){for(let i=0;i<series.length;i++)if(series[i]!=null)return {value:series[i],index:i};return null}
-function pctDelta(now,base){return ((now-base)/base)*100}
-function signed(v,dec=1,suffix='%'){return `${v>0?'+':''}${v.toFixed(dec)}${suffix}`}
-function metricTone(v){return v<0?'risk':v>0?'upv':'warn'}
-function levelForFear(v){return v<=24?1:v<=44?2:v<=55?3:v<=74?4:5}
+function pctDelta(now,base){return (now==null||base==null)?null:((now-base)/base)*100}
+function signed(v,dec=1,suffix='%'){return v==null?'n/d':`${v>0?'+':''}${v.toFixed(dec)}${suffix}`}
+function metricTone(v){return v==null?'info':v<0?'risk':v>0?'upv':'info'}
+function levelForFear(v){return v<25?1:v<45?2:v<=55?3:v<75?4:5}
 function levelForVol(v){return v<20?1:v<40?2:v<60?3:v<80?4:5}
 function levelForOI(v){return v<-5?5:v<-2?4:v<=2?3:v<=5?2:5}
 function levelForRSI(v){return v<30?1:v<45?2:v<=55?3:v<=70?4:5}
@@ -1483,104 +1490,63 @@ function renderLiquidationMap(){
   const minP=sorted[0].p,maxP=sorted[sorted.length-1].p,W=1000,H=452,left=58,right=24,top=44,base=306,plotW=W-left-right,plotH=base-top;
   const x=p=>left+(p-minP)/(maxP-minP)*plotW;
   const yv=v=>base-(v/maxV)*(plotH*.72);
-  const prof=cumulativeProfile(sorted,price),cumMax=Math.max(prof.longTotal,prof.shortTotal);
+  const prof=cumulativeProfile(sorted,price),cumMax=Math.max(prof.longTotal,prof.shortTotal)||1;
   const yc=v=>base-(v/cumMax)*(plotH*.9);
   const peak=sorted.find(b=>b.v===maxV);
   const colorFor=v=>{const r=v/maxV;return r>=.66?'var(--risk)':r>=.40?'var(--lv-4)':r>=.20?'var(--alert)':'var(--info)'};
-  const gridVals=[0,10,20,30,40,46.39];
-  const grid=gridVals.map(v=>{const y=v===0?base:base-(v/46.39)*(plotH*.72);return `<line class="liq-grid-line" x1="${left}" x2="${W-right}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}"/><text class="liq-axis-label" x="${left-9}" y="${(y+3).toFixed(1)}" text-anchor="end">${v===0?'0':v.toFixed(v===46.39?2:0)+'M'}</text>`}).join('');
+  const gridVals=[0,.25,.5,.75,1].map(r=>maxV*r);
+  const grid=gridVals.map(v=>{const y=v===0?base:yv(v);return `<line class="liq-grid-line" x1="${left}" x2="${W-right}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}"/><text class="liq-axis-label" x="${left-9}" y="${(y+3).toFixed(1)}" text-anchor="end">${v===0?'0':Math.round(v)+'u'}</text>`}).join('');
   const barW=Math.max(5,Math.min(12,plotW/(sorted.length*3.05)));
   const maxDist=Math.max(...sorted.map(b=>Math.abs(b.p-price)));
-  const zones=sorted.map((b,i)=>{
-    const prev=sorted[i-1],next=sorted[i+1];
-    const lo=i===0?b.p:Math.round((prev.p+b.p)/2);
-    const hi=i===sorted.length-1?b.p:Math.round((b.p+next.p)/2);
-    return {lo,hi};
-  });
-  const bars=sorted.map((b,i)=>{const xx=x(b.p)-barW/2,yy=yv(b.v),hh=base-yy,dist=Math.abs(b.p-price)/maxDist,delay=Math.round((1-dist)*260),c=colorFor(b.v),hitW=Math.max(18,barW+8),hx=x(b.p)-hitW/2,z=zones[i],aria=`Nivel aproximado ${b.p.toLocaleString('en-US')} USDT; zona visual ${z.lo.toLocaleString('en-US')} a ${z.hi.toLocaleString('en-US')} USDT; concentración aproximada ${b.v.toFixed(1)} millones de dólares`;
-    return `<rect class="liq-bar-svg${b===peak?' peak':''}" data-bar-index="${i}" x="${xx.toFixed(1)}" y="${yy.toFixed(1)}" width="${barW.toFixed(1)}" height="${hh.toFixed(1)}" rx="0.8" fill="${c}" color="${c}" style="--delay:${delay}ms"/><rect class="liq-hit-target" data-liq-index="${i}" tabindex="0" role="button" aria-label="${aria}" x="${hx.toFixed(1)}" y="${Math.max(top,yy-8).toFixed(1)}" width="${hitW.toFixed(1)}" height="${(base-Math.max(top,yy-8)+8).toFixed(1)}"/>`}).join('');
-  const path=(pts,fnY)=>pts.map((pt,i)=>`${i?'L':'M'} ${x(pt.p).toFixed(1)} ${fnY(pt.value).toFixed(1)}`).join(' ');
+  const zones=sorted.map((b,i)=>{const prev=sorted[i-1],next=sorted[i+1];const lo=i===0?b.p:Math.round((prev.p+b.p)/2),hi=i===sorted.length-1?b.p:Math.round((b.p+next.p)/2);return {lo,hi}});
+  const bars=sorted.map((b,i)=>{const bx=x(b.p),by=yv(b.v),bh=base-by,c=colorFor(b.v),isPeak=b===peak?' peak':'';return `<rect class="liq-bar-svg${isPeak}" data-bar-index="${i}" x="${(bx-barW/2).toFixed(1)}" y="${by.toFixed(1)}" width="${barW.toFixed(1)}" height="${bh.toFixed(1)}" fill="${c}" style="color:${c};--delay:${(i*.018).toFixed(2)}s"/><rect class="liq-hit-target" data-liq-index="${i}" tabindex="0" role="button" aria-label="Zona ${b.p} USDT, intensidad relativa ${b.v}" x="${(bx-Math.max(barW,22)/2).toFixed(1)}" y="${top}" width="${Math.max(barW,22).toFixed(1)}" height="${base-top+18}"/>`}).join('');
+  const path=(pts,fn)=>pts.map((p,i)=>`${i?'L':'M'}${x(p.p).toFixed(1)},${fn(p.value).toFixed(1)}`).join(' ');
   const longPath=path(prof.longPts,yc),shortPath=path(prof.shortPts,yc);
-  const longArea=`M ${x(prof.longPts[0].p).toFixed(1)} ${base} `+prof.longPts.map(pt=>`L ${x(pt.p).toFixed(1)} ${yc(pt.value).toFixed(1)}`).join(' ')+` L ${x(price).toFixed(1)} ${base} Z`;
-  const shortArea=`M ${x(price).toFixed(1)} ${base} `+prof.shortPts.map(pt=>`L ${x(pt.p).toFixed(1)} ${yc(pt.value).toFixed(1)}`).join(' ')+` L ${x(prof.shortPts[prof.shortPts.length-1].p).toFixed(1)} ${base} Z`;
-  const tickMarks=sorted.map((b,i)=>`<line class="liq-grid-line" x1="${x(b.p).toFixed(1)}" x2="${x(b.p).toFixed(1)}" y1="${(base+4).toFixed(1)}" y2="${(base+10).toFixed(1)}" style="opacity:${i%2?0.35:0.52}"/>`).join('');
-  const tickLabelY1=344,tickLabelY2=363;
-  const tickRows=sorted.map((b,i)=>{
-    const xx=x(b.p).toFixed(1),yy=i%2===0?tickLabelY1:tickLabelY2;
-    return `<text class="liq-axis-label liq-axis-bin" x="${xx}" y="${yy}" text-anchor="middle">${b.p.toLocaleString('en-US')}</text>`;
-  }).join('');
-  const centerGuides=sorted.filter((b,i)=>i>0&&i<sorted.length-1&&Math.abs(b.p-price)<1600).map(b=>`<line class="liq-grid-line" x1="${x(b.p).toFixed(1)}" x2="${x(b.p).toFixed(1)}" y1="${top}" y2="${base}" style="opacity:.18"/>`).join('');
-  host.innerHTML=`<svg class="liq-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Perfil reconstruido de liquidaciones BTC USDT con histograma y curvas acumuladas">
-    ${grid}${centerGuides}<path class="liq-area-long" d="${longArea}"/><path class="liq-area-short" d="${shortArea}"/>${bars}
+  const longArea=`${longPath} L${x(price).toFixed(1)},${base} L${x(prof.longPts[0].p).toFixed(1)},${base} Z`;
+  const shortArea=`${shortPath} L${x(prof.shortPts.at(-1).p).toFixed(1)},${base} L${x(price).toFixed(1)},${base} Z`;
+  const tickRows=sorted.map((b,i)=>`<text class="liq-axis-label liq-axis-bin" x="${x(b.p).toFixed(1)}" y="${base+31+(i%2)*12}" text-anchor="middle">${Math.round(b.p/100)/10}k</text>`).join('');
+  const tickMarks=sorted.map(b=>`<line class="liq-grid-line" x1="${x(b.p).toFixed(1)}" x2="${x(b.p).toFixed(1)}" y1="${top}" y2="${base}" style="opacity:.18"/>`).join('');
+  host.innerHTML=`<svg class="liq-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Perfil reconstruido de liquidaciones BTC USDT con histograma relativo y curvas acumuladas">
+    ${grid}${tickMarks}<path class="liq-area-long" d="${longArea}"/><path class="liq-area-short" d="${shortArea}"/>${bars}
     <path class="liq-curve" pathLength="1" d="${longPath}" stroke="var(--risk)"/><path class="liq-curve" pathLength="1" d="${shortPath}" stroke="var(--signal)"/>
-    <text class="liq-curve-label long" x="${left+8}" y="${top+12}">largos acumulados · ${prof.longTotal.toFixed(1)}M</text><text class="liq-curve-label short" x="${W-right-8}" y="${top+12}" text-anchor="end">cortos acumulados · ${prof.shortTotal.toFixed(1)}M</text>
-    <line class="liq-price-line" x1="${x(price).toFixed(1)}" x2="${x(price).toFixed(1)}" y1="${top-4}" y2="${base+4}"/><text class="liq-price-label" x="${x(price).toFixed(1)}" y="${top-14}" text-anchor="middle">PRECIO ACTUAL · ${price.toLocaleString('en-US')}</text>
-    ${tickMarks}${tickRows}
-    <g class="liq-tip" id="liqTip" aria-hidden="true">
-      <line class="liq-tip-line" id="liqTipLine" x1="0" x2="0" y1="0" y2="0"/>
-      <rect class="liq-tip-box" id="liqTipBox" x="0" y="0" width="206" height="54" rx="3"/>
-      <text class="liq-tip-kicker" id="liqTipKicker" x="0" y="0">ZONA DE LIQUIDACIÓN</text>
-      <text class="liq-tip-main" id="liqTipMain" x="0" y="0"></text>
-      <text class="liq-tip-sub" id="liqTipSub" x="0" y="0"></text>
-    </g>
-    <text class="liq-axis-label hot" x="${left}" y="417">precio BTC/USDT · tocar una barra para ver su zona</text><text class="liq-axis-label hot" x="${W-right}" y="417" text-anchor="end">barra = concentración aproximada · color = % del pico</text>
+    <text class="liq-curve-label long" x="${left+8}" y="${top+12}">largos · intensidad acumulada ${prof.longTotal.toFixed(0)}u</text><text class="liq-curve-label short" x="${W-right-8}" y="${top+12}" text-anchor="end">cortos · intensidad acumulada ${prof.shortTotal.toFixed(0)}u</text>
+    <line class="liq-price-line" x1="${x(price).toFixed(1)}" x2="${x(price).toFixed(1)}" y1="${top-4}" y2="${base+4}"/><text class="liq-price-label" x="${x(price).toFixed(1)}" y="${top-14}" text-anchor="middle">PRECIO DEL MAPA · ${price.toLocaleString('en-US')}</text>
+    ${tickRows}
+    <g class="liq-tip" id="liqTip" aria-hidden="true"><line class="liq-tip-line" id="liqTipLine" x1="0" x2="0" y1="0" y2="0"/><rect class="liq-tip-box" id="liqTipBox" x="0" y="0" width="206" height="54" rx="3"/><text class="liq-tip-kicker" id="liqTipKicker" x="0" y="0">ZONA DE LIQUIDACIÓN</text><text class="liq-tip-main" id="liqTipMain" x="0" y="0"></text><text class="liq-tip-sub" id="liqTipSub" x="0" y="0"></text></g>
+    <text class="liq-axis-label hot" x="${left}" y="417">precio BTC/USDT · tocar una barra para ver su zona</text><text class="liq-axis-label hot" x="${W-right}" y="417" text-anchor="end">barra = intensidad relativa · color = % del pico</text>
   </svg>`;
   const svg=host.querySelector('.liq-svg'),tip=host.querySelector('#liqTip'),tipBox=host.querySelector('#liqTipBox'),tipLine=host.querySelector('#liqTipLine'),tipKicker=host.querySelector('#liqTipKicker'),tipMain=host.querySelector('#liqTipMain'),tipSub=host.querySelector('#liqTipSub');
   const tipW=206,tipH=54;
-  function clearLiqSelection(){
-    host.querySelectorAll('.liq-bar-svg.is-selected').forEach(el=>el.classList.remove('is-selected'));
-    tip.classList.remove('is-open');tip.setAttribute('aria-hidden','true');
-  }
+  function clearLiqSelection(){host.querySelectorAll('.liq-bar-svg.is-selected').forEach(el=>el.classList.remove('is-selected'));tip.classList.remove('is-open');tip.setAttribute('aria-hidden','true')}
   function selectLiqBin(i){
-    const b=sorted[i],z=zones[i],cx=x(b.p),barTop=yv(b.v),c=colorFor(b.v);
-    const tx=Math.min(Math.max(cx-tipW/2,left+4),W-right-tipW-4);
-    const ty=Math.max(top+22,barTop-tipH-14);
-    host.querySelectorAll('.liq-bar-svg.is-selected').forEach(el=>el.classList.remove('is-selected'));
-    const bar=host.querySelector(`[data-bar-index="${i}"]`);if(bar)bar.classList.add('is-selected');
-    tipBox.setAttribute('x',tx.toFixed(1));tipBox.setAttribute('y',ty.toFixed(1));tipBox.setAttribute('stroke',c);
-    tipLine.setAttribute('x1',cx.toFixed(1));tipLine.setAttribute('x2',cx.toFixed(1));tipLine.setAttribute('y1',(ty+tipH).toFixed(1));tipLine.setAttribute('y2',Math.max(ty+tipH+4,barTop-4).toFixed(1));tipLine.setAttribute('stroke',c);
-    tipKicker.setAttribute('x',(tx+11).toFixed(1));tipKicker.setAttribute('y',(ty+14).toFixed(1));
-    tipMain.setAttribute('x',(tx+11).toFixed(1));tipMain.setAttribute('y',(ty+31).toFixed(1));tipMain.textContent=`≈ ${b.p.toLocaleString('en-US')} USDT`;
-    tipSub.setAttribute('x',(tx+11).toFixed(1));tipSub.setAttribute('y',(ty+45).toFixed(1));tipSub.textContent=`zona visual ${z.lo.toLocaleString('en-US')}–${z.hi.toLocaleString('en-US')} · ≈${b.v.toFixed(1)}M`;
-    tip.classList.add('is-open');tip.setAttribute('aria-hidden','false');
+    const b=sorted[i],z=zones[i],cx=x(b.p),barTop=yv(b.v),c=colorFor(b.v),tx=Math.min(Math.max(cx-tipW/2,left+4),W-right-tipW-4),ty=Math.max(top+22,barTop-tipH-14);
+    host.querySelectorAll('.liq-bar-svg.is-selected').forEach(el=>el.classList.remove('is-selected'));const bar=host.querySelector(`[data-bar-index="${i}"]`);if(bar)bar.classList.add('is-selected');
+    tipBox.setAttribute('x',tx.toFixed(1));tipBox.setAttribute('y',ty.toFixed(1));tipBox.setAttribute('stroke',c);tipLine.setAttribute('x1',cx.toFixed(1));tipLine.setAttribute('x2',cx.toFixed(1));tipLine.setAttribute('y1',(ty+tipH).toFixed(1));tipLine.setAttribute('y2',Math.max(ty+tipH+4,barTop-4).toFixed(1));tipLine.setAttribute('stroke',c);tipKicker.setAttribute('x',(tx+11).toFixed(1));tipKicker.setAttribute('y',(ty+14).toFixed(1));tipMain.setAttribute('x',(tx+11).toFixed(1));tipMain.setAttribute('y',(ty+31).toFixed(1));tipMain.textContent=`≈ ${b.p.toLocaleString('en-US')} USDT`;tipSub.setAttribute('x',(tx+11).toFixed(1));tipSub.setAttribute('y',(ty+45).toFixed(1));tipSub.textContent=`zona ${z.lo.toLocaleString('en-US')}–${z.hi.toLocaleString('en-US')} · intensidad ${b.v}u`;tip.classList.add('is-open');tip.setAttribute('aria-hidden','false');
   }
-  host.querySelectorAll('.liq-hit-target').forEach(hit=>{
-    hit.addEventListener('click',ev=>{ev.stopPropagation();selectLiqBin(Number(hit.dataset.liqIndex))});
-    hit.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();selectLiqBin(Number(hit.dataset.liqIndex))}});
-  });
+  host.querySelectorAll('.liq-hit-target').forEach(hit=>{hit.addEventListener('click',ev=>{ev.stopPropagation();selectLiqBin(Number(hit.dataset.liqIndex))});hit.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();selectLiqBin(Number(hit.dataset.liqIndex))}})});
   svg.addEventListener('click',ev=>{if(!ev.target.closest('.liq-hit-target'))clearLiqSelection()});
-  document.getElementById('liqRead').innerHTML=`<b>Lectura:</b> el pico absoluto está cerca de <b>${peak.p.toLocaleString('en-US')}</b> con ≈<b>${peak.v.toFixed(1)}M</b>. Tocá una barra para ver su nivel y su zona visual aproximada. El perfil suma ≈<b>${prof.longTotal.toFixed(1)}M</b> debajo del precio y ≈<b>${prof.shortTotal.toFixed(1)}M</b> arriba.`;
+  document.getElementById('liqRead').innerHTML=`<b>Lectura:</b> el pico relativo está cerca de <b>${peak.p.toLocaleString('en-US')}</b>. El anexo ubica la banda de largos en <b>82.000–83.500</b> y la de cortos en <b>85.000–88.000</b>; las alturas son unidades visuales, no millones atribuidos a cada bin.`;
 }
 (function renderCrypto(){
   const section=document.getElementById('cryptoSection');if(!section)return;
-  const label=BRIDGE_LABELS[CRYPTO.bridge.state]||BRIDGE_LABELS.own;
-  const state=document.getElementById('cryptoBridgeState');state.dataset.state=CRYPTO.bridge.state;
-  state.style.setProperty('--bridge-color',CRYPTO.bridge.state==='opposite'?'var(--signal)':CRYPTO.bridge.state==='own'?'var(--alert)':'var(--info)');
-  document.getElementById('bridgeStateKey').textContent=label.key;
-  document.getElementById('bridgeStateSub').textContent=label.sub;
-  document.getElementById('bridgeNarrative').innerHTML=CRYPTO.bridge.narrative.map((x,i)=>`<p${i===CRYPTO.bridge.linkIndex?' class="bridge-link"':''}>${x}</p>`).join('');
+  const label=BRIDGE_LABELS[CRYPTO.bridge.state]||BRIDGE_LABELS.own,state=document.getElementById('cryptoBridgeState');state.dataset.state=CRYPTO.bridge.state;state.style.setProperty('--bridge-color',CRYPTO.bridge.state==='opposite'?'var(--signal)':CRYPTO.bridge.state==='own'?'var(--alert)':'var(--info)');
+  document.getElementById('bridgeStateKey').textContent=label.key;document.getElementById('bridgeStateSub').textContent=label.sub;document.getElementById('bridgeNarrative').innerHTML=CRYPTO.bridge.narrative.map((x,i)=>`<p${i===CRYPTO.bridge.linkIndex?' class="bridge-link"':''}>${x}</p>`).join('');
   document.getElementById('bridgeMemory').innerHTML=BRIDGE.map(b=>`<div class="bm-cell" data-state="${b.state||'gap'}"><div class="bm-date"><span class="bm-date-long">${b.date}</span><span class="bm-date-short">${b.short}</span></div><div class="bm-state">${b.state?(BRIDGE_LABELS[b.state]?.key||'—'):'SIN EDICIÓN'}</div><div class="bm-line">${b.line}</div></div>`).join('');
-  document.getElementById('cryptoSources').textContent=CRYPTO.source;
-  document.getElementById('cryptoAsof').textContent=CRYPTO.asof;
-  const capNow=CRYPTO.series.cap.at(-1),capPrev=lastPublished(CRYPTO.series.cap),capFirst=firstPublished(CRYPTO.series.cap),capD1=pctDelta(capNow,capPrev.value),capD4=pctDelta(capNow,capFirst.value);
-  document.getElementById('capDeltaChip').innerHTML=`<b class="${metricTone(capD1)}">${capD1<0?'▼':'▲'} ${Math.abs(capD1).toFixed(2)}%</b><span>vs 25S</span><b class="${metricTone(capD4)}">${capD4<0?'▼':'▲'} ${Math.abs(capD4).toFixed(2)}%</b><span>vs 24S</span>`;
-  const domNow=CRYPTO.series.btcDom.at(-1),domPrev=lastPublished(CRYPTO.series.btcDom).value,domFirst=firstPublished(CRYPTO.series.btcDom).value;
-  document.getElementById('domDelta').innerHTML=`<b>${signed(domNow-domPrev,1,' pp')}</b> vs 25S · <b>${signed(domNow-domFirst,1,' pp')}</b> vs 24S`;
-  const altNow=CRYPTO.series.altseason.at(-1),altPrev=lastPublished(CRYPTO.series.altseason).value,altFirst=firstPublished(CRYPTO.series.altseason).value;
-  document.getElementById('altDelta').innerHTML=`<b class="dn">${signed(altNow-altPrev,0,' pts')}</b> vs 25S · <b class="dn">${signed(altNow-altFirst,0,' pts')}</b> vs 24S`;
-  document.getElementById('cryptoAssetRows').innerHTML=CRYPTO.assets.map(a=>{const fundClass=a.fund>0.015?'fund-hot':a.fund>=0?'fund-pos':'fund-neg',rsiLevel=levelForRSI(a.rsi);return `<tr class="${a.d>=0?'asset-pos':'asset-neg'}"><td><strong>${a.t}</strong></td><td>$${a.p}</td><td class="${a.d>=0?'delta-pos':'delta-neg'}">${a.d>=0?'+':''}${a.d.toFixed(2)}%</td><td class="${fundClass}">${a.fund.toFixed(4)}%</td><td>${a.oi}</td><td class="rsi-${rsiLevel}">${a.rsi.toFixed(2)}</td><td class="crypto-note${a.t==='XAU'?' token-gold':''}">${a.note||'—'}</td></tr>`}).join('');
-  const fearLevel=levelForFear(CRYPTO.sentiment.fear),volB=levelForVol(CRYPTO.vol.btc),volE=levelForVol(CRYPTO.vol.eth),oiLevel=levelForOI(CRYPTO.derivatives.oiDelta);
-  const extremeClass=l=>l===5?' lv-extreme':'';
+  document.getElementById('cryptoSources').textContent=CRYPTO.source;document.getElementById('cryptoAsof').textContent=CRYPTO.asof;
+  const capNow=CRYPTO.series.cap.at(-1),capPrev=lastPublished(CRYPTO.series.cap),capFirst=firstPublished(CRYPTO.series.cap),capChip=document.getElementById('capDeltaChip');
+  if(capNow==null){capChip.innerHTML='<span>30S · n/d</span><span>último publicado 28S · $2.86T</span>'}else{const d1=pctDelta(capNow,capPrev?.value),d4=pctDelta(capNow,capFirst?.value);capChip.innerHTML=`<b class="${metricTone(d1)}">${d1<0?'▼':'▲'} ${Math.abs(d1).toFixed(2)}%</b><span>previo</span><b class="${metricTone(d4)}">${d4<0?'▼':'▲'} ${Math.abs(d4).toFixed(2)}%</b><span>4 ediciones</span>`}
+  const domNow=CRYPTO.series.btcDom.at(-1),domPrev=lastPublished(CRYPTO.series.btcDom)?.value,domFirst=firstPublished(CRYPTO.series.btcDom)?.value;document.getElementById('domDelta').innerHTML=`<b>${signed(domNow-domPrev,2,' pp')}</b> vs 28S · <b>${signed(domNow-domFirst,2,' pp')}</b> vs 25S`;
+  const altNow=CRYPTO.series.altseason.at(-1),altPrev=lastPublished(CRYPTO.series.altseason)?.value,altFirst=firstPublished(CRYPTO.series.altseason)?.value;document.getElementById('altDelta').innerHTML=`<b class="up">${signed(altNow-altPrev,0,' pts')}</b> vs 28S · <b class="dn">${signed(altNow-altFirst,0,' pts')}</b> vs 25S`;
+  document.getElementById('cryptoAssetRows').innerHTML=CRYPTO.assets.map(a=>{const fundClass=a.fund==null?'':Math.abs(a.fund)>0.015?'fund-hot':a.fund>=0?'fund-pos':'fund-neg',fund=a.fund==null?'n/d':a.fund.toFixed(4)+'%',rsiLevel=levelForRSI(a.rsi);return `<tr class="${a.d>=0?'asset-pos':'asset-neg'}"><td><strong>${a.t}</strong></td><td>$${a.p}</td><td class="${a.d>=0?'delta-pos':'delta-neg'}">${a.d>=0?'+':''}${a.d.toFixed(2)}%</td><td class="${fundClass}">${fund}</td><td>${a.oi}</td><td class="rsi-${rsiLevel}">${a.rsi.toFixed(2)}</td><td class="crypto-note">${a.note||'—'}</td></tr>`}).join('');
+  const fearLevel=levelForFear(CRYPTO.sentiment.fear),volB=levelForVol(CRYPTO.vol.btc),volE=levelForVol(CRYPTO.vol.eth),oiLevel=levelForOI(CRYPTO.derivatives.oiDelta),extremeClass=l=>l===5?' lv-extreme':'';
   document.getElementById('cryptoDetailGrid').innerHTML=[
-    `<div class="cd-card" style="--level-color:${levelColor(fearLevel)}"><div class="cd-k">Miedo y codicia</div><div class="cd-v${extremeClass(fearLevel)}">${CRYPTO.sentiment.fear}</div>${levelScale(CRYPTO.sentiment.fear)}<div class="cd-x">CoinMarketCap · codicia · escala 0–100</div></div>`,
-    `<div class="cd-card"><div class="cd-k">Volatilidad implícita</div><div class="lv-pair"><span>Bitcoin</span><div class="lv-mini" style="--pos:${CRYPTO.vol.btc}%"></div><strong style="--pair-color:${levelColor(volB)}" class="${extremeClass(volB).trim()}">${CRYPTO.vol.btc.toFixed(2)}</strong></div><div class="lv-pair"><span>Ethereum</span><div class="lv-mini" style="--pos:${CRYPTO.vol.eth}%"></div><strong style="--pair-color:${levelColor(volE)}" class="${extremeClass(volE).trim()}">${CRYPTO.vol.eth.toFixed(2)}</strong></div><div class="cd-x">Bitcoin → verde · Ethereum → ámbar según la escala común.</div></div>`,
-    `<div class="cd-card" style="--level-color:${levelColor(oiLevel)}"><div class="cd-k">Interés abierto</div><div class="cd-v${extremeClass(oiLevel)}">$${CRYPTO.derivatives.oiPerp}</div>${levelScale((CRYPTO.derivatives.oiDelta+10)/20*100)}<div class="cd-x"><b style="color:${levelColor(oiLevel)}">${CRYPTO.derivatives.oiDelta.toFixed(2)}%</b> en 24h · escala en U · financiación ${CRYPTO.derivatives.funding.toFixed(4)}% · liquidaciones $${CRYPTO.derivatives.liq24h}</div></div>`,
-    `<div class="cd-card"><div class="cd-k">Flujo ETF cripto</div><div class="cd-v">${CRYPTO.etf.value.startsWith('-')?'−$'+CRYPTO.etf.value.slice(1):'$'+CRYPTO.etf.value}</div><div class="cd-x">${CRYPTO.etf.date} · ${CRYPTO.etf.lag} sesión de rezago. Dato rezagado: no describe el cierre actual.</div></div>`
+    `<div class="cd-card" style="--level-color:${levelColor(fearLevel)}"><div class="cd-k">Miedo y codicia</div><div class="cd-v${extremeClass(fearLevel)}">${CRYPTO.sentiment.fear}</div>${levelScale(CRYPTO.sentiment.fear)}<div class="cd-x">rango reportado 71–72 · codicia</div></div>`,
+    `<div class="cd-card"><div class="cd-k">Volatilidad implícita</div><div class="lv-pair"><span>Bitcoin</span><div class="lv-mini" style="--pos:${CRYPTO.vol.btc}%"></div><strong style="--pair-color:${levelColor(volB)}">${CRYPTO.vol.btc.toFixed(2)}</strong></div><div class="lv-pair"><span>Ethereum</span><div class="lv-mini" style="--pos:${CRYPTO.vol.eth}%"></div><strong style="--pair-color:${levelColor(volE)}">${CRYPTO.vol.eth.toFixed(2)}</strong></div><div class="cd-x">BTC 30S · ETH ${CRYPTO.vol.ethAsOf}. El rezago queda visible.</div></div>`,
+    `<div class="cd-card" style="--level-color:${levelColor(oiLevel)}"><div class="cd-k">Interés abierto</div><div class="cd-v${extremeClass(oiLevel)}">$${CRYPTO.derivatives.oiPerp}</div>${levelScale((CRYPTO.derivatives.oiDelta+10)/20*100)}<div class="cd-x"><b style="color:${levelColor(oiLevel)}">${CRYPTO.derivatives.oiDelta.toFixed(2)}%</b> en 24h · financiación BTC ${CRYPTO.derivatives.funding.toFixed(4)}% · liquidaciones $${CRYPTO.derivatives.liq24h}</div></div>`,
+    `<div class="cd-card"><div class="cd-k">Flujo ETF cripto</div><div class="cd-v" style="font-size:18px">${CRYPTO.etf.value}</div><div class="cd-x">${CRYPTO.etf.date} · flujo diario reportado. La semana acumula +$3.55B en fondos de activos digitales.</div></div>`
   ].join('');
-  document.getElementById('cryptoConflict').innerHTML=`<b>CONFLICTO DE PROVEEDORES:</b> ${CRYPTO.sentiment.conflict} Un proveedor por métrica; no se promedian metodologías distintas.`;
-  document.getElementById('liqMeta').textContent=`${CRYPTO.liquidation.source} · ${CRYPTO.liquidation.asof}`;
-  document.getElementById('liqHonesty').innerHTML=`<b>LECTURA DE PICOS:</b> sobre el mapa de Coinglass del ${CRYPTO.liquidation.asof} · Binance BTC/USDT Perpetuo, ventana de un día. Los valores son aproximados: informa la <b>forma del perfil</b> y dónde está la concentración, no la cifra exacta de cada barra.`;
-  renderLiquidationMap();
+  document.getElementById('cryptoConflict').innerHTML=`<b>CONFLICTOS / REZAGOS:</b> ${CRYPTO.sentiment.conflict} Capitalización total 30S: n/d. Volatilidad ETH conserva lectura 28S y queda stale. Un proveedor por métrica; no se inventan cruces.`;
+  document.getElementById('liqMeta').textContent=`${CRYPTO.liquidation.source} · ${CRYPTO.liquidation.asof}`;document.getElementById('liqHonesty').innerHTML=`<b>LECTURA DE PICOS:</b> perfil reconstruido desde Coinglass · Binance BTC/USDT Perpetuo. Los valores por barra son aproximados y expresados como intensidad visual relativa; informa la forma del perfil, no una cifra exacta por bin. Corte 30 sep · 22:00 UTC.`;renderLiquidationMap();
 })();
 
 function formatCryptoCount(el,value){
@@ -1618,93 +1584,81 @@ function animateCrypto(){
 })();
 
 
-/* ── cálculo de retornos por marcador ── */
+/* ── cálculo de retornos y contribuciones por marcador · §3F ── */
+function cashpathStats(m){
+  if(!m||!Array.isArray(m.legs)||!m.legs.length)return null;
+  const sessions=m.legs.reduce((a,l)=>a+l.sessions,0);
+  const ret=m.legs.reduce((a,l)=>a+l.rate*l.sessions/252,0);
+  const contrib=m.legs.reduce((a,l)=>a+l.weight*l.rate*l.sessions/252,0);
+  return {sessions,ret,contrib};
+}
 function markReturn(m){
   if(!m)return null;
   const carry=MARKS.rate*MARKS.sessions/252;
   switch(m.kind){
-    case 'cash':     return carry;
-    case 'cashpath': return m.ret;
-    case 'price':  return (m.now-m.entry)/m.entry;
-    case 'short':  return -(m.now-m.entry)/m.entry;
-    case 'yield':  return -m.dur*((m.now-m.entry)/100)+carry*0.6;
+    case 'cashpath':{const x=cashpathStats(m);return x?x.ret:null}
+    case 'price': return (m.now-m.entry)/m.entry;
+    case 'short': return -(m.now-m.entry)/m.entry;
+    case 'yield': return -m.dur*((m.now-m.entry)/100)+carry*0.6;
     case 'closed': return m.realized;
-    default:       return null;
+    default:return null;
   }
 }
-
-/* ── render del marcador ── */
+function markContribution(m,hz,visibleWeight,r){
+  if(!m||r==null)return null;
+  if(m.kind==='cashpath'){const x=cashpathStats(m);return x?x.contrib:null}
+  if(m.kind==='closed'){
+    const cw=m.closeWeight&&typeof m.closeWeight==='object'?m.closeWeight[hz]:null;
+    return typeof cw==='number'?cw*r:visibleWeight*r;
+  }
+  return visibleWeight*r;
+}
 (function renderMarks(){
   if(typeof MARKS==='undefined')return;
   const fmt=v=>(v>=0?'+':'')+(v*100).toFixed(2)+'%';
   const pts=v=>(v>=0?'+':'')+(v*100).toFixed(2);
-
   ['3m','6m'].forEach(hz=>{
-    const panel=document.getElementById('hz'+hz);
-    if(!panel)return;
-    let total=0, marcadas=0, sinMarca=0, pesoMarcado=0;
-
+    const panel=document.getElementById('hz'+hz);if(!panel)return;
+    let total=0,marcadas=0,sinMarca=0;
     panel.querySelectorAll('.pos').forEach(pos=>{
-      const key=pos.dataset.mark;
-      const m=key?MARKS.items[key]:null;
-      const r=markReturn(m);
-      const usd=pos.querySelector('.pos-w');
-      const w=(m&&typeof m.pnlWeight==='number')?m.pnlWeight:(usd?parseFloat(usd.textContent)/100:0);
-      const cell=pos.querySelector('.pos-contrib');
-      if(r===null){ sinMarca++; if(cell)cell.textContent='—'; return; }
-      marcadas++;
-      pesoMarcado+=w;
-      total+=w*r;
-      if(cell){
-        cell.textContent=fmt(r)+' · '+pts(w*r)+' pts';
-        cell.className='pos-contrib '+(r>0.0005?'up':r<-0.0005?'dn':'nt');
-      }
+      const key=pos.dataset.mark,m=key?MARKS.items[key]:null,r=markReturn(m),w=parseFloat(pos.querySelector('.pos-w')?.textContent||'0')/100,cell=pos.querySelector('.pos-contrib');
+      const c=markContribution(m,hz,w,r);
+      if(r===null||c===null||!Number.isFinite(c)){sinMarca++;if(cell)cell.textContent='—';return}
+      marcadas++;total+=c;
+      if(cell){cell.textContent=fmt(r)+' · '+pts(c)+' pts';cell.className='pos-contrib '+(c>0.0005?'up':c<-0.0005?'dn':'nt')}
     });
-
-    const box=document.getElementById('pnl'+hz);
-    if(!box)return;
-    if(sinMarca){
-      box.className='hzs-v faint';
-      box.innerHTML='n/d · '+sinMarca+' marcador(es) ausente(s)'+
-        '<span class="pnl-sub">subtotal marcado '+pts(total)+' pts · cobertura '+(pesoMarcado*100).toFixed(0)+'% · '+MARKS.sessions+' sesiones · fail-closed</span>';
-      return;
-    }
-    box.className='hzs-v '+(total>0.0005?'up':total<-0.0005?'dn':'nt');
-    box.innerHTML=fmt(total)+
-      '<span class="pnl-sub">'+MARKS.sessions+' sesiones · '+marcadas+' posiciones marcadas</span>';
+    const box=document.getElementById('pnl'+hz);if(!box)return;
+    if(sinMarca){box.className='hzs-v faint';box.innerHTML='n/d · '+sinMarca+' marcador(es) ausente(s)<span class="pnl-sub">fail-closed · '+MARKS.sessions+' sesiones</span>';return}
+    box.className='hzs-v '+(total>0.0005?'up':total<-0.0005?'dn':'nt');box.innerHTML=fmt(total)+'<span class="pnl-sub">'+MARKS.sessions+' sesiones · '+marcadas+' posiciones marcadas · peso-tiempo validado</span>';
   });
 })();
-
 (function auditMarks(){
   if(typeof MARKS==='undefined')return;
-  if(!(MARKS.rate>0&&MARKS.rate<0.25))
-    console.warn(`[MARKS] Tasa de referencia fuera de rango: ${MARKS.rate}`);
-  if(!Number.isInteger(MARKS.sessions)||MARKS.sessions<1)
-    console.warn(`[MARKS] Contador de sesiones inválido: ${MARKS.sessions}`);
-
+  if(!(MARKS.rate>0&&MARKS.rate<0.25))console.warn(`[MARKS] Tasa fuera de rango: ${MARKS.rate}`);
+  if(!Number.isInteger(MARKS.sessions)||MARKS.sessions<1)console.warn(`[MARKS] Sesiones inválidas: ${MARKS.sessions}`);
   Object.entries(MARKS.items).forEach(([k,m])=>{
-    if(m.kind==='price'||m.kind==='short'||m.kind==='yield'){
-      if(!(m.entry>0)||!(m.now>0))
-        console.warn(`[MARKS] ${k}: entry o now ausente o no positivo.`);
-      const mv=Math.abs((m.now-m.entry)/m.entry);
-      if(mv>0.35)
-        console.warn(`[MARKS] ${k}: movimiento de ${(mv*100).toFixed(1)}% desde la apertura. ¿Error de tipeo?`);
-    }
-    if(m.kind==='yield'&&!(m.dur>0&&m.dur<15))
-      console.warn(`[MARKS] ${k}: duración modificada fuera de rango: ${m.dur}`);
-    if(m.kind==='closed'&&!m.since)
-      console.warn(`[MARKS] ${k}: resultado cerrado sin fecha de congelamiento.`);
+    if(Object.prototype.hasOwnProperty.call(m,'ret')||Object.prototype.hasOwnProperty.call(m,'pnlWeight'))console.warn(`[MARKS] ${k}: contiene resultado/peso precalculado prohibido.`);
+    if(m.kind==='cashpath'){const x=cashpathStats(m);if(!x||x.sessions!==MARKS.sessions)console.warn(`[MARKS] ${k}: cashpath cubre ${x?.sessions} sesiones; se esperan ${MARKS.sessions}.`)}
+    if(['price','short','yield'].includes(m.kind)&&(!(m.entry>0)||!(m.now>0)))console.warn(`[MARKS] ${k}: entry/now inválido.`);
+    if(m.kind==='yield'&&!(m.dur>0&&m.dur<15))console.warn(`[MARKS] ${k}: duración fuera de rango.`);
+    if(m.kind==='closed'&&!m.since)console.warn(`[MARKS] ${k}: cierre sin fecha.`);
   });
-
+  const constWeights={
+    '3m':{gold:.10,equity:.10,xlv:.08,jpy:.07},
+    '6m':{dur6m:.20,equity:.20,gold:.12,xle:.08,jpy:.08,xlv:.03}
+  };
   ['3m','6m'].forEach(hz=>{
-    const panel=document.getElementById('hz'+hz);
-    if(!panel)return;
-    const sin=[...panel.querySelectorAll('.pos')].filter(p=>!p.dataset.mark||!MARKS.items[p.dataset.mark]);
-    if(sin.length)
-      console.warn(`[MARKS] Cartera ${hz}: ${sin.length} posición(es) sin data-mark válido; el P&L queda en n/d.`);
+    const panel=document.getElementById('hz'+hz);if(!panel)return;
+    const visible=[...panel.querySelectorAll('.pos')].reduce((a,p)=>a+(parseFloat(p.querySelector('.pos-w')?.textContent||'0')||0),0);
+    if(Math.abs(visible-100)>.01)console.warn(`[WEIGHT] ${hz}: peso visible ${visible.toFixed(2)}%.`);
+    let wt=Object.values(constWeights[hz]).reduce((a,w)=>a+w*MARKS.sessions,0);
+    const cash=MARKS.items['cash'+hz];if(cash?.legs)wt+=cash.legs.reduce((a,l)=>a+l.weight*l.sessions,0);
+    Object.entries(MARKS.items).forEach(([k,m])=>{const legs=m.weightLegs&&m.weightLegs[hz];if(Array.isArray(legs))wt+=legs.reduce((a,l)=>a+l.weight*l.sessions,0)});
+    const avg=wt/MARKS.sessions;
+    if(Math.abs(avg-1)>.005)console.warn(`[WEIGHT-TIME] ${hz}: ${(avg*100).toFixed(2)}%, esperado 100% ±0.5%.`);
+    const sin=[...panel.querySelectorAll('.pos')].filter(p=>!p.dataset.mark||!MARKS.items[p.dataset.mark]);if(sin.length)console.warn(`[MARKS] ${hz}: ${sin.length} posición(es) sin marcador.`);
   });
 })();
-
 
 document.querySelectorAll('.sem-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.sem-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');const sev=b.dataset.sev;document.querySelectorAll('.sem-card').forEach(c=>{c.style.display=(sev==='all'||c.dataset.sev===sev)?'':'none'});}));
 document.querySelectorAll('.op-tab').forEach(t=>t.addEventListener('click',()=>{
